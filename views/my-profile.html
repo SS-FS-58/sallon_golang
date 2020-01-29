@@ -1,0 +1,398 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+	<li>
+		<a href="/admin/my-profile?lang=gr">
+			<img src="/static/images/flags/GR.png">
+			{{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin/my-profile?lang=en">
+			<img src="/static/images/flags/GB.png">
+			{{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}}
+{{define "content"}}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-4 col-md-5">
+                <div class="card card-user">
+                    <div class="image">
+                        <img src="/static/images/slider-1.jpg" alt="..." />
+                    </div>
+                    <div class="card-content ">
+                        <div class="author">
+                            <img class="avatar border-white" src="/static/images/stor_admin_{{.User.ID}}.jpg" alt="..." />
+                            <h4 class="card-title">{{.User.Forename}} {{.User.Surname}}
+                                <br />
+                                <a href="#">
+                                    <small>{{.User.Email}}</small>
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="panel panel-info">
+
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class=" col-md-12 col-lg-12 ">
+                                        <table class="table table-user-information">
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{gettext "Work Phone:"}}</td>
+                                                    <td>{{.User.HomeTelephone}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{gettext "Mobile Phone:"}}</td>
+                                                    <td>{{.User.MobileTelephone}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{gettext "Company:"}}</td>
+                                                    <td>{{.User.CompanyName}}</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-xs-3 col-md-offset-1">
+                                <h5>
+                                    <a href="/admin/subscription" data-original-title='{{gettext "Buy subscription or credits"}}' data-toggle="tooltip" type="button" class="btn btn-sm btn-primary">
+                                        <span class="ti-email"></span>
+                                    </a>
+                                </h5>
+                            </div>
+                            <div class="col-xs-4">
+                                <h5>
+                                    <button onclick="getSingleUser('{{.User.ID}}');" data-original-title='{{gettext "Edit your profile"}}' data-toggle="tooltip" type="button"
+                                        class="btn btn-sm btn-warning get-single-user">
+                                        <span class="ti-pencil-alt"></span>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div class="col-xs-3">
+                                <h5>
+                                    <a href="/admin/stores" data-original-title='{{gettext "Add Stores"}}' data-toggle="tooltip" type="button" class="btn btn-sm btn-info">
+                                        <span class="ti-plus"></span>
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-7">
+
+
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">{{gettext "Edit Profile"}}</h4>
+                    </div>
+                    <div id="registerFormDiv" class="card-content">
+
+                        <form id="updateFormValidation" enctype="multipart/form-data">
+                            <input type="hidden" id="UserId" name="UserId" value="{{.User.ID}}">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>{{gettext "Company"}}</label>
+                                    <input type="text" id="company_name" name="company_name" placeholder='{{gettext "Company Name"}}' class="form-control" disabled>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>{{gettext "Username"}}</label>
+                                        <input type="text" id="username" name="username" placeholder='{{gettext "Your username"}}' class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">{{gettext "Email address"}}</label>
+                                        <input type="email" id="email" name="email" placeholder='{{gettext "Enter email"}}' class="form-control" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{gettext "First Name"}}</label>
+                                        <input type="text" id="forename" name="forename" placeholder='{{gettext "Your Forename"}}' class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{gettext "Last Name"}}</label>
+                                        <input type="text" id="surname" name="surname" placeholder='{{gettext "Your Surname"}}' class="form-control" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{gettext "Password"}}</label>
+                                        <input type="password" id="password" name="password" placeholder='{{gettext "Password"}}' class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{gettext "Password Confirmation"}}</label>
+                                        <input type="password" id="confirm_password" name="confirm_password" placeholder='{{gettext "Password Confirmation"}}' class="form-control"
+                                            disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>{{gettext "Work Telephone"}}</label>
+                                        <input type="text" id="work_telephone" name="work_telephone" placeholder='{{gettext "Work Telephone"}}' class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>{{gettext "Mobile Telephone"}}</label>
+                                        <input type="text" id="mobile_telephone" name="mobile_telephone" placeholder='{{gettext "Mobile Telephone"}}' class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{gettext "Image Logo"}}</label>
+                                        <div class="input-group image-preview">
+
+                                            <input type="text" name="lenderLogo" class="form-control image-preview-filename" disabled="disabled" disabled>
+
+                                            <span class="input-group-btn">
+
+                                                <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                                    <span class="fa fa-remove"></span> {{gettext "Clear"}}
+                                                </button>
+
+                                                <div class="btn btn-default image-preview-input">
+                                                    <span class="fa fa-folder-open"></span>
+                                                    <span class="image-preview-input-title">{{gettext "Browse…"}}</span>
+                                                    <input type="file" accept="image/png, image/jpeg, image/gif" name="userLogoFile" />
+
+                                                </div>
+                                            </span>
+                                        </div>
+                                        <div id="disp_tmp_path1" class="hidden"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button id="submit" type="submit" class="btn btn-info btn-fill btn-wd" disabled>{{gettext "Update Profile"}}</button>
+                                <button id="editCancel" disabled class="btn btn-danger btn-fill btn-wd" onclick="window.location = '/admin/my-profile';">{{gettext "Cancel"}}</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{{end}} {{define "scripts"}}
+<script>
+    $(document).ready(function () {
+       // demo.updateFormValidation();
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+</script>
+<script>
+    $().ready(function () {
+
+        $('#updateFormValidation').validate({
+            rules: {
+                username: "required",
+                email: {
+                    required: true,
+                    email: true,
+                },
+                password: {
+
+                    minlength: 5,
+                },
+                confirm_password: {
+
+                    minlength: 5,
+                    equalTo: "#password"
+                },
+                forename: "required",
+                surname: "required",
+                company_name: "required",
+                search_address: "required",
+                street_number: {
+                    required: true,
+                    number: true,
+                },
+                route: "required",
+                locality: "required",
+                postal_code: "required",
+                country: "required",
+                work_telephone: {
+                    required: true,
+                    number: true,
+                },
+                mobile_telephone: {
+                    required: true,
+                    number: true,
+                },
+            },
+            messages: {
+                username: '{{gettext "Please enter your username"}}',
+                email: '{{gettext "Please enter a valid email address"}}',
+
+                password: {
+                    required: '{{gettext "Please provide a password"}}',
+                    minlength: '{{gettext "Your password must be at least 5 characters long"}}'
+                },
+                confirm_password: {
+                    required: '{{gettext "Please provide a password"}}',
+                    minlength: '{{gettext "Your password must be at least 5 characters long"}}',
+                    equalTo: '{{gettext "Please enter the same password as above"}}'
+                },
+                forename: '{{gettext "Please enter your forename"}}',
+                surname: '{{gettext "Please enter your surname"}}',
+                company_name: '{{gettext "Please enter your company name"}}',
+                search_address: '{{gettext "Please enter your address"}}',
+                street_number: {
+                    required: '{{gettext "Please enter your address number"}}',
+                    number: '{{gettext "The address number is not a number"}}',
+                },
+                route: '{{gettext "Please enter your route"}}',
+                locality: '{{gettext "Please enter your city"}}',
+                postal_code: '{{gettext "Please enter your postal code"}}',
+                country: '{{gettext "Please enter your country"}}',
+                work_telephone: {
+                    required: '{{gettext "Please enter your phone number"}}',
+                    number: '{{gettext "The phone number is not a number"}}',
+                },
+                mobile_telephone: {
+                    required: '{{gettext "Please enter your mobile number"}}',
+                    number: '{{gettext "The mobile number is not a number"}}',
+                }
+            }
+        });
+
+    });
+</script>
+
+<script>
+    function getSingleUser(id) {
+        if ($(window).width() < 992) {
+            $('html, body').animate({
+                scrollTop: $("#registerFormDiv").offset().top
+            }, 2000);
+        }
+        var datajson = '/admin/api/profile/' + id;
+
+        $.getJSON(datajson, function (data) {
+            console.log(JSON.stringify(data));
+
+            $("input[name=company_name]").prop("disabled", false);
+            $("input[name=username]").prop("disabled", false);
+            $("input[name=forename]").prop("disabled", false);
+            $("input[name=surname]").prop("disabled", false);
+            $("input[name=password]").prop("disabled", false);
+            $("input[name=confirm_password]").prop("disabled", false);
+            $("input[name=work_telephone]").prop("disabled", false);
+            $("input[name=mobile_telephone]").prop("disabled", false);
+            $("input[name=email]").prop("disabled", false);
+
+            $("#submit").prop("disabled", false);
+            $("#editCancel").prop("disabled", false);
+
+
+            $("input[name=company_name]").val(data.company_name);
+            $("input[name=username]").val(data.username);
+            $("input[name=forename]").val(data.forename);
+            $("input[name=surname]").val(data.surname);
+            $("input[name=work_telephone]").val(data.work_telephone);
+            $("input[name=mobile_telephone]").val(data.mobile_telephone);
+            $("input[name=email]").val(data.email);
+
+        });
+    };
+</script>
+<script>
+    $(document).ready(function () {
+
+        $('#updateFormValidation').submit(function (event) {
+            event.preventDefault();
+            var id = $('input[name= UserId]').val();
+            var idInt = parseInt(id);
+            var userLogoImageFile = $('input[name=userLogoFile]');
+
+            var formData = {
+                'id': idInt,
+                'company_name': $("input[name=company_name]").val(),
+                'username': $("input[name=username]").val(),
+                'password': $("input[name=password]").val(),
+                'forename': $("input[name=forename]").val(),
+                'surname': $("input[name=surname]").val(),
+                'work_telephone': $("input[name=work_telephone]").val(),
+                'mobile_telephone': $("input[name=mobile_telephone]").val(),
+                'email': $("input[name=email]").val(),
+            };
+
+            var userJSON = JSON.stringify(formData);
+
+            var fd = new FormData();
+            fd.append('userJSON', userJSON);
+            if (userLogoImageFile.length && userLogoImageFile[0].files.length) {
+                fd.append('userLogoImageFile', userLogoImageFile[0].files[0]);
+            }
+
+
+            $.ajax({
+                url: '/admin/api/update-user/' + idInt,
+                data: fd,
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                success: function (data) {
+                    $.notify({
+                        icon: 'ti-user',
+                        message: data.description,
+
+
+
+                    }, {
+                            placement: {
+                                from: "top",
+                                align: "center"
+                            },
+                            type: 'success',
+                            timer: 2000,
+                        });
+                    setTimeout(function () {
+                        $("#registerFormDiv").load(location.href + " #registerFormDiv");
+                    }, 2000);
+
+                }
+            });
+
+
+        });
+    });
+
+</script> {{end}}

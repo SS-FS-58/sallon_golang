@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="/static/images/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/static/images/favicon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>{{$title := .Title}} {{gettext $title}}</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta name="viewport" content="width=device-width" />
+
+
+	<!-- Bootstrap core CSS     -->
+	<link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+
+	<!--  Paper Dashboard core CSS    -->
+	<link href="/static/css/paper-dashboard.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/static/css/dataTbale.buttons.css" type="text/css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.bootstrap.min.css" type="text/css">
+
+
+	<link href='/static/css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+
+	<link href="/static/css/scheduler.css" rel="stylesheet" />
+	<link href="/static/css/select2.min.css" rel="stylesheet" />
+	<link href="/static/css/select2-bootstrap.css" rel="stylesheet" />
+	<link href="/static/css/jscolor.css" rel="stylesheet" />
+
+	<!--  CSS for Demo Purpose, don't include it in your project     -->
+	<link href="/static/css/demo.css" rel="stylesheet" />
+
+	<!--  Fonts and icons     -->
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+	<link href="/static/css/themify-icons.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="sidebar" data-background-color="brown" data-active-color="danger">
+
+			<div class="logo">
+				<a href="/" class="simple-text logo-mini">
+					SS
+				</a>
+
+				<a href="/" class="simple-text logo-normal">
+					Succsteps
+				</a>
+			</div>
+			<div class="sidebar-wrapper">
+				{{if .VatNumber }}
+				
+				
+				<ul class="nav">
+						<li {{if eq .Active "bookings"}} class="active" {{end}}{{if eq .Active "calendar"}} class="active" {{end}}>
+							<a data-toggle="collapse" href="#Bookingsforms">
+								<i class="ti-calendar"></i>
+								<p>
+									{{gettext "Bookings"}}
+									<b class="caret"></b>
+								</p>
+							</a>
+							<div {{if eq .Active "bookings"}} class="collapse in" {{end}}{{if eq .Active "calendar"}} class="collapse in" {{end}} class="collapse" id="Bookingsforms">
+								<ul class="nav">
+									<li {{if eq .Active "calendar"}} class="active" {{end}}>
+										<a href="/admin/calendar">
+											<span class="sidebar-mini">CA</span>
+											<span class="sidebar-normal">{{gettext "Calendar"}}</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="bottom-logout">
+								<a href="/admin/logout">
+									<i class="ti-export"></i>
+									<p>{{gettext "Logout"}}</p>
+								</a>
+						</li>
+					</ul>
+				{{else}}
+				<div class="user">
+						<div class="info">
+							<div class="photo">
+								<img src="/static/images/stor_admin_{{.ImageName}}.jpg" />
+							</div>
+	
+							<a data-toggle="collapse" href="#collapseExample" class="collapsed">
+								<span>
+									{{safehtml .Username}}
+									<b class="caret"></b>
+								</span>
+							</a>
+							<div class="clearfix"></div>
+	
+							<div class='collapse {{if eq .Active "profile"}} in {{end}}' id="collapseExample">
+								<ul class="nav">
+									<li {{if eq .Active "profile"}} class="active" {{end}}>
+										<a href="/admin/my-profile">
+											<span class="sidebar-mini">MP</span>
+											<span class="sidebar-normal">{{gettext "My Profile"}}</span>
+										</a>
+									</li>
+	
+									<li>
+										<a href="/admin/logout">
+											<span class="sidebar-mini">LO</span>
+											<span class="sidebar-normal">{{gettext "Logout"}}</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				<ul class="nav">
+					<li {{if eq .Active "index"}} class="active" {{end}}{{if eq .Active "stats"}} class="active" {{end}}>
+						<a data-toggle="collapse" href="#dashboardOverview">
+							<i class="ti-panel"></i>
+							<p>{{gettext "Dashboard"}}
+								<b class="caret"> </b>
+							</p>
+						</a>
+						<div{{if eq .Active "index"}} class="collapse in" {{end}}{{if eq .Active "subscription"}} class="collapse in" {{end}}{{if eq .Active "billing"}} class="collapse in" {{end}} class="collapse" id="dashboardOverview">
+							<ul class="nav">
+								<li {{if eq .Active "index"}} class="active" {{end}}>
+									<a href="/admin">
+										<span class="sidebar-mini">DOV</span>
+										<span class="sidebar-normal">{{gettext "Overview"}}</span>
+									</a>
+								</li>
+							</ul>
+							<ul class="nav">
+								<li {{if eq .Active "subscription"}} class="active" {{end}}>
+									<a href="/admin/subscription">
+										<span class="sidebar-mini">DSB</span>
+										<span class="sidebar-normal">{{gettext "Subscription"}}</span>
+									</a>
+								</li>
+							</ul>
+							<ul class="nav">
+									<li {{if eq .Active "billing"}} class="active" {{end}}>
+										<a href="/admin/billing">
+											<span class="sidebar-mini">DBH</span>
+											<span class="sidebar-normal">{{gettext "Billing History"}}</span>
+										</a>
+									</li>
+								</ul>
+						</div>
+					</li>
+
+					<li {{if eq .Active "bookings"}} class="active" {{end}}>
+							<a href="/admin/calendar">
+							<i class="ti-calendar"></i>							
+							<p>{{gettext "Bookings"}}</p>
+						</a>						
+					</li>
+
+
+					<li {{if eq .Active "customers"}} class="active" {{end}}>
+							<a href="/admin/customers">
+							<i class="ti-user"></i>
+							<p>{{gettext "Customers"}}</p>
+						</a>						
+					</li>
+
+					<li {{if eq .Active "cashier"}} class="active" {{end}} {{if eq .Active "Income"}} class="active" {{end}} {{if eq .Active "Expenses"}} class="active" {{end}}>
+						<a data-toggle="collapse" href="#cashierforms">
+							<i class="ti-package"></i>
+							<p>
+								{{gettext "Cashier"}}
+								<b class="caret"></b>
+							</p>
+						</a>
+						<div {{if eq .Active "cashier"}} class="collapse in" {{end}} {{if eq .Active "Income"}} class="collapse in" {{end}} {{if eq .Active "Expenses"}} class="collapse in" {{end}} class="collapse" id="cashierforms">
+							<ul class="nav">
+								<li {{if eq .Active "Income"}} class="active" {{end}}>
+									<a href="/admin/income">
+										<span class="sidebar-mini">CIC</span>
+										<span class="sidebar-normal">{{gettext "Income"}}</span>
+									</a>
+								</li>
+								<li {{if eq .Active "Expenses"}} class="active" {{end}}>
+									<a href="/admin/expenses">
+										<span class="sidebar-mini">CEX</span>
+										<span class="sidebar-normal">{{gettext "Expenses"}}</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+
+
+					<li {{if eq .Active "campaignfacebook"}} class="active" {{end}} 
+					{{if eq .Active "campaigngoogle"}} class="active" {{end}}
+					{{if eq .Active "campaignsms"}} class="active" {{end}}
+					{{if eq .Active "campaignemail"}} class="active" {{end}}>
+						<a data-toggle="collapse" href="#formsExamples">
+							<i class="ti-clipboard"></i>
+							<p>
+								{{gettext "Campaigns"}}
+								<b class="caret"></b>
+							</p>
+						</a>
+						<div {{if eq .Active "campaignfacebook"}} class="collapse in" {{end}}
+						{{if eq .Active "campaigngoogle"}} class="collapse in"{{end}} 
+						{{if eq .Active "campaignsms"}} class="collapse in" {{end}}
+						{{if eq .Active "campaignemail"}} class="collapse in"{{end}} class="collapse" id="formsExamples">
+							<ul class="nav">
+								<!-- <li {{if eq .Active "campaignfacebook"}} class="active" {{end}}>
+									<a href="/admin/campaignfacebook">
+										<span class="sidebar-mini">FB</span>
+										<span class="sidebar-normal">{{gettext "Facebook Campaigns"}}</span>
+									</a>
+								</li>
+								<li {{if eq .Active "campaigngoogle"}} class="active" {{end}}>
+									<a href="/admin/campaigngoogle">
+										<span class="sidebar-mini">GO</span>
+										<span class="sidebar-normal">{{gettext "Google Campaigns"}}</span>
+									</a>
+								</li> -->
+								<li {{if eq .Active "campaignsms"}} class="active" {{end}}>
+									<a href="/admin/campaignsms">
+										<span class="sidebar-mini">CSM</span>
+										<span class="sidebar-normal">{{gettext "Sms Campaigns"}}</span>
+									</a>
+								</li>
+								<li {{if eq .Active "campaignemail"}} class="active" {{end}}>
+									<a href="/admin/campaignemail">
+										<span class="sidebar-mini">CEM</span>
+										<span class="sidebar-normal">{{gettext "Email Campaigns"}}</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+
+					<li {{if eq .Active "reportsales"}} class="active" {{end}} 
+					{{if eq .Active "unfinishedcanceled"}} class="active" {{end}} 
+					{{if eq .Active "reportrevenueexpenses"}} class="active" {{end}} 
+					{{if eq .Active "reportcustomerswithbalance"}} class="active" {{end}} 
+					{{if eq .Active "reportpendingdays"}} class="active" {{end}}>
+						<a data-toggle="collapse" href="#Reportforms">
+							<i class="ti-clipboard"></i>
+							<p>
+								{{gettext "Reports"}}
+								<b class="caret"></b>
+							</p>
+						</a>
+						<div {{if eq .Active "reportsales"}} class="collapse in" {{end}}
+						 {{if eq .Active "unfinishedcanceled"}} class="collapse in" {{end}} 
+						 {{if eq .Active "reportrevenueexpenses"}} class="collapse in" {{end}} 
+						 {{if eq .Active "reportcustomerswithbalance"}} class="collapse in" {{end}} 
+						 {{if eq .Active "reportpendingdays"}} class="collapse in" {{end}} class="collapse" id="Reportforms">
+							<ul class="nav">
+								<li {{if eq .Active "reportsales"}} class="active" {{end}}>
+									<a href="/admin/reportsales">
+										<span class="sidebar-mini">RSR</span>
+										<span class="sidebar-normal">{{gettext "Sales Report"}}</span>
+									</a>
+								</li>
+								<li {{if eq .Active "unfinishedcanceled"}} class="active" {{end}}>
+									<a href="/admin/unfinishedcanceled">
+										<span class="sidebar-mini">RUC</span>
+										<span class="sidebar-normal">Cancellations Report</span>
+									</a>
+								</li>
+								<li {{if eq .Active "reportrevenueexpenses"}} class="active" {{end}}>
+									<a href="/admin/reportrevenueexpenses">
+										<span class="sidebar-mini">RRE</span>
+										<span class="sidebar-normal">{{gettext "Revenue - Expenses"}}</span>
+									</a>
+								</li>
+								<li {{if eq .Active "reportcustomerswithbalance"}} class="active" {{end}}>
+									<a href="/admin/customers">
+										<span class="sidebar-mini">RCB</span>
+										<span class="sidebar-normal">{{gettext "Customers with points"}}</span>
+									</a>
+								</li>
+								<li {{if eq .Active "reportpendingdays"}} class="active" {{end}}>
+									<a href="/admin/reportpendingdays">
+										<span class="sidebar-mini">PAP</span>
+										<span class="sidebar-normal">Pending Appointments</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+
+					<li {{if eq .Active "shops"}} class="active" {{end}} {{if eq .Active "storesettings"}} class="active" {{end}} {{if eq .Active "storesettingsservices"}} class="active" {{end}}{{if eq .Active "suppliers"}} class="active" {{end}} {{if eq .Active "products"}} class="active" {{end}} {{if eq .Active "hairdressers"}} class="active" {{end}} {{if eq .Active "promotions"}} class="active" {{end}}>
+						<a data-toggle="collapse" href="#settingsmenut">
+							<i class="ti-view-list-alt"></i>
+							<p>
+								{{gettext "Settings"}}
+								<b class="caret"></b>
+							</p>
+						</a>
+						<div class='collapse {{if eq .Active "shops"}} in {{end}} {{if eq .Active "storesettings"}} in{{end}} {{if eq .Active "storesettingssmsemail"}} in{{end}} {{if eq .Active "storesettingsservices"}} in {{end}} {{if eq .Active "rewards"}} in {{end}} {{if eq .Active "promotions"}} in {{end}} {{if eq .Active "recommendations"}} in {{end}} {{if eq .Active "suppliers"}} in {{end}} {{if eq .Active "products"}} in {{end}} {{if eq .Active "hairdressers"}} in {{end}}' id='settingsmenut'>
+							<ul class="nav">
+								<li {{if eq .Active "shops"}} class="active" {{end}}>
+									<a href="/admin/stores">
+										<span class="sidebar-mini">SST</span>
+										<span class="sidebar-normal">{{gettext "Stores"}}</span>
+									</a>
+								</li>
+								<li {{if eq .Active "hairdressers"}} class="active" {{end}}>
+									<a href="/admin/hairdressers">
+										<span class="sidebar-mini">SEM</span>
+										<span class="sidebar-normal">{{gettext "Employees"}}</span>
+									</a>
+								</li>
+								<li {{if eq .Active "suppliers"}} class="active" {{end}}>
+									<a href="/admin/suppliers">
+										<span class="sidebar-mini">SSU</span>
+										<span class="sidebar-normal">{{gettext "Suppliers"}}</span>
+									</a>
+								</li>
+								<li {{if eq .Active "products"}} class="active" {{end}}>
+									<a href="/admin/products">
+										<span class="sidebar-mini">SPR</span>
+										<span class="sidebar-normal">{{gettext "Products"}}</span>
+									</a>
+								</li>
+								<li {{if eq .Active "storesettingsservices"}} class="active" {{end}}>
+									<a href="/admin/services">
+										<span class="sidebar-mini">SSE</span>
+										<span class="sidebar-normal">{{gettext "Services"}}</span>
+									</a>
+								</li>
+								<!-- <li {{if eq .Active "rewards"}} class="active" {{end}}>
+									<a href="/admin/rewards">
+										<span class="sidebar-mini">CR</span>
+										<span class="sidebar-normal">{{gettext "Rewards"}}</span>
+									</a>
+								</li> -->
+								<li {{if eq .Active "promotions"}} class="active" {{end}}>
+									<a href="/admin/promotions">
+										<span class="sidebar-mini">SPR</span>
+										<span class="sidebar-normal">{{gettext "Promotions"}}</span>
+									</a>
+								</li>
+								<!-- <li {{if eq .Active "recommendations"}} class="active" {{end}}>
+									<a href="/admin/recommendations">
+										<span class="sidebar-mini">RR</span>
+										<span class="sidebar-normal">{{gettext "Recommendations"}}</span>
+									</a>
+								</li> -->
+								<li {{if eq .Active "storesettings"}} class="active" {{end}}>
+									<a href="/admin/store-settings">
+										<span class="sidebar-mini">SSS</span>
+										<span class="sidebar-normal">{{gettext "Store settings"}}</span>
+									</a>
+								</li>
+								<li {{if eq .Active "storesettingssmsemail"}} class="active" {{end}}>
+									<a href="/admin/sms-email-settings">
+										<span class="sidebar-mini">SSE</span>
+										<span class="sidebar-normal">{{gettext "Sms-Email settings"}}</span>
+									</a>
+								</li>
+
+							</ul>
+
+						</div>
+
+					</li>
+
+					<li class="bottom-logout">
+						
+							<a href="/admin/logout">
+								<i class="ti-export"></i>
+								<p>{{gettext "Logout"}}</p>
+							</a>
+
+					</li>
+				</ul>
+			{{end}}
+
+
+		</div>
+
+	</div>
+
+	<div class="main-panel">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-minimize">
+					<button id="minimizeSidebar" class="btn btn-fill btn-icon">
+						<i class="ti-more-alt"></i>
+					</button>
+				</div>
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar bar1"></span>
+						<span class="icon-bar bar2"></span>
+						<span class="icon-bar bar3"></span>
+					</button>
+					<a class="navbar-brand" href="#charts">{{$menutitle := .MenuTitle}} {{gettext $menutitle}}</a>
+				</div>
+				<div class="collapse navbar-collapse">
+
+					<ul class="nav navbar-nav navbar-right">
+						{{block "lang" .}}{{end}}
+												
+						<li>
+							<a href="#viewstore" class="dropdown-toggle btn-magnify" data-toggle="dropdown">														
+								<i class="ti-share"></i>
+								<p>{{gettext "View your store"}}</p>
+							</a>								
+						</li>
+						<li>
+							<a href="#stats" class="dropdown-toggle btn-magnify" data-toggle="dropdown">
+								<i class="ti-world"></i>
+								<p>{{gettext "Language"}}</p>
+							</a>
+							{{block "manylangs" . }} {{end}}
+						</li>
+						<li class="dropdown">
+							<a href="#notifications" class="dropdown-toggle btn-rotate" data-toggle="dropdown">
+								<i class="ti-bell"></i>
+								<span class="notification">0</span>
+								<p class="hidden-md hidden-lg">
+									{{gettext "Notifications"}}
+									<b class="caret"></b>
+								</p>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#markread">{{gettext "Mark all as read"}}</a>
+								</li>
+								<li>
+									<a href="#not1">{{gettext "No notifications"}}</a>
+								</li>								
+								<li>
+									<a href="#showall">{{gettext "Show all"}}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		{{block "content" .}}{{end}}
+
+		<footer class="footer">
+			<div class="container-fluid">
+				<nav class="pull-left">
+					<ul>
+						<li>
+							<a href="https://www.succsteps.com/terms">
+								{{gettext "Terms and Conditions"}}
+							</a>
+						</li>
+						<li>
+							<a href="https://www.succsteps.com/support">
+								{{gettext "Support"}}
+							</a>
+						</li>
+						<li>
+							<a href="http://www.creative-tim.com/contact-us">
+								{{gettext "Contact us"}}
+							</a>
+						</li>
+					</ul>
+				</nav>
+				<div class="copyright pull-right">
+					&copy;
+					<script>document.write(new Date().getFullYear())</script>, made with
+					<i class="fa fa-heart heart"></i> by
+					<a href="http://www.succsteps.com">Succsteps Team</a>
+				</div>
+			</div>
+		</footer>
+	</div>
+	</div>
+
+
+	<!--   Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js   -->
+	<script src="/static/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+	<script src="/static/js/jquery-ui.min.js" type="text/javascript"></script>
+	<script src="/static/js/perfect-scrollbar.min.js" type="text/javascript"></script>
+	<script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
+
+	<!--  Forms Validations Plugin -->
+	<script src="/static/js/jquery.validate.min.js"></script>
+
+	<!-- Promise Library for SweetAlert2 working on IE -->
+	<script src="/static/js/es6-promise-auto.min.js"></script>
+
+	<!--  Plugin for Date Time Picker and Full Calendar Plugin-->
+	<script src="/static/js/moment.min.js"></script>
+
+	<!--  Date Time Picker Plugin is included in this js file -->
+	<script src="/static/js/bootstrap-datetimepicker.js"></script>
+
+	<!--  Select Picker Plugin -->
+	<script src="/static/js/bootstrap-selectpicker.js"></script>
+
+	<!--  Switch and Tags Input Plugins -->
+	<script src="/static/js/bootstrap-switch-tags.js"></script>
+
+	<!-- Circle Percentage-chart -->
+	<script src="/static/js/jquery.easypiechart.min.js"></script>
+
+	<!--  Charts Plugin -->
+	<script src="/static/js/chartist.min.js"></script>
+
+	<!--  Notifications Plugin    -->
+	<script src="/static/js/bootstrap-notify.js"></script>
+
+	<!-- Sweet Alert 2 plugin -->
+	<script src="/static/js/sweetalert2.js"></script>
+
+	<!-- Vector Map plugin -->
+	<script src="/static/js/jquery-jvectormap.js"></script>
+
+	<!--  Google Maps Plugin    -->
+	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCJQmyil5FKCMy9c29Jz4RswT5glVOdQ"></script> -->
+
+	<!-- Wizard Plugin    -->
+	<script src="/static/js/jquery.bootstrap.wizard.min.js"></script>
+
+	<!--  Bootstrap Table Plugin    -->
+	<script src="/static/js/bootstrap-table.js"></script>
+
+	<!--  Plugin for DataTables.net  -->
+	<script src="/static/js/jquery.datatables.js"></script>
+	<script src="/static/js/dataTable.buttons.js" type="text/javascript"></script>
+	<script src="/static/js/dataTable.buttons.flash.js" type="text/javascript"></script>
+	<script src="/static/js/dataTable.jszip.js" type="text/javascript"></script>
+	<script src="/static/js/dataTable.pdfmaker.js" type="text/javascript"></script>
+	<script src="/static/js/dataTable.fonts.js" type="text/javascript"></script>
+	<script src="/static/js/dataTable.html5.js" type="text/javascript"></script>
+	<script src="/static/js/dataTable.button.print.js" type="text/javascript"></script>
+	<script src="/static/js/dataTable.column.visibility.js" type="text/javascript"></script>
+
+	<!--  Full Calendar Plugin    -->
+	<script src="/static/js/fullcalendar.min.js"></script>
+
+	<!-- Paper Dashboard PRO Core javascript and methods for Demo purpose -->
+	<script src="/static/js/paper-dashboard.js"></script>
+
+	<script src="/static/js/scheduler.js"></script>
+	<script src="/static/js/select2.min.js"></script>
+	<script src="/static/js/jscolor.js"></script>
+
+
+	<!-- Paper Dashboard PRO DEMO methods, don't include it in your project! -->
+	<script src="/static/js/demo.js"></script>
+	<script src="/static/js/charts.min.js"></script>
+	<script src="/static/js/producthelpers.js"></script> {{block "scripts" .}}{{end}} {{block "googlemaps" .}}{{end}}
+
+</body>
+
+</html>

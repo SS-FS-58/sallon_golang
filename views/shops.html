@@ -1,0 +1,1096 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+    <li>
+        <a href="/admin/stores?lang=gr">
+            <img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+        </a>
+
+    </li>
+    <li>
+
+        <a href="/admin/stores?lang=en">
+            <img src="/static/images/flags/GB.png"> {{gettext "English"}}
+        </a>
+    </li>
+</ul>
+{{end}} {{define "content"}}
+
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+
+                        <button id="toggle" class="btn btn-sm btn-primary">?</button>
+                        <aside id="aside" class="aside">
+                            <h2>{{gettext "Information"}}</h2>
+        
+                            <p>{{gettext "Here you can find all your store settings You can add new stores edit details or change passwords from your stores"}}</p>
+                            
+                        </aside>
+                
+                    <div class="card-content">                        
+                        <div id="my-tab-content" class="tab-content">
+                            <div class="tab-pane active" id="Stores">
+                                <div class="col-md-12 text-left margin-bottom-20">
+
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalHorizontal">
+                                        <span class="btn-label">
+                                            <i class="ti-plus"></i>
+                                        </span> {{gettext "Add new shop"}}
+                                    </button>
+                                </div>
+
+                                <div class="margin-bottom-20">
+                                    <div class="fresh-datatables">
+                                        <table id="shopdatatables" class="table  table-striped table-bordered  table-hover" cellspacing="0" width="100%" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>{{gettext "Brand Name"}}</th>
+                                                    <th>{{gettext "Vat Number"}}</th>
+                                                    <th>{{gettext "Address"}}</th>
+                                                    <th>{{gettext "Tax Office"}}</th>
+                                                    <th>{{gettext "Creation Date"}}</th>
+
+                                                    <th class="disabled-sorting">{{gettext "Actions"}}</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>{{gettext "Brand Name"}}</th>
+                                                    <th>{{gettext "Vat Number"}}</th>
+                                                    <th>{{gettext "Address"}}</th>
+                                                    <th>{{gettext "Tax Office"}}</th>
+                                                    <th>{{gettext "Creation Date"}}</th>
+                                                    <th>{{gettext "Actions"}}</th>
+                                                </tr>
+                                            </tfoot>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" onclick="window.location = '/admin/stores';">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">{{gettext "Close"}}</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        {{gettext "New Shop"}}
+                                    </h4>
+                                </div>
+
+                                <!-- Modal Body -->
+                                <form id="createNewShopFormValidation">
+                                    <input type="hidden" id="UserId" name="UserId" value="{{.UserID}}">
+                                    <div class="modal-body">
+                                        <div class="card card-plain">
+                                            <div class="content">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div id="vat-exists" class='alert alert-danger' role='alert'>
+                                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                                <span aria-hidden='true'>&times;</span>
+                                                            </button>
+                                                            <strong>{{gettext "The VAT number already exist."}}</strong>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <input type="text" id="vat_number" name="vat_number" placeholder='{{gettext "Your VAT Number"}}' class="form-control">
+                                                            <label id="report" class="error report">{{gettext "*VAT number exists"}}</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <input type="text" id="company_name" name="company_name" placeholder='{{gettext "Company Name"}}' class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <input type="text" id="work_telephone" name="work_telephone" placeholder='{{gettext "Work Telephone"}}' class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <input type="text" id="mobile_telephone" name="mobile_telephone" placeholder='{{gettext "Mobile Telephone"}}' class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <input type="password" id="password" name="password" placeholder='{{gettext "Password"}}' class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <input type="password" id="confirm_password" name="confirm_password" placeholder='{{gettext "Password Confirmation"}}' class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label class="control_label">{{gettext "Select country if you want to add bank holidays to the calendar"}}</label>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="radio">
+                                                                <input type="radio" name="include_bank_holidays" id="include_bank_holidays" value="include">
+                                                                <label for="include_bank_holidays">
+                                                                    {{gettext "Include Bank Holidays"}}
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="radio">
+                                                                <input type="radio" name="include_bank_holidays" id="exclude_bank_holidays" value="exclude">
+                                                                <label for="exclude_bank_holidays">
+                                                                    {{gettext "Exclude Bank Holidays"}}
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div id="includebankholidays" class="row">
+                                                    <div class="col-md-10 col-md-offset-1">
+                                                        <div class="form-group">
+                                                            <select id="select_coundry" name="select_coundry" class="select_coundry selectpicker" data-style="btn dropdown-toggle bs-placeholder btn-info  btn-block"
+                                                                title='{{gettext "Select Coundry"}}' data-size="7" data-live-search="true">
+                                                                <option value="australian">Australian</option>
+                                                                <option value="austrian">Austrian</option>
+                                                                <option value="brazilian">Brazilian</option>
+                                                                <option value="canadian">Canadian</option>
+                                                                <option value="china">China</option>
+                                                                <option value="christian">Christian</option>
+                                                                <option value="danish">Danish</option>
+                                                                <option value="dutch">Dutch</option>
+                                                                <option value="finnish">Finnish</option>
+                                                                <option value="french">French</option>
+                                                                <option value="german">German</option>
+                                                                <option value="greek">Ελλάδα</option>
+                                                                <option value="hong_kong_c">Hong Kong (C)</option>
+                                                                <option value="hong_kong">Hong Kong</option>
+                                                                <option value="indian">Indian Holidays</option>
+                                                                <option value="indonesian">Indonesian</option>
+                                                                <option value="iranian">Iranian</option>
+                                                                <option value="irish">Irish</option>
+                                                                <option value="islamic">Islamic</option>
+                                                                <option value="italian">Italian</option>
+                                                                <option value="japanese">Japanese</option>
+                                                                <option value="jewish">Jewish</option>
+                                                                <option value="malaysia">Malaysian</option>
+                                                                <option value="mexican">Mexican</option>
+                                                                <option value="new_zealand">New Zealand</option>
+                                                                <option value="norwegian">Norwegian</option>
+                                                                <option value="philippines">Philippines</option>
+                                                                <option value="polish">Polish</option>
+                                                                <option value="portuguese">Portuguese</option>
+                                                                <option value="russian">Russian</option>
+                                                                <option value="singapore">Singapore</option>
+                                                                <option value="sa">South Africa</option>
+                                                                <option value="south_korea">South Korean</option>
+                                                                <option value="spain">Spain</option>
+                                                                <option value="swedish">Swedish</option>
+                                                                <option value="taiwan">Taiwan</option>
+                                                                <option value="thai">Thai</option>
+                                                                <option value="uk">United Kington</option>
+                                                                <option value="usa">USA</option>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <div class="form-group">
+                                                            <input type="text" id="tax_office" name="tax_office" placeholder='{{gettext "Tax Office"}}' class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <div id="locationField" class="form-group">
+                                                            <input id="autocomplete" name="search_address" class="form-control" placeholder='{{gettext "Enter your address"}}' onFocus="geolocate()"
+                                                                type="text"></input>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div id="address" class="hidden">
+                                                    <label class="control-label">{{gettext "Street address"}}</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <input class="form-control" id="street_number" name="street_number" placeholder='{{gettext "Street address"}}' disabled="true"></input>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="form-group">
+                                                                <input class="form-control" id="route" name="route" disabled="true"></input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <label class="control-label">{{gettext "City"}}</label>
+                                                    <div class="form-group">
+                                                        <input class="form-control" id="locality" name="locality" placeholder='{{gettext "City"}}' disabled="true"></input>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="control-label">{{gettext "State"}}</label>
+                                                            <div class="form-group">
+                                                                <input class="form-control" id="administrative_area_level_1" name="administrative_area_level_1" placeholder='{{gettext "State"}}'
+                                                                    disabled="true"></input>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-1"></div>
+                                                        <div class="col-md-5">
+                                                            <label class="control-label">{{gettext "Zip Code"}}</label>
+                                                            <div class="form-group">
+                                                                <input class="form-control" id="postal_code" name="postal_code" placeholder='{{gettext "Zip Code"}}' disabled="true"></input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" colspan="3">
+                                                        <input class="form-control" id="country" name="country" placeholder='{{gettext "Country"}}' disabled="true"></input>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- Modal Footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.location = '/admin/stores';">
+                                            {{gettext "Close"}}
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            {{gettext "Save changes"}}
+                                        </button>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade editModalHorizontal" id="editModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" onclick="window.location = '/admin/stores';">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">{{gettext "Close"}}</span>
+                                    </button>
+                                    <h4 class="modal-title" id="editModalLabel">
+                                    </h4>
+                                </div>
+
+                                <!-- Modal Body -->
+                                <form id="editShopFormValidation">
+                                    <input type="hidden" id="Id" name="Id">
+                                    <input type="hidden" id="UserID" name="UserID">
+                                    <div class="modal-body">
+                                        <div class="card card-plain">
+                                            <div class="content">
+                                                <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="vat_number" class="control-label">{{gettext "Your VAT Number"}}</label>
+                                                            <input type="text" id="vat_number" name="evat_number" placeholder='{{gettext "Your VAT Number"}}' disabled class="form-control">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="company_name" class="control-label">{{gettext "Company Name"}}</label>
+                                                            <input type="text" id="company_name" name="ecompany_name" placeholder='{{gettext "Company Name"}}' class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="work_telephone">{{gettext "Work Telephone"}}</label>
+                                                            <input type="text" id="work_telephone" name="ework_telephone" placeholder='{{gettext "Work Telephone"}}' class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="mobile_telephone" class="control-label">{{gettext "Mobile Telephone"}}</label>
+                                                            <input type="text" id="mobile_telephone" name="emobile_telephone" placeholder='{{gettext "Mobile Telephone"}}' class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <div class="form-group">
+                                                            <label for="tax_office" class="control-label">{{gettext "Tax Office"}}</label>
+                                                            <input type="text" id="tax_office" name="etax_office" placeholder='{{gettext "Tax Office"}}' class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <div class="form-group">
+                                                            <label for="locality" class="control-label">{{gettext "City"}}</label>
+                                                            <input class="form-control" id="locality" name="elocality" placeholder='{{gettext "City"}}'></input>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <label class="control-label">{{gettext "Street address"}}</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <input class="form-control" id="street_number" name="estreet_number" placeholder='{{gettext "Street address"}}'></input>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+
+                                                            <input class="form-control" id="route" name="eroute"></input>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">{{gettext "State"}}</label>
+                                                        <div class="form-group">
+                                                            <input class="form-control" id="administrative_area_level_1" name="eadministrative_area_level_1" placeholder='{{gettext "State"}}'></input>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-5">
+                                                        <label class="control-label">{{gettext "Zip Code"}}</label>
+                                                        <div class="form-group">
+                                                            <input class="form-control" id="postal_code" name="epostal_code" placeholder='{{gettext "Zip Code"}}'></input>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" colspan="3">
+                                                    <input class="form-control" id="country" name="ecountry" placeholder='{{gettext "Country"}}'></input>
+                                                </div>
+
+                                                <div class="col-md-10 col-md-offset-1">
+                                                    <label class="control_label">{{gettext "Change country if you want to add bank holidays to the calendar"}}</label>
+
+                                                    <div class="form-group">
+                                                        <select id="eselect_coundry" name="eselect_coundry" class="eselect_coundry selectpicker" data-style="btn dropdown-toggle bs-placeholder btn-info  btn-block"
+                                                            title='Select Coundry' data-size="7" data-live-search="true">
+                                                            <option value="australian">Australian</option>
+                                                            <option value="austrian">Austrian</option>
+                                                            <option value="brazilian">Brazilian</option>
+                                                            <option value="canadian">Canadian</option>
+                                                            <option value="china">China</option>
+                                                            <option value="christian">Christian</option>
+                                                            <option value="danish">Danish</option>
+                                                            <option value="dutch">Dutch</option>
+                                                            <option value="finnish">Finnish</option>
+                                                            <option value="french">French</option>
+                                                            <option value="german">German</option>
+                                                            <option value="greek">Ελλάδα</option>
+                                                            <option value="hong_kong_c">Hong Kong (C)</option>
+                                                            <option value="hong_kong">Hong Kong</option>
+                                                            <option value="indian">Indian Holidays</option>
+                                                            <option value="indonesian">Indonesian</option>
+                                                            <option value="iranian">Iranian</option>
+                                                            <option value="irish">Irish</option>
+                                                            <option value="islamic">Islamic</option>
+                                                            <option value="italian">Italian</option>
+                                                            <option value="japanese">Japanese</option>
+                                                            <option value="jewish">Jewish</option>
+                                                            <option value="malaysia">Malaysian</option>
+                                                            <option value="mexican">Mexican</option>
+                                                            <option value="new_zealand">New Zealand</option>
+                                                            <option value="norwegian">Norwegian</option>
+                                                            <option value="philippines">Philippines</option>
+                                                            <option value="polish">Polish</option>
+                                                            <option value="portuguese">Portuguese</option>
+                                                            <option value="russian">Russian</option>
+                                                            <option value="singapore">Singapore</option>
+                                                            <option value="sa">South Africa</option>
+                                                            <option value="south_korea">South Korean</option>
+                                                            <option value="spain">Spain</option>
+                                                            <option value="swedish">Swedish</option>
+                                                            <option value="taiwan">Taiwan</option>
+                                                            <option value="thai">Thai</option>
+                                                            <option value="uk">United Kington</option>
+                                                            <option value="usa">USA</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal Footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.location = '/admin/stores';">
+                                            {{gettext "Close"}}
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            {{gettext "Save changes"}}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade editModalHorizontalForChangePassword" id="editModalHorizontalForChangePassword" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="window.location = '/admin/stores';">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">{{gettext "Close"}}</span>
+                </button>
+                <h4 class="modal-title" id="editModalLabelForChangePassword">
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <form id="editShopFormValidationForChangePassword">
+                <input type="hidden" id="passId" name="passId">
+                <input type="hidden" id="UserID" name="UserID">
+                <div class="modal-body">
+                    <div class="card card-plain">
+                        <div class="content">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="change_password" class="control-label">{{gettext "Change Password"}}</label>
+                                        <input type="password" id="change_password" name="change_password" placeholder='{{gettext "Change Password"}}' class="form-control">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="confirm_change_password" class="control-label">{{gettext "Password Confirmation"}}</label>
+                                        <input type="password" id="confirm_change_password" name="confirm_change_password" placeholder='{{gettext "Password Confirmation"}}'
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.location = '/admin/stores';">
+                        {{gettext "Close"}}
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        {{gettext "Save changes"}}
+                    </button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+{{end}} {{define "googlemaps"}}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCJQmyil5FKCMy9c29Jz4RswT5glVOdQ&libraries=places&callback=initAutocomplete&&language=el"></script> {{end}} {{define "scripts"}}
+<script>
+    $().ready(function () {
+
+        // demo.updateFormValidation();
+        demo.createNewShopFormValidationSubmit();
+        // demo.createNewShopFormValidationValidate();
+        demo.updateShopFormValidationSubmit();
+        //demo.updatePasswordShopFormValidationValidate();
+
+        $('#portfolioModal1').on('hidden.bs.modal', function () {
+            location.reload();
+        });
+
+    });
+</script>
+<script>
+    // This example displays an address form, using the autocomplete feature
+    // of the Google Places API to help users fill in the information.
+
+    // This example requires the Places library. Include the libraries=places
+    // parameter when you first load the API. For example:
+    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+    var placeSearch, autocomplete;
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+    };
+
+    function initAutocomplete() {
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+        autocomplete = new google.maps.places.Autocomplete(
+                  /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+            { types: ['geocode'] });
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete.addListener('place_changed', fillInAddress);
+
+    }
+
+    function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        var place = autocomplete.getPlace();
+
+        for (var component in componentForm) {
+            document.getElementById(component).value = '';
+            document.getElementById(component).disabled = false;
+        }
+
+        // Get each component of the address from the place details
+        // and fill the corresponding field on the form.
+        for (var i = 0; i < place.address_components.length; i++) {
+            var addressType = place.address_components[i].types[0];
+            if (componentForm[addressType]) {
+                var val = place.address_components[i][componentForm[addressType]];
+                document.getElementById(addressType).value = val;
+                $("#address").removeClass("hidden");
+            }
+        }
+    }
+
+    // Bias the autocomplete object to the user's geographical location,
+    // as supplied by the browser's 'navigator.geolocation' object.
+    function geolocate() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                var circle = new google.maps.Circle({
+                    center: geolocation,
+                    radius: position.coords.accuracy
+                });
+                autocomplete.setBounds(circle.getBounds());
+
+            });
+        }
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $('#toggle').click(function (e) {
+			$('.aside').stop(true).slideToggle();
+		});
+		$(document).click(function (e) {
+			if (!$(e.target).closest('#toggle, .aside').length) {
+				$('.aside').stop(true).slideUp();
+			}
+		});
+        $("#includebankholidays").hide();
+        $("input[name='include_bank_holidays']").on('click', function () {
+            var $this = $(this);
+            var radio_value = $.trim($this.val());
+            if (radio_value === 'include') {
+                $("#includebankholidays").show();
+            } else if (radio_value === 'exclude') {
+
+                $("#includebankholidays").hide();
+            } else {
+                $("#includebankholidays").hide();
+            }
+        });
+        $("#editShopFormValidationForChangePassword").on('submit', function (event) {
+            event.preventDefault();
+            var id = $("#passId").val();
+            id = parseInt(id);
+            var formData = {
+                'id': id,
+                'password': $("#change_password").val(),
+
+            };
+            $.ajax({
+                type: 'post',
+                url: '/admin/api/change-password-for-shop/' + id,
+                data: JSON.stringify(formData),
+                dataType: 'json',
+                contentType: "application/json",
+
+                success: function (data) {
+
+                    swal({
+                        title: '{{gettext "Updated!"}}',
+                        text: '{{gettext "Your store password has been successfully changed."}}',
+                        type: 'success',
+                        confirmButtonClass: "btn btn-success btn-fill",
+                        buttonsStyling: false
+                    }).then(function () {
+                        $('#editModalHorizontalForChangePassword').modal('toggle');
+                        window.location.reload();
+                    })
+
+                },
+                error: function (request, status, error) {
+                    console.log(status);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    var user_is = $('input[name= UserId]').val();
+    var usr_id = parseInt(user_is);
+    var url = '/admin/api/all-shops-per-user/' + usr_id;
+    $('#shopdatatables').DataTable({
+        "processing": true,
+        "ajax": {
+            "url": url,
+            "dataSrc": function (data) {
+                console.log(data);
+                if (data["data"] == null) {
+                    return [];
+                }
+                else {
+                    return data.data;
+                }
+            }
+        },
+        "oLanguage": {
+            "sEmptyTable": '{{gettext "You do not have any data"}}',
+            "sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+        },
+        "columns": [
+            {
+                "data": "company_name",
+                "render": function (data) {
+
+
+                    return data;
+                }
+            },
+            {
+                "data": "vat_number",
+                "render": function (data) {
+
+
+                    return data;
+                }
+            },
+            {
+                "data": null,
+                "render": function (data, type, row) {
+
+
+                    return data.company_address + " " + data.company_street_number + ", " + data.company_city + ", " + data.company_zip_code + ", " + data.company_country;
+                }
+            },
+            {
+                "data": "tax_office",
+                "render": function (data) {
+
+
+                    return data;
+                }
+            },
+            {
+                "data": "created_at",
+                "render": function (data) {
+                    var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+                    return dateoflastReview.format("DD/MM/YYYY")
+                }
+
+            },
+
+            // {
+            //   "data": "null",
+            //   "render": function (data, type, row) {
+            //     if (row.is_active == true) {
+
+            //       return '<td class="text-center"><input type="checkbox" class="switch-plain" checked></td>'
+            //     } else {
+            //       return '<td class="text-center"><input type="checkbox" class="switch-plain"></td>'
+            //     }
+            //   }
+
+            // },
+            {
+                "data": "company_country",
+                "render": function (data) {
+                    return '<td><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target=".editModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a><a rel="tooltip" title="Change Password" class="btn btn-simple btn-danger btn-icon table-action shange_password" data-toggle="modal" data-target="#editModalHorizontalForChangePassword"><i class="ti-unlock"></i></a></td>'
+
+
+                }
+            },
+
+        ],
+        "pagingType": "full_numbers",
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+        responsive: true,
+        language: {
+            search: "_INPUT_",
+            searchPlaceholder: '{{gettext "Search records"}}',
+        },
+        "initComplete": function (settings, json) {
+
+            $('[rel="tooltip"]').tooltip();
+        }
+
+    });
+
+
+    var table = $('#shopdatatables').DataTable();
+    // Edit record
+    table.on('click', '.shange_password', function () {
+        // $tr = $(this).closest('tr');
+        // var data = table.row($tr).data();
+        var cell = table.cell(this.parentNode);
+        var data = table.row(cell.index().row).data();
+        $("#editModalLabelForChangePassword").text('{{gettext "Edit"}}' + data.company_name);
+        $("#passId").val(data.id);
+        $("#UserID").val(data.user_id);
+
+
+
+        console.log(data);
+    });
+
+    table.on('click', '.edit', function () {
+        // $tr = $(this).closest('tr');
+        // var data = table.row($tr).data();
+        var cell = table.cell(this.parentNode);
+        var data = table.row(cell.index().row).data();
+        $("#editModalLabel").text('{{gettext "Edit"}}' + data.company_name);
+        $("#Id").val(data.id);
+        $("#UserID").val(data.user_id);
+        $("input[name=ecompany_name]").val(data.company_name);
+        $("input[name=evat_number]").val(data.vat_number);
+        $("input[name=etax_office]").val(data.tax_office);
+        $("input[name=ework_telephone]").val(data.work_telephone);
+        $("input[name=emobile_telephone]").val(data.mobile_telephone);
+
+        $("input[name=estreet_number]").val(data.company_street_number);
+        $("input[name=eroute]").val(data.company_address);
+        $("input[name=elocality]").val(data.company_city);
+        $("input[name=eadministrative_area_level_1]").val(data.company_state);
+        $("input[name=epostal_code]").val(data.company_zip_code);
+        $("input[name=ecountry]").val(data.company_country);
+        $("#eselect_coundry").val(data.bank_holidays_country);
+        $("#eselect_coundry").selectpicker('refresh');
+
+        console.log(data);
+    });
+
+    // Delete a record
+    table.on('click', '.remove', function (e) {
+        var cell = table2.cell(this.parentNode);
+        var data = table2.row(cell.index().row).data();
+
+        var shopId = parseInt(data.id);
+        var formData = {
+            'is_active': data.is_active,
+        }
+        swal({
+            title: '{{gettext "Are you sure?"}}',
+            text: '{{gettext "You will not be able to recover this store!"}}',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '{{gettext "Yes, delete it!"}}',
+            cancelButtonText: '{{gettext "No, keep it"}}',
+            confirmButtonClass: "btn btn-success btn-fill",
+            cancelButtonClass: "btn btn-danger btn-fill",
+            buttonsStyling: false
+        }).then(function () {
+            $.ajax({
+                type: 'post',
+                url: '/admin/api/disable-single-shop/' + shopId,
+                data: JSON.stringify(formData),
+
+                success: function (data) {
+                    table.row($tr).remove().draw();
+                    swal({
+                        title: '{{gettext "Deleted!"}}',
+                        text: '{{gettext "Your store has been deleted."}}',
+                        type: 'success',
+                        confirmButtonClass: "btn btn-success btn-fill",
+                        buttonsStyling: false
+                    })
+
+                },
+                contentType: 'application/json',
+                dataType: 'json'
+            });
+
+        }, function (dismiss) {
+            // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+            if (dismiss === 'cancel') {
+                swal({
+                    title: '{{gettext "Cancelled"}}',
+                    text: '{{gettext "Your store is safe :)"}}',
+                    type: 'error',
+                    confirmButtonClass: "btn btn-info btn-fill",
+                    buttonsStyling: false
+                })
+            }
+        })
+
+        e.preventDefault();
+    });
+
+    //Like record
+    table.on('click', '.like', function () {
+        alert('You clicked on Like button');
+    });
+</script>
+<script>
+    $().ready(function () {
+
+        $("#vat-exists").hide();
+        $('#createNewShopFormValidation').validate({
+            rules: {
+                vat_number: "required",
+                tax_office: "required",
+                email: {
+                    required: true,
+                    email: true,
+                },
+                password: {
+                    required: true,
+                    minlength: 5,
+                },
+                confirm_password: {
+                    required: true,
+                    minlength: 5,
+                    equalTo: "#password"
+                },
+                forename: "required",
+                surname: "required",
+                company_name: "required",
+                search_address: "required",
+                street_number: {
+                    required: true,
+                    number: true,
+                },
+                route: "required",
+                locality: "required",
+                postal_code: "required",
+                country: "required",
+                work_telephone: {
+                    required: true,
+                    number: true,
+                },
+                mobile_telephone: {
+                    required: true,
+                    number: true,
+                },
+            },
+            messages: {
+                vat_number: '{{gettext "Please enter your VAT number"}}',
+                tax_office: '{{gettext "Please enter your tax office"}}',
+                email: '{{gettext "Please enter a valid email address"}}',
+
+                password: {
+                    required: '{{gettext "Please provide a password"}}',
+                    minlength: '{{gettext "Your password must be at least 5 characters long"}}'
+                },
+                confirm_password: {
+                    required: '{{gettext "Please provide a password"}}',
+                    minlength: '{{gettext "Your password must be at least 5 characters long"}}',
+                    equalTo: '{{gettext "Please enter the same password as above"}}'
+                },
+                forename: '{{gettext "Please enter your forename"}}',
+                surname: '{{gettext "Please enter your surname"}}',
+                company_name: '{{gettext "Please enter your company name"}}',
+                search_address: '{{gettext "Please enter your address"}}',
+                street_number: {
+                    required: '{{gettext "Please enter your address number"}}',
+                    number: '{{gettext "The address number is not a number"}}',
+                },
+                route: '{{gettext "Please enter your route"}}',
+                locality: '{{gettext "Please enter you city"}}',
+                postal_code: '{{gettext "Please enter your postal code"}}',
+                country: '{{gettext "Please enter your country"}}',
+                work_telephone: {
+                    required: '{{gettext "Please enter your phone number"}}',
+                    number: '{{gettext "The phone number is not a number"}}',
+                },
+                mobile_telephone: {
+                    required: '{{gettext "Please enter your mobile number"}}',
+                    number: '{{gettext "The mobile number is not a number"}}',
+                }
+            }
+        });
+
+    });
+</script>
+<script>
+    $().ready(function () {
+
+        $('#editShopFormValidationForChangePassword').validate({
+            rules: {
+
+                change_password: {
+                    required: true,
+                    minlength: 5,
+                },
+                confirm_change_password: {
+                    required: true,
+                    minlength: 5,
+                    equalTo: "#change_password"
+                },
+
+
+            },
+            messages: {
+
+                change_password: {
+                    required: '{{gettext "Please provide a password"}}',
+                    minlength: '{{gettext "Your password must be at least 5 characters long"}}'
+                },
+                confirm_change_password: {
+                    required: '{{gettext "Please provide a password"}}',
+                    minlength: '{{gettext "Your password must be at least 5 characters long"}}',
+                    equalTo: '{{gettext "Please enter the same password as above"}}'
+                },
+
+
+            }
+        });
+
+    });
+
+    $().ready(function () {
+
+        $('#updateFormValidation').validate({
+            rules: {
+                username: "required",
+                email: {
+                    required: true,
+                    email: true,
+                },
+                password: {
+
+                    minlength: 5,
+                },
+                confirm_password: {
+
+                    minlength: 5,
+                    equalTo: "#password"
+                },
+                forename: "required",
+                surname: "required",
+                company_name: "required",
+                search_address: "required",
+                street_number: {
+                    required: true,
+                    number: true,
+                },
+                route: "required",
+                locality: "required",
+                postal_code: "required",
+                country: "required",
+                work_telephone: {
+                    required: true,
+                    number: true,
+                },
+                mobile_telephone: {
+                    required: true,
+                    number: true,
+                },
+            },
+            messages: {
+                username: '{{gettext "Please enter your username"}}',
+                email: '{{gettext "Please enter a valid email address"}}',
+
+                password: {
+                    required: '{{gettext "Please provide a password"}}',
+                    minlength: '{{gettext "Your password must be at least 5 characters long"}}'
+                },
+                confirm_password: {
+                    required: '{{gettext "Please provide a password"}}',
+                    minlength: '{{gettext "Your password must be at least 5 characters long"}}',
+                    equalTo: '{{gettext "Please enter the same password as above"}}'
+                },
+                forename: '{{gettext "Please enter your forename"}}',
+                surname: '{{gettext "Please enter your surname"}}',
+                company_name: '{{gettext "Please enter your company name"}}',
+                search_address: '{{gettext "Please enter your address"}}',
+                street_number: {
+                    required: '{{gettext "Please enter your address number"}}',
+                    number: '{{gettext "The address number is not a number"}}',
+                },
+                route: '{{gettext "Please enter your route"}}',
+                locality: '{{gettext "Please enter your city"}}',
+                postal_code: '{{gettext "Please enter your postal code"}}',
+                country: '{{gettext "Please enter your country"}}',
+                work_telephone: {
+                    required: '{{gettext "Please enter your phone number"}}',
+                    number: '{{gettext "The phone number is not a number"}}',
+                },
+                mobile_telephone: {
+                    required: '{{gettext "Please enter your mobile number"}}',
+                    number: '{{gettext "The mobile number is not a number"}}',
+                }
+            }
+        });
+
+    });
+</script>
+<!-- <script type="text/javascript">
+    $.notify({
+        allow_dismiss: true,
+        
+        icon: '/static/images/Succstepsfavicon.png',
+        title: 'Succsteps',
+        message: '{{gettext "Here you can find all your store settings You can add new stores edit details or change passwords from your stores"}}'
+    },{
+        type: 'pastel-warning',
+         delay: 500000,
+        icon_type: 'image',
+        placement: {from: 'top',align: 'center'
+	},
+    offset: {
+		y: 8
+	},
+        template: '<div data-notify="container" class="col-xs-11 col-sm-5 alert alert-{0}" role="alert">' +
+                '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">X</button>'+
+            '<img data-notify="icon" class="img-circle pull-left">' +
+            '<span data-notify="title">{1}</span>' +
+            '<span data-notify="message">{2}</span>' +
+        '</div>'
+    });
+    </script> -->
+    {{end}}

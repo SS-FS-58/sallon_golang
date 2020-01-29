@@ -1,0 +1,1142 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+	<li>
+		<a href="/admin/expenses?lang=gr">
+			<img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin/expenses?lang=en">
+			<img src="/static/images/flags/GB.png"> {{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}} {{define "content"}}
+<div class="content">
+	<input type="hidden" id="UserID" name="UserID" value="{{.UserID}}">
+	<input type="hidden" id="CostCategoryID" name="CostCategoryID">
+	<input type="hidden" id="StoreID" name="StoreID">
+
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="card">
+					<div class="card-content">
+						<div class="nav-tabs-navigation">
+							<div class="nav-tabs-wrapper">
+								<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+									<li class="active">
+										<a href="#Expenses" data-toggle="tab">{{gettext "Expenses"}}</a>
+									</li>
+									<li>
+										<a href="#ExpensesList" data-toggle="tab">{{gettext "Expenses List"}}</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div id="my-tab-content" class="tab-content">
+							<div class="tab-pane active" id="Expenses">
+								<div class="header">
+
+									<h4 class="title">
+										<a id="inserexpnsebtn" href="#addexpprice" data-toggle="collapse" class="btn btn-icon btn-info btn-add">
+											<i class="ti-plus"></i>
+										</a>
+										{{gettext "Add Expense Price"}}</h4>
+								</div>
+								<div class="content">
+									<div class="collapse" id="addexpprice">
+										<form id="add-expense-price">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="col-md-3">
+														<label>{{gettext "Select Store"}}</label>
+														<div id="GenderOfCustomer">
+															<div class="form-group">
+																<select id="expselectstore" name="expselectstore" class="select_drop selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select Store"}}'
+																 data-size="7" data-live-search="true">
+
+																</select>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-md-3">
+														<div id="SubCategoryName">
+															<div class="form-group">
+																<label>{{gettext "Select Cost Category"}}</label>
+																<select id="expselectcostcat" name="expselectcostcat" class="select_drop selectpicker" data-style="btn btn-info btn-block"
+																 title='{{gettext "Select Cost Category"}}' data-size="7" data-live-search="true">
+
+																</select>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-md-3">
+														<div class="form-group">
+															<label>{{gettext "Expense Price"}}</label>
+															<input type="text" id="expenseprice" name="expenseprice" placeholder='{{gettext "Expense Price"}}' class="form-control">
+														</div>
+													</div>
+
+
+													<div class="col-md-1 margin-top-20">
+														<div id="payment" class="form-group">
+															<input class="tgl tgl-skewed" id="paidunpaid" type="checkbox" />
+															<label class="tgl-btn" data-tg-off='{{gettext "Unpaid"}}' data-tg-on='{{gettext "Paid"}}' for="paidunpaid"></label>
+														</div>
+													</div>
+													<div class="col-md-2 margin-top-20">
+														<div class="form-group">
+															<button id="expense-submit" type="submit" class="btn btn-info">{{gettext "Submit"}}</button>
+
+														</div>
+													</div>
+												</div>
+
+												<div class="clearfix"></div>
+
+											</div>
+										</form>
+									</div>
+
+									<div class="fresh-datatables">
+										<table id="expensesLists" class="table table-striped table-bordered  table-hover expensesListdatatables" cellspacing="0"
+										 width="100%" style="width:100%">
+											<thead>
+												<tr>
+													<th>{{gettext "Store Name"}}</th>
+													<th>{{gettext "Expense Name"}}</th>
+													<th>{{gettext "Expense Price"}}</th>
+													<th>{{gettext "Payment"}}</th>
+													<th>{{gettext "Creation Date"}}</th>
+													<th class="disabled-sorting">{{gettext "Actions"}}</th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<th>{{gettext "Store Name"}}</th>
+													<th>{{gettext "Expense Name"}}</th>
+													<th>{{gettext "Expense Price"}}</th>
+													<th>{{gettext "Payment"}}</th>
+													<th>{{gettext "Creation Date"}}</th>
+													<th>{{gettext "Actions"}}</th>
+												</tr>
+											</tfoot>
+											<tbody>
+
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-pane" id="ExpensesList">
+								<div class="header">
+
+									<h4 class="title">
+										<a href="#addcostcategory" data-toggle="collapse" class="btn btn-icon btn-info btn-add">
+											<i class="ti-plus"></i>
+										</a>
+										{{gettext "Add Cost Category"}}
+
+									</h4>
+								</div>
+								<div class="col-md-12 text-left margin-bottom-20">
+
+									<div class="content">
+										<div class="collapse" id="addcostcategory">
+											<form id="add-cost-category">
+												<div class="row">
+													<div id="ServiceTime" class="col-md-4">
+														<div class="form-group">
+															<select id="selectstore" name="selectstore" class="select_drop selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select Store"}}'
+															 data-size="7" data-live-search="true">
+
+															</select>
+														</div>
+													</div>
+													<div class="col-md-5">
+														<div class="form-group">
+
+															<input id="cost_category" type="text" name="cost_category" class="form-control border-input" placeholder='{{gettext "Cost Category Name"}}'>
+															<label id="cost_category_exists" for="cost_category"></label>
+														</div>
+													</div>
+
+													<div class="col-md-2">
+														<div class="form-group">
+															<div class="text-center">
+																<button type="submit" class="btn btn-info btn-fill btn-wd">{{gettext "Create"}}</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+
+										<div class="fresh-datatables">
+											<table id="expensesListdatatables" class="table table-striped table-bordered  table-hover expensesListdatatables" cellspacing="0"
+											 width="100%" style="width:100%">
+												<thead>
+													<tr>
+														<th>{{gettext "Store Name"}}</th>
+														<th>{{gettext "Expense Name"}}</th>
+														<th>{{gettext "Creation Date"}}</th>
+														<th>{{gettext "Active"}}</th>
+														<th class="disabled-sorting">{{gettext "Actions"}}</th>
+													</tr>
+												</thead>
+												<tfoot>
+													<tr>
+														<th>{{gettext "Store Name"}}</th>
+														<th>{{gettext "Expense Name"}}</th>
+														<th>{{gettext "Creation Date"}}</th>
+														<th>{{gettext "Active"}}</th>
+														<th>{{gettext "Actions"}}</th>
+													</tr>
+												</tfoot>
+												<tbody>
+
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade costCategoryEditModalHorizontal" id="costCategoryEditModalHorizontal" tabindex="-1" role="dialog"
+ aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">{{gettext "Close"}}</span>
+				</button>
+				<h4 class="modal-title" id="editcatModalLabel">
+				</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<form id="edit-cost_category">
+				<input type="hidden" id="CategoryID" name="CategoryID">
+				<input type="hidden" id="CategoryEditUserID" name="CategoryEditUserID">
+				<div class="modal-body">
+					<div class="card card-plain">
+						<div class="content">
+							<div class="row">
+
+								<div class="col-md-12">
+									<div class="form-group">
+
+										<input id="ecategory_cost_name" type="text" name="ecategory_cost_name" class="form-control border-input" placeholder='{{gettext "Cost Category Name"}}'>
+										<label id="ecategory_cost_name_exists" for="ecategory_cost_name"></label>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						{{gettext "Close"}}
+					</button>
+					<button type="submit" class="btn btn-primary">
+						{{gettext "Save changes"}}
+					</button>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+</div>
+<div class="modal fade expenseEditModalHorizontal" id="expenseEditModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">{{gettext "Close"}}</span>
+				</button>
+				<h4 class="modal-title" id="editcatModalLabel">
+				</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<form id="edit-expense">
+				<input type="hidden" id="ExpenseID" name="ExpenseID">
+				<div class="modal-body">
+					<div class="card card-plain">
+						<div class="content">
+							<div class="row">
+
+								<div class="col-md-12">
+									<label>{{gettext "Select Store"}}</label>
+									<div id="GenderOfCustomer">
+										<div class="form-group">
+											<select id="eexpselectstore" name="eexpselectstore" class="select_drop selectpicker" data-style="btn btn-info btn-block"
+											 title='{{gettext "Select Store"}}' data-size="7" data-live-search="true">
+
+											</select>
+										</div>
+									</div>
+									<div id="SubCategoryName">
+										<div class="form-group">
+											<label>{{gettext "Select Cost Category"}}</label>
+											<select id="eexpselectcostcat" name="eexpselectcostcat" class="select_drop selectpicker" data-style="btn btn-info btn-block"
+											 title='{{gettext "Select Cost Category"}}' data-size="7" data-live-search="true">
+
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>{{gettext "Expense Price"}}</label>
+										<input type="text" id="eexpenseprice" name="eexpenseprice" placeholder='{{gettext "Expense Price"}}' class="form-control">
+									</div>
+
+									<div class="col-md-6">
+										<div id="payment" class="form-group">
+											<input class="tgl tgl-skewed" id="epaidunpaid" type="checkbox" />
+											<label class="tgl-btn" data-tg-off='{{gettext "Unpaid"}}' data-tg-on='{{gettext "Paid"}}' for="epaidunpaid"></label>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						{{gettext "Close"}}
+					</button>
+					<button type="submit" class="btn btn-primary">
+						{{gettext "Save changes"}}
+					</button>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+</div>
+{{end}}{{define "scripts"}}
+
+<script type="text/javascript">
+	var user_id = $('input[name=UserID]').val();
+	user_id = parseInt(user_id);
+	var url = '/admin/api/all-stores-per-user/' + user_id;
+	$.getJSON(url, function (data) {
+
+		for (let i = 0; i < data["data"].length; i++) {
+			$('#selectstore').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id));
+			$('#expselectstore').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id));
+
+
+		};
+
+		$('#selectstore').val(data["data"][0].id);
+		$('#expselectstore').val(data["data"][0].id);
+
+		$('.selectpicker').selectpicker('refresh');
+
+	});
+
+	var url12 = '/admin/api/all-cost-categories-per-user/' + user_id;
+
+	$.getJSON(url12, function (json) {
+
+		var shop = $('#expselectstore option:selected').val();
+		shop = parseInt(shop);
+		for (let i = 0; i < json["data"].length; i++) {
+			if (shop == json["data"][i].store_id && json["data"][i].is_active == true) {
+				$('#expselectcostcat').append($('<option>').text(json["data"][i].cost_category).attr('value', json["data"][i].id));
+			};
+		};
+		$('.selectpicker').selectpicker('refresh');
+		$("#expselectstore").on('change', function () {
+			storeid = parseInt(this.value);
+			storeid = parseInt(storeid);
+			$('#expselectcostcat').find('option').remove().end();
+			for (let i = 0; i < json["data"].length; i++) {
+				if (storeid == json["data"][i].store_id && json["data"][i].is_active == true) {
+					$('#expselectcostcat').append($('<option>').text(json["data"][i].cost_category).attr('value', json["data"][i].id));
+				};
+			};
+			$('.selectpicker').selectpicker('refresh');
+		});
+	});
+
+	var url1 = '/admin/api/all-cost-categories-per-user/' + user_id;
+	$('#expensesListdatatables').DataTable({
+		"processing": true,
+		"ajax": {
+			"url": url1,
+			"dataSrc": function (data) {
+				console.log(data);
+				if (data["data"] == null) {
+					return [];
+				}
+				else {
+					return data.data;
+				}
+			}
+		},
+		"oLanguage": {
+			"sEmptyTable": '{{gettext "You do not have any data"}}',
+			"sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+		},
+		"columns": [
+			{
+				"data": "store_name",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "cost_category",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+
+			{
+				"data": "created_at",
+				"render": function (data) {
+					var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+					return dateoflastReview.format("DD/MM/YYYY")
+				}
+
+			},
+			{
+				"data": "null",
+				"render": function (data, type, row) {
+					if (row.is_active == true) {
+
+
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" class="tgl tgl-skewed" id="my-costcategorycheckbox' + row.id + '" type="checkbox" checked /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-costcategorycheckbox' + row.id + '"></label></td>'
+					} else {
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" class="tgl tgl-skewed" id="my-costcategorycheckbox' + row.id + '" type="checkbox" /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-costcategorycheckbox' + row.id + '"></label></td>'
+					}
+				}
+
+			},
+			{
+				"data": "null",
+				"render": function (data) {
+					return '<td><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target="#costCategoryEditModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+				}
+			},
+
+		],
+		"pagingType": "full_numbers",
+		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+		responsive: true,
+		language: {
+			search: "_INPUT_",
+			searchPlaceholder: '{{gettext "Search records"}}',
+		},
+		"initComplete": function (settings, json) {
+			$('[rel="tooltip"]').tooltip();
+
+		}
+
+	});
+	var table = $('#expensesListdatatables').DataTable();
+
+	table.on('click', '.tgl-skewed', function () {
+		var $this = $(this);
+		enable_disable_cost_category($this.prop('checked') == true, $this.attr('data-id'));
+	});
+
+
+	table.on('click', '.edit', function () {
+		// $tr = $(this).closest('tr');
+		// var data = table.row($tr).data();
+		var cell = table.cell(this.parentNode);
+		var data = table.row(cell.index().row).data();
+		$("#editcatModalLabel").text("Edit " + data.cost_category);
+		$("input[name=ecategory_cost_name]").val(data.cost_category);
+		$("input[name=CostCategoryID]").val(data.id);
+		$("input[name=StoreID]").val(data.store_id);
+
+
+	});
+	// Delete a record
+	table.on('click', '.remove', function (e) {
+		var cell = table.cell(this.parentNode);
+		var data = table.row(cell.index().row).data();
+		var expenseId = parseInt(data.id);
+		var formData = {
+			'id': parseInt(data.id),
+		}
+		swal({
+			title: 'Are you sure?',
+			text: 'You will not be able to recover this expense!',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, delete it!',
+			cancelButtonText: 'No, keep it',
+			confirmButtonClass: "btn btn-success btn-fill",
+			cancelButtonClass: "btn btn-danger btn-fill",
+			buttonsStyling: false
+		}).then(function () {
+			$.ajax({
+				type: 'post',
+				url: '/admin/api/delete-single-cost-category/' + expenseId,
+				data: JSON.stringify(formData),
+
+				success: function (data) {
+
+					swal({
+						title: 'Deleted!',
+						text: 'Your expense has been deleted.',
+						type: 'success',
+						confirmButtonClass: "btn btn-success btn-fill",
+						buttonsStyling: false
+					}).then(function () {
+						var table2 = $('#expensesListdatatables').DataTable();
+						table2.ajax.reload();
+						var table4 = $('#expensesLists').DataTable();
+						table4.ajax.reload();
+
+					});
+
+				},
+				contentType: 'application/json',
+				dataType: 'json'
+			});
+
+		}, function (dismiss) {
+			// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+			if (dismiss === 'cancel') {
+				swal({
+					title: 'Cancelled',
+					text: 'Your expense is safe :)',
+					type: 'error',
+					confirmButtonClass: "btn btn-info btn-fill",
+					buttonsStyling: false
+				})
+			}
+		})
+
+		e.preventDefault();
+	});
+
+	function enable_disable_cost_category(checked, id) {
+		console.log(checked, id);
+		id = parseInt(id);
+
+		var formData = {
+			'is_active': checked,
+		}
+
+		$.ajax({
+			type: 'post',
+			url: '/admin/api/enable-disable-cost-category/' + id,
+			data: JSON.stringify(formData),
+
+			success: function (data) {
+				demo.showSwal('update-message');
+
+			},
+
+
+			contentType: 'application/json',
+			dataType: 'json'
+		});
+
+	};
+
+</script>
+<script>
+	$(document).ready(function () {
+		$('#add-cost-category').validate({
+			rules: {
+				cost_category: "required",
+				selectstore: "required",
+			},
+			messages: {
+				cost_category: 'Please enter cost category',
+				selectstore: 'Please select store',
+
+
+			}
+		});
+
+		$('#add-cost-category').on('submit', function (event) {
+			event.preventDefault();
+			if ($.trim($("#selectstore").val()) === "" || $.trim($("#cost_category").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+
+				var user_is = $('input[name=UserID]').val();
+				var usr_id = parseInt(user_is);
+				var shopid = $('#selectstore option:selected').val();
+				shopid = parseInt(shopid);
+				var formData = {
+					'user_id': usr_id,
+					'store_id': shopid,
+					'cost_category': $("input[name=cost_category]").val(),
+
+				};
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/create-cost-category',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 501) {
+							$("#cost_category_exists").text(data.description);
+							return;
+						} else {
+
+
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: 'Successfully insert cost category to the database',
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								// var table = $('#expensesListdatatables').DataTable();
+								// table.ajax.reload();
+
+								// $("#demos").load(location.href + " #demos");
+								// $('#demos').load(document.URL + ' #demos');
+
+
+							});
+
+						}
+
+					}
+				});
+			}
+		});
+
+	});
+</script>
+<script>
+	$(document).ready(function () {
+
+		$('#edit-cost-category').validate({
+			rules: {
+				ecategory_cost_name: "required",
+
+			},
+			messages: {
+				ecategory_cost_name: '{{gettext "Please enter cost category name"}}',
+			}
+		});
+		$('#edit-cost_category').on('submit', function (event) {
+			event.preventDefault();
+			if ($.trim($("#ecategory_cost_name").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+
+				var id = $('input[name=CostCategoryID]').val();
+				var id = parseInt(id);
+				var user_is = $('input[name=UserID]').val();
+				var usr_id = parseInt(user_is);
+
+				var store_id = $('input[name=StoreID]').val();
+				store_id = parseInt(store_id);
+
+				var formData = {
+					'id': id,
+					'store_id': store_id,
+					'user_id': usr_id,
+					'cost_category': $("input[name=ecategory_cost_name]").val(),
+				};
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/update-cost-category/' + id,
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 501) {
+							$("#ecategory_cost_name_exists").text(data.description);
+							return;
+						} else {
+
+							$('.costCategoryEditModalHorizontal').modal('toggle');
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: "Successfully update cost category in to the database",
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								var tabler = $('#expensesListdatatables').DataTable();
+								tabler.ajax.reload();
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+			}
+		});
+
+	});
+</script>
+<script>
+	$('#add-expense-price').validate({
+		rules: {
+			expselectstore: "required",
+			expselectcostcat: "required",
+			expenseprice: {
+				required: true,
+				number: true,
+			},
+		},
+		messages: {
+			expselectstore: 'Please select store',
+			expselectcostcat: 'Please select expense category',
+			expenseprice: {
+				required: 'Please enter expense price',
+				number: 'The expense price is not a number',
+			},
+
+
+		}
+	});
+	$("#add-expense-price").on('submit', function (e) {
+		e.preventDefault();
+
+		if ($.trim($("#expselectstore").val()) === "" || $.trim($("#expselectcostcat").val()) === "" || $.trim($("#expenseprice").val()) === "") {
+			alert('{{gettext "you did not fill out one of the fields"}}');
+			return false;
+		} else {
+
+			var user_is = $('input[name=UserID]').val();
+			var usr_id = parseInt(user_is);
+			var shopid = $('#expselectstore option:selected').val();
+			shopid = parseInt(shopid);
+
+			var expensecatid = $('#expselectcostcat option:selected').val();
+			expensecatid = parseInt(expensecatid);
+			var paidunpaid = $('#paidunpaid:checkbox:checked').length > 0;
+			var epenseprice = $('input[name=expenseprice]').val();
+			epenseprice = parseFloat(epenseprice);
+
+
+
+			var formData = {
+				'user_id': usr_id,
+				'store_id': shopid,
+				'expense_cost_category': expensecatid,
+				'expense_price': epenseprice,
+				'expense_paid_unpaid': paidunpaid
+
+			};
+			console.log(formData);
+			$.ajax({
+				type: 'post',
+				url: '/admin/api/create-expense',
+				data: JSON.stringify(formData),
+				dataType: 'json',
+				contentType: "application/json",
+
+				success: function (data) {
+					var status = data.status;
+					console.log(status);
+					if (status == 501) {
+						// $("#cost_category_exists").text(data.description);
+						return;
+					} else {
+
+
+						swal({
+							title: '{{gettext "Good job!"}}',
+							text: 'Successfully insert Expense to the database',
+							buttonsStyling: false,
+							confirmButtonClass: "btn btn-success btn-fill",
+							type: "success"
+						}).then(function () {
+							var table = $('#expensesLists').DataTable();
+							table.ajax.reload();
+
+						});
+
+					}
+
+				}
+			});
+		}
+	})
+</script>
+<script>
+
+	var user = $('input[name=UserID]').val();
+	user = parseInt(user);
+	var url13 = '/admin/api/all-expenses-per-user/' + user;
+	$('#expensesLists').DataTable({
+		"processing": true,
+		"ajax": {
+			"url": url13,
+			"dataSrc": function (data) {
+				console.log(data);
+				if (data["data"] == null) {
+					return [];
+				}
+				else {
+					return data.data;
+				}
+			}
+		},
+		"oLanguage": {
+			"sEmptyTable": '{{gettext "You do not have any data"}}',
+			"sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+		},
+		"columns": [
+			{
+				"data": "store_name",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "cost_category",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "expense_price",
+				"render": function (data) {
+					expenseprice = parseFloat(data).toFixed(2);
+
+					return "€ " + expenseprice;
+				}
+			},
+
+			{
+				"data": "null",
+				"render": function (data, type, row) {
+					if (row.expense_paid_unpaid == true) {
+
+						return '<td class="td-actions text-center paymenttype"><div class="paymenttype"><input data-id="' + row.id + '" class="tgl tgl-skewed" id="my-costcategorycheckbox' + row.id + '" type="checkbox" checked /><label class="tgl-btn" data-tg-off="{{gettext "Unpaid"}}" data-tg-on="{{gettext "Paid"}}" for="my-costcategorycheckbox' + row.id + '"></label></div></td>'
+					} else {
+						return '<td class="td-actions text-center"><div class="paymenttype"><input data-id="' + row.id + '" class="tgl tgl-skewed" id="my-costcategorycheckbox' + row.id + '" type="checkbox" /><label class="tgl-btn" data-tg-off="{{gettext "Unpaid"}}" data-tg-on="{{gettext "Paid"}}" for="my-costcategorycheckbox' + row.id + '"></label></div></td>'
+					}
+				}
+
+			},
+
+			{
+				"data": "created_at",
+				"render": function (data) {
+					var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+					return dateoflastReview.format("DD/MM/YYYY")
+				}
+
+			},
+
+			{
+				"data": "null",
+				"render": function (data) {
+					return '<td><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target="#expenseEditModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+				}
+			},
+
+		],
+		"pagingType": "full_numbers",
+		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+		responsive: true,
+		language: {
+			search: "_INPUT_",
+			searchPlaceholder: '{{gettext "Search records"}}',
+		},
+		"initComplete": function (settings, json) {
+			$('[rel="tooltip"]').tooltip();
+			this.api().columns().every(function () {
+				var column = this;
+				var select = $('<select id="expense-selected" class="form-control border-input"><option value=""></option></select>')
+					.appendTo($(column.footer()).empty())
+					.on('change', function () {
+						var val = $.fn.dataTable.util.escapeRegex(
+							$(this).val()
+						);
+
+						column
+							.search(val ? '^' + val + '$' : '', true, false)
+							.draw();
+					});
+
+
+				column.data().unique().sort().each(function (d, j) {
+					select.append('<option value="' + d + '">' + d + '</option>')
+
+
+				});
+
+
+
+			});
+
+
+		}
+
+	});
+	var table1 = $('#expensesLists').DataTable();
+
+	table1.on('click', '.tgl-skewed', function () {
+		var $this = $(this);
+		paidunpaid($this.prop('checked') == true, $this.attr('data-id'));
+	});
+
+
+
+	table1.on('click', '.edit', function () {
+
+		var cell = table1.cell(this.parentNode);
+		var data = table1.row(cell.index().row).data();
+		$("#ExpenseID").val(data.id);
+
+		var url5 = '/admin/api/all-stores-per-user/' + data.user_id;
+		$.getJSON(url5, function (data1) {
+			console.log(data1);
+			for (let i = 0; i < data1["data"].length; i++) {
+				$('#eexpselectstore').append($('<option>').text(data1["data"][i].company_name).attr('value', data1["data"][i].id));
+			};
+			$('#eexpselectstore').val(data.store_id);
+		});
+
+
+		$('.selectpicker').selectpicker('refresh');
+
+		var url125 = '/admin/api/all-cost-categories-per-user/' + data.user_id;
+
+		$.getJSON(url125, function (json1) {
+
+			var shop23 = $('#eexpselectstore option:selected').val();
+			shop23 = parseInt(shop23);
+			for (let i = 0; i < json1["data"].length; i++) {
+				if (shop23 == json1["data"][i].store_id && json1["data"][i].is_active == true) {
+					$('#eexpselectcostcat').append($('<option>').text(json1["data"][i].cost_category).attr('value', json1["data"][i].id));
+				};
+				$('#eexpselectcostcat').val(data.expense_cost_category);
+
+			};
+			$('.selectpicker').selectpicker('refresh');
+			$("#eexpselectstore").on('change', function () {
+				var storeid = parseInt(this.value);
+				storeid = parseInt(storeid);
+				$('#eexpselectcostcat').find('option').remove().end();
+				for (let i = 0; i < json1["data"].length; i++) {
+					if (storeid == json1["data"][i].store_id && json1["data"][i].is_active == true) {
+						$('#eexpselectcostcat').append($('<option>').text(json1["data"][i].cost_category).attr('value', json1["data"][i].id));
+					};
+				};
+				$('.selectpicker').selectpicker('refresh');
+			});
+		});
+		$("#eexpenseprice").val(data.expense_price);
+
+		$("#epaidunpaid").prop("checked", data.expense_paid_unpaid);
+	});
+
+	table1.on('click', '.remove', function (e) {
+		var cell = table1.cell(this.parentNode);
+		var data = table1.row(cell.index().row).data();
+		var expenseId = parseInt(data.id);
+		var formData = {
+			'id': parseInt(data.id),
+		}
+		swal({
+			title: 'Are you sure?',
+			text: 'You will not be able to recover this expense!',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, delete it!',
+			cancelButtonText: 'No, keep it',
+			confirmButtonClass: "btn btn-success btn-fill",
+			cancelButtonClass: "btn btn-danger btn-fill",
+			buttonsStyling: false
+		}).then(function () {
+			$.ajax({
+				type: 'post',
+				url: '/admin/api/delete-single-expense/' + expenseId,
+				data: JSON.stringify(formData),
+
+				success: function (data) {
+
+					swal({
+						title: 'Deleted!',
+						text: 'Your expense has been deleted.',
+						type: 'success',
+						confirmButtonClass: "btn btn-success btn-fill",
+						buttonsStyling: false
+					}).then(function () {
+
+						var table6 = $('#expensesLists').DataTable();
+						table6.ajax.reload();
+
+					});
+
+				},
+				contentType: 'application/json',
+				dataType: 'json'
+			});
+
+		}, function (dismiss) {
+			// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+			if (dismiss === 'cancel') {
+				swal({
+					title: 'Cancelled',
+					text: 'Your expense is safe :)',
+					type: 'error',
+					confirmButtonClass: "btn btn-info btn-fill",
+					buttonsStyling: false
+				})
+			}
+		})
+
+		e.preventDefault();
+	});
+	function paidunpaid(checked, id) {
+
+		id = parseInt(id);
+
+		var formData = {
+			'expense_paid_unpaid': checked,
+		}
+
+		$.ajax({
+			type: 'post',
+			url: '/admin/api/paid-unpaid/' + id,
+			data: JSON.stringify(formData),
+
+			success: function (data) {
+				demo.showSwal('update-message');
+
+			},
+
+
+			contentType: 'application/json',
+			dataType: 'json'
+		});
+
+	};
+
+	$("#edit-expense").on('submit', function (e) {
+		e.preventDefault();
+
+		if ($.trim($("#eexpselectstore").val()) === "" || $.trim($("#eexpselectcostcat").val()) === "" || $.trim($("#eexpenseprice").val()) === "") {
+			alert('{{gettext "you did not fill out one of the fields"}}');
+			return false;
+		} else {
+
+			var user_is = $('input[name=UserID]').val();
+			var usr_id = parseInt(user_is);
+			var eshopid = $('#eexpselectstore option:selected').val();
+			eshopid = parseInt(eshopid);
+
+			var eexpensecatid = $('#eexpselectcostcat option:selected').val();
+			eexpensecatid = parseInt(eexpensecatid);
+			var epaidunpaid = $('#epaidunpaid:checkbox:checked').length > 0;
+			var eepenseprice = $('input[name=eexpenseprice]').val();
+			eepenseprice = parseFloat(eepenseprice);
+
+			var expID = $("#ExpenseID").val();
+			expID = parseInt(expID);
+
+
+			var formData = {
+				'user_id': usr_id,
+				'store_id': eshopid,
+				'expense_cost_category': eexpensecatid,
+				'expense_price': eepenseprice,
+				'expense_paid_unpaid': epaidunpaid
+
+			};
+			console.log(formData);
+			$.ajax({
+				type: 'post',
+				url: '/admin/api/edit-expense/' + expID,
+				data: JSON.stringify(formData),
+				dataType: 'json',
+				contentType: "application/json",
+
+				success: function (data) {
+					var status = data.status;
+					console.log(status);
+					if (status == 501) {
+						// $("#cost_category_exists").text(data.description);
+						return;
+					} else {
+
+
+						swal({
+							title: '{{gettext "Good job!"}}',
+							text: 'Successfully update Expense to the database',
+							buttonsStyling: false,
+							confirmButtonClass: "btn btn-success btn-fill",
+							type: "success"
+						}).then(function () {
+							$(".expenseEditModalHorizontal").modal('toggle');
+							var table = $('#expensesLists').DataTable();
+							table.ajax.reload();
+
+						});
+
+					}
+
+				}
+			});
+		}
+	})
+
+
+</script> {{end}}

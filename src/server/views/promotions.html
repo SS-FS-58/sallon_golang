@@ -1,0 +1,1605 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+	<li>
+		<a href="/admin/promotions?lang=gr">
+			<img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin/promotions?lang=en">
+			<img src="/static/images/flags/GB.png"> {{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}} {{define "content"}}
+
+<div class="content">
+	<input type="hidden" id="UserID" name="UserID" value="{{.UserID}}">
+
+	<div class="col-lg-12 col-md-12">
+		<div class="card">
+				<button id="toggle" class="btn btn-sm btn-primary">?</button>
+				<aside id="aside" class="aside">
+					<h2>{{gettext "Information"}}</h2>
+
+					<p>{{gettext "Here you can find all your store promotions you can promote service or product with discount value in time frame"}}</p>
+					
+				</aside>
+			<div class="card-header">
+				<h4 class="card-title">
+					<button id="openmodalpromotion" class="btn btn-default" data-toggle="modal" data-target="#promotionAddModalHorizontal">
+						<i class="ti-plus"></i>
+						{{gettext "Add Promotion"}}
+					</button>
+					
+
+				</h4>
+			</div>
+			<div class="card-content">
+				<div class="nav-tabs-navigation">
+					<div class="nav-tabs-wrapper">
+						<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+							<li class="active">
+								<a href="#servicesall" data-toggle="tab">{{gettext "Services Promotions"}} </a>
+							</li>
+							<li>
+								<a href="#productsall" data-toggle="tab">{{gettext "Products Promotions"}}</a>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+				<div id="my-tab-content" class="tab-content">
+					<div class="tab-pane active" id="servicesall">
+						<div class="col-md-12">
+							<div class="card-plain">
+								<div class="fresh-datatables">
+									<table id="promotiontableservices" class="table  table-striped table-bordered  table-hover" cellspacing="0" width="100%"
+									 style="width:100%">
+										<thead>
+											<tr>
+												<th>{{gettext "Store"}}</th>
+												<th>{{gettext "Promotion Title"}}</th>
+												<th>{{gettext "Price"}}</th>
+												<th>{{gettext "Promotion Text"}}</th>
+												<th>{{gettext "Time / Days"}}</th>
+												<th>{{gettext "Service"}}</th>
+												<th>{{gettext "Date Of Creation"}}</th>
+												<th class="disabled-sorting">{{gettext "Actions"}}</th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>{{gettext "Store"}}</th>
+												<th>{{gettext "Promotion Title"}}</th>
+												<th>{{gettext "Price"}}</th>
+
+												<th>{{gettext "Promotion Text"}}</th>
+												<th>{{gettext "Time / Days"}}</th>
+												<th>{{gettext "Service"}}</th>
+												<th>{{gettext "Date Of Creation"}}</th>
+												<th>{{gettext "Actions"}}</th>
+											</tr>
+										</tfoot>
+										<tbody>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="tab-pane" id="productsall">
+						<div class="fresh-datatables">
+							<table id="promotiontableproducts" class="table table-striped table-bordered  table-hover promotiontableproducts" cellspacing="0"
+							 width="100%" style="width:100%">
+								<thead>
+									<tr>
+										<th>{{gettext "Store"}}</th>
+										<th>{{gettext "Promotion Title"}}</th>
+										<th>{{gettext "Price"}}</th>
+										<th>{{gettext "Promotion Text"}}</th>
+										<th>{{gettext "Product"}}</th>
+										<th>{{gettext "Date Of Creation"}}</th>
+										<th class="disabled-sorting">{{gettext "Actions"}}</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>{{gettext "Store"}}</th>
+										<th>{{gettext "Promotion Title"}}</th>
+										<th>{{gettext "Price"}}</th>
+										<th>{{gettext "Promotion Text"}}</th>
+										<th>{{gettext "Product"}}</th>
+										<th>{{gettext "Date Of Creation"}}</th>
+										<th>{{gettext "Actions"}}</th>
+									</tr>
+								</tfoot>
+								<tbody>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<div class="modal fade promotionAddModalHorizontal" id="promotionAddModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">{{gettext "Close"}}</span>
+				</button>
+				<h4 class="modal-title" id="editcatModalLabel">
+					{{gettext "Add Promotion"}}
+				</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<form id="add-promotion">
+
+				<div class="modal-body">
+					<div class="card card-plain">
+						<div class="content">
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label" for="promotion_title">{{gettext "Promotion Title"}}</label>
+									<input id="promotion_title" type="text" name="promotion_title" class="form-control border-input" placeholder='{{gettext "Promotion Title"}}'>
+								</div>
+								<div id="ServiceTime">
+									<div class="form-group">
+										<label class="control-label">{{gettext "Store"}}</label>
+										<select id="select_store" name="select_store" class="select_drop selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select Store"}}'
+										 data-size="7" data-live-search="true">
+
+										</select>
+									</div>
+								</div>
+								<label>{{gettext "Select promotion type"}}</label>
+								<div class="col-md-12">
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="radio">
+												<input type="radio" name="is_service" id="is_service" value="service">
+												<label for="is_service">
+													{{gettext "Service"}}
+												</label>
+											</div>
+										</div>
+
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="radio">
+												<input type="radio" name="is_service" id="is_product" value="product">
+												<label for="is_product">
+													{{gettext "Product"}}
+												</label>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="clearfix"></div>
+								<div id="GenderOfCustomer">
+									<div class="form-group">
+										<label class="control-label">{{gettext "Service"}}</label>
+										<select multiple id="select_service" name="select_service" class="select_drop selectpicker" data-style="btn btn-info btn-block"
+										 title='{{gettext "Select Service"}}' data-size="7" data-live-search="true">
+
+										</select>
+									</div>
+								</div>
+								<div id="SubCategoryName">
+									<div class="form-group">
+										<label for="select_product" class="control-label">{{gettext "Product"}}</label>
+										<select multiple id="select_product" name="select_product" class="select_drop selectpicker" data-style="btn btn-info btn-block"
+										 title='{{gettext "Select Product"}}' data-size="7" data-live-search="true">
+
+										</select>
+									</div>
+								</div>
+								<div id="daysduration">
+									<div class="form-group">
+										<label class="control-label" for="days_duration">{{gettext "Days Duration"}}</label>
+										<input id="days_duration" type="text" name="days_duration" class="form-control border-input" placeholder='{{gettext "Days Duration"}}'>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="days_duration">{{gettext "Price discount"}}</label>
+									<input id="promotion_sale" type="text" name="promotion_sale" class="form-control border-input" placeholder='{{gettext "Promotion Sale per %  e.x. 10"}}'>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">{{gettext "Promotion Description"}}</label>
+									<textarea class="form-control" id="promotion_description" name="promotion_description" placeholder='{{gettext "Promotion Description"}}'
+									 rows="3"></textarea>
+
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+
+				</div>
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						{{gettext "Close"}}
+					</button>
+					<button type="submit" class="btn btn-primary">
+						{{gettext "Save changes"}}
+					</button>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+</div>
+<div class="modal fade editpromotionAddModalHorizontal" id="editpromotionAddModalHorizontal" tabindex="-1" role="dialog"
+ aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">{{gettext "Close"}}</span>
+				</button>
+				<h4 class="modal-title" id="editcatModalLabel">
+					{{gettext "Edit Promotion"}}
+				</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<form id="edit-promotion">
+				<input type="hidden" id="promid" name="promid">
+				<div class="modal-body">
+					<div class="card card-plain">
+						<div class="content">
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label" for="promotion_title">{{gettext "Promotion Title"}}</label>
+									<input id="epromotion_title" type="text" name="epromotion_title" class="form-control border-input" placeholder='{{gettext "Promotion Title"}}'>
+								</div>
+								<div id="ServiceTime">
+									<div class="form-group">
+										<label class="control-label">{{gettext "Store"}}</label>
+										<select id="eselect_store" name="eselect_store" class="select_drop selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select Store"}}'
+										 data-size="7" data-live-search="true">
+
+										</select>
+									</div>
+								</div>
+								<label>{{gettext "Select promotion type"}}</label>
+								<div class="col-md-12">
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="radio">
+												<input type="radio" name="eis_service" id="eis_service" value="service" checked>
+												<label for="eis_service">
+													{{gettext "Service"}}
+												</label>
+											</div>
+										</div>
+
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="radio">
+												<input type="radio" name="eis_service" id="eis_product" value="product" disabled>
+												<label for="eis_product">
+													{{gettext "Product"}}
+												</label>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="clearfix"></div>
+								<div id="GenderOfCustomer">
+									<div class="form-group">
+										<label class="control-label">{{gettext "Service"}}</label>
+										<select multiple id="eselect_service" name="eselect_service" class="select_drop selectpicker" data-style="btn btn-info btn-block"
+										 title='{{gettext "Select Service"}}' data-size="7" data-live-search="true">
+
+										</select>
+									</div>
+								</div>
+
+								<div id="daysduration">
+									<div class="form-group">
+										<label class="control-label" for="days_duration">{{gettext "Days Duration"}}</label>
+										<input id="edays_duration" type="text" name="edays_duration" class="form-control border-input" placeholder='{{gettext "Days Duration"}}'>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="days_duration">{{gettext "Price discount"}}</label>
+									<input id="epromotion_sale" type="text" name="epromotion_sale" class="form-control border-input" placeholder='{{gettext "Promotion Sale per %  e.x. 10"}}'>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">{{gettext "Promotion Description"}}</label>
+									<textarea class="form-control" id="epromotion_description" name="epromotion_description" placeholder='{{gettext "Promotion Description"}}'
+									 rows="3"></textarea>
+
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+
+				</div>
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						{{gettext "Close"}}
+					</button>
+					<button type="submit" class="btn btn-primary">
+						{{gettext "Update changes"}}
+					</button>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+</div>
+<div class="modal fade editpromotionproAddModalHorizontal" id="editpromotionproAddModalHorizontal" tabindex="-1" role="dialog"
+ aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">{{gettext "Close"}}</span>
+				</button>
+				<h4 class="modal-title" id="editcatModalLabel">
+					{{gettext "Edit Promotion"}}
+				</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<form id="edit-product-promotion">
+				<input type="hidden" id="eepromid" name="eepromid">
+
+				<div class="modal-body">
+					<div class="card card-plain">
+						<div class="content">
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label" for="promotion_title">{{gettext "Promotion Title"}}</label>
+									<input id="eepromotion_title" type="text" name="eepromotion_title" class="form-control border-input" placeholder='{{gettext "Promotion Title"}}'>
+								</div>
+								<div id="ServiceTime">
+									<div class="form-group">
+										<label class="control-label">{{gettext "Store"}}</label>
+										<select id="eeselect_store" name="eeselect_store" class="select_drop selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select Store"}}'
+										 data-size="7" data-live-search="true">
+
+										</select>
+									</div>
+								</div>
+								<label>{{gettext "Select promotion type"}}</label>
+								<div class="col-md-12">
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="radio">
+												<input type="radio" name="eeis_service" id="eeis_service" value="service" disabled>
+												<label for="eeis_service">
+													{{gettext "Service"}}
+												</label>
+											</div>
+										</div>
+
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="radio">
+												<input type="radio" name="eeis_service" id="eeis_product" value="product" checked>
+												<label for="eeis_product">
+													{{gettext "Product"}}
+												</label>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="clearfix"></div>
+
+								<div id="SubCategoryName">
+									<div class="form-group">
+										<label for="eeselect_product" class="control-label">{{gettext "Product"}}</label>
+										<select multiple id="eeselect_product" name="eeselect_product" class="select_drop selectpicker" data-style="btn btn-info btn-block"
+										 title='{{gettext "Select Product"}}' data-size="7" data-live-search="true">
+
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label" for="eedays_duration">{{gettext "Price discount"}}</label>
+									<input id="eepromotion_sale" type="text" name="eepromotion_sale" class="form-control border-input" placeholder='{{gettext "Promotion Sale per %  e.x. 10"}}'>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">{{gettext "Promotion Description"}}</label>
+									<textarea class="form-control" id="eepromotion_description" name="eepromotion_description" placeholder='{{gettext "Promotion Description"}}'
+									 rows="3"></textarea>
+
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+
+				</div>
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						{{gettext "Close"}}
+					</button>
+					<button type="submit" class="btn btn-primary">
+						{{gettext "Update changes"}}
+					</button>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+</div>
+
+
+{{end}} {{define "scripts"}}
+<script>
+
+	$(document).ready(function () {
+		var user_id = $('input[name=UserID]').val();
+		user_id = parseInt(user_id);
+
+
+		$("#openmodalpromotion").on('click', function () {
+
+			var url = '/admin/api/all-stores-per-user/' + user_id;
+			$.getJSON(url, function (data) {
+				for (let i = 0; i < data["data"].length; i++) {
+					$('#select_store').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id));
+				};
+
+				$('#select_store').val(data["data"][0].id);
+				var shopid = $("#select_store option:selected").val();
+				shopid = parseInt(shopid);
+				$('.selectpicker').selectpicker('refresh');
+				var url = '/admin/api/all-services-per-user-per-store/' + shopid + "/" + user_id;
+				$.getJSON(url, function (data1) {
+					for (let i = 0; i < data1.length; i++) {
+						if (data1[i].is_active == true) {
+							$('#select_service').append($('<option>').text(data1[i].service_name).attr('value', data1[i].id).attr('data-price', data1[i].service_price).attr('data-duration', data1[i].service_duration));
+						};
+
+					};
+					$('.selectpicker').selectpicker('refresh');
+				});
+				var customerURL = '/admin/api/all-products-per-user-per-store/' + shopid + "/" + user_id;
+				$.getJSON(customerURL, function (productdata) {
+					for (let i = 0; i < productdata.length; i++) {
+						if (productdata[i].is_active == true) {
+							$('#select_product').append($('<option>').text(productdata[i].product_name).attr('value', productdata[i].id).attr('product_price', productdata[i].product_price));
+						};
+
+					};
+					$('.selectpicker').selectpicker('refresh');
+				});
+
+
+			});
+
+			$('#select_store').on('change', function () {
+
+				$('#select_service').find('option').remove().end();
+				$('#select_product').find('option').remove().end();
+				var stid = parseInt(this.value);
+
+				$.getJSON('/admin/api/all-services-per-user-per-store/' + stid + "/" + user_id, function (data1) {
+					for (let i = 0; i < data1.length; i++) {
+						if (data1[i].is_active == true) {
+							$('#select_service').append($('<option>').text(data1[i].service_name).attr('value', data1[i].id).attr('data-price', data1[i].service_price).attr('data-duration', data1[i].service_duration));
+						};
+
+					};
+					$('.selectpicker').selectpicker('refresh');
+				});
+
+				$.getJSON('/admin/api/all-products-per-user-per-store/' + stid + "/" + user_id, function (productdata) {
+					for (let i = 0; i < productdata.length; i++) {
+						if (productdata[i].is_active == true) {
+							$('#select_product').append($('<option>').text(productdata[i].product_name).attr('value', productdata[i].id).attr('product_price', productdata[i].product_price));
+						};
+
+					};
+					$('.selectpicker').selectpicker('refresh');
+				});
+
+			})
+
+			$("#GenderOfCustomer").hide();
+			$("#SubCategoryName").hide();
+			$("#daysduration").hide();
+			$("input[name='is_service']").on('click', function () {
+				var $this = $(this);
+				var radio_value = $.trim($this.val());
+				if (radio_value === 'service') {
+					$("#GenderOfCustomer").show();
+					$("#daysduration").show();
+					$("#SubCategoryName").hide();
+
+
+
+				} else if (radio_value === 'product') {
+					$("#GenderOfCustomer").hide();
+					$("#daysduration").hide();
+					$("#SubCategoryName").show();
+				} else {
+					$("#GenderOfCustomer").hide();
+					$("#SubCategoryName").hide();
+					$("#daysduration").hide();
+				}
+
+
+			});
+
+		});
+	});
+</script>
+<script>
+	$(document).ready(function () {
+		$('#toggle').click(function (e) {
+			$('.aside').stop(true).slideToggle();
+		});
+		$(document).click(function (e) {
+			if (!$(e.target).closest('#toggle, .aside').length) {
+				$('.aside').stop(true).slideUp();
+			}
+		});
+		$('#add-promotion').validate({
+			rules: {
+
+				select_store: "required",
+				days_duration: {
+					required: true,
+					number: true,
+				},
+				promotion_sale: {
+					required: true,
+					number: true,
+				},
+				promotion_description: "required",
+				promotion_title: "required",
+			},
+			messages: {
+
+				select_store: '{{gettext "Please select store"}}',
+				days_duration: {
+					required: '{{gettext "Please insert days duration"}}',
+					number: '{{gettext "The days duration is not a number"}}',
+				},
+				promotion_sale: {
+					required: '{{gettext "Please insert promotion discount"}}',
+					number: '{{gettext "The promotion discount is not a number"}}',
+				},
+				promotion_description: '{{gettext "Please insert description"}}',
+				promotion_title: '{{gettext "Please insert promotion title"}}',
+
+			}
+		});
+		$('#edit-promotion').validate({
+			rules: {
+
+				eselect_store: "required",
+				edays_duration: {
+					required: true,
+					number: true,
+				},
+				epromotion_sale: {
+					required: true,
+					number: true,
+				},
+				epromotion_description: "required",
+				epromotion_title: "required",
+			},
+			messages: {
+
+				eselect_store: '{{gettext "Please select store"}}',
+				edays_duration: {
+					required: '{{gettext "Please insert days duration"}}',
+					number: '{{gettext "The days duration is not a number"}}',
+				},
+				epromotion_sale: {
+					required: '{{gettext "Please insert promotion discount"}}',
+					number: '{{gettext "The promotion discount is not a number"}}',
+				},
+				epromotion_description: '{{gettext "Please insert description"}}',
+				epromotion_title: '{{gettext "Please insert promotion title"}}',
+
+			}
+		});
+		$('#edit-product-promotion').validate({
+			rules: {
+
+				eeselect_store: "required",
+
+				eepromotion_sale: {
+					required: true,
+					number: true,
+				},
+				eepromotion_description: "required",
+				eepromotion_title: "required",
+			},
+			messages: {
+
+				eselect_store: '{{gettext "Please select store"}}',
+
+				eepromotion_sale: {
+					required: '{{gettext "Please insert promotion discount"}}',
+					number: '{{gettext "The promotion discount is not a number"}}',
+				},
+				eepromotion_description: '{{gettext "Please insert description"}}',
+				eepromotion_title: '{{gettext "Please insert promotion title"}}',
+
+			}
+		});
+
+
+		$("#edit-product-promotion").on('submit', function (e) {
+
+			e.preventDefault();
+
+			var user_id = $('input[name=UserID]').val();
+			user_id = parseInt(user_id);
+			if ($.trim($("#eeselect_store").val()) === "" || $.trim($("#eepromotion_sale").val()) === "" || $.trim($("#eepromotion_title").val()) === "" || $.trim($("#eeselect_product").val()) === "" || $.trim($("#eeis_product").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+				var eeobj;
+				var tbl = [];
+				var productall = $('#eeselect_product').val();
+				var productcomma = productall.join(",");
+				var promotion_title = $("#eepromotion_title").val();
+				var single_store = $("#eeselect_store option:selected").val();
+				single_store = parseInt(single_store);
+				var days_duration = $("#eedays_duration").val();
+				days_duration = parseInt(days_duration);
+
+				var promotion_sale = $("#eepromotion_sale").val();
+				promotion_sale = parseFloat(promotion_sale);
+
+				var promotion_description = $("#eepromotion_description").val();
+
+				// $.each(productall, function (key, value) {
+
+				// 	tbl.push(obj);
+
+				// });
+				eeobj = {
+					'promotion_title': promotion_title,
+					'store_id': single_store,
+					'user_id': user_id,
+					'is_service': false,
+					'promotion_service': productcomma,
+					'days_duration': 0,
+					'promotion_sale': promotion_sale,
+					'promotion_description': promotion_description
+
+				};
+				var eepromotionJSON = JSON.stringify(eeobj);
+
+				var fd = new FormData();
+				fd.append('epromotionJSON', eepromotionJSON);
+				var promid = $("#eepromid").val();
+				promid = parseInt(promid);
+				$.ajax({
+					url: '/admin/api/update-promotion-data/' + promid,
+					data: fd,
+					type: 'POST',
+					contentType: false,
+					processData: false,
+					dataType: 'json',
+					success: function (data) {
+						if (data.status == 500) {
+							$.notify({
+								icon: 'ti-user',
+								message: data.description,
+
+							}, {
+									placement: {
+										from: "top",
+										align: "center"
+									},
+									type: 'danger',
+									timer: 2000,
+									z_index: 2000,
+								});
+
+						} else if (data.status == 200) {
+							$.notify({
+								icon: 'ti-user',
+								message: data.description,
+
+							}, {
+									placement: {
+										from: "top",
+										align: "center"
+									},
+									type: 'success',
+									timer: 2000,
+									z_index: 2000,
+								});
+							var tabler = $('#promotiontableproducts').DataTable();
+							tabler.ajax.reload();
+							$("#edit-product-promotion").trigger("reset");
+							$('#edit-product-promotion').find('input:text, input:password, select, textarea').val('');
+							$('.selectpicker').selectpicker('refresh');
+							$('#edit-product-promotion').find('input:radio, input:checkbox').prop('checked', false);
+							$("#editpromotionproAddModalHorizontal").modal('toggle');
+						}
+					},
+					error: function (err) {
+
+					}
+				});
+
+			};
+
+		})
+
+		$("#edit-promotion").on('submit', function (e) {
+
+			e.preventDefault();
+			var user_id = $('input[name=UserID]').val();
+			user_id = parseInt(user_id);
+			if ($.trim($("#eselect_store").val()) === "" || $.trim($("#epromotion_sale").val()) === "" || $.trim($("#epromotion_title").val()) === "" || $.trim($("#eselect_service").val()) === "" || $.trim($("#eis_service").val()) === "" || $.trim($("#edays_duration").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+
+				var eobj;
+				var tbl = [];
+				var servicesall = $('#eselect_service').val();
+				var servicescomma = servicesall.join(",");
+				var promotion_title = $("#epromotion_title").val();
+				var single_store = $("#eselect_store option:selected").val();
+				single_store = parseInt(single_store);
+				var days_duration = $("#edays_duration").val();
+				days_duration = parseInt(days_duration);
+
+				var promotion_sale = $("#epromotion_sale").val();
+				promotion_sale = parseFloat(promotion_sale);
+
+				var promotion_description = $("#epromotion_description").val();
+
+				// $.each(servicesall, function (key, value) {
+
+				// 	tbl.push(obj);
+				// });
+				eobj = {
+					'promotion_title': promotion_title,
+					'store_id': single_store,
+					'user_id': user_id,
+					'is_service': true,
+					'promotion_service': servicescomma,
+					'days_duration': days_duration,
+					'promotion_sale': promotion_sale,
+					'promotion_description': promotion_description
+
+				};
+				var epromotionJSON = JSON.stringify(eobj);
+
+				var efd = new FormData();
+				efd.append('epromotionJSON', epromotionJSON);
+				var promid = $("#promid").val();
+				promid = parseInt(promid);
+				console.log(epromotionJSON);
+				console.log(promid);
+				$.ajax({
+					url: '/admin/api/update-promotion-data/' + promid,
+					data: efd,
+					type: 'POST',
+					contentType: false,
+					processData: false,
+					dataType: 'json',
+					success: function (data) {
+						if (data.status == 500) {
+							$.notify({
+								icon: 'ti-user',
+								message: data.description,
+
+
+							}, {
+									placement: {
+										from: "top",
+										align: "center"
+									},
+									type: 'danger',
+									timer: 2000,
+									z_index: 2000,
+								});
+
+						} else if (data.status == 200) {
+							$.notify({
+								icon: 'ti-user',
+								message: data.description,
+
+							}, {
+									placement: {
+										from: "top",
+										align: "center"
+									},
+									type: 'success',
+									timer: 2000,
+									z_index: 2000,
+								});
+							var tabler = $('#promotiontableservices').DataTable();
+							tabler.ajax.reload();
+							$("#edit-promotion").trigger("reset");
+							$('#edit-promotion').find('input:text, input:password, select, textarea').val('');
+							$('.selectpicker').selectpicker('refresh');
+							$('#edit-promotion').find('input:radio, input:checkbox').prop('checked', false);
+							$("#editpromotionAddModalHorizontal").modal('toggle');
+
+						}
+					},
+					error: function (err) {
+
+					}
+				});
+
+
+			};
+
+		})
+
+		$("#add-promotion").on('submit', function (e) {
+
+			e.preventDefault();
+			var radioselected = $("#add-promotion input[name='is_service']:checked").val();
+			var radiovalue = $.trim(radioselected);
+			var user_id = $('input[name=UserID]').val();
+			user_id = parseInt(user_id);
+			if ($.trim($("#select_store").val()) === "" || $.trim($("#promotion_sale").val()) === "" || $.trim($("#promotion_title").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+
+				switch (radiovalue) {
+					case 'service':
+
+						if ($.trim($("#select_service").val()) === "" || $.trim($("#is_service").val()) === "" || $.trim($("#days_duration").val()) === "") {
+							alert('{{gettext "you did not fill out one of the fields"}}');
+
+							return false;
+						} else {
+							var obj;
+							var tbl = [];
+							var servicesall = $('#select_service').val();
+							var servicescomma = servicesall.join(",");
+							var promotion_title = $("#promotion_title").val();
+							var single_store = $("#select_store option:selected").val();
+							single_store = parseInt(single_store);
+							var days_duration = $("#days_duration").val();
+							days_duration = parseInt(days_duration);
+
+							var promotion_sale = $("#promotion_sale").val();
+							promotion_sale = parseFloat(promotion_sale);
+
+							var promotion_description = $("#promotion_description").val();
+
+							// $.each(servicesall, function (key, value) {
+
+							// 	tbl.push(obj);
+							// });
+							obj = {
+								'promotion_title': promotion_title,
+								'store_id': single_store,
+								'user_id': user_id,
+								'is_service': true,
+								'promotion_service': servicescomma,
+								'days_duration': days_duration,
+								'promotion_sale': promotion_sale,
+								'promotion_description': promotion_description
+
+							};
+							var promotionJSON = JSON.stringify(obj);
+
+							var fd = new FormData();
+							fd.append('promotionJSON', promotionJSON);
+
+							$.ajax({
+								url: '/admin/api/insert-promotion-data',
+								data: fd,
+								type: 'POST',
+								contentType: false,
+								processData: false,
+								dataType: 'json',
+								success: function (data) {
+									if (data.status == 500) {
+										$.notify({
+											icon: 'ti-user',
+											message: data.description,
+
+
+										}, {
+												placement: {
+													from: "top",
+													align: "center"
+												},
+												type: 'danger',
+												timer: 2000,
+												z_index: 2000,
+											});
+
+									} else if (data.status == 200) {
+										$.notify({
+											icon: 'ti-user',
+											message: data.description,
+
+										}, {
+												placement: {
+													from: "top",
+													align: "center"
+												},
+												type: 'success',
+												timer: 2000,
+												z_index: 2000,
+											});
+										var tabler = $('#promotiontableservices').DataTable();
+										tabler.ajax.reload();
+										$("#add-promotion").trigger("reset");
+										$('#add-promotion').find('input:text, input:password, select, textarea').val('');
+										$('.selectpicker').selectpicker('refresh');
+										$('#add-promotion').find('input:radio, input:checkbox').prop('checked', false);
+										$("#promotionAddModalHorizontal").modal('toggle');
+
+									}
+								},
+								error: function (err) {
+
+								}
+							});
+						};
+						break;
+
+					case 'product':
+
+						if ($.trim($("#select_product").val()) === "" || $.trim($("#is_product").val()) === "") {
+							alert('{{gettext "you did not fill out one of the fields"}}');
+
+							return false;
+						} else {
+							var obj;
+							var tbl = [];
+							var productall = $('#select_product').val();
+							var productcomma = productall.join(",");
+							var promotion_title = $("#promotion_title").val();
+							var single_store = $("#select_store option:selected").val();
+							single_store = parseInt(single_store);
+							var days_duration = $("#days_duration").val();
+							days_duration = parseInt(days_duration);
+
+							var promotion_sale = $("#promotion_sale").val();
+							promotion_sale = parseFloat(promotion_sale);
+
+							var promotion_description = $("#promotion_description").val();
+
+							// $.each(productall, function (key, value) {
+
+							// 	tbl.push(obj);
+
+							// });
+							obj = {
+								'promotion_title': promotion_title,
+								'store_id': single_store,
+								'user_id': user_id,
+								'is_service': false,
+								'promotion_service': productcomma,
+								'days_duration': 0,
+								'promotion_sale': promotion_sale,
+								'promotion_description': promotion_description
+
+							};
+							var promotionJSON = JSON.stringify(obj);
+
+							var fd = new FormData();
+							fd.append('promotionJSON', promotionJSON);
+
+							$.ajax({
+								url: '/admin/api/insert-promotion-data',
+								data: fd,
+								type: 'POST',
+								contentType: false,
+								processData: false,
+								dataType: 'json',
+								success: function (data) {
+									if (data.status == 500) {
+										$.notify({
+											icon: 'ti-user',
+											message: data.description,
+
+										}, {
+												placement: {
+													from: "top",
+													align: "center"
+												},
+												type: 'danger',
+												timer: 2000,
+												z_index: 2000,
+											});
+
+									} else if (data.status == 200) {
+										$.notify({
+											icon: 'ti-user',
+											message: data.description,
+
+										}, {
+												placement: {
+													from: "top",
+													align: "center"
+												},
+												type: 'success',
+												timer: 2000,
+												z_index: 2000,
+											});
+										var tabler = $('#promotiontableproducts').DataTable();
+										tabler.ajax.reload();
+										$("#add-promotion").trigger("reset");
+										$('#add-promotion').find('input:text, input:password, select, textarea').val('');
+										$('.selectpicker').selectpicker('refresh');
+										$('#add-promotion').find('input:radio, input:checkbox').prop('checked', false);
+										$("#promotionAddModalHorizontal").modal('toggle');
+									}
+								},
+								error: function (err) {
+
+								}
+							});
+						};
+						break;
+
+					default:
+						break;
+				}
+
+			};
+
+		})
+
+
+	});
+</script>
+<script>
+
+	var user = $('input[name=UserID]').val();
+	user = parseInt(user);
+	var url13 = '/admin/api/all-promotion-services-per-user/' + user;
+	$('#promotiontableservices').DataTable({
+		"processing": true,
+		"ajax": {
+			"url": url13,
+			"dataSrc": function (data) {
+				console.log(data);
+				if (data["data"] == null) {
+					return [];
+				}
+				else {
+					return data.data;
+				}
+			}
+		},
+		"oLanguage": {
+			"sEmptyTable": '{{gettext "You do not have any data"}}',
+			"sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+		},
+		"columns": [
+			{
+				"data": "store_name",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "promotion_title",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "promotion_sale",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "promotion_description",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "days_duration",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "promotion_service",
+				"render": function (data) {
+					var splitservices = data.split(",");
+					return data;
+				}
+			},
+			{
+				"data": "created_at",
+				"render": function (data) {
+					var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+					return dateoflastReview.format("DD/MM/YYYY")
+				}
+
+			},
+
+			{
+				"data": "null",
+				"render": function (data) {
+					return '<td><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target="#editpromotionAddModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+				}
+			},
+
+		],
+		"pagingType": "full_numbers",
+		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+		responsive: true,
+		language: {
+			search: "_INPUT_",
+			searchPlaceholder: '{{gettext "Search records"}}',
+		},
+		"initComplete": function (settings, json) {
+			$('[rel="tooltip"]').tooltip();
+
+
+		},
+		// "drawCallback": function ( settings ) {
+		//     var api = this.api();
+		//     var rows = api.rows( {page:'current'} ).nodes();
+		//     var last=null;
+
+		//     api.column(1, {page:'current'} ).data().each( function ( group, i ) {
+		//         if ( last !== group ) {
+		//             $(rows).eq( i ).before(
+		//                 '<tr class="group"><td colspan="7">'+group+'</td></tr>'
+		//             );
+
+		//             last = group;
+		//         }
+		//     } );
+		// }
+
+	});
+
+
+
+	var table = $('#promotiontableservices').DataTable();
+
+
+	table.on('click', '.edit', function () {
+
+		$('#eselect_store').find('option').remove().end();
+		$('#eselect_service').find('option').remove().end();
+		var cell = table.cell(this.parentNode);
+		var data = table.row(cell.index().row).data();
+		setTimeout(function () {
+			var user_id = data.user_id;
+			user_id = parseInt(user_id);
+			var url = '/admin/api/all-stores-per-user/' + user_id;
+			$.getJSON(url, function (data) {
+				for (let i = 0; i < data["data"].length; i++) {
+					$('#eselect_store').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id));
+				};
+
+				$('#eselect_store').selectpicker('refresh');
+			});
+
+		}, 50);
+		setTimeout(function () {
+			var user_id = data.user_id;
+			var shopid = data.store_id;
+			shopid = parseInt(shopid);
+
+			$('.selectpicker').selectpicker('refresh');
+			var url = '/admin/api/all-services-per-user-per-store/' + shopid + "/" + user_id;
+			$.getJSON(url, function (data1) {
+				for (let i = 0; i < data1.length; i++) {
+					if (data1[i].is_active == true) {
+						$('#eselect_service').append($('<option>').text(data1[i].service_name).attr('value', data1[i].id).attr('data-price', data1[i].service_price).attr('data-duration', data1[i].service_duration));
+					};
+
+				};
+
+				var allServicesIds = data.services_ids.split(",");
+
+				$('#eselect_service').selectpicker('refresh');
+				$('#eselect_service').selectpicker('val', allServicesIds);
+				$("#eselect_store").selectpicker('val', shopid);
+
+			});
+		}, 60)
+
+		$("#epromotion_title").val(data.promotion_title);
+
+		$('.selectpicker').selectpicker('refresh');
+		if (data.is_service == true) {
+			$('#eis_service').prop('checked', true)
+		} else {
+			$('#eis_product').prop('checked', true)
+
+		};
+		$("#edays_duration").val(data.days_duration);
+		$("#epromotion_sale").val(data.promotion_sale);
+		$("#epromotion_description").val(data.promotion_description);
+		$("#promid").val(data.id);
+
+
+	});
+	// Delete a record
+	table.on('click', '.remove', function (e) {
+		var cell = table.cell(this.parentNode);
+		var data = table.row(cell.index().row).data();
+		var promId = parseInt(data.id);
+		var formData = {
+			'id': parseInt(data.id),
+		}
+		swal({
+			title: '{{gettext "Are you sure?"}}',
+			text: '{{gettext "You will not be able to recover this promotion!"}}',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: '{{gettext "Yes, delete it!"}}',
+			cancelButtonText: '{{gettext "No, keep it"}}',
+			confirmButtonClass: "btn btn-success btn-fill",
+			cancelButtonClass: "btn btn-danger btn-fill",
+			buttonsStyling: false
+		}).then(function () {
+			$.ajax({
+				type: 'post',
+				url: '/admin/api/delete-promotion-data/' + promId,
+				data: JSON.stringify(formData),
+
+				success: function (data) {
+
+					swal({
+						title: '{{gettext "Deleted!"}}',
+						text: '{{gettext "Your promotion has been deleted."}}',
+						type: 'success',
+						confirmButtonClass: "btn btn-success btn-fill",
+						buttonsStyling: false
+					}).then(function () {
+						var table2 = $('#promotiontableservices').DataTable();
+						table2.ajax.reload();
+
+
+					});
+
+				},
+				contentType: 'application/json',
+				dataType: 'json'
+			});
+
+		}, function (dismiss) {
+			// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+			if (dismiss === 'cancel') {
+				swal({
+					title: '{{gettext "Cancelled"}}',
+					text: '{{gettext "Your promotion is safe :)"}}',
+					type: 'error',
+					confirmButtonClass: "btn btn-info btn-fill",
+					buttonsStyling: false
+				})
+			}
+		})
+
+		e.preventDefault();
+	});
+
+
+</script>
+<script>
+
+	var user = $('input[name=UserID]').val();
+	user = parseInt(user);
+	var url13 = '/admin/api/all-promotion-products-per-user/' + user;
+	$('#promotiontableproducts').DataTable({
+		"processing": true,
+		"ajax": {
+			"url": url13,
+			"dataSrc": function (data) {
+				console.log(data);
+				if (data["data"] == null) {
+					return [];
+				}
+				else {
+					return data.data;
+				}
+			}
+		},
+		"oLanguage": {
+			"sEmptyTable": '{{gettext "You do not have any data"}}',
+			"sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+		},
+		"columns": [
+			{
+				"data": "store_name",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "promotion_title",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "promotion_sale",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "promotion_description",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+
+			{
+				"data": "promotion_service",
+				"render": function (data) {
+					var splitservices = data.split(",");
+					return data;
+				}
+			},
+			{
+				"data": "created_at",
+				"render": function (data) {
+					var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+					return dateoflastReview.format("DD/MM/YYYY")
+				}
+
+			},
+
+			{
+				"data": "null",
+				"render": function (data) {
+					return '<td><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target="#editpromotionproAddModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+				}
+			},
+
+		],
+		"pagingType": "full_numbers",
+		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+		responsive: true,
+		language: {
+			search: "_INPUT_",
+			searchPlaceholder: '{{gettext "Search records"}}',
+		},
+		"initComplete": function (settings, json) {
+			$('[rel="tooltip"]').tooltip();
+
+
+		},
+		// "drawCallback": function ( settings ) {
+		//     var api = this.api();
+		//     var rows = api.rows( {page:'current'} ).nodes();
+		//     var last=null;
+
+		//     api.column(1, {page:'current'} ).data().each( function ( group, i ) {
+		//         if ( last !== group ) {
+		//             $(rows).eq( i ).before(
+		//                 '<tr class="group"><td colspan="7">'+group+'</td></tr>'
+		//             );
+
+		//             last = group;
+		//         }
+		//     } );
+		// }
+
+	});
+	var table1 = $('#promotiontableproducts').DataTable();
+
+	table1.on('click', '.edit', function () {
+
+		$('#eeselect_store').find('option').remove().end();
+		$('#eeselect_service').find('option').remove().end();
+		var cell = table1.cell(this.parentNode);
+		var data = table1.row(cell.index().row).data();
+		setTimeout(function () {
+			var user_id = data.user_id;
+			user_id = parseInt(user_id);
+			var url = '/admin/api/all-stores-per-user/' + user_id;
+			$.getJSON(url, function (data) {
+				for (let i = 0; i < data["data"].length; i++) {
+					$('#eeselect_store').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id));
+				};
+
+				$('#eeselect_store').selectpicker('refresh');
+			});
+
+		}, 50);
+		setTimeout(function () {
+			var user_id = data.user_id;
+			var shopid = data.store_id;
+			shopid = parseInt(shopid);
+
+			$('.selectpicker').selectpicker('refresh');
+			var url = '/admin/api/all-products-per-user-per-store/' + shopid + "/" + user_id;
+			$.getJSON(url, function (productdata) {
+				for (let i = 0; i < productdata.length; i++) {
+					if (productdata[i].is_active == true) {
+						$('#eeselect_product').append($('<option>').text(productdata[i].product_name).attr('value', productdata[i].id).attr('product_price', productdata[i].product_price));
+					};
+
+				};
+
+				var allServicesIds = data.services_ids.split(",");
+
+				$('#eeselect_product').selectpicker('refresh');
+				$('#eeselect_product').selectpicker('val', allServicesIds);
+				$("#eeselect_store").selectpicker('val', shopid);
+
+			});
+		}, 60)
+
+		$("#eepromotion_title").val(data.promotion_title);
+
+		$('.selectpicker').selectpicker('refresh');
+		if (data.is_service == true) {
+			$('#eeis_service').prop('checked', true)
+		} else {
+			$('#eeis_product').prop('checked', true)
+
+		};
+		$("#eepromotion_sale").val(data.promotion_sale);
+		$("#eepromotion_description").val(data.promotion_description);
+		$("#eepromid").val(data.id);
+
+
+	});
+	// Delete a record
+	table1.on('click', '.remove', function (e) {
+		var cell = table1.cell(this.parentNode);
+		var data = table1.row(cell.index().row).data();
+		var promId = parseInt(data.id);
+		var formData = {
+			'id': parseInt(data.id),
+		}
+		swal({
+			title: '{{gettext "Are you sure?"}}',
+			text: '{{gettext "You will not be able to recover this promotion!"}}',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: '{{gettext "Yes, delete it!"}}',
+			cancelButtonText: '{{gettext "No, keep it"}}',
+			confirmButtonClass: "btn btn-success btn-fill",
+			cancelButtonClass: "btn btn-danger btn-fill",
+			buttonsStyling: false
+		}).then(function () {
+			$.ajax({
+				type: 'post',
+				url: '/admin/api/delete-promotion-data/' + promId,
+				data: JSON.stringify(formData),
+
+				success: function (data) {
+
+					swal({
+						title: '{{gettext "Deleted!"}}',
+						text: '{{gettext "Your promotion has been deleted."}}',
+						type: 'success',
+						confirmButtonClass: "btn btn-success btn-fill",
+						buttonsStyling: false
+					}).then(function () {
+						var table3 = $('#promotiontableproducts').DataTable();
+						table3.ajax.reload();
+
+
+					});
+
+				},
+				contentType: 'application/json',
+				dataType: 'json'
+			});
+
+		}, function (dismiss) {
+			// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+			if (dismiss === 'cancel') {
+				swal({
+					title: '{{gettext "Cancelled"}}',
+					text: '{{gettext "Your promotion is safe :)"}}',
+					type: 'error',
+					confirmButtonClass: "btn btn-info btn-fill",
+					buttonsStyling: false
+				})
+			}
+		})
+
+		e.preventDefault();
+	});
+
+</script> 
+<!-- <script type="text/javascript">
+    $.notify({
+        allow_dismiss: true,
+        
+        icon: '/static/images/Succstepsfavicon.png',
+        title: 'Succsteps',
+        message: '{{gettext "Here you can find all your store promotions you can promote service or product with discount value in time frame"}}'
+    },{
+        type: 'pastel-warning',
+         delay: 500000,
+        icon_type: 'image',
+        placement: {from: 'top',align: 'center'
+	},
+    offset: {
+		y: 8
+	},
+        template: '<div data-notify="container" class="col-xs-11 col-sm-5 alert alert-{0}" role="alert">' +
+                '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">X</button>'+
+            '<img data-notify="icon" class="img-circle pull-left">' +
+            '<span data-notify="title">{1}</span>' +
+            '<span data-notify="message">{2}</span>' +
+        '</div>'
+    });
+ </script> -->
+ {{end}}

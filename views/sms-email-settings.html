@@ -1,0 +1,264 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+    <li>
+        <a href="/admin/sms-email-settings?lang=gr">
+            <img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+        </a>
+
+    </li>
+    <li>
+
+        <a href="/admin/sms-email-settings?lang=en">
+            <img src="/static/images/flags/GB.png"> {{gettext "English"}}
+        </a>
+    </li>
+</ul>
+{{end}} {{define "content"}}
+
+<div class="content">
+    <input type="hidden" id="UseID" name="UserID" value="{{.UserID}}">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <form method="#" action="#" class="form-horizontal">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                {{gettext "Sms and viber settings"}}
+                            </h4>
+                            <p class="category">{{gettext "Please choose one of the available option"}}</p>
+                            <div class="radio">
+                                <input type="radio" name="radio1" id="radio1" value="option1">
+                                <label for="radio1">
+                                        {{gettext "SMS Only"}}
+                                </label>
+                            </div>
+
+                            <div class="radio">
+                                <input type="radio" name="radio1" id="radio2" value="option2">
+                                <label for="radio2">
+                                        {{gettext "Viber Only"}}
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <input type="radio" name="radio1" id="radio3" value="option3" checked="">
+                                <label for="radio3">
+                                        {{gettext "Viber first and then sms"}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="form-group">
+                                <label class="control-label">{{gettext "Information"}}</label>
+                                <p class="category">
+                                    <br>
+                                </p>
+                                <p class="category">{{gettext " If you select sms all your stores will use the sms Gateway for the notifications and campaigns"}}</p>
+                                <p class="category">{{gettext " If you select viber all your stores will use the viber Getaway for the notifications and campaigns"}}</p>
+                                <p class="category">{{gettext " If you select Viber first and then sms all your stores will use the Viber first and then sms for failed back Getaway for the notifications and campaigns"}}</p>
+                                <p class="category">{{gettext " E.g If you customer could not be reach from viber service sms service will be selected"}}</p>
+                                <p class="category"><br></p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="form-group">
+                                <label class="col-sm-2"></label>
+                                <div class="col-sm-10">
+                                    <div class="text-right">
+                                        <button type="submit" class="btn btn-fill btn-info">
+                                            {{gettext "Save settings"}}
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- end card -->
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+
+                    <form method="#" action="#" class="form-horizontal">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                {{gettext "Message"}}
+                            </h4>
+                            <p class="category">{{gettext "Send SMS notification on new customer bookings"}}</p>
+                            <div class="text-right">
+                                <input type="checkbox" class="switch" checked>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{gettext "Text"}}</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" placeholder='{{gettext "booking reminder for [TIME] on [DATE] on [SALON NAME]"}}' rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="form-group">
+                                <label class="col-sm-2"></label>
+                                <div class="col-sm-10">
+                                        <div class="text-right">
+                                                <button type="submit" class="btn btn-fill btn-info">
+                                                    {{gettext "Save settings"}}
+                                                </button>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- end card -->
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+
+                    <form method="#" action="#" class="form-horizontal">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                {{gettext "Message"}}
+                            </h4>
+                            <p class="category">{{gettext "Remind the appointment to the client with an SMS"}}</p>
+                            <div class="text-right">
+                                <input type="checkbox" class="switch" checked>
+
+                            </div>
+                        </div>
+                        <div class="card-content">
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{gettext "Text"}}</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" placeholder='{{gettext "booking reminder for [TIME] on [DATE] on [SALON NAME]"}}' rows="3"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer">
+                            <div class="form-group">
+                                <label class="col-sm-2"></label>
+                                <div class="col-sm-10">
+                                        <div class="text-right">
+                                                <button type="submit" class="btn btn-fill btn-info">
+                                                    {{gettext "Save settings"}}
+                                                </button>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- end card -->
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+
+                    <form method="#" action="#" class="form-horizontal">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                {{gettext "Message"}}
+                            </h4>
+                            <p class="category">{{gettext "Remind the appointment to the client with an Email"}}</p>
+                            <div class="text-right">
+                                <input type="checkbox" class="switch" checked>
+
+                            </div>
+                        </div>
+                        <div class="card-content">
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{gettext "Email Subject"}}</label>
+                                <div class="col-sm-10">
+                                    <input type="text" placeholder='{{gettext "Reservation reminder for [TIME] on [DATE] on [SALON NAME]"}}' class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{gettext "Text"}}</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" placeholder='{{gettext "booking reminder for [TIME] on [DATE] on [SALON NAME]"}}' rows="3"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer">
+                            <div class="form-group">
+                                <label class="col-sm-2"></label>
+                                <div class="col-sm-10">
+                                        <div class="text-right">
+                                                <button type="submit" class="btn btn-fill btn-info">
+                                                    {{gettext "Save settings"}}
+                                                </button>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+
+
+                    <form method="#" action="#" class="form-horizontal">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                {{gettext "Message"}}
+                            </h4>
+                            <p class="category">{{gettext "Send Email notification on new customer bookings"}}</p>
+                            <div class="text-right">
+                                <input type="checkbox" class="switch" checked>
+                            </div>
+
+                        </div>
+                        <div class="card-content">
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Email Subject</label>
+                                <div class="col-sm-10">
+                                    <input type="text" placeholder='{{gettext "Reservation reminder for [TIME] on [DATE] on [SALON NAME]"}}' class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{gettext "Text"}}</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" placeholder='{{gettext "booking reminder for [TIME] on [DATE] on [SALON NAME]"}}' rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="form-group">
+                                <label class="col-sm-2"></label>
+                                <div class="col-sm-10">
+                                        <div class="text-right">
+                                                <button type="submit" class="btn btn-fill btn-info">
+                                                    {{gettext "Save settings"}}
+                                                </button>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- end card -->
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{{end}} {{define "scripts"}} {{end}}

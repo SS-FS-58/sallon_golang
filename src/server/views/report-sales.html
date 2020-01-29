@@ -1,0 +1,1101 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+	<li>
+		<a href="/admin/reportsales?lang=gr">
+			<img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin/reportsales?lang=en">
+			<img src="/static/images/flags/GB.png"> {{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}} {{define "content"}}
+<div class="content">
+	<input type="hidden" id="UserID" name="UserID" value="{{.UserID}}">
+	<div class="container-fluid">
+		<!-- <div class="row">
+			<div class="col-lg-3 col-sm-6">
+				<div class="card card-circle-chart" data-background-color="blue">
+					<div class="card-header text-center">
+						<p class="description">{{gettext "Cash"}}</p>
+					</div>
+					<div class="card-content">
+						<div id="chartDashboard" class="chart-circle" data-percent="70">1242€</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="card card-circle-chart" data-background-color="green">
+					<div class="card-header text-center">
+						<p class="description">{{gettext "Credit Card"}}</p>
+					</div>
+					<div class="card-content">
+						<div id="chartOrders" class="chart-circle" data-percent="34">142€</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="card card-circle-chart" data-background-color="orange">
+					<div class="card-header text-center">
+						<p class="description">{{gettext "Discounts / Gifts"}}</p>
+					</div>
+					<div class="card-content">
+						<div id="chartNewVisitors" class="chart-circle" data-percent="62">12€</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="card card-circle-chart" data-background-color="brown">
+					<div class="card-header text-center">
+						<p class="description">{{gettext "Income"}}</p>
+					</div>
+					<div class="card-content">
+						<div id="chartSubscriptions" class="chart-circle" data-percent="10">1542€</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+		<div class="row ">
+
+			<div class="card">				
+				<div class="card-content">
+					<div class="nav-tabs-navigation">
+						<div class="nav-tabs-wrapper">
+							<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+								<li class="active">
+									<a href="#salesperpartner" data-toggle="tab">{{gettext "Sales of Services per Partner"}}</a>
+								</li>
+
+								<li>
+									<a href="#totalsalesperservice" data-toggle="tab">{{gettext "Sales of Services per Service"}}</a>
+								</li>
+								<li>
+									<a href="#totalsalesperproduct" data-toggle="tab">{{gettext "Product Sales by Product"}}</h3>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div id="my-tab-content" class="tab-content ">
+						<div class="tab-pane active" id="salesperpartner">
+							<div class="row">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+									<div class="col-md-4  col-sm-4 col-xs-4 text-left margin-bottom-20">
+										<div class="btn-group">
+											<button type="button" id="thisweekservices" class="btn btn-default">{{gettext "This Week"}}</button>
+											<button id="thismonthservices" type="button" class="btn btn-default">{{gettext "This Month"}}</button>
+											<button type="button" id="thisyearservices" class="btn btn-default">{{gettext "This Year"}}</button>
+										</div>
+									</div>
+
+									<div class="col-md-8">
+										<form id="formsalesperpartnet">
+											<div class="col-md-3">
+												<div id="ServiceTime" class="form-group">
+
+													<select id="select_store" name="select_store" class="select_store selectpicker" data-style="btn dropdown-toggle bs-placeholder btn-info  btn-block"
+													 title='{{gettext "Select Store"}}' data-size="7" data-live-search="true">
+														{{range $index , $result := .Stores}}
+
+														<option value="{{$result.ID}}">{{$result.CompanyName}}</option>
+														{{end}}
+													</select>
+
+												</div>
+
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<input type="text" id="service_date_from" name="service_date_from" class="form-control datepicker" placeholder='{{gettext "Select From Date"}}'>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<input type="text" id="service_date_to" name="service_date_to" class="form-control datepicker" placeholder='{{gettext "Select To Date"}}'>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<button id="salessearchbutton" type="button" class="btn btn-wd btn-warning btn-fill btn-magnify">
+														<span class="btn-label">
+															<i class="ti-search"></i>
+														</span>
+														{{gettext "Search"}}
+													</button>
+												</div>
+											</div>
+
+										</form>
+									</div>
+
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<h3 class="text-left">{{gettext "Sales Report:"}}
+								<span id="fromsalestitle"></span> -
+								<span id="tosalestitle"></span>
+							</h3>
+
+							<div class="fresh-datatables">
+								<table id="salesperpartnertable" class="table  table-striped table-bordered  table-hover" cellspacing="0" width="100%" style="width:100%">
+									<thead>
+										<tr>
+											<th>{{gettext "Partner"}}</th>
+											<th>{{gettext "No. Services"}}</th>
+											<th>{{gettext "Hours"}}</th>
+											<th>{{gettext "Total Discount"}}</th>
+											<th>{{gettext "Total"}}</th>
+											<th>{{gettext "Revenue / hour"}}</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>{{gettext "Partner"}}</th>
+											<th>{{gettext "No. Services"}}</th>
+											<th>{{gettext "Hours"}}</th>
+											<th>{{gettext "Total Discount"}}</th>
+											<th>{{gettext "Total"}}</th>
+											<th>{{gettext "Revenue / hour"}}</th>
+										</tr>
+									</tfoot>
+									<tbody>
+
+									</tbody>
+
+								</table>
+							</div>
+							<div class="card card-plain ">								
+								<div class="card-content">
+									<canvas id="chartActivity"></canvas>
+									<!-- <div id="chartActivity" class="ct-chart"></div> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="tab-pane" id="totalsalesperservice">
+							<div class="row">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+									<div class="col-md-4  col-sm-4 col-xs-4 text-left margin-bottom-20">
+										<div class="btn-group">
+											<button type="button" id="sthisweekservices" class="btn btn-default">{{gettext "This Week"}}</button>
+											<button id="sthismonthservices" type="button" class="btn btn-default">{{gettext "This Month"}}</button>
+											<button type="button" id="sthisyearservices" class="btn btn-default">{{gettext "This Year"}}</button>
+										</div>
+									</div>
+
+									<div class="col-md-8">
+										<form id="formsalesperpartnet">
+											<div class="col-md-3">
+												<div id="ServiceTime" class="form-group">
+
+													<select id="sselect_store" name="sselect_store" class="sselect_store selectpicker" data-style="btn dropdown-toggle bs-placeholder btn-info  btn-block"
+													 title='{{gettext "Select Store"}}' data-size="7" data-live-search="true">
+														{{range $index , $result := .Stores}}
+
+														<option value="{{$result.ID}}">{{$result.CompanyName}}</option>
+														{{end}}
+													</select>
+
+												</div>
+
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<input type="text" id="sservice_date_from" name="service_date_from" class="form-control datepicker" placeholder='{{gettext "Select From Date"}}'>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<input type="text" id="sservice_date_to" name="service_date_to" class="form-control datepicker" placeholder='{{gettext "Select To Date"}}'>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<button id="ssalessearchbutton" type="button" class="btn btn-wd btn-warning btn-fill btn-magnify">
+														<span class="btn-label">
+															<i class="ti-search"></i>
+														</span>
+														{{gettext "Search"}}
+													</button>
+												</div>
+											</div>
+
+										</form>
+									</div>
+
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<h3 class="text-left">{{gettext "Sales Report:"}}
+								<span id="sfromsalestitle"></span> -
+								<span id="stosalestitle"></span>
+							</h3>
+
+							<div class="fresh-datatables">
+								<table id="saleservicesperservice" class="table  table-striped table-bordered  table-hover" cellspacing="0" width="100%"
+								 style="width:100%">
+									<thead>
+										<tr>
+											<th>Service</th>
+											<th>{{gettext "No. Services"}}</th>
+											<th>{{gettext "Hours"}}</th>
+											<th>{{gettext "Total"}}</th>
+											<th>{{gettext "Revenue / hour"}}</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>Service</th>
+											<th>{{gettext "No. Services"}}</th>
+											<th>{{gettext "Hours"}}</th>
+											<th>{{gettext "Total"}}</th>
+											<th>{{gettext "Revenue / hour"}}</th>
+										</tr>
+									</tfoot>
+									<tbody>
+
+									</tbody>
+
+								</table>
+							</div>
+							<div class="card card-plain ">
+								<form id="progressbar-form" class="form-horizontal">									
+									<h4 class="card-title text-left">{{gettext "Total"}}
+										<span id="grandtotaltitle"></span>
+									</h4>
+									<div id="progress-content" class="card-content">
+
+
+
+
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="tab-pane" id="totalsalesperproduct">
+							<div class="row">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+									<div class="col-md-4  col-sm-4 col-xs-4 text-left margin-bottom-20">
+										<div class="btn-group">
+											<button type="button" id="pthisweekservices" class="btn btn-default">{{gettext "This Week"}}</button>
+											<button id="pthismonthservices" type="button" class="btn btn-default">{{gettext "This Month"}}</button>
+											<button type="button" id="pthisyearservices" class="btn btn-default">{{gettext "This Year"}}</button>
+										</div>
+									</div>
+
+									<div class="col-md-8">
+										<form id="formsalesperpartnet">
+											<div class="col-md-3">
+												<div id="ServiceTime" class="form-group">
+
+													<select id="pselect_store" name="pselect_store" class="pselect_store selectpicker" data-style="btn dropdown-toggle bs-placeholder btn-info  btn-block"
+													 title='{{gettext "Select Store"}}' data-size="7" data-live-search="true">
+														{{range $index , $result := .Stores}}
+
+														<option value="{{$result.ID}}">{{$result.CompanyName}}</option>
+														{{end}}
+													</select>
+
+												</div>
+
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<input type="text" id="pservice_date_from" name="pservice_date_from" class="form-control datepicker" placeholder='{{gettext "Select From Date"}}'>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<input type="text" id="pservice_date_to" name="pservice_date_to" class="form-control datepicker" placeholder='{{gettext "Select To Date"}}'>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<button id="psalessearchbutton" type="button" class="btn btn-wd btn-warning btn-fill btn-magnify">
+														<span class="btn-label">
+															<i class="ti-search"></i>
+														</span>
+														{{gettext "Search"}}
+													</button>
+												</div>
+											</div>
+
+										</form>
+									</div>
+
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<h3 class="text-left">{{gettext "Sales Report:"}}
+								<span id="pfromsalestitle"></span> -
+								<span id="ptosalestitle"></span>
+							</h3>
+
+							<div class="fresh-datatables">
+								<table id="productsperpartnertable" class="table  table-striped table-bordered  table-hover" cellspacing="0" width="100%"
+								 style="width:100%">
+									<thead>
+										<tr>
+											<th>{{gettext "Products"}}</th>
+											<th>{{gettext "Items quantity"}}</th>
+											<th>{{gettext "Total"}}</th>
+
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>{{gettext "Products"}}</th>
+											<th>{{gettext "Items quantity"}}</th>
+											<th>{{gettext "Total"}}</th>
+
+										</tr>
+									</tfoot>
+									<tbody>
+
+									</tbody>
+
+								</table>
+							</div>
+							<div class="card card-plain ">
+								<form id="pprogressbar-form" class="form-horizontal">								
+									<h4 class="card-title text-left">{{gettext "Total"}}
+										<span id="pgrandtotaltitle"></span>
+									</h4>
+									<div id="pprogress-content" class="card-content">
+
+
+
+
+									</div>
+								</form>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+{{end}}{{define "scripts"}}
+<script type="text/javascript">
+	$(document).ready(function () {
+		var data_table;
+		var dashboard_table_id = "#salesperpartnertable";
+		function destroy_existing_data_table() {
+
+			var existing_table = $(dashboard_table_id).dataTable();
+			if (existing_table != undefined) {
+				existing_table.fnClearTable();
+				existing_table.fnDestroy();
+			};
+		};
+
+		function create_dashboard_table() {
+			var from = $("#service_date_from").val();
+			$("#fromsalestitle").text(from);
+			var momentObjFfrom = moment(from, 'DD/MM/YYYY');
+			var timeStampFrom = (moment(momentObjFfrom).unix());
+			var to = $("#service_date_to").val();
+			$("#tosalestitle").text(to);
+			var momentObjTo = moment(to, 'DD/MM/YYYY');
+
+			var timeStampTo = (moment(momentObjTo).unix());
+
+			var user_id = $('input[name=UserID]').val();
+			var user_id = parseInt(user_id);
+
+			var store_id = $("#select_store option:selected").val();
+			store_id = parseInt(store_id);
+
+			var results = enumerateDaysBetweenDates(momentObjFfrom, momentObjTo);
+			console.log(results);
+
+			if ($('#chartActivity').length) {
+
+
+				$.ajax({
+					type: 'GET',
+					url: '/admin/api/all-services-sales-per-employee-graph/' + user_id + "/" + store_id + "/" + timeStampFrom + "/" + timeStampTo,
+					dataType: 'json',
+
+					success: function (json) {
+						console.log(json);
+						var labelss = new Array();
+
+						var labels = new Array();;
+						var datasets = new Array();
+						$.each(json, function (i, data) {
+							labels = data.labels
+
+							datasets = data.datasets;
+							// console.log(data.labels);
+
+							// list.push(data);
+
+						});
+						console.log(datasets[0].label);
+						for (i = 0; i < labels.length; ++i) {
+							var momentDate = moment(labels[i]);
+							labelss.push(momentDate.format('DD-MM-YYYY'));
+
+						}
+
+						for (let i = 0; i < datasets.length; ++i) {
+							var color = datasets[i].backgroundColor;
+							
+							var rgbaCol = 'rgba(' + parseInt(color.slice(-6, -4), 16)
+								+ ',' + parseInt(color.slice(-4, -2), 16)
+								+ ',' + parseInt(color.slice(-2), 16)
+								+ ',0.3)';
+							
+							datasets[i].backgroundColor =rgbaCol;
+						};
+
+						divs = jQuery.unique(labelss);
+
+						// sortLabels = divs.sort();
+						var data = {
+							labels: labelss,
+							datasets: datasets,
+						};
+
+						var ctx = document.getElementById("chartActivity");
+						var lineChart = new Chart(ctx, {
+							type: 'line',
+							data,
+							options: {
+								tooltips: {
+									callbacks: {
+										label: function (tooltipItems, data) {
+											return '€' + tooltipItems.yLabel.toString();
+										}
+									},
+								},
+								scales: {
+									yAxes: [{
+
+										ticks: {
+											beginAtZero: true,
+											callback: function (value, index, values) {
+												return '€' + value.toFixed(2);
+											}
+										}
+									}]
+								}
+							}
+						});
+
+
+
+					},
+					error: function (Result) {
+
+						console.log("error");
+
+					}
+
+				});
+
+			}
+
+
+			var servicesalesurl = '/admin/api/all-services-sales-per-employee/' + user_id + "/" + store_id + "/" + timeStampFrom + "/" + timeStampTo;
+
+
+
+			data_table = $(dashboard_table_id).DataTable({
+				"processing": true,
+
+
+				"ajax": {
+					"url": servicesalesurl,
+					"dataSrc": function (data) {
+						if (data["data"] == null) {
+							return [];
+						}
+						else {
+							return data.data;
+						}
+
+					}
+				},
+				"oLanguage": {
+					"sEmptyTable": '{{gettext "You do not have any data"}}' + from + " to: " + to,
+					"sProcessing": '{{gettext "Loading. Please wait..."}}'
+				},
+
+
+				"columns": [
+					{
+						"data": "hairdresser_name",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": "total_qty_services",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": "total_service_duration",
+						"render": function (data) {
+							var hours = (parseFloat(data) / 60).toFixed(2);
+
+							return hours + " hours";
+						}
+					},
+
+					{
+						"data": "total_service_discount",
+						"render": function (data) {
+							var totaldicount = parseFloat(data).toFixed(2);
+
+							return "€" + totaldicount;
+						}
+					},
+
+					{
+						"data": "total_price_services",
+						"render": function (data) {
+							var totalprice = parseFloat(data).toFixed(2);
+
+							return "€" + totalprice;
+						}
+					},
+
+					{
+						"data": null,
+						"render": function (data, type, row) {
+							var costperhour = (parseFloat(row.total_price_services).toFixed(2) / parseFloat(row.total_service_duration / 60).toFixed(2)).toFixed(2);
+
+							return "€" + costperhour;
+						}
+					},
+
+				],
+				"pagingType": "full_numbers",
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+				responsive: true,
+				language: {
+					search: "_INPUT_",
+					searchPlaceholder: '{{gettext "Search records"}}',
+				},
+				"initComplete": function (settings, json) {
+					$('[rel="tooltip"]').tooltip();
+
+				}
+
+			});
+		};
+		$("#salessearchbutton").click(function (event) {
+
+			event.preventDefault();
+			if ($("#service_date_from").val() === '') {
+				$("<span id='spanmessagefrom'>Please select date from!</span>").insertAfter("#service_date_from");
+				return false;
+			} else {
+				$("#spanmessagefrom").hide();
+
+			};
+			if ($("#select_store").val() === '') {
+				$("<span id='spanmessagestore'>Please select store!</span>").insertAfter("#select_store");
+				return false;
+			} else {
+				$("#spanmessagestore").hide();
+
+			};
+			if ($("#service_date_to").val() === '') {
+				$("<span id='spanmessageto'>Please select date to!</span>").insertAfter("#service_date_to");
+				return false;
+			} else {
+				$("#spanmessageto").hide();
+				// $("#inactive_customers_row").removeClass("hidden").addClass("fade-it");
+				event.preventDefault();
+				destroy_existing_data_table();
+				create_dashboard_table();
+			};
+
+		});
+
+	});
+
+	function enumerateDaysBetweenDates(startDate, endDate) {
+		var now = startDate, dates = [];
+
+		while (now.isSameOrBefore(endDate)) {
+			dates.push(now.format('DD/MM/YYYY'));
+			now.add(1, 'days');
+		}
+		return dates;
+	};
+
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		var data_table;
+		var dashboard_table_id = "#productsperpartnertable";
+		function destroy_existing_data_table() {
+
+			var existing_table = $(dashboard_table_id).dataTable();
+			if (existing_table != undefined) {
+				existing_table.fnClearTable();
+				existing_table.fnDestroy();
+			};
+		};
+
+		function create_dashboard_table() {
+			var from = $("#pservice_date_from").val();
+			$("#pfromsalestitle").text(from);
+			var momentObjFfrom = moment(from, 'DD/MM/YYYY');
+			var timeStampFrom = (moment(momentObjFfrom).unix());
+			var to = $("#pservice_date_to").val();
+			$("#ptosalestitle").text(to);
+			var momentObjTo = moment(to, 'DD/MM/YYYY');
+
+			var timeStampTo = (moment(momentObjTo).unix());
+
+			var user_id = $('input[name=UserID]').val();
+			var user_id = parseInt(user_id);
+
+			var store_id = $("#pselect_store option:selected").val();
+			store_id = parseInt(store_id);
+
+			var results = enumerateDaysBetweenDates(momentObjFfrom, momentObjTo);
+			console.log(results);
+
+			var servicesalesurl = '/admin/api/all-products-sales-per-employee/' + user_id + "/" + store_id + "/" + timeStampFrom + "/" + timeStampTo;
+
+			data_table = $(dashboard_table_id).DataTable({
+				"processing": true,
+
+
+				"ajax": {
+					"url": servicesalesurl,
+					"dataSrc": function (data) {
+						if (data["data"] == null) {
+							return [];
+						}
+						else {
+							return data.data;
+						}
+
+					}
+				},
+				"oLanguage": {
+					"sEmptyTable": "You don't have invalid customers for : " + from + " to: " + to,
+					"sProcessing": '{{gettext "Loading. Please wait..."}}'
+				},
+
+
+				"columns": [
+					{
+						"data": "name",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": "qty",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": "total",
+						"render": function (data) {
+							var totalprice = parseFloat(data).toFixed(2);
+
+							return "€" + totalprice;
+						}
+					},
+
+
+
+				],
+				"pagingType": "full_numbers",
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+				responsive: true,
+				language: {
+					search: "_INPUT_",
+					searchPlaceholder: '{{gettext "Search records"}}',
+				},
+				"initComplete": function (settings, json) {
+					$('[rel="tooltip"]').tooltip();
+					var grandtotal = 0;
+					for (let i = 0; i < json["data"].length; i++) {
+						grandtotal = grandtotal + parseFloat(json["data"][i].total);
+					};
+
+					$("#pgrandtotaltitle").text("€" + grandtotal.toFixed(2))
+					console.log(grandtotal.toFixed(2));
+					for (let i = 0; i < json["data"].length; i++) {
+						var percentage = 0;
+						percentage = (parseFloat(json["data"][i].total) / grandtotal) * 100;
+						$("#pprogress-content").append(`<div class="form-group">
+							<label class="col-md-4 control-label">`+ json["data"][i].name + `</label>
+								<div class="col-md-6">
+								<div class="progress">
+
+									<div class="progress-bar" role="progressbar" aria-valuenow="`+ json["data"][i].total + `" aria-valuemin="0" aria-valuemax="` + grandtotal + `" style="width: ` + percentage + `%;">
+
+										<span class="sr-only">`+ json["data"][i].total + ` Complete</span>
+
+									</div>
+
+								</div>
+								</div>
+							<label class="col-md-2 control-label text-left">€`+ parseFloat(json["data"][i].total).toFixed(2) + `</label>
+					</div>`);
+					};
+
+				}
+
+			});
+		};
+		$("#psalessearchbutton").click(function (event) {
+
+			event.preventDefault();
+			if ($("#pservice_date_from").val() === '') {
+				$("<span id='pspanmessagefrom'>Please select date from!</span>").insertAfter("#pservice_date_from");
+				return false;
+			} else {
+				$("#spanmessagefrom").hide();
+
+			};
+			if ($("#pselect_store").val() === '') {
+				$("<span id='pspanmessagestore'>Please select store!</span>").insertAfter("#pselect_store");
+				return false;
+			} else {
+				$("#pspanmessagestore").hide();
+
+			};
+			if ($("#pservice_date_to").val() === '') {
+				$("<span id='pspanmessageto'>Please select date to!</span>").insertAfter("#pservice_date_to");
+				return false;
+			} else {
+				$("#pspanmessageto").hide();
+				// $("#inactive_customers_row").removeClass("hidden").addClass("fade-it");
+				event.preventDefault();
+				destroy_existing_data_table();
+				create_dashboard_table();
+			};
+
+		});
+
+	});
+
+
+
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		var data_table;
+		var dashboard_table_id = "#saleservicesperservice";
+		function destroy_existing_data_table() {
+
+			var existing_table = $(dashboard_table_id).dataTable();
+			if (existing_table != undefined) {
+				existing_table.fnClearTable();
+				existing_table.fnDestroy();
+			};
+		};
+
+		function create_dashboard_table() {
+			var from = $("#sservice_date_from").val();
+			$("#sfromsalestitle").text(from);
+			var momentObjFfrom = moment(from, 'DD/MM/YYYY');
+			var timeStampFrom = (moment(momentObjFfrom).unix());
+			var to = $("#sservice_date_to").val();
+			$("#stosalestitle").text(to);
+			var momentObjTo = moment(to, 'DD/MM/YYYY');
+
+			var timeStampTo = (moment(momentObjTo).unix());
+
+			var user_id = $('input[name=UserID]').val();
+			var user_id = parseInt(user_id);
+
+			var store_id = $("#sselect_store option:selected").val();
+			store_id = parseInt(store_id);
+
+			var results = enumerateDaysBetweenDates(momentObjFfrom, momentObjTo);
+			console.log(results);
+
+
+			var servicesalesurlpeservice = '/admin/api/all-services-sales-per-service/' + user_id + "/" + store_id + "/" + timeStampFrom + "/" + timeStampTo;
+
+
+
+			data_table = $(dashboard_table_id).DataTable({
+				"processing": true,
+
+
+				"ajax": {
+					"url": servicesalesurlpeservice,
+					"dataSrc": function (data) {
+						if (data["data"] == null) {
+							return [];
+						}
+						else {
+							return data.data;
+						}
+
+					}
+				},
+				"oLanguage": {
+					"sEmptyTable": "You don't have invalid customers for : " + from + " to: " + to,
+					"sProcessing": '{{gettext "Loading. Please wait..."}}'
+				},
+
+
+				"columns": [
+					{
+						"data": "name",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": "qty",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": "total_service_duration",
+						"render": function (data) {
+							var hours = (parseFloat(data) / 60).toFixed(2);
+
+							return hours + " hours";
+						}
+					},
+
+
+
+					{
+						"data": "total",
+						"render": function (data) {
+							var totalprice = parseFloat(data).toFixed(2);
+
+							return "€" + totalprice;
+						}
+					},
+
+					{
+						"data": null,
+						"render": function (data, type, row) {
+							var costperhour = (parseFloat(row.total).toFixed(2) / parseFloat(row.total_service_duration / 60).toFixed(2)).toFixed(2);
+
+							return "€" + costperhour;
+						}
+					},
+
+				],
+				"pagingType": "full_numbers",
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+				responsive: true,
+				language: {
+					search: "_INPUT_",
+					searchPlaceholder: '{{gettext "Search records"}}',
+				},
+				"initComplete": function (settings, json) {
+					$('[rel="tooltip"]').tooltip();
+					console.log(json);
+					var grandtotal = 0;
+					for (let i = 0; i < json["data"].length; i++) {
+						grandtotal = grandtotal + parseFloat(json["data"][i].total);
+					};
+
+					$("#grandtotaltitle").text("€" + grandtotal.toFixed(2))
+					console.log(grandtotal.toFixed(2));
+					for (let i = 0; i < json["data"].length; i++) {
+						var percentage = 0;
+						percentage = (parseFloat(json["data"][i].total) / grandtotal) * 100;
+						$("#progress-content").append(`<div class="form-group">
+							<label class="col-md-4 control-label">`+ json["data"][i].name + `</label>
+								<div class="col-md-6">
+								<div class="progress">
+
+									<div class="progress-bar" role="progressbar" aria-valuenow="`+ json["data"][i].total + `" aria-valuemin="0" aria-valuemax="` + grandtotal + `" style="width: ` + percentage + `%;">
+
+										<span class="sr-only">`+ json["data"][i].total + ` Complete</span>
+
+									</div>
+
+								</div>
+								</div>
+							<label class="col-md-2 control-label text-left">€`+ parseFloat(json["data"][i].total).toFixed(2) + `</label>
+					</div>`);
+					};
+
+				}
+
+			});
+		};
+		$("#ssalessearchbutton").click(function (event) {
+
+			event.preventDefault();
+			$("#progress-content").empty();
+			if ($("#sservice_date_from").val() === '') {
+				$("<span id='sspanmessagefrom'>Please select date from!</span>").insertAfter("#sservice_date_from");
+				return false;
+			} else {
+				$("#sspanmessagefrom").hide();
+
+			};
+			if ($("#sselect_store").val() === '') {
+				$("<span id='sspanmessagestore'>Please select store!</span>").insertAfter("#sselect_store");
+				return false;
+			} else {
+				$("#sspanmessagestore").hide();
+
+			};
+			if ($("#sservice_date_to").val() === '') {
+				$("<span id='sspanmessageto'>Please select date to!</span>").insertAfter("#sservice_date_to");
+				return false;
+			} else {
+				$("#sspanmessageto").hide();
+				// $("#inactive_customers_row").removeClass("hidden").addClass("fade-it");
+				event.preventDefault();
+				destroy_existing_data_table();
+				create_dashboard_table();
+			};
+
+		});
+
+	});
+
+
+
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+
+
+		demo.initFormExtendedDatetimepickers();
+		$("#thisweekservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfweek = moment().startOf('week').format("DD/MM/YYYY");
+			const endOfweek = moment().endOf('week').format("DD/MM/YYYY");
+			$("#service_date_from").val(startOfweek);
+			$("#service_date_to").val(endOfweek);
+		})
+
+		$("#thismonthservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfmonth = moment().startOf('month').format("DD/MM/YYYY");
+			const endOfmonth = moment().endOf('month').format("DD/MM/YYYY");
+			$("#service_date_from").val(startOfmonth);
+			$("#service_date_to").val(endOfmonth);
+		});
+
+		$("#thisyearservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfyear = moment().startOf('year').format("DD/MM/YYYY");
+			const endOfyear = moment().endOf('year').format("DD/MM/YYYY");
+			$("#service_date_from").val(startOfyear);
+			$("#service_date_to").val(endOfyear);
+		})
+
+		$("#pthisweekservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfweek = moment().startOf('week').format("DD/MM/YYYY");
+			const endOfweek = moment().endOf('week').format("DD/MM/YYYY");
+			$("#pservice_date_from").val(startOfweek);
+			$("#pservice_date_to").val(endOfweek);
+		})
+
+		$("#pthismonthservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfmonth = moment().startOf('month').format("DD/MM/YYYY");
+			const endOfmonth = moment().endOf('month').format("DD/MM/YYYY");
+			$("#pservice_date_from").val(startOfmonth);
+			$("#pservice_date_to").val(endOfmonth);
+		});
+
+		$("#pthisyearservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfyear = moment().startOf('year').format("DD/MM/YYYY");
+			const endOfyear = moment().endOf('year').format("DD/MM/YYYY");
+			$("#pservice_date_from").val(startOfyear);
+			$("#pservice_date_to").val(endOfyear);
+		});
+		$("#sthisweekservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfweek = moment().startOf('week').format("DD/MM/YYYY");
+			const endOfweek = moment().endOf('week').format("DD/MM/YYYY");
+			$("#sservice_date_from").val(startOfweek);
+			$("#sservice_date_to").val(endOfweek);
+		});
+
+		$("#sthismonthservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfmonth = moment().startOf('month').format("DD/MM/YYYY");
+			const endOfmonth = moment().endOf('month').format("DD/MM/YYYY");
+			$("#sservice_date_from").val(startOfmonth);
+			$("#sservice_date_to").val(endOfmonth);
+		});
+
+		$("#sthisyearservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfyear = moment().startOf('year').format("DD/MM/YYYY");
+			const endOfyear = moment().endOf('year').format("DD/MM/YYYY");
+			$("#sservice_date_from").val(startOfyear);
+			$("#sservice_date_to").val(endOfyear);
+		});
+
+
+
+
+
+
+
+	});
+</script> 
+<script type="text/javascript">
+    $.notify({
+        allow_dismiss: true,
+        
+        icon: '/static/images/Succstepsfavicon.png',
+        title: 'Succsteps',
+        message: '{{gettext "Sales reports for all your stores"}}'
+    },{
+        type: 'pastel-warning',
+         delay: 500000,
+        icon_type: 'image',
+        placement: {from: 'top',align: 'center'
+	},
+    offset: {
+		y: 8
+	},
+        template: '<div data-notify="container" class="col-xs-11 col-sm-5 alert alert-{0}" role="alert">' +
+                '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">X</button>'+
+            '<img data-notify="icon" class="img-circle pull-left">' +
+            '<span data-notify="title">{1}</span>' +
+            '<span data-notify="message">{2}</span>' +
+        '</div>'
+    });
+    </script>{{end}}

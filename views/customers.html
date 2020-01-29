@@ -1,0 +1,2727 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+	<li>
+		<a href="/admin/customers?lang=gr">
+			<img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin/customers?lang=en">
+			<img src="/static/images/flags/GB.png"> {{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}} {{define "content"}}
+
+<div class="content">
+	<input type="hidden" name="UserEmail" id="UserEmail" value="{{.UserEmail}}">
+	<div class="container-fluid">
+					
+		<div class="row ">
+			<div class="col-md-4 col-sm-6">
+
+				<div class="card">
+					<div class="ncust-header">
+						<i class="ti-user icon-warning"></i> {{gettext "Gold customers"}}
+					</div>
+					<div class="card-content text-right">
+
+						<div class="form-group">
+							<label for="gold_customer_points" class="control-label">{{gettext "Insert Minimum Points"}}</label>
+							<input type="text" id="gold_customer_points" name="gold_customer_points" class="form-control" placeholder='{{gettext "Insert Minimum Points"}}'>
+						</div>
+
+					</div>
+					<div class="card-footer">
+						<hr>
+						<div class="footer-title">
+							<div class="stats">
+								<i class="ti-user"></i> {{gettext "Search for gold customers"}}
+							</div>
+						</div>
+						<div class="pull-right">
+							<button id="gold_customers_button" class="btn btn-info btn-fill btn-icon btn-sm gold_customers_button">
+								<i class="ti-search"></i>
+							</button>
+
+						</div>
+
+
+					</div>
+				</div>
+
+			</div>
+
+			<div class="col-md-4 col-sm-6">
+				<div class="card">
+					<div class="ncust-header">
+						<i class="ti-user icon-danger"></i> {{gettext "Search for inactive customers"}}
+					</div>
+					<div class="card-content text-right">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="inactive_from" class="control-label">{{gettext "Select Date From"}}</label>
+
+								<input type="text" id="inactive_from" name="inactive_from" class="form-control datepicker" placeholder='{{gettext "Inactive From"}}'
+								/>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="inactive_to" class="control-label">{{gettext "Select Date To"}}</label>
+								<input type="text" id="inactive_to" name="inactive_to" class="form-control datepicker" placeholder='{{gettext "Inactive To"}}'
+								/>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="card-footer">
+						<hr>
+						<div class="footer-title">
+							<div class="stats">
+								<i class="ti-user"></i> {{gettext "Search for inactive customers"}}
+							</div>
+						</div>
+						<div class="pull-right">
+							<button id="search_inactive_customers_button" class="btn btn-info btn-fill btn-icon btn-sm">
+								<i class="ti-search"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				<div class="card">
+					<div class="ncust-header">
+						<i class="ti-user icon-success"></i> {{gettext "Customers with birthdays"}}
+					</div>
+					<div class="card-content text-right">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="inactive_from" class="control-label">{{gettext "Select Date"}}</label>
+
+								<input type="text" id="birthday_day" name="birthday_day" class="form-control datepicker" placeholder='{{gettext "Date Of Birth"}}'
+								/>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="card-footer">
+						<hr>
+						<div class="footer-title">
+							<div class="stats">
+								<i class="ti-user"></i> {{gettext "Search for customers with birthdays"}}
+							</div>
+						</div>
+						<div class="pull-right">
+							<button id="birthday_day_button" class="btn btn-info btn-fill btn-icon btn-sm">
+								<i class="ti-search"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row hidden" id="gold_customers_row">
+			<div class="col-md-12">
+				<div class="card">
+
+					<div class="card-header">
+						<h4 class="card-title">{{gettext "Gold customers"}}
+							<div class="pull-right">
+
+								<a rel="tooltip" title="" class="btn btn-simple btn-default btn-icon btn-xs table-action close-widget" data-original-title="Close">
+									<i class="ti-close"></i>
+								</a>
+
+							</div>
+
+						</h4>
+
+					</div>
+					<div class="card-content">
+
+						<div class="fresh-datatables">
+							<table id="gold_customers_table" class="table  table-striped table-bordered  table-hover" cellspacing="0" width="100%" style="width:100%">
+								<thead>
+									<tr>
+										<th>{{gettext "Name"}}</th>
+										<th>{{gettext "Phone"}}</th>
+										<th>{{gettext "Address"}}</th>
+										<th>{{gettext "Points"}}</th>
+										<th>{{gettext "Birthday"}}</th>
+										<th>{{gettext "Email"}}</th>
+										<th>{{gettext "Creation Date"}}</th>
+										<th class="disabled-sorting">{{gettext "Actions"}}</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>{{gettext "Name"}}</th>
+										<th>{{gettext "Phone"}}</th>
+										<th>{{gettext "Address"}}</th>
+										<th>{{gettext "Points"}}</th>
+										<th>{{gettext "Birthday"}}</th>
+										<th>{{gettext "Email"}}</th>
+										<th>{{gettext "Creation Date"}}</th>
+										<th class="disabled-sorting">{{gettext "Actions"}}</th>
+									</tr>
+								</tfoot>
+								<tbody>
+
+								</tbody>
+
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="row hidden" id="inactive_customers_row">
+			<div class="col-md-12">
+
+				<div class="card">
+
+					<div class="card-header">
+
+						<h4 class="card-title">{{gettext "Inactive customers"}}
+
+							<div class="pull-right">
+
+								<a rel="tooltip" title="" class="btn btn-simple btn-default btn-icon btn-xs table-action close-widget" data-original-title="Close">
+									<i class="ti-close"></i>
+								</a>
+
+							</div>
+						</h4>
+
+					</div>
+					<div class="card-content">
+
+						<div class="fresh-datatables">
+							<table id="inactive_customers_table" class="table  table-striped table-bordered  table-hover" cellspacing="0" width="100%"
+							 style="width:100%">
+								<thead>
+									<tr>
+										<th>{{gettext "Name"}}</th>
+										<th>{{gettext "Phone"}}</th>
+										<th>{{gettext "Address"}}</th>
+										<th>{{gettext "Points"}}</th>
+										<th>{{gettext "Birthday"}}</th>
+										<th>{{gettext "Email"}}</th>
+										<th>{{gettext "Creation Date"}}</th>
+										<th class="disabled-sorting">{{gettext "Actions"}}</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>{{gettext "Name"}}</th>
+										<th>{{gettext "Phone"}}</th>
+										<th>{{gettext "Address"}}</th>
+										<th>{{gettext "Points"}}</th>
+										<th>{{gettext "Birthday"}}</th>
+										<th>{{gettext "Email"}}</th>
+										<th>{{gettext "Creation Date"}}</th>
+										<th class="disabled-sorting">{{gettext "Actions"}}</th>
+									</tr>
+								</tfoot>
+								<tbody>
+
+								</tbody>
+
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="row hidden" id="bthday_customers_row">
+			<div class="col-md-12">
+
+				<div class="card">
+
+					<div class="card-header">
+
+						<h4 class="card-title">{{gettext "Customers With Birthdays"}}
+
+							<div class="pull-right">
+
+								<a rel="tooltip" title="" class="btn btn-simple btn-default btn-icon btn-xs table-action close-widget" data-original-title="Close">
+									<i class="ti-close"></i>
+								</a>
+
+							</div>
+						</h4>
+
+					</div>
+					<div class="card-content">
+
+						<div class="fresh-datatables">
+							<table id="bthday_customers_table" class="table  table-striped table-bordered  table-hover" cellspacing="0" width="100%"
+							 style="width:100%">
+								<thead>
+									<tr>
+										<th>{{gettext "Name"}}</th>
+										<th>{{gettext "Phone"}}</th>
+										<th>{{gettext "Address"}}</th>
+										<th>{{gettext "Points"}}</th>
+										<th>{{gettext "Birthday"}}</th>
+										<th>{{gettext "Email"}}</th>
+										<th>{{gettext "Creation Date"}}</th>
+										<th class="disabled-sorting">{{gettext "Actions"}}</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>{{gettext "Name"}}</th>
+										<th>{{gettext "Phone"}}</th>
+										<th>{{gettext "Address"}}</th>
+										<th>{{gettext "Points"}}</th>
+										<th>{{gettext "Birthday"}}</th>
+										<th>{{gettext "Email"}}</th>
+										<th>{{gettext "Creation Date"}}</th>
+										<th class="disabled-sorting">{{gettext "Actions"}}</th>
+									</tr>
+								</tfoot>
+								<tbody>
+
+								</tbody>
+
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title">{{gettext "Here you can find all your customers"}}</h4>
+					</div>
+					<div class="card-content">
+						<div class="col-md-12">
+							<div class="col-md-9 text-left margin-bottom-20">
+								<div class="btn-group">
+									<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalHorizontal">{{gettext "Add customer"}}</button>
+
+								</div>
+							</div>
+							<div class="col-md-3 text-right">
+								<button id="button_pelatis_lianikis" class="btn btn-info"> {{gettext "Add Walk-in Customer"}}</button>
+							</div>
+						</div>
+
+
+
+
+						<div class="fresh-datatables">
+							<table id="shopdatatables" class="table  table-striped table-bordered  table-hover" cellspacing="0" width="100%" style="width:100%">
+								<thead>
+									<tr>
+										<th>{{gettext "Name"}}</th>
+										<th>{{gettext "Phone"}}</th>
+										<th>{{gettext "Address"}}</th>
+										<th>{{gettext "Points"}}</th>
+										<th>{{gettext "Birthday"}}</th>
+										<th>{{gettext "Email"}}</th>
+										<th>{{gettext "Walk-in Customer"}}</th>
+										<th>{{gettext "Creation Date"}}</th>
+
+										<th class="disabled-sorting">{{gettext "Actions"}}</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>{{gettext "Name"}}</th>
+										<th>{{gettext "Phone"}}</th>
+										<th>{{gettext "Address"}}</th>
+										<th>{{gettext "Points"}}</th>
+										<th>{{gettext "Birthday"}}</th>
+										<th>{{gettext "Email"}}</th>
+										<th>{{gettext "Walk-in Customer"}}</th>
+										<th>{{gettext "Creation Date"}}</th>
+
+										<th class="disabled-sorting">{{gettext "Actions"}}</th>
+									</tr>
+								</tfoot>
+								<tbody>
+
+								</tbody>
+
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" onclick="window.location = '/admin/customers';">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">{{gettext "Close"}}</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					{{gettext "New Customer"}}
+				</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<form id="createNewCustomerForm">
+				<input type="hidden" id="UserID" name="UserID" value="{{.UserID}}">
+				<div class="modal-body">
+					<div class="card card-plain">
+						<div class="content">
+							<div class="row">
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<input type="text" id="customer_name" name="customer_name" placeholder='{{gettext "Customer Name"}}' class="form-control">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<input type="text" id="customer_surname" name="customer_surname" placeholder='{{gettext "Customer Surname"}}' class="form-control">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<input type="text" id="customer_email" name="customer_email" placeholder='{{gettext "Customer Email"}}' class="form-control">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div id="GenderOfCustomer">
+										<div class="form-group">
+											<select id="gender_of_customer" name="gender_of_customer" class="selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select gender"}}'
+											 data-size="7">
+												<option value="male">{{gettext "Male"}}</option>
+												<option value="female">{{gettext "Female"}}</option>
+												<option value="other">{{gettext "Other"}}</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<input type="text" id="mobile_phone" name="mobile_phone" class="form-control" placeholder='{{gettext "Enter your mobile number"}}'
+										/>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<input id="home_number" name="home_number" class="form-control" placeholder='{{gettext "Enter your home phone number"}}'
+										 type="text">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<input type="text" id="date_of_birth" name="date_of_birth" class="form-control datepicker" placeholder='{{gettext "Date Of Birth"}}'
+										/>
+									</div>
+								</div>
+								<div class="col-md-8">
+									<div id="locationField" class="form-group">
+										<input id="autocomplete" name="search_address" class="form-control" placeholder='{{gettext "Enter your address"}}' onFocus="geolocate()"
+										 type="text"></input>
+									</div>
+								</div>
+							</div>
+
+
+
+							<div id="address" class="hidden">
+								<label class="control-label">{{gettext "Street address"}}</label>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<input class="form-control" id="street_number" name="street_number" placeholder='{{gettext "Street address"}}' disabled="true"></input>
+										</div>
+									</div>
+									<div class="col-md-8">
+										<div class="form-group">
+											<input class="form-control" id="route" name="route" disabled="true"></input>
+										</div>
+									</div>
+								</div>
+
+								<label class="control-label">{{gettext "City"}}</label>
+								<div class="form-group">
+									<input class="form-control" id="locality" name="locality" placeholder='{{gettext "City"}}' disabled="true"></input>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<label class="control-label">{{gettext "State"}}</label>
+										<div class="form-group">
+											<input class="form-control" id="administrative_area_level_1" name="administrative_area_level_1" placeholder='{{gettext "State"}}'
+											 disabled="true"></input>
+										</div>
+									</div>
+									<div class="col-md-1"></div>
+									<div class="col-md-5">
+										<label class="control-label">{{gettext "Zip Code"}}</label>
+										<div class="form-group">
+											<input class="form-control" id="postal_code" name="postal_code" placeholder='{{gettext "Zip Code"}}'></input>
+										</div>
+									</div>
+								</div>
+								<div class="form-group" colspan="3">
+									<input class="form-control" id="country" name="country" placeholder='{{gettext "Country"}}' disabled="true"></input>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.location = '/admin/customers';">
+						{{gettext "Close"}}
+					</button>
+					<button type="submit" class="btn btn-primary">
+						{{gettext "Save changes"}}
+					</button>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+</div>
+<div class="modal fade editModalHorizontal" id="editModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" onclick="window.location = '/admin/customers';">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">{{gettext "Close"}}</span>
+				</button>
+				<h4 class="modal-title" id="editModalLabel">
+				</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<form id="updateCustomerForm">
+				<input type="hidden" id="Id" name="Id">
+				<input type="hidden" id="UserID" name="UserID">
+				<div class="modal-body">
+					<div class="card card-plain">
+						<div class="content">
+							<div class="row">
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<input type="text" id="ecustomer_name" name="ecustomer_name" placeholder='{{gettext "Customer Name"}}' class="form-control">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<input type="text" id="ecustomer_surname" name="ecustomer_surname" placeholder='{{gettext "Customer Surname"}}' class="form-control">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<input type="text" id="ecustomer_email" name="ecustomer_email" placeholder='{{gettext "Customer Email"}}' class="form-control">
+									</div>
+								</div>
+								<div id="GenderOfCustomer" class="col-md-6">
+
+									<div class="form-group">
+										<select id="egender_of_customer" name="egender_of_customer" class="selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select gender"}}'
+										 data-size="7">
+											<option value="male">{{gettext "Male"}}</option>
+											<option value="female">{{gettext "Female"}}</option>
+											<option value="other">{{gettext "Other"}}</option>
+										</select>
+									</div>
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<input type="text" id="emobile_phone" name="emobile_phone" class="form-control" placeholder='{{gettext "Enter your mobile number"}}'
+										/>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<input id="ehome_number" name="ehome_number" class="form-control" placeholder='{{gettext "Enter your home phone number"}}'
+										 type="text">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<input type="text" id="edate_of_birth" name="edate_of_birth" class="form-control datepicker" placeholder='{{gettext "Date Of Birth"}}'
+										/>
+									</div>
+								</div>
+							</div>
+
+
+
+
+							<label class="control-label">{{gettext "Street address"}}</label>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<input class="form-control" id="estreet_number" name="estreet_number" placeholder='{{gettext "Street address"}}'></input>
+									</div>
+								</div>
+								<div class="col-md-8">
+									<div class="form-group">
+										<input class="form-control" id="eroute" name="eroute"></input>
+									</div>
+								</div>
+							</div>
+
+							<label class="control-label">{{gettext "City"}}</label>
+							<div class="form-group">
+								<input class="form-control" id="elocality" name="elocality" placeholder='{{gettext "City"}}'></input>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<label class="control-label">{{gettext "State"}}</label>
+									<div class="form-group">
+										<input class="form-control" id="eadministrative_area_level_1" name="eadministrative_area_level_1" placeholder='{{gettext "State"}}'></input>
+									</div>
+								</div>
+								<div class="col-md-1"></div>
+								<div class="col-md-5">
+									<label class="control-label">{{gettext "Zip Code"}}</label>
+									<div class="form-group">
+										<input class="form-control" id="epostal_code" name="epostal_code" placeholder='{{gettext "Zip Code"}}'></input>
+									</div>
+								</div>
+							</div>
+							<div class="form-group" colspan="3">
+								<input class="form-control" id="ecountry" name="ecountry" placeholder='{{gettext "Country"}}'></input>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.location = '/admin/customers';">
+						{{gettext "Close"}}
+					</button>
+					<button type="submit" class="btn btn-primary">
+						{{gettext "Update changes"}}
+					</button>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+</div>
+
+{{end}} {{define "googlemaps"}}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCJQmyil5FKCMy9c29Jz4RswT5glVOdQ&libraries=places&callback=initAutocomplete&&language=el"></script> {{end}}{{define "scripts"}}
+<script>
+
+	var placeSearch, autocomplete;
+	var componentForm = {
+		street_number: 'short_name',
+		route: 'long_name',
+		locality: 'long_name',
+		administrative_area_level_1: 'short_name',
+		country: 'long_name',
+		postal_code: 'short_name'
+	};
+
+	function initAutocomplete() {
+		// Create the autocomplete object, restricting the search to geographical
+		// location types.
+		autocomplete = new google.maps.places.Autocomplete(
+							/** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+			{ types: ['geocode'] });
+
+		// When the user selects an address from the dropdown, populate the address
+		// fields in the form.
+		autocomplete.addListener('place_changed', fillInAddress);
+
+	}
+
+	function fillInAddress() {
+		// Get the place details from the autocomplete object.
+		var place = autocomplete.getPlace();
+
+		for (var component in componentForm) {
+			document.getElementById(component).value = '';
+			document.getElementById(component).disabled = false;
+		}
+
+		// Get each component of the address from the place details
+		// and fill the corresponding field on the form.
+		for (var i = 0; i < place.address_components.length; i++) {
+			var addressType = place.address_components[i].types[0];
+			if (componentForm[addressType]) {
+				var val = place.address_components[i][componentForm[addressType]];
+				document.getElementById(addressType).value = val;
+				$("#address").removeClass("hidden");
+			}
+		}
+	}
+
+	// Bias the autocomplete object to the user's geographical location,
+	// as supplied by the browser's 'navigator.geolocation' object.
+	function geolocate() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+				var geolocation = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+				var circle = new google.maps.Circle({
+					center: geolocation,
+					radius: position.coords.accuracy
+				});
+				autocomplete.setBounds(circle.getBounds());
+
+			});
+		}
+	}
+</script>
+<script>
+	$(document).ready(function () {
+		$(".close-widget").on('click', function () {
+			$(this).closest(".row").addClass("hidden");
+		});
+		demo.initFormExtendedDatetimepickers();
+		//demo.createNewCustomerFormValidation();
+		//demo.createNewCustomerFormValidationSubmit();
+		//demo.updateCustomerFormValidationSubmit();
+	});
+</script>
+
+<script type="text/javascript">
+
+	var user_is = $('input[name=UserID]').val();
+	var usr_id = parseInt(user_is);
+	var url = '/admin/api/all-customers-per-user/' + usr_id;
+	$('#shopdatatables').DataTable({
+		"processing": true,
+		"ajax": {
+			"url": url,
+			"dataSrc": function (data1) {
+				if (data1["data"] == null) {
+					return [];
+				}
+				else {
+					return data1.data;
+				}
+
+			}
+		},
+		"oLanguage": {
+			"sEmptyTable": '{{gettext "You do not have any data"}}',
+			"sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+		},
+		"columns": [
+			{
+				"data": null,
+				"render": function (data, type, row) {
+					var name = data.customer_name + " " + data.customer_surname;
+
+					return name;
+				}
+			},
+			{
+				"data": "mobile_phone_number",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": null,
+				"render": function (data, type, row) {
+
+
+					return data.customer_address + " " + data.customer_street_number + ", " + data.customer_city + ", " + data.customer_zip_code + ", " + data.customer_country;
+				}
+			},
+			{
+				"data": "customer_points",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "date_of_birth",
+				"render": function (data) {
+
+
+
+					var dateoflastReview = moment(data, "YYYY-MM-DD");
+					return dateoflastReview.format("DD/MM/YYYY")
+				}
+			},
+			{
+				"data": "customer_email",
+				"render": function (data) {
+
+
+					return '<a href="mailto:' + data + '" target="_top">' + data + '</a>';
+				}
+			},
+			{
+				"data": "null",
+				"render": function (data, type, row) {
+					if (row.pelatis_lianikis == true) {
+						$("#button_pelatis_lianikis").attr("disabled", "disabled");
+						return '<td class="td-actions text-center"><input   type="checkbox" name="my-checkbox" class="switch-plain enableDisableProduct" checked disabled></td>'
+
+					} else {
+						return '<td class="td-actions text-center"><input  type="checkbox" name="my-checkbox" class="switch-plain enableDisableProduct" disabled></td>'
+					}
+				}
+
+			},
+
+
+			{
+				"data": "created_at",
+				"render": function (data) {
+					var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+					return dateoflastReview.format("DD/MM/YYYY")
+				}
+
+			},
+
+
+			{
+				"data": "null",
+				"render": function (data, type, row) {
+					var name = row.customer_name + "-" + row.customer_surname;
+					return `<td class="text-right">
+						<a rel="tooltip" title="" class="btn btn-simple btn-warning btn-icon table-action sendsms" data-original-title='Send SMS'>
+											<i class="ti-mobile"></i>
+										</a>
+										<a rel="tooltip" title="" class="btn btn-simple btn-warning btn-icon table-action sendEmail" data-original-title='Send e-mail'>
+											<i class="ti-email"></i>
+										</a>
+										<a rel="tooltip" title="" class="btn btn-simple btn-warning btn-icon table-action edit" data-original-title='{{gettext "Edit"}}' data-toggle="modal" data-target=".editModalHorizontal">
+											<i class="ti-pencil-alt"></i>
+										</a>
+										<a href="/admin/view-customer/`+ row.id + `/` + name + `" rel="tooltip" title="" class="btn btn-simple btn-info btn-icon table-action service" data-original-title='{{gettext "Customer card"}}'>
+											<i class="ti-layout-media-right-alt"></i>
+										</a>										
+									</td>`
+					//return '<td><a rel="tooltip" title="View" class="btn btn-simple btn-info btn-icon table-action view"> <i class="ti-image"></i></a><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target=".editModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+
+				}
+			},
+
+		],
+		"pagingType": "full_numbers",
+		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+		responsive: true,
+		language: {
+			search: "_INPUT_",
+			searchPlaceholder: '{{gettext "Search records"}}',
+		},
+		"initComplete": function (settings, json) {
+			$('.switch-plain.enableDisableProduct').bootstrapSwitch({
+				onColor: 'primary',
+			});
+			$('[rel="tooltip"]').tooltip();
+
+		}
+
+	});
+
+
+	var table = $('#shopdatatables').DataTable();
+	table.on('responsive-display', function (e, datatable, row, showHide, update) {
+		$('.switch-plain.enableDisableProduct').bootstrapSwitch({
+			onColor: 'primary',
+		});
+		$('[rel="tooltip"]').tooltip();
+	});
+	// Edit record
+	table.on('click', '.edit', function () {
+
+		var cell = table.cell(this.parentNode);
+		var data = table.row(cell.index().row).data();
+		$("#editModalLabel").text("Edit " + data.customer_name);
+		$("#Id").val(data.id);
+		$("#UserID").val(data.user_id);
+
+		$("input[name=ecustomer_name]").val(data.customer_name);
+		$("input[name=ecustomer_surname]").val(data.customer_surname);
+
+		$("#egender_of_customer").val(data.gender_of_customer);
+		$(".selectpicker").selectpicker("refresh");
+
+		$("input[name=emobile_phone]").val(data.mobile_phone_number);
+		$("input[name=ehome_number]").val(data.home_phone_number);
+		$("input[name=ecustomer_email]").val(data.customer_email);
+
+
+		var dob = moment(data.date_of_birth, "YYYY-MM-DD");
+
+		$("input[name=edate_of_birth]").val(dob.format("DD/MM/YYYY"));
+
+		$("input[name=estreet_number]").val(data.customer_street_number);
+		$("input[name=eroute]").val(data.customer_address);
+		$("input[name=elocality]").val(data.customer_city);
+		$("input[name=eadministrative_area_level_1]").val(data.customer_state);
+		$("input[name=epostal_code]").val(data.customer_zip_code);
+		$("input[name=ecountry]").val(data.customer_country);
+	});
+
+	// Delete a record
+	table.on('click', '.remove', function (e) {
+		$tr = $(this).closest('tr');
+		table.row($tr).remove().draw();
+		e.preventDefault();
+	});
+
+	table.on('click', '.sendsms', function () {
+		var cell = table.cell(this.parentNode);
+		var data = table.row(cell.index().row).data();
+
+		swal({
+			title: 'Send sms',
+			html: ` 
+				<p>Send an sms message to `+ data.customer_name + " " + data.customer_surname + `.<br/> 
+				<p>Please check the telephone number: <strong>`+ data.mobile_phone_number + `</strong> then type your message in the text box below and press ok</p>
+				<div class="form-group">
+				<input type="text" id="_customer_mobile_number" name="_customer_mobile_number" class="form-control" placeholder="Customer mobile phone number">
+				</div>
+				<div class="form-group">
+				<textarea class="form-control _sms_customer_comments" id="_sms_customer_comments" name="_sms_customer_comments" placeholder=Message rows="3"></textarea>
+				</div>`,
+			showCancelButton: true,
+			confirmButtonClass: 'btn btn-success btn-fill',
+			cancelButtonClass: 'btn btn-danger btn-fill',
+			buttonsStyling: false,
+			preConfirm: () => {
+				return new Promise((resolve) => {
+
+					if ($("#_sms_customer_comments").val() === '') {
+						swal.showValidationError(
+							'Please write a message'
+						)
+						return false;
+					};
+					if ($("#_customer_mobile_number").val() === '') {
+						swal.showValidationError(
+							'Please insert a mobile phone number'
+
+						)
+						return false;
+					}
+
+					resolve()
+
+				})
+			},
+
+		}).then((result) => {
+			var sender = "SuccSteps";
+			var customermobilenumber = $("#_customer_mobile_number").val();
+			var customersmsmessage = $("#_sms_customer_comments").val();
+
+			var formData = {
+				"sender": sender,
+				"mobile_phone_number": customermobilenumber,
+				"message": customersmsmessage
+			};
+			$.ajax({
+				type: 'post',
+				url: '/admin/api/send-sms-from-gold-customers',
+				data: JSON.stringify(formData),
+				dataType: 'json',
+				contentType: "application/json",
+
+				success: function (data) {
+					var status = data.status;
+					console.log(status);
+					if (status == 500) {
+
+						return;
+					} else {
+
+						swal({
+							title: '{{gettext "Good job!"}}',
+							text: 'Successfully send sms to client: ' + " " + data.customer_name,
+							buttonsStyling: false,
+							confirmButtonClass: "btn btn-success btn-fill",
+							type: "success"
+						}).then(function () {
+							window.location.reload();
+						});
+
+					}
+
+				}
+			});
+
+
+		});
+		$("#_customer_mobile_number").val(data.mobile_phone_number);
+	});
+	table.on('click', '.sendEmail', function () {
+		var user_id = $('input[name=UserID]').val();
+		user_id = parseInt(user_id);
+		var url = '/admin/api/all-stores-per-user/' + user_id;
+
+
+		var cell = table.cell(this.parentNode);
+		var data = table.row(cell.index().row).data();
+
+
+		swal({
+			title: 'Send E-mail',
+			html: ` 
+			<p>Please send an e-mail to  <strong>`+ data.customer_name + " " + data.customer_surname + ` </strong> <br/> Send an email using the text box below and then press ok.</p>
+			<p>Please check the email address is correct: <strong>`+ data.customer_email + `</strong> </p>
+			<div class="form-group margin-botton-20">
+			 <label class="control-label">Select Store</label>
+			  <select id="custstores" name="stores" class="form-control custstores">
+				<option value>{{gettext "Please Select"}}</option>    
+			   </select>
+			</div>
+			<div class="form-group">
+			<input type="text" id="_customer_email" name="_customer_email" class="form-control" placeholder="Customer email address">
+			</div>
+			<div class="form-group">
+			<input type="text" id="_customer_subject" name="_customer_subject" class="form-control" placeholder="Subject">
+			</div>
+			<div class="form-group">
+			<textarea class="form-control _customer_email_message" id="_customer_email_message" name="_customer_email_message" placeholder=Message rows="3"></textarea>
+			</div>`,
+			showCancelButton: true,
+			confirmButtonClass: 'btn btn-success btn-fill',
+			cancelButtonClass: 'btn btn-danger btn-fill',
+			buttonsStyling: false,
+			preConfirm: () => {
+				return new Promise((resolve) => {
+
+					if ($("#_customer_email").val() === '') {
+						swal.showValidationError(
+							'Please write the email'
+						)
+						return false;
+					};
+					if ($("#_customer_subject").val() === '') {
+						swal.showValidationError(
+							'Please write a subject'
+						)
+						return false;
+					};
+					if ($("#_customer_email_message").val() === '') {
+						swal.showValidationError(
+							'Please write a message'
+						)
+						return false;
+					};
+					if ($("#custstores").select2().find(":selected").val() === '') {
+						swal.showValidationError(
+							'Please select store'
+						)
+						return false;
+					}
+
+					resolve()
+
+				})
+			},
+
+		}).then((result) => {
+			var myTextareaVal = $("#_customer_email_message").val();
+			var myLineBreak =myTextareaVal.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '<br />');
+
+			var companyAdress = $(".custstores").select2().find(":selected").attr("companyAdress");
+			var worktel = $(".custstores").select2().find(":selected").attr("work-telephone");
+			var store_name = $(".custstores").select2().find(":selected").text();
+			// var service_id = $(".service_name").select2().find(":selected").val();
+			var formData = {
+				"customer_name": data.customer_name,
+				"email": $("#_customer_email").val(),
+				"subject": $("#_customer_subject").val(),
+				"customer_message": myLineBreak,
+				"company_address": companyAdress,
+				"contact_details": worktel,
+				"company_nick_name": store_name,
+				"user_email": $("#UserEmail").val(),
+			};
+			$.ajax({
+				type: 'post',
+				url: '/admin/api/send-email-from-gold-customers',
+				data: JSON.stringify(formData),
+				dataType: 'json',
+				contentType: "application/json",
+
+				success: function (data) {
+					var status = data.status;
+					console.log(status);
+					if (status == 500) {
+						swal({
+							title: 'Error',
+							text: data.description,
+							buttonsStyling: false,
+							confirmButtonClass: "btn btn-success btn-fill",
+							type: "error"
+						}).then(function () {
+							window.location.reload();
+						});
+
+						return;
+					} else {
+
+						swal({
+							title: '{{gettext "Good job!"}}',
+							text: 'Successfully send email to client' + " " + $("#_customer_email").val(),
+							buttonsStyling: false,
+							confirmButtonClass: "btn btn-success btn-fill",
+							type: "success"
+						}).then(function () {
+							window.location.reload();
+						});
+
+					}
+
+				}
+			});
+
+
+		});
+
+		$.getJSON(url, function (data) {
+			console.log(data);
+			for (let i = 0; i < data["data"].length; i++) {
+				var companyAdress = data["data"][i].company_address + " " + data["data"][i].company_street_number + ", " + data["data"][i].company_city + ", " + data["data"][i].company_zip_code + ", " + data["data"][i].company_country
+				$('#custstores').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id).attr('companyAdress', companyAdress).attr('work-telephone', data["data"][i].work_telephone));
+
+			};
+
+			$('#custstores').val(data["data"][0].id);
+
+			$("#custstores").select2({
+				theme: 'bootstrap'
+			});
+
+		});
+		$("#_customer_email").val(data.customer_email);
+	});
+
+
+</script>
+<script>
+	$(document).ready(function () {
+		today = new Date();
+		var user_id = $('input[name=UserID]').val();
+		var user_id = parseInt(user_id);
+		var shopDetails = [];
+		var url = '/admin/api/all-stores-per-user/' + user_id;
+		$.getJSON(url, function (data) {
+			shopDetails = data["data"][0];
+
+		});
+		$("#button_pelatis_lianikis").on('click', function () {
+
+
+			var formData = {
+				'user_id': shopDetails.user_id,
+				'customer_name': "Walk-In",
+				'customer_surname': "Customer",
+				'gender_of_customer': "other",
+				'mobile_phone_number': shopDetails.mobile_telephone,
+				'home_phone_number': shopDetails.work_telephone,
+				'customer_email': "info@info.info" + shopDetails.vat_number,
+				'date_of_birth': today,
+				'customer_street_number': shopDetails.company_street_number,
+				'customer_address': shopDetails.company_address,
+				'customer_city': shopDetails.company_city,
+				'customer_state': shopDetails.company_state,
+				'customer_zip_code': shopDetails.company_zip_code,
+				'customer_country': shopDetails.company_country,
+				'pelatis_lianikis': true,
+				'customer_points': 0,
+			};
+
+			console.log(formData);
+			$.ajax({
+				type: 'post',
+				url: '/admin/api/create-customer',
+				data: JSON.stringify(formData),
+				dataType: 'json',
+				contentType: "application/json",
+				success: function (data) {
+					var status = data.status;
+					console.log(status);
+					if (status == 501) {
+						console.log("exist");
+						return;
+					} else {
+						swal({
+							title: '{{gettext "Good job!"}}',
+							text: '{{gettext "Successfully insert walk-in customer to the database"}}',
+							buttonsStyling: false,
+							confirmButtonClass: "btn btn-success btn-fill",
+							type: "success"
+						}).then(function () {
+
+							window.location.reload();
+
+
+						});
+					}
+
+				}
+			});
+
+		});
+
+
+	});
+</script>
+<script>
+	$(document).ready(function () {
+		$('#createNewCustomerForm').validate({
+			rules: {
+				customer_name: "required",
+				customer_surname: "required",
+
+				gender_of_customer: "required",
+				customer_email: {
+					required: true,
+					email: true,
+				},
+				mobile_phone: {
+					required: true,
+					number: true,
+				},
+
+				search_address: "required",
+				street_number: {
+					required: true,
+					number: true,
+				},
+				route: "required",
+				locality: "required",
+				postal_code: "required",
+				country: "required",
+				date_of_birth: "required",
+
+			},
+			messages: {
+				customer_name: '{{gettext "Please enter customer name"}}',
+				customer_surname: '{{gettext "Please enter surname name"}}',
+				gender_of_customer: '{{gettext "Please select gender"}}',
+				mobile_phone: {
+					required: '{{gettext "Please enter your phone number"}}',
+					number: '{{gettext "The phone number is not a number"}}',
+				},
+				search_address: '{{gettext "Please enter your address"}}',
+				street_number: {
+					required: '{{gettext "Please enter your address number"}}',
+					number: '{{gettext "The address number is not a number"}}',
+				},
+				route: '{{gettext "Please enter your route"}}',
+				locality: '{{gettext "Please enter your city"}}',
+				postal_code: '{{gettext "Please enter your postal code"}}',
+				country: '{{gettext "Please enter your country"}}',
+				customer_email: {
+					required: '{{gettext "Please enter a valid email address"}}',
+					email: '{{gettext "The value is not a email address"}}'
+				},
+
+				date_of_birth: '{{gettext "Please select date of birth"}}',
+			}
+		});
+	});
+</script>
+<script>
+	$(document).ready(function () {
+		$('#createNewCustomerForm').on('submit', function (event) {
+			event.preventDefault();
+			if ($.trim($("#customer_name").val()) === "" || $.trim($("#customer_surname").val()) === "" || $.trim($("#mobile_phone").val()) === "" || $.trim($("#customer_email").val()) === "" || $.trim($("#autocomplete").val()) === "" || $.trim($("#postal_code").val()) === "" || $.trim($("#gender_of_customer").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+
+				var user_is = $('input[name= UserID]').val();
+				var usr_id = parseInt(user_is);
+				var street_number = $("input[name=street_number]").val();
+				street_number = parseInt(street_number);
+
+
+				var from = $("#date_of_birth").val().split("/");
+				var f = new Date(from[2], from[1] - 1, from[0]);
+
+				var formData = {
+					'user_id': usr_id,
+					'customer_name': $("input[name=customer_name]").val(),
+					'customer_surname': $("input[name=customer_surname]").val(),
+					'gender_of_customer': $("#gender_of_customer").val(),
+					'mobile_phone_number': $("input[name=mobile_phone]").val(),
+					'home_phone_number': $("input[name=home_number]").val(),
+					'customer_email': $("input[name=customer_email]").val(),
+					'date_of_birth': f,
+
+					'customer_street_number': street_number,
+					'customer_address': $("input[name=route]").val(),
+					'customer_city': $("input[name=locality]").val(),
+					'customer_state': $("input[name=administrative_area_level_1]").val(),
+					'customer_zip_code': $("input[name=postal_code]").val(),
+					'customer_country': $("input[name=country]").val(),
+				};
+
+				var shopJSON = JSON.stringify(formData);
+
+				var fd = new FormData();
+				fd.append('supplierJSON', shopJSON);
+				// if (shopLogoImageFile.length && shopLogoImageFile[0].files.length) {
+				//   fd.append('shopLogoImageFile', shopLogoImageFile[0].files[0]);
+				// }
+
+
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/create-customer',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 500) {
+							$("#vat-exists").addClass("show");
+							return;
+						} else {
+
+							$('#myModalHorizontal').modal('toggle');
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: '{{gettext "Successfully insert customer to the database"}}',
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+			}
+		});
+	});
+</script>
+<script>
+	$(document).ready(function () {
+		$('#updateCustomerForm').on('submit', function (event) {
+			event.preventDefault();
+			if ($.trim($("#ecustomer_name").val()) === "" || $.trim($("#ecustomer_surname").val()) === "" || $.trim($("#emobile_phone").val()) === "" || $.trim($("#ecustomer_email").val()) === "" || $.trim($("#estreet_number").val()) === "" || $.trim($("#eroute").val()) === "" || $.trim($("#eadministrative_area_level_1").val()) === "" || $.trim($("#epostal_code").val()) === "" || $.trim($("#egender_of_customer").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+
+				var id = $('input[name=Id]').val();
+				var id = parseInt(id);
+				var user_is = $('input[name= UserID]').val();
+				var usr_id = parseInt(user_is);
+				var street_number = $("input[name=estreet_number]").val();
+				street_number = parseInt(street_number);
+
+
+				var from = $("#edate_of_birth").val();
+				var f = moment(from, "DD/MM/YYYY");
+
+				var formData = {
+					'id': id,
+					'user_id': usr_id,
+					'customer_name': $("input[name=ecustomer_name]").val(),
+					'customer_surname': $("input[name=ecustomer_surname]").val(),
+					'gender_of_customer': $("#egender_of_customer").val(),
+					'mobile_phone_number': $("input[name=emobile_phone]").val(),
+					'home_phone_number': $("input[name=ehome_number]").val(),
+					'customer_email': $("input[name=ecustomer_email]").val(),
+					'date_of_birth': f,
+
+					'customer_street_number': street_number,
+					'customer_address': $("input[name=eroute]").val(),
+					'customer_city': $("input[name=elocality]").val(),
+					'customer_state': $("input[name=eadministrative_area_level_1]").val(),
+					'customer_zip_code': $("input[name=epostal_code]").val(),
+					'customer_country': $("input[name=ecountry]").val(),
+				};
+
+				var shopJSON = JSON.stringify(formData);
+
+				var fd = new FormData();
+				fd.append('supplierJSON', shopJSON);
+				// if (shopLogoImageFile.length && shopLogoImageFile[0].files.length) {
+				//   fd.append('shopLogoImageFile', shopLogoImageFile[0].files[0]);
+				// }
+
+
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/update-customer/' + id,
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 500) {
+
+							return;
+						} else {
+
+							$('.editModalHorizontal').modal('toggle');
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: '{{gettext "Successfully update customer in to the database"}}',
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+			}
+		});
+	});
+</script>
+<script>
+	$(document).ready(function () {
+		$('#updateCustomerForm').validate({
+			rules: {
+				ecustomer_name: "required",
+				ecustomer_surname: "required",
+
+				egender_of_customer: "required",
+				ecustomer_email: {
+					required: true,
+					email: true,
+				},
+				emobile_phone: {
+					required: true,
+					number: true,
+				},
+
+				esearch_address: "required",
+				estreet_number: {
+					required: true,
+					number: true,
+				},
+				eroute: "required",
+				elocality: "required",
+				epostal_code: "required",
+				ecountry: "required",
+				edate_of_birth: "required",
+
+			},
+			messages: {
+				ecustomer_name: '{{gettext "Please enter customer name"}}',
+				ecustomer_surname: '{{gettext "Please enter surname name"}}',
+				egender_of_customer: '{{gettext "Please select gender"}}',
+				emobile_phone: {
+					required: '{{gettext "Please enter phone number"}}',
+					number: '{{gettext "The phone number is not a number"}}',
+				},
+				esearch_address: '{{gettext "Please enter the address"}}',
+				estreet_number: {
+					required: '{{gettext "Please enter the address number"}}',
+					number: '{{gettext "The address number is not a number"}}',
+				},
+				eroute: '{{gettext "Please enter route"}}',
+				elocality: '{{gettext "Please enter the city"}}',
+				epostal_code: '{{gettext "Please enter the postal code"}}',
+				ecountry: '{{gettext "Please enter the country"}}',
+				ecustomer_email: {
+					required: '{{gettext "Please enter a valid email address"}}',
+					email: '{{gettext "The value is not a email address"}}'
+				},
+
+				edate_of_birth: '{{gettext "Please select date of birth"}}',
+			}
+		});
+	});
+</script>
+<script type="text/javascript">
+
+	$(document).ready(function () {
+		var data_table;
+		var dashboard_table_id = "#gold_customers_table";
+		function destroy_existing_data_table() {
+
+			var existing_table = $(dashboard_table_id).dataTable();
+			if (existing_table != undefined) {
+				existing_table.fnClearTable();
+				existing_table.fnDestroy();
+			};
+		};
+
+		function create_dashboard_table() {
+			var points = $("#gold_customer_points").val();
+			points - parseInt(points);
+			var user_id = $('input[name=UserID]').val();
+			var user_id = parseInt(user_id);
+			var goldurl = '/admin/api/all-gold-customers-per-user/' + user_id + "/" + points;
+			data_table = $(dashboard_table_id).DataTable({
+
+				"processing": true,
+
+				"ajax": {
+					"url": goldurl,
+					"dataSrc": function (data2) {
+						if (data2["data"] == null) {
+							return [];
+						}
+						else {
+							return data2.data;
+						}
+
+					}
+				},
+				"oLanguage": {
+					"sEmptyTable": '{{gettext "You do not have gold customers with:"}}' + points + '{{gettext " points or more."}}',
+					"sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+				},
+
+				"columns": [
+					{
+						"data": null,
+						"render": function (data, type, row) {
+							var name = data.customer_name + " " + data.customer_surname;
+
+							return name;
+						}
+					},
+					{
+						"data": "mobile_phone_number",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": null,
+						"render": function (data, type, row) {
+
+
+							return data.customer_address + " " + data.customer_street_number + ", " + data.customer_city + ", " + data.customer_zip_code + ", " + data.customer_country;
+						}
+					},
+					{
+						"data": "customer_points",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": "date_of_birth",
+						"render": function (data) {
+
+
+							var dateoflastReview = moment(data, "YYYY-MM-DD");
+							return dateoflastReview.format("DD/MM/YYYY")
+						}
+					},
+					{
+						"data": "customer_email",
+						"render": function (data) {
+
+
+							return '<a href="mailto:' + data + '" target="_top">' + data + '</a>';
+						}
+					},
+
+
+
+					{
+						"data": "created_at",
+						"render": function (data) {
+							var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+							return dateoflastReview.format("DD/MM/YYYY")
+						}
+
+					},
+					{
+						"data": "null",
+						"render": function (data, type, row) {
+							var name = row.customer_name + "-" + row.customer_surname;
+							return `<td class="text-right">
+
+						<a rel="tooltip" title="" class="btn btn-simple btn-warning btn-icon table-action sendsms" data-original-title='Send SMS'>
+							<i class="ti-mobile"></i>
+						</a>
+						<a rel="tooltip" title="" class="btn btn-simple btn-warning btn-icon table-action sendEmail" data-original-title='Send e-mail'>
+							<i class="ti-email"></i>
+						</a>
+						<a href="/admin/view-customer/`+ row.id + `/` + name + `" rel="tooltip" title="" class="btn btn-simple btn-info btn-icon table-action service" data-original-title='{{gettext "Customer card"}}'>
+							<i class="ti-layout-media-right-alt"></i>
+						</a>										
+					</td>`
+							//return '<td><a rel="tooltip" title="View" class="btn btn-simple btn-info btn-icon table-action view"> <i class="ti-image"></i></a><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target=".editModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+
+						}
+					},
+
+
+
+
+				],
+				"pagingType": "full_numbers",
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+				responsive: true,
+				language: {
+					search: "_INPUT_",
+					searchPlaceholder: '{{gettext "Search records"}}',
+				},
+				"initComplete": function (settings, json) {
+					$('[rel="tooltip"]').tooltip();
+
+				}
+			});
+		};
+
+		$("#gold_customers_button").click(function (event) {
+
+			if ($("#gold_customer_points").val() === '') {
+				$("<span id='spanmessage'>Please insert points !</span>").insertAfter("#gold_customer_points");
+				return false;
+			} else {
+				$("#spanmessage").hide();
+				$("#gold_customers_row").removeClass("hidden").addClass("fade-it");
+			};
+			event.preventDefault();
+			destroy_existing_data_table();
+			create_dashboard_table();
+		});
+
+		$('table').on('responsive-display', function (e, datatable, row, showHide, update) {
+
+			$('[rel="tooltip"]').tooltip();
+
+		});
+		// Edit record
+		$('table#gold_customers_table').on('click', '.sendsms', function () {
+			var cell = data_table.cell(this.parentNode);
+			var data = data_table.row(cell.index().row).data();
+
+			swal({
+				title: 'Send sms',
+				html: ` 
+				<p>The customer `+ data.customer_name + " " + data.customer_surname + ` has <strong>` + data.customer_points + `</strong> points. Please send an sms message using the text box below and then press send.</p>
+				<p>Please check the telephone number: <strong>`+ data.mobile_phone_number + `</strong> if it's correct</p>
+				<div class="form-group">
+				<input type="text" id="gold_customer_mobile_number" name="gold_customer_mobile_number" class="form-control" placeholder="Customer mobile phone number">
+				</div>
+				<div class="form-group">
+				<textarea class="form-control sms_gold_customer_comments" id="sms_gold_customer_comments" name="sms_gold_customer_comments" placeholder=Message rows="3"></textarea>
+				</div>`,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-success btn-fill',
+				cancelButtonClass: 'btn btn-danger btn-fill',
+				buttonsStyling: false,
+				preConfirm: () => {
+					return new Promise((resolve) => {
+
+						if ($("#sms_gold_customer_comments").val() === '') {
+							swal.showValidationError(
+								'Please write a message'
+							)
+							return false;
+						};
+						if ($("#gold_customer_mobile_number").val() === '') {
+							swal.showValidationError(
+								'Please insert a mobile phone number'
+
+							)
+							return false;
+						}
+
+						resolve()
+
+					})
+				},
+
+			}).then((result) => {
+				var sender = "SuccSteps";
+				var customermobilenumber = $("#gold_customer_mobile_number").val();
+				var customersmsmessage = $("#sms_gold_customer_comments").val();
+
+				var formData = {
+					"sender": sender,
+					"mobile_phone_number": customermobilenumber,
+					"message": customersmsmessage
+				};
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/send-sms-from-gold-customers',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 500) {
+
+							return;
+						} else {
+
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: 'Successfully send sms to client: ' + " " + data.customer_name,
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+
+
+			});
+			$("#gold_customer_mobile_number").val(data.mobile_phone_number);
+		});
+		$('table#gold_customers_table').on('click', '.sendEmail', function () {
+			var user_id = $('input[name=UserID]').val();
+			user_id = parseInt(user_id);
+			var url = '/admin/api/all-stores-per-user/' + user_id;
+
+
+			var cell = data_table.cell(this.parentNode);
+			var data = data_table.row(cell.index().row).data();
+
+
+			swal({
+				title: 'Send E-mail',
+				html: ` 
+			<p>The customer `+ data.customer_name + " " + data.customer_surname + ` has <strong>` + data.customer_points + `</strong> points. Please send an email message using the text box below and then press send.</p>
+			<p>Please check the email address number: <strong>`+ data.customer_email + `</strong> if it's correct</p>
+			<div class="form-group margin-botton-20">
+			 <label class="control-label">Select Store</label>
+			  <select id="stores" name="stores" class="form-control stores">
+				<option value>{{gettext "Please Select"}}</option>    
+			   </select>
+			</div>
+			<div class="form-group">
+			<input type="text" id="gold_customer_email" name="gold_customer_email" class="form-control" placeholder="Customer email address">
+			</div>
+			<div class="form-group">
+			<input type="text" id="gold_customer_subject" name="gold_customer_subject" class="form-control" placeholder="Customer subject">
+			</div>
+			<div class="form-group">
+			<textarea class="form-control gold_customer_email_message" id="gold_customer_email_message" name="gold_customer_email_message" placeholder=Message rows="3"></textarea>
+			</div>`,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-success btn-fill',
+				cancelButtonClass: 'btn btn-danger btn-fill',
+				buttonsStyling: false,
+				preConfirm: () => {
+					return new Promise((resolve) => {
+
+						if ($("#gold_customer_email").val() === '') {
+							swal.showValidationError(
+								'Please write the email'
+							)
+							return false;
+						};
+						if ($("#gold_customer_subject").val() === '') {
+							swal.showValidationError(
+								'Please write a subject'
+							)
+							return false;
+						};
+						if ($("#gold_customer_email_message").val() === '') {
+							swal.showValidationError(
+								'Please write a message'
+							)
+							return false;
+						};
+						if ($("#stores").select2().find(":selected").val() === '') {
+							swal.showValidationError(
+								'Please select store'
+							)
+							return false;
+						}
+
+						resolve()
+
+					})
+				},
+
+			}).then((result) => {
+
+
+				var companyAdress = $(".stores").select2().find(":selected").attr("companyAdress");
+				var worktel = $(".stores").select2().find(":selected").attr("work-telephone");
+				var store_name = $(".stores").select2().find(":selected").text();
+				// var service_id = $(".service_name").select2().find(":selected").val();
+				var formData = {
+					"customer_name": data.customer_name,
+					"email": $("#gold_customer_email").val(),
+					"subject": $("#gold_customer_subject").val(),
+					"customer_message": $("#gold_customer_email_message").val(),
+					"company_address": companyAdress,
+					"contact_details": worktel,
+					"company_nick_name": store_name,
+					"user_email": $("#UserEmail").val(),
+				};
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/send-email-from-gold-customers',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 500) {
+							swal({
+								title: 'Error',
+								text: data.description,
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "error"
+							}).then(function () {
+								window.location.reload();
+							});
+
+							return;
+						} else {
+
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: 'Successfully send email to client' + " " + $("#gold_customer_email").val(),
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+
+
+			});
+
+			$.getJSON(url, function (data) {
+				console.log(data);
+				for (let i = 0; i < data["data"].length; i++) {
+					var companyAdress = data["data"][i].company_address + " " + data["data"][i].company_street_number + ", " + data["data"][i].company_city + ", " + data["data"][i].company_zip_code + ", " + data["data"][i].company_country
+					$('#stores').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id).attr('companyAdress', companyAdress).attr('work-telephone', data["data"][i].work_telephone));
+
+				};
+
+				$('#stores').val(data["data"][0].id);
+
+				$("#stores").select2({
+					theme: 'bootstrap'
+				});
+
+			});
+			$("#gold_customer_email").val(data.customer_email);
+		});
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		var data_table;
+		var dashboard_table_id = "#inactive_customers_table";
+		function destroy_existing_data_table() {
+
+			var existing_table = $(dashboard_table_id).dataTable();
+			if (existing_table != undefined) {
+				existing_table.fnClearTable();
+				existing_table.fnDestroy();
+			};
+		};
+
+		function create_dashboard_table() {
+			var inactive_from = $("#inactive_from").val();
+			var momentObjFfrom = moment(inactive_from, 'DD/MM/YYYY');
+			var timeStampFrom = (moment(momentObjFfrom).unix());
+			var inactive_to = $("#inactive_to").val();
+			var momentObjTo = moment(inactive_to, 'DD/MM/YYYY');
+
+			var timeStampTo = (moment(momentObjTo).unix());
+
+			var user_id = $('input[name=UserID]').val();
+			var user_id = parseInt(user_id);
+
+			var invaliddurl = '/admin/api/all-inactive-customers-per-user/' + user_id + "/" + timeStampFrom + "/" + timeStampTo;
+
+
+			data_table = $(dashboard_table_id).DataTable({
+				"processing": true,
+
+
+				"ajax": {
+					"url": invaliddurl,
+					"dataSrc": function (data3) {
+						if (data3["data"] == null) {
+							return [];
+						}
+						else {
+							return data3.data;
+						}
+
+					}
+				},
+				"oLanguage": {
+					"sEmptyTable": '{{gettext "You do not have inactive customers for :"}}' + inactive_from + '{{gettext "to: "}}' + inactive_to,
+					"sProcessing": '{{gettext "Loading. Please wait..."}}'
+				},
+
+
+				"columns": [
+					{
+						"data": null,
+						"render": function (data, type, row) {
+							var name = data.customer_name + " " + data.customer_surname;
+
+							return name;
+						}
+					},
+					{
+						"data": "mobile_phone_number",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": null,
+						"render": function (data, type, row) {
+
+
+							return data.customer_address + " " + data.customer_street_number + ", " + data.customer_city + ", " + data.customer_zip_code + ", " + data.customer_country;
+						}
+					},
+					{
+						"data": "customer_points",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": "date_of_birth",
+						"render": function (data) {
+
+
+							var dateoflastReview = moment(data, "YYYY-MM-DD");
+							return dateoflastReview.format("DD/MM/YYYY")
+						}
+					},
+					{
+						"data": "customer_email",
+						"render": function (data) {
+
+
+							return '<a href="mailto:' + data + '" target="_top">' + data + '</a>';
+						}
+					},
+
+
+
+					{
+						"data": "created_at",
+						"render": function (data) {
+							var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+							return dateoflastReview.format("DD/MM/YYYY")
+						}
+
+					},
+					{
+						"data": "null",
+						"render": function (data, type, row) {
+							var name = row.customer_name + "-" + row.customer_surname;
+							return `<td class="text-right">
+
+										<a rel="tooltip" title="" class="btn btn-simple btn-warning btn-icon table-action sendsms" data-original-title='Send SMS'>
+											<i class="ti-mobile"></i>
+										</a>
+										<a rel="tooltip" title="" class="btn btn-simple btn-warning btn-icon table-action sendEmail" data-original-title='Send e-mail'>
+											<i class="ti-email"></i>
+										</a>
+										<a href="/admin/view-customer/`+ row.id + `/` + name + `" rel="tooltip" title="" class="btn btn-simple btn-info btn-icon table-action service" data-original-title='{{gettext "Customer card"}}'>
+											<i class="ti-layout-media-right-alt"></i>
+										</a>										
+									</td>`
+							//return '<td><a rel="tooltip" title="View" class="btn btn-simple btn-info btn-icon table-action view"> <i class="ti-image"></i></a><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target=".editModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+
+						}
+					},
+
+				],
+				"pagingType": "full_numbers",
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+				responsive: true,
+				language: {
+					search: "_INPUT_",
+					searchPlaceholder: '{{gettext "Search records"}}',
+				},
+				"initComplete": function (settings, json) {
+					$('[rel="tooltip"]').tooltip();
+
+				}
+
+			});
+		};
+		$("#search_inactive_customers_button").click(function (event) {
+
+			event.preventDefault();
+			if ($("#inactive_from").val() === '' || $("#inactive_to").val() === '') {
+				$("<span id='spanmessagefrom'>Please select date from!</span>").insertAfter("#inactive_from");
+				return false;
+			} else {
+				$("#spanmessagefrom").hide();
+
+			};
+			if ($("#inactive_to").val() === '') {
+				$("<span id='spanmessageto'>Please select date to!</span>").insertAfter("#inactive_to");
+				return false;
+			} else {
+				$("#spanmessageto").hide();
+				$("#inactive_customers_row").removeClass("hidden").addClass("fade-it");
+				event.preventDefault();
+				destroy_existing_data_table();
+				create_dashboard_table();
+			};
+
+
+		});
+		$('table').on('responsive-display', function (e, datatable, row, showHide, update) {
+
+			$('[rel="tooltip"]').tooltip();
+		});
+		// Edit record
+		$('table#inactive_customers_table').on('click', '.sendsms', function () {
+
+			var cell = data_table.cell(this.parentNode);
+			var data = data_table.row(cell.index().row).data();
+
+			swal({
+				title: 'Send sms',
+				html: ` 
+				<p>The customer `+ data.customer_name + " " + data.customer_surname + ` doesn't have any appointments betwwen: ` + inactive_from + ` - ` + inactive_to + ` . Please send an sms message using the text box below and then press send.</p>
+				<p>Please check the telephone number: <strong>`+ data.mobile_phone_number + `</strong> if it's correct</p>
+				<div class="form-group">
+				 <input type="text" id="inactive_customer_mobile_number" name="inactive_customer_mobile_number" class="form-control" placeholder="Customer mobile phone number">
+				</div>
+				<div class="form-group">
+				 <textarea class="form-control sms_inactive_customer_comments" id="sms_inactive_customer_comments" name="sms_inactive_customer_comments" placeholder=Message rows="3"></textarea>
+				</div>`,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-success btn-fill',
+				cancelButtonClass: 'btn btn-danger btn-fill',
+				buttonsStyling: false,
+				preConfirm: () => {
+					return new Promise((resolve) => {
+
+						if ($("#sms_inactive_customer_comments").val() === '') {
+							swal.showValidationError(
+								'Please write a message'
+							)
+							return false;
+						};
+						if ($("#inactive_customer_mobile_number").val() === '') {
+							swal.showValidationError(
+								'Please insert a mobile phone number'
+							)
+							return false;
+						}
+
+						resolve()
+
+					})
+				},
+
+			}).then((result) => {
+				var sender = "SuccSteps";
+				var customermobilenumber = $("#inactive_customer_mobile_number").val();
+				var customersmsmessage = $("#sms_inactive_customer_comments").val();
+
+				var formData = {
+					"sender": sender,
+					"mobile_phone_number": customermobilenumber,
+					"message": customersmsmessage
+				};
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/send-sms-from-gold-customers',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 500) {
+
+							return;
+						} else {
+
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: 'Successfully send sms to client: ' + " " + data.customer_name,
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+
+
+			});
+			$("#inactive_customer_mobile_number").val(data.mobile_phone_number);
+		});
+
+		$('table#inactive_customers_table').on('click', '.sendEmail', function () {
+
+			var user_id = $('input[name=UserID]').val();
+			user_id = parseInt(user_id);
+			var url = '/admin/api/all-stores-per-user/' + user_id;
+
+
+			var cell = data_table.cell(this.parentNode);
+			var data = data_table.row(cell.index().row).data();
+
+
+			swal({
+				title: 'Send E-mail',
+				html: ` 
+					<p>The customer `+ data.customer_name + " " + data.customer_surname + ` doesn't have any appointments betwwen: ` + inactive_from + ` - ` + inactive_to + ` . Please send an e-mail message using the text box below and then press send.</p>
+					<p>Please check the email address number: <strong>`+ data.customer_email + `</strong> if it's correct</p>
+					<div class="form-group margin-botton-20">
+					 <label class="control-label">Select Store</label>
+					  <select id="inactivestores" name="inactivestores" class="form-control inactivestores">
+						<option value>{{gettext "Please Select"}}</option>    
+					   </select>
+					</div>
+					<div class="form-group">
+					<input type="text" id="inactive_customer_email" name="inactive_customer_email" class="form-control" placeholder="Customer email address">
+					</div>
+					<div class="form-group">
+					<input type="text" id="inactive_customer_subject" name="inactive_customer_subject" class="form-control" placeholder="Customer subject">
+					</div>
+					<div class="form-group">
+					<textarea class="form-control inactive_customer_email_message" id="inactive_customer_email_message" name="inactive_customer_email_message" placeholder=Message rows="3"></textarea>
+					</div>`,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-success btn-fill',
+				cancelButtonClass: 'btn btn-danger btn-fill',
+				buttonsStyling: false,
+				preConfirm: () => {
+					return new Promise((resolve) => {
+
+						if ($("#inactive_customer_email").val() === '') {
+							swal.showValidationError(
+								'Please write the email'
+							)
+							return false;
+						};
+						if ($("#inactive_customer_subject").val() === '') {
+							swal.showValidationError(
+								'Please write a subject'
+							)
+							return false;
+						};
+						if ($("#inactive_customer_email_message").val() === '') {
+							swal.showValidationError(
+								'Please write a message'
+							)
+							return false;
+						};
+						if ($("#inactivestores").select2().find(":selected").val() === '') {
+							swal.showValidationError(
+								'Please select store'
+							)
+							return false;
+						}
+
+						resolve()
+
+					})
+				},
+
+			}).then((result) => {
+
+				var myTextareaVal1 = $("#inactive_customer_email_message").val();
+				var myLineBreak1 =myTextareaVal1.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '<br />');
+				var companyAdress = $(".inactivestores").select2().find(":selected").attr("companyAdress");
+				var worktel = $(".inactivestores").select2().find(":selected").attr("work-telephone");
+				var store_name = $(".inactivestores").select2().find(":selected").text();
+				// var service_id = $(".service_name").select2().find(":selected").val();
+				var formData = {
+					"customer_name": data.customer_name,
+					"email": $("#inactive_customer_email").val(),
+					"subject": $("#inactive_customer_subject").val(),
+					"customer_message":myLineBreak1,
+					"company_address": companyAdress,
+					"contact_details": worktel,
+					"company_nick_name": store_name,
+					"user_email": $("#UserEmail").val(),
+				};
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/send-email-from-gold-customers',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 500) {
+							swal({
+								title: 'Error',
+								text: data.description,
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "error"
+							}).then(function () {
+								window.location.reload();
+							});
+
+							return;
+						} else {
+
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: 'Successfully send email to client' + " " + $("#inactive_customer_email").val(),
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+
+
+			});
+
+			$.getJSON(url, function (data) {
+				console.log(data);
+				for (let i = 0; i < data["data"].length; i++) {
+					var companyAdress = data["data"][i].company_address + " " + data["data"][i].company_street_number + ", " + data["data"][i].company_city + ", " + data["data"][i].company_zip_code + ", " + data["data"][i].company_country
+					$('#inactivestores').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id).attr('companyAdress', companyAdress).attr('work-telephone', data["data"][i].work_telephone));
+
+				};
+
+				$('#inactivestores').val(data["data"][0].id);
+
+				$("#inactivestores").select2({
+					theme: 'bootstrap'
+				});
+
+			});
+			$("#inactive_customer_email").val(data.customer_email);
+		});
+	});
+
+
+
+
+
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		var date = moment(Date.now());
+		$('#birthday_day').val(date.format("DD/MM/YYYY"));
+
+		var data_table;
+		var dashboard_table_id = "#bthday_customers_table";
+		function destroy_existing_data_table() {
+
+			var existing_table = $(dashboard_table_id).dataTable();
+			if (existing_table != undefined) {
+				existing_table.fnClearTable();
+				existing_table.fnDestroy();
+			};
+		};
+
+		function create_dashboard_table() {
+			var birthday_day = $("#birthday_day").val();
+			var momentObjFbirthday_day = moment(birthday_day, 'DD/MM/YYYY');
+			var timeStampBthday = (moment(momentObjFbirthday_day).unix());
+
+			var user_id = $('input[name=UserID]').val();
+			var user_id = parseInt(user_id);
+			var bthdaydurl = '/admin/api/all-bthday-customers-per-user/' + user_id + "/" + timeStampBthday;
+			data_table = $(dashboard_table_id).DataTable({
+				"processing": true,
+
+
+				"ajax": {
+					"url": bthdaydurl,
+					"dataSrc": function (data4) {
+
+						if (data4["data"] == null) {
+							return [];
+						}
+						else {
+							return data4.data;
+						}
+					}
+				},
+				"oLanguage": {
+					"sEmptyTable": '{{gettext "You do not have any customers with birthdays for :"}}' + birthday_day,
+					"sProcessing": '{{gettext "Loading. Please wait..."}}'
+				},
+
+
+				"columns": [
+					{
+						"data": null,
+						"render": function (data, type, row) {
+							var name = data.customer_name + " " + data.customer_surname;
+
+							return name;
+						}
+					},
+					{
+						"data": "mobile_phone_number",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": null,
+						"render": function (data, type, row) {
+
+
+							return data.customer_address + " " + data.customer_street_number + ", " + data.customer_city + ", " + data.customer_zip_code + ", " + data.customer_country;
+						}
+					},
+					{
+						"data": "customer_points",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": "date_of_birth",
+						"render": function (data) {
+
+
+							var dateoflastReview = moment(data, "YYYY-MM-DD");
+							return dateoflastReview.format("DD/MM/YYYY")
+						}
+					},
+					{
+						"data": "customer_email",
+						"render": function (data) {
+
+
+							return '<a href="mailto:' + data + '" target="_top">' + data + '</a>';
+						}
+					},
+
+
+
+					{
+						"data": "created_at",
+						"render": function (data) {
+							var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+							return dateoflastReview.format("DD/MM/YYYY")
+						}
+
+					},
+					{
+						"data": "null",
+						"render": function (data, type, row) {
+							var name = row.customer_name + "-" + row.customer_surname;
+							return `<td class="text-right">
+
+										<a rel="tooltip" title="" class="btn btn-simple btn-warning btn-icon table-action sendsms" data-original-title='Send SMS'>
+											<i class="ti-mobile"></i>
+										</a>
+										<a rel="tooltip" title="" class="btn btn-simple btn-warning btn-icon table-action sendEmail" data-original-title='Send e-mail'>
+											<i class="ti-email"></i>
+										</a>
+										<a href="/admin/view-customer/`+ row.id + `/` + name + `" rel="tooltip" title="" class="btn btn-simple btn-info btn-icon table-action service" data-original-title='{{gettext "Customer card"}}'>
+											<i class="ti-layout-media-right-alt"></i>
+										</a>										
+									</td>`
+							//return '<td><a rel="tooltip" title="View" class="btn btn-simple btn-info btn-icon table-action view"> <i class="ti-image"></i></a><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target=".editModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+
+						}
+					},
+
+
+
+
+				],
+				"pagingType": "full_numbers",
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+				responsive: true,
+				language: {
+					search: "_INPUT_",
+					searchPlaceholder: '{{gettext "Search records"}}',
+				},
+				"initComplete": function (settings, json) {
+					$('[rel="tooltip"]').tooltip();
+
+				}
+
+			});
+		};
+
+		$("#birthday_day_button").click(function (event) {
+			event.preventDefault();
+			if ($("#birthday_day").val() === '') {
+				$("<span id='spanmessagebthday'>Please select birthday!</span>").insertAfter("#birthday_day");
+				return false;
+			} else {
+				$("#spanmessagebthday").hide();
+				$("#bthday_customers_row").removeClass("hidden").addClass("fade-it");
+				event.preventDefault();
+				destroy_existing_data_table();
+				create_dashboard_table();
+			};
+		});
+
+
+		$('table').on('responsive-display', function (e, datatable, row, showHide, update) {
+
+			$('[rel="tooltip"]').tooltip();
+		});
+		// Edit record
+		$('table#bthday_customers_table').on('click', '.sendsms', function () {
+
+			var cell = data_table.cell(this.parentNode);
+			var data = data_table.row(cell.index().row).data();
+
+
+			swal({
+				title: 'Send sms',
+				html: ` 
+						<p>The customer `+ data.customer_name + " " + data.customer_surname + ` has birthday today. Please send an sms message using the text box below and then press send.</p>
+						<p>Please check the telephone number: <strong>`+ data.mobile_phone_number + `</strong> if it's correct</p>
+						<div class="form-group">
+						 <input type="text" id="bthday_customer_mobile_number" name="bthday_customer_mobile_number" class="form-control" placeholder="Customer mobile phone number">
+						</div>
+						<div class="form-group">
+						 <textarea class="form-control sms_bthday_customer_comments" id="sms_bthday_customer_comments" name="sms_bthday_customer_comments" placeholder=Message rows="3"></textarea>
+						</div>`,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-success btn-fill',
+				cancelButtonClass: 'btn btn-danger btn-fill',
+				buttonsStyling: false,
+				preConfirm: () => {
+					return new Promise((resolve) => {
+
+						if ($("#sms_bthday_customer_comments").val() === '') {
+							swal.showValidationError(
+								'Please write a message'
+							)
+							return false;
+						};
+						if ($("#bthday_customer_mobile_number").val() === '') {
+							swal.showValidationError(
+								'Please insert a mobile phone number'
+							)
+							return false;
+						}
+
+						resolve()
+
+					})
+				},
+
+			}).then((result) => {
+				var sender = "SuccSteps";
+				var customermobilenumber = $("#bthday_customer_mobile_number").val();
+				var customersmsmessage = $("#sms_bthday_customer_comments").val();
+
+				var formData = {
+					"sender": sender,
+					"mobile_phone_number": customermobilenumber,
+					"message": customersmsmessage
+				};
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/send-sms-from-gold-customers',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 500) {
+
+							return;
+						} else {
+
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: 'Successfully send sms to client: ' + " " + data.customer_name,
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+
+
+			});
+			$("#bthday_customer_mobile_number").val(data.mobile_phone_number);
+		});
+
+		$('table#bthday_customers_table').on('click', '.sendEmail', function () {
+
+			var user_id = $('input[name=UserID]').val();
+			user_id = parseInt(user_id);
+			var url = '/admin/api/all-stores-per-user/' + user_id;
+
+
+			var cell = data_table.cell(this.parentNode);
+			var data = data_table.row(cell.index().row).data();
+
+
+			swal({
+				title: 'Send E-mail',
+				html: ` 
+							<p>The customer `+ data.customer_name + " " + data.customer_surname + ` has birthday today. Please send an e-mail message using the text box below and then press send.</p>
+							<p>Please check the email address number: <strong>`+ data.customer_email + `</strong> if it's correct</p>
+							<div class="form-group margin-botton-20">
+							 <label class="control-label">Select Store</label>
+							  <select id="bthdaystores" name="bthdaystores" class="form-control bthdaystores">
+								<option value>{{gettext "Please Select"}}</option>    
+							   </select>
+							</div>
+							<div class="form-group">
+							<input type="text" id="bthday_customer_email" name="bthday_customer_email" class="form-control" placeholder="Customer email address">
+							</div>
+							<div class="form-group">
+							<input type="text" id="bthday_customer_subject" name="bthday_customer_subject" class="form-control" placeholder="Customer subject">
+							</div>
+							<div class="form-group">
+							<textarea class="form-control bthday_customer_email_message" id="bthday_customer_email_message" name="bthday_customer_email_message" placeholder=Message rows="3"></textarea>
+							</div>`,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-success btn-fill',
+				cancelButtonClass: 'btn btn-danger btn-fill',
+				buttonsStyling: false,
+				preConfirm: () => {
+					return new Promise((resolve) => {
+
+						if ($("#bthday_customer_email").val() === '') {
+							swal.showValidationError(
+								'Please write the email'
+							)
+							return false;
+						};
+						if ($("#bthday_customer_subject").val() === '') {
+							swal.showValidationError(
+								'Please write a subject'
+							)
+							return false;
+						};
+						if ($("#bthday_customer_email_message").val() === '') {
+							swal.showValidationError(
+								'Please write a message'
+							)
+							return false;
+						};
+						if ($("#bthdaystores").select2().find(":selected").val() === '') {
+							swal.showValidationError(
+								'Please select store'
+							)
+							return false;
+						}
+
+						resolve()
+
+					})
+				},
+
+			}).then((result) => {
+				var myTextareaVal2 = $("#bthday_customer_email_message").val();
+				var myLineBreak2 =myTextareaVal2.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '<br />');
+
+				var companyAdress = $(".bthdaystores").select2().find(":selected").attr("companyAdress");
+				var worktel = $(".bthdaystores").select2().find(":selected").attr("work-telephone");
+				var store_name = $(".bthdaystores").select2().find(":selected").text();
+				// var service_id = $(".service_name").select2().find(":selected").val();
+				var formData = {
+					"customer_name": data.customer_name,
+					"email": $("#bthday_customer_email").val(),
+					"subject": $("#bthday_customer_subject").val(),
+					"customer_message":myLineBreak2,
+					"company_address": companyAdress,
+					"contact_details": worktel,
+					"company_nick_name": store_name,
+					"user_email": $("#UserEmail").val(),
+				};
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/send-email-from-gold-customers',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 500) {
+							swal({
+								title: 'Error',
+								text: data.description,
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "error"
+							}).then(function () {
+								window.location.reload();
+							});
+
+							return;
+						} else {
+
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: 'Successfully send email to client' + " " + $("#bthday_customer_email").val(),
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+
+
+			});
+
+			$.getJSON(url, function (data) {
+				console.log(data);
+				for (let i = 0; i < data["data"].length; i++) {
+					var companyAdress = data["data"][i].company_address + " " + data["data"][i].company_street_number + ", " + data["data"][i].company_city + ", " + data["data"][i].company_zip_code + ", " + data["data"][i].company_country
+					$('#bthdaystores').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id).attr('companyAdress', companyAdress).attr('work-telephone', data["data"][i].work_telephone));
+
+				};
+
+				$('#bthdaystores').val(data["data"][0].id);
+
+				$("#bthdaystores").select2({
+					theme: 'bootstrap'
+				});
+
+			});
+			$("#bthday_customer_email").val(data.customer_email);
+		});
+
+
+	});
+
+
+</script> 
+<script type="text/javascript">
+    $.notify({
+        allow_dismiss: true,
+        
+        icon: '/static/images/Succstepsfavicon.png',
+        title: 'Succsteps',
+        message: '{{gettext "Here you can find all your customers"}}'
+    },{
+        type: 'pastel-warning',
+         delay: 500000,
+        icon_type: 'image',
+        placement: {from: 'top',align: 'center'
+	},
+    offset: {
+		y: 8
+	},
+        template: '<div data-notify="container" class="col-xs-11 col-sm-5 alert alert-{0}" role="alert">' +
+                '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">X</button>'+
+            '<img data-notify="icon" class="img-circle pull-left">' +
+            '<span data-notify="title">{1}</span>' +
+            '<span data-notify="message">{2}</span>' +
+        '</div>'
+    });
+    </script>{{end}}

@@ -1,0 +1,1990 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+	<li>
+		<a href="/admin/calendar?lang=gr">
+			<img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin/calendar?lang=en">
+			<img src="/static/images/flags/GB.png"> {{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}} {{define "content"}}
+<style>
+	.bootstrap-datetimepicker-widget.dropdown-menu.bottom {
+		top: 45px !important;
+		color: #333;
+	}
+
+	;
+</style>
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+
+			<div class="col-md-12">
+				<div class="card card-calendar">
+					<div class="card-content">
+						<input type="hidden" name="vat" id="vat" value="{{.VatNumber}}">
+
+						<div class="form-group">
+
+							<select id="select_store" name="select_store" class="select_store selectpicker" data-style="btn dropdown-toggle bs-placeholder btn-info  btn-block"
+							 title='{{gettext "Select Store"}}' data-size="7" data-live-search="true">
+								{{range $index , $result := .Stores}}
+
+								<option value="{{$result.ID}}">{{$result.CompanyName}}</option>
+								{{end}}
+							</select>
+
+						</div>
+
+						<div id="fullCalendar">
+
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="portfolio-modal modal fade" id="fullCalModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="close-modal" data-dismiss="modal">
+					<div class="lr">
+						<div class="rl"></div>
+					</div>
+				</div>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="card">
+								<div class="card-header">
+									<h4 class="card-title">{{gettext "Observations"}}</h4>
+								</div>
+								<div class="card-content">
+									<div class="table-full-width table-tasks">
+										<table class="table customer_comments_new">
+											<tbody>
+
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="card-footer">
+									<hr>
+									<div class="stats">
+										<input type="button" id="seeMoreRecords_new" class="btn btn-primary btn-sm btn-fill" value='{{gettext "More"}}'>
+										<input type="button" id="seeLessRecords_new" class="btn btn-primary btn-sm btn-fill" value='{{gettext "Less"}}'>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 ">
+							<div class="card modal-body">
+								<!-- Project Details Go Here -->
+								<div class="card-header">
+									<h4 class="card-title">
+										<div class="alert-with-icon container">
+
+											<span data-notify="message">{{gettext "Add an appointment"}}</span>
+											<span id="selectedtimestart" data-notify="icon" class="ti-alarm-clock"></span>
+											<span id="selectedtimeend"></span>
+										</div>
+									</h4>
+								</div>
+
+								<div class="col-md-12">
+									<div class="collapse" id="customerCollapse">
+										<div class="card card-plain">
+											<div class="card-header">
+												<h4 class="card-title">{{gettext "Create Customer"}}</h4>
+											</div>
+											<div class="card-content">
+												<form id="createNewCustomerFormForCalendar">
+													<input type="hidden" id="UserID" name="UserID" value="{{.UserID}}">
+
+													<div class="col-md-12">
+
+														<div class="col-md-6">
+															<div class="form-group">
+																<input type="text" id="customer_name" name="customer_name" placeholder='{{gettext "Customer Name"}}' class="form-control">
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<input type="text" id="customer_surname" name="customer_surname" placeholder='{{gettext "Customer Surname"}}' class="form-control">
+															</div>
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="col-md-6">
+															<div class="form-group">
+																<input type="text" id="customer_email" name="customer_email" placeholder='{{gettext "Customer Email"}}' class="form-control">
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div id="GenderOfCustomer">
+																<div class="form-group">
+																	<select id="gender_of_customer" name="gender_of_customer" class="selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select gender"}}'
+																	 data-size="7">
+																		<option value="male">{{gettext "Male"}}</option>
+																		<option value="female">{{gettext "Female"}}</option>
+																	</select>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="col-md-6">
+															<div class="form-group">
+																<input type="text" id="mobile_phone" name="mobile_phone" class="form-control" placeholder='{{gettext "Enter your mobile number"}}'
+																/>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<input id="home_number" name="home_number" class="form-control" placeholder='{{gettext "Enter your home phone number"}}'
+																 type="text">
+															</div>
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div class="col-md-4">
+															<div class="form-group">
+																<input type="text" id="date_of_birth" name="date_of_birth" class="form-control datepicker" placeholder='{{gettext "Date Of Birth"}}'
+																/>
+															</div>
+														</div>
+														<div class="col-md-8">
+															<div id="locationField" class="form-group">
+																<input id="autocomplete" name="search_address" class="form-control" placeholder='{{gettext "Enter your address"}}' onFocus="geolocate()"
+																 type="text" />
+															</div>
+														</div>
+													</div>
+													<div class="col-md-12">
+														<div id="address" class="hidden">
+															<label class="control-label">{{gettext "Street address"}}</label>
+															<div class="col-md-12">
+
+																<div class="col-md-4">
+																	<div class="form-group">
+																		<input class="form-control" id="street_number" name="street_number" placeholder='{{gettext "Street address"}}' disabled="true"></input>
+																	</div>
+																</div>
+																<div class="col-md-8">
+																	<div class="form-group">
+																		<input class="form-control" id="route" name="route" disabled="true"></input>
+																	</div>
+																</div>
+															</div>
+
+
+															<div class="col-md-12">
+																<div class="form-group">
+																	<label class="control-label">{{gettext "City"}}</label>
+																	<input class="form-control" id="locality" name="locality" placeholder='{{gettext "City"}}' disabled="true"></input>
+																</div>
+															</div>
+															<div class="col-md-12">
+																<div class="col-md-6">
+																	<label class="control-label">{{gettext "State"}}</label>
+																	<div class="form-group">
+																		<input class="form-control" id="administrative_area_level_1" name="administrative_area_level_1" placeholder='{{gettext "State"}}'
+																		 disabled="true"></input>
+																	</div>
+																</div>
+																<div class="col-md-1"></div>
+																<div class="col-md-5">
+																	<label class="control-label">{{gettext "Zip Code"}}</label>
+																	<div class="form-group">
+																		<input class="form-control" id="postal_code" name="postal_code" placeholder='{{gettext "Zip Code"}}'></input>
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-12">
+																<div class="form-group" colspan="3">
+																	<input class="form-control" id="country" name="country" placeholder='{{gettext "Country"}}' disabled="true" />
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-md-12">
+														<button type="submit" id="btn1calendar" class="btn btn-primary">
+															{{gettext "Create Customer"}}
+														</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="clearfix"></div>
+								<form id="createrantevou">
+
+									<input type="hidden" id="ServicesUserID" name="ServicesUserID" value="{{.UserID}}">
+
+									<input type="hidden" id="rantevou_hairdresser" name="rantevou_hairdresser">
+									<input type="hidden" id="rantevou_start" name="rantevou_start">
+									<input type="hidden" id="rantevou_end" name="rantevou_end">
+									<input type="hidden" id="rantevou_store_id" name="rantevou_store_id">
+									<input type="hidden" id="allDay" name="allDay">
+
+									<div class="row infopanel">
+										<div class="col-md-6">
+
+										</div>
+										<div class="col-md-6 text-right">
+											<div class="form-inline">
+												<button type="button" class="btn btn-fill btn-default" data-toggle="collapse" data-target="#customerCollapse" aria-expanded="false"
+												 aria-controls="customerCollapse">
+													<span class="btn-label">
+														<i class="ti-plus"></i>
+													</span>
+													{{gettext "New Customer"}}
+												</button>
+												<button id="walkinbutton" type="button" class="btn btn-fill btn-default" disabled="disabled">
+													<span class="btn-label">
+														<i class="ti-hand-point-right"></i>
+													</span>
+													{{gettext "Walk-In"}}
+												</button>
+											</div>
+										</div>
+									</div>
+
+									<hr>
+									<div class="card card-plain">
+										<div class="content">
+
+											<div class="form">
+												<div class="calendarselect">
+													<div class="selectreload">
+														<div class="form-group">
+
+															<select id="select_customer" name="select_customer" class="select_drop selectpicker" data-style="btn dropdown-toggle bs-placeholder btn-info  btn-block"
+															 title='{{gettext "Select Customer"}}' data-size="7" data-live-search="true">
+															</select>
+														</div>
+													</div>
+
+												</div>
+
+												<div class="row">
+													<div class="col-md-2">
+														<select id="hairdresser_name" name="hairdresser_name" class="hairdresser_name selectpicker" data-style="btn btn-info btn-block"
+														 title='{{gettext "Select Employee"}}' data-size="7" data-live-search="true">
+
+
+														</select>
+													</div>
+
+													<div class="col-md-3">
+														<div class="form-group">
+
+															<select id="service_name1" name="service_name" class="select_service selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select Service"}}'
+															 data-size="7" data-live-search="true">
+
+
+															</select>
+														</div>
+													</div>
+													<div class="col-md-2">
+														<div class="form-group">
+															<div class="input-group">
+																<span class="input-group-addon" id="basic-addon1">€</span>
+																<input type="text" class="form-control border-input rantevou_price" name="rantevou_price" id="rantevou_price" aria-describedby="basic-addon1"
+																 placeholder={{gettext "Price"}} readonly>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-2">
+														<div class="form-group">
+
+															<select id="rantevou_status" name="rantevou_status" class="select_status selectpicker" data-style="btn dropdown-toggle bs-placeholder btn-info  btn-block"
+															 title="Select Status" data-size="7">
+																<option value="pending" selected>{{gettext "Pending"}}</option>
+																<option value="inprogress">{{gettext "In progress"}}</option>
+																<option value="complete">{{gettext "Complete"}}</option>
+																<option value="cancelled">{{gettext "Cancelled"}}</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-froup">
+															<div class="input-group">
+																<span class="input-group-addon" id="basic-addon1">
+																	<i class="ti-timer"></i>
+																</span>
+																<input id="rantevou_duration" type="text" name="rantevou_duration" class="form-control  border-input rantevou_duration" placeholder='{{gettext "Duration"}}'
+																 readonly>
+
+																<div class="input-group-btn">
+																	<button class="btn btn-success btn-fill" type="button" onclick="education_fields();">
+																		<span class="ti-plus" aria-hidden="true"></span>
+																	</button>
+																</div>
+															</div>
+														</div>
+													</div>
+													<input type="hidden" id="endtimerantevou" name="endtimerantevou">
+													<div class="col-md-12">
+														<div class="form-group">
+															<label class="control-label">{{gettext "Observations"}}</label>
+
+															<textarea class="form-control rantevou_comments" id="rantevou_comments" name="rantevou_comments" placeholder='{{gettext "Observations"}}'
+															 rows="3"></textarea>
+
+														</div>
+													</div>
+												</div>
+
+												<div id="education_fields"> </div>
+
+
+												<div class="clearfix"></div>
+											</div>
+										</div>
+
+									</div>
+									<!-- Modal Footer -->
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">
+											<i class="fa fa-times"></i>
+											{{gettext "Close"}}
+										</button>
+										<button id="rantevousubmit" type="submit" class="btn btn-primary">
+											<i class="ti-save-alt"></i>
+											{{gettext "Save changes"}}
+										</button>
+									</div>
+
+								</form>
+
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card">
+								<div class="card-header">
+									<h4 class="card-title">{{gettext "Promotions"}}</h4>
+								</div>
+								<div class="card-content">
+									<div class="table-full-width table-tasks">
+										<table id="promotion-table" class="table promotion-table">
+											<tbody>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="card-footer">
+									<hr>
+									<div id="promsername" class="stats">
+										<i class="fa fa-history"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="portfolio-modal modal fade" id="editfullCalModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="close-modal" data-dismiss="modal">
+					<div class="lr">
+						<div class="rl"></div>
+					</div>
+				</div>
+				<div class="content">
+					<div class="container-fluid">
+						<div class="container">
+							<div id="alert-warning" class="alert alert-warning">
+								<button type="button" aria-hidden="true" class="close">×</button>
+								<span>
+									<b>{{gettext "Warning -"}} </b> {{gettext "You can not modify this appointment with completed status"}}
+								</span>
+							</div>
+							<div id="alert-warning-cancel" class="alert alert-warning">
+								<span>
+									<b>{{gettext "Warning -"}} </b> {{gettext "You can not modify this appointment with cancelled status"}}
+								</span>
+							</div>
+						</div>
+						<div class="row">
+
+							<div class="col-md-3">
+								<div class="card">
+									<div class="card-header">
+										<h4 class="card-title">{{gettext "Observations"}}</h4>
+									</div>
+									<div class="card-content">
+										<div class="table-full-width table-tasks">
+											<table class="table  customer_comments">
+												<tbody>
+
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="card-footer">
+										<hr>
+										<div class="stats">
+											<input type="button" id="seeMoreRecords" class="btn btn-primary btn-sm btn-fill" value='{{gettext "More"}}'>
+											<input type="button" id="seeLessRecords" class="btn btn-primary btn-sm btn-fill" value='{{gettext "Less"}}'>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="card">
+									<div class="card-header">
+
+										<h5 id="" class="card-title modalTitleEdit"> </h5>
+									</div>
+									<div class="card-content">
+
+										<div class="panel panel-info">
+
+											<div class="panel-body">
+												<table class="table table-user-information">
+													<tbody>
+														<tr>
+															<td>{{gettext "Services:"}}</td>
+															<td id="serviceName"></td>
+														</tr>
+														<tr>
+															<td>{{gettext "Start Date:"}}</td>
+															<td id="startTime"></td>
+														</tr>
+														<tr>
+															<td>{{gettext "End Date:"}}</td>
+															<td id="endTime"></td>
+														</tr>
+														<tr>
+															<td>{{gettext "Observations"}}:</td>
+															<td id="eventComments"></td>
+														</tr>
+													</tbody>
+												</table>
+
+											</div>
+										</div>
+									</div>
+									<div class="card-footer text-center">
+										<hr>
+
+										<form method="post" action="/admin/checkout">
+											<input type="hidden" name="hairdresserID" id="eventresourceID">
+											<input type="hidden" name="eventID" id="eventID">
+											<input type="hidden" name="storeID" id="storeID">
+											<input type="hidden" name="customerID" id="customerID">
+											<input type="hidden" name="customerName" id="customerName">
+											<input type="hidden" name="customerPhoneNumber" id="customerPhoneNumber">
+											<input type="hidden" name="customerEmail" id="customerEmail">
+											<input type="hidden" name="eventDate" id="eventDate">
+											<input type="hidden" name="hairdreserName" id="hairdreserName">
+											<input type="hidden" name="serviceStatus" id="serviceStatus">
+											<input type="hidden" name="serviceHasFormula" id="serviceHasFormula">
+
+											<button id="customer-finish" type="submit" class="btn btn-success btn-wd">
+												<i class="ti-save-alt"></i>
+												{{gettext "Finish"}}
+											</button>
+										</form>
+
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="card">
+									<div class="card-header">
+
+										<h5 id="" class="card-title">{{gettext "Cancel Appointment"}}</h5>
+									</div>
+									<div class="card-content">
+										<button id="canceleddAppointment" data-event-id="" type="button" class="btn btn-warning btn-block">
+											<i class="fa fa-times"></i>
+											{{gettext "Cancel Appointment"}}
+										</button>
+									</div>
+									<div class="card-footer">
+										<hr>
+
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header">
+
+										<h5 id="" class="card-title">{{gettext "Promotions"}}</h5>
+									</div>
+									<div class="card-content">
+										<h5>{{gettext "Transfer the appointment for"}}
+											<span class="modalTitleEdit"></span> {{gettext "to different date:"}}</h5>
+
+										<div class="form-group">
+											<input id="change-appointmet" type="text" class="btn btn-default btn-fill btn-wd btn-block datepicker1" placeholder='{{gettext "Change Appointment"}}'>
+										</div>
+									</div>
+									<div class="card-footer">
+										<hr>
+
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12 text-center">
+
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<i class="fa fa-times"></i>
+									{{gettext "Close"}}
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+{{end}} {{define "googlemaps"}}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCJQmyil5FKCMy9c29Jz4RswT5glVOdQ&libraries=places&callback=initAutocomplete&&language=el"></script> {{end}}{{define "scripts"}}
+<script>
+	$('#select_store option:first-child').attr("selected", "selected");
+
+	var placeSearch, autocomplete;
+	var componentForm = {
+		street_number: 'short_name',
+		route: 'long_name',
+		locality: 'long_name',
+		administrative_area_level_1: 'short_name',
+		country: 'long_name',
+		postal_code: 'short_name'
+	};
+
+	function initAutocomplete() {
+		// Create the autocomplete object, restricting the search to geographical
+		// location types.
+		autocomplete = new google.maps.places.Autocomplete(
+							/** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+			{ types: ['geocode'] });
+
+		// When the user selects an address from the dropdown, populate the address
+		// fields in the form.
+		autocomplete.addListener('place_changed', fillInAddress);
+
+	}
+
+	function fillInAddress() {
+		// Get the place details from the autocomplete object.
+		var place = autocomplete.getPlace();
+
+		for (var component in componentForm) {
+			document.getElementById(component).value = '';
+			document.getElementById(component).disabled = false;
+		}
+
+		// Get each component of the address from the place details
+		// and fill the corresponding field on the form.
+		for (var i = 0; i < place.address_components.length; i++) {
+			var addressType = place.address_components[i].types[0];
+			if (componentForm[addressType]) {
+				var val = place.address_components[i][componentForm[addressType]];
+				document.getElementById(addressType).value = val;
+				$("#address").removeClass("hidden");
+			}
+		}
+	}
+
+	// Bias the autocomplete object to the user's geographical location,
+	// as supplied by the browser's 'navigator.geolocation' object.
+	function geolocate() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+				var geolocation = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+				var circle = new google.maps.Circle({
+					center: geolocation,
+					radius: position.coords.accuracy
+				});
+				autocomplete.setBounds(circle.getBounds());
+
+			});
+		}
+	}
+</script>
+<script>
+	$(document).ready(function () {
+		demo.initFormExtendedDatetimepickers();
+		//demo.createrantevouFormSubmit();
+		//demo.createNewCustomerFormValidationForCalendar();
+		//demo.createNewCustomerFormValidationSubmitForCalendar();
+	});
+</script>
+
+<script>
+	var allBankHolidays = [];
+	var weeklyHoursArray = [];
+	var allservicesperstore = [];
+	var allHairdressers;
+	$(function () { // document ready
+
+
+
+		$calendar = $("#fullCalendar");
+		today = new Date();
+		var user_id = $('input[name=ServicesUserID]').val();
+		user_id = parseInt(user_id);
+		var store_id = $("#select_store").val();
+		store_id = parseInt(store_id);
+
+		$.getJSON("/admin/api/all-bank-holidays-per-store/" + store_id, function (allbankHol) {
+
+			for (let i = 0; i < allbankHol["data"].length; i++) {
+				allBankHolidays.push(allbankHol["data"][i]);
+			};
+
+		});
+
+		$.getJSON('/admin/api/all-customers-per-user/' + user_id, function (data) {
+			for (let i = 0; i < data["data"].length; i++) {
+				if (data["data"][i].pelatis_lianikis == true) {
+
+
+					$('#select_customer').append($('<option>').text(data["data"][i].customer_name + " " + data["data"][i].customer_surname + " " + data["data"][i].mobile_phone_number).attr('value', data["data"][i].id));
+					$("#select_customer option[value=" + data["data"][i].id + "]").hide();
+					$("#walkinbutton").attr("disabled", false);
+					$("#walkinbutton").attr("optioncustomerid", data["data"][i].id);
+				} else {
+					$('#select_customer').append($('<option>').text(data["data"][i].customer_name + " " + data["data"][i].customer_surname + " " + data["data"][i].mobile_phone_number).attr('value', data["data"][i].id));
+				}
+			};
+			$('#select_customer').selectpicker('refresh');
+		});
+
+		$("#select_store").on('change', function () {
+			weeklyHoursArray = [];
+			$("table.promotion-table tbody").empty();
+			$("table.customer_comments tbody").empty();
+
+			$('#hairdresser_name').find('option').remove().end();
+			$('#service_name1').find('option').remove().end();
+			allservicesperstore = [];
+			store_id = parseInt(this.value);
+
+			$calendar.fullCalendar('refetchEvents');
+			$calendar.fullCalendar('refetchResources');
+
+		});
+
+		$calendar.fullCalendar({
+			viewRender: function (view, element) {
+				// We make sure that we activate the perfect scrollbar when the view isn't on Month
+				if (view.name != 'month') {
+					$(element).find('.fc-scroller').perfectScrollbar();
+				}
+			},
+			schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+			defaultView: 'agendaDay',
+			defaultDate: today,
+			// locale: initialLocaleCode,
+			editable: true,
+
+			selectable: true,
+			selectHelper: true,
+			eventLimit: true, // allow "more" link when too many events
+			navLinks: true,
+			aspectRatio: 1.8,
+			scrollTime: '08:00',
+			slotLabelFormat: "HH:mm",
+			timeFormat: 'H(:mm)',
+			header: {
+				left: 'prev,next today ',
+				center: 'title',
+				right: 'agendaDay,agendaTwoDay,agendaWeek,month,list'
+			},
+			buttonText: {
+				today: '{{gettext "today"}}',
+				month: '{{gettext "month"}}',
+				week: '{{gettext "week"}}',
+				day: '{{gettext "day"}}',
+				list: '{{gettext "list"}}',
+				agendaDay: '{{gettext "day"}}',
+				agendaTwoDay: '{{gettext "2 days"}}',
+				agendaWeek: '{{gettext "week"}}',
+				month: '{{gettext "month"}}'
+			},
+
+			views: {
+				agendaTwoDay: {
+					type: 'agenda',
+					duration: { days: 2 },
+					groupByResource: true
+				},
+				day: {
+					titleFormat: 'DD/MM/YYYY'
+				}
+			},
+			allDaySlot: false,
+
+
+			resources: function (callback) {
+
+
+
+				$.getJSON("/admin/api/all-calendar-resources/" + user_id + "/" + store_id, function (resources) {
+					allHairdressers = resources;
+					if (!resources) {
+						return false;
+
+					} else {
+
+						callback(resources);
+					}
+				});
+
+
+			},
+
+			events: function (start, end, timezone, callback) {
+				var eventtime = start.format('YYYY-MM-DD');
+				var endtime = end.format('YYYY-MM-DD');
+
+
+
+				$.getJSON("/admin/api/all-calendar-events/" + user_id + "/" + store_id + "/" + eventtime + "/" + endtime, function (events) {
+					console.log(store_id);
+					var all = [];
+					if (!events) {
+						for (let i = 0; i < allBankHolidays.length; i++) {
+							var hol = allBankHolidays[i].start;
+							var momentObj = moment(hol);
+							$('.fc-day[data-date="' + momentObj.format('YYYY-MM-DD') + '"]').css('background', '#ff9f89');
+							all.push(allBankHolidays[i]);
+						};
+
+
+						callback(all);
+
+					} else {
+
+						for (let i = 0; i < allBankHolidays.length; i++) {
+							var hol = allBankHolidays[i].start;
+							var momentObj = moment(hol);
+							$('.fc-day[data-date="' + momentObj.format('YYYY-MM-DD') + '"]').css('background', '#ff9f89');
+
+							events.push(allBankHolidays[i]);
+						}
+
+						callback(events);
+
+					}
+
+
+				});
+				$.getJSON("/admin/api/all-weekly-hours-per-user-per-store/" + user_id + "/" + store_id, function (allhours) {
+
+					for (let i = 0; i < allhours.length; i++) {
+						weeklyHoursArray.push(allhours[i]);
+
+					};
+				});
+			},
+			businessHours: weeklyHoursArray,
+			selectConstraint: "businessHours",
+			eventRender: function (event, element) {
+
+				switch (event.service_status) {
+					case "pending":
+						element.find(".fc-title").append(" <i class='ti-info-alt '> </i>");
+						break;
+					case "complete":
+
+						element.find(".fc-title").append(" <i class='ti-arrow-circle-down '> </i>");
+						break;
+					case "inprogress":
+						element.find(".fc-title").append(" <i class='ti-arrow-circle-right '> </i>");
+						break;
+					case "cancelled":
+						element.find(".fc-title").append(" <i class='ti-na '> </i>");
+						break;
+					default:
+						break;
+				}
+
+
+			},
+			eventMouseover: function (data, event, view) {
+
+				tooltip = '<div class="tooltiptopicevent" style="width:auto;height:auto;background:#feb811;position:absolute;z-index:10001;padding:10px 10px 10px 10px ;  line-height: 200%;">' + '{{gettext "Customer Name"}} ' + ': ' + data.title + '</br>' + '{{gettext "Start:"}} ' + ': ' + data.start.format("DD-MM-YYYY HH:mm:ss") + '</br>' + '{{gettext "End:"}} ' + ': ' + data.end.format("DD-MM-YYYY HH:mm:ss") + '</br>' + '{{gettext "Status"}} ' + ': ' + data.service_status + '</br>' + '{{gettext "Service"}} ' + ': ' + data.service_name + '</div>';
+
+
+				$("body").append(tooltip);
+				$(this).mouseover(function (e) {
+					$(this).css('z-index', 10000);
+					$('.tooltiptopicevent').fadeIn('500');
+					$('.tooltiptopicevent').fadeTo('10', 1.9);
+				}).mousemove(function (e) {
+					$('.tooltiptopicevent').css('top', e.pageY + 10);
+					$('.tooltiptopicevent').css('left', e.pageX + 20);
+				});
+
+
+			},
+			eventMouseout: function (data, event, view) {
+				$(this).css('z-index', 8);
+
+				$('.tooltiptopicevent').remove();
+
+			},
+
+			select: function (start, end, jsEvent, view, resource) {
+				var startDate = moment(start),
+					endDate = moment(end),
+					date = startDate.clone(),
+					isWeekend = false;
+
+				while (date.isBefore(endDate)) {
+					if (date.isoWeekday() == 6 || date.isoWeekday() == 7) {
+						isWeekend = true;
+					};
+					date.add(1, 'day');
+				};
+
+				for (let i = 0; i < allBankHolidays.length; i++) {
+					var hol = allBankHolidays[i].start;
+					var momentObj = moment(hol);
+					if (momentObj.format('YYYY-MM-DD') == startDate.format('YYYY-MM-DD')) {
+						var r = confirm("are you sure - is bank holiday");
+						if (r == true) {
+							$('#fullCalModal').modal();
+						} else {
+							return false;
+						};
+					};
+				};
+
+
+
+				var starttime = moment(start).format('MMMM Do YYYY h:mm a');
+				var endtime = moment(end).format('h:mm a');
+				var all;
+				var allDay = !start.hasTime() && !end.hasTime();
+				if (allDay == true) {
+					all = "true";
+				} else {
+					all = "false";
+				};
+
+				$('#modalTitle').html(resource ? resource.title : '(no resource)');
+
+
+				$("#selectedtimestart").html(": " + start.format("DD/MM/YYYY HH:mm") + " - ");
+
+				$("input[name=rantevou_start]").val(start.format());
+				$("input[name=allDay]").val(all);
+				$("input[name=rantevou_end]").val(end.format());
+				$("input[name=rantevou_store_id]").val($("#select_store").val());
+				$("input[name=rantevou_hairdresser]").val(resource ? resource.id : '(no resource)');
+
+				if (isWeekend) {
+					var r = confirm("are you sure - weekend");
+					if (r == true) {
+						$('#fullCalModal').modal();
+					} else {
+						return false;
+					};
+
+				};
+
+				for (let i = 0; i < allHairdressers.length; i++) {
+					$('#hairdresser_name').append($('<option>').text(allHairdressers[i].title).attr('value', allHairdressers[i].id));
+					if (allHairdressers[i].id == resource.id) {
+						$("#hairdresser_name option[value=" + resource.id + "]").show().attr("selected", "true");
+					};
+				};
+				$('#hairdresser_name').val(resource.id);
+				$('#hairdresser_name').selectpicker('refresh');
+
+				var url = '/admin/api/all-services-per-user-per-store/' + store_id + "/" + user_id;
+				$.getJSON(url, function (data) {
+					for (let i = 0; i < data.length; i++) {
+						$('#service_name1').append($('<option>').text(data[i].service_name).attr('value', data[i].id).attr('data-price', data[i].service_price).attr('data-duration', data[i].service_duration).attr('service-id', data[i].id));
+						allservicesperstore.push(data[i]);
+					};
+					$('#service_name1').selectpicker('refresh');
+				});
+
+				$('#service_name1').on('change', function () {
+					$("#rantevou_price").val();
+					$("#rantevou_duration").val();
+					var $this = $(this);
+					var price = $this.find(':selected').attr('data-price');
+					var duration = $this.find(':selected').attr('data-duration');
+					$("#rantevou_price").val(price);
+					$("#rantevou_duration").val(duration + " minutes");
+
+
+					$("#selectedtimeend").html(start.add(duration, 'minutes').format("DD/MM/YYYY HH:mm"));
+
+					var service_ID = $this.find(':selected').attr('service-id');
+					service_ID = parseInt(service_ID);
+					var user_is = $('input[name=ServicesUserID]').val();
+					var usr_id = parseInt(user_is);
+					var store_id = $("#select_store").val();
+					store_id = parseInt(store_id);
+					var prourl = '/admin/api/all-promotion-services-per-service-per-user-per-store/' + usr_id + "/" + store_id + "/" + service_ID;
+					$("table.promotion-table tbody").empty();
+
+
+					$.getJSON(prourl, function (promData) {
+						if (!promData) {
+							return false;
+						}
+						for (let i = 0; i < promData.length; i++) {
+
+							var starttimerantevoustring = moment(promData[i].created_at);
+							var momentStringStart = starttimerantevoustring.format("DD/MM/YYYY HH:mm");
+							var newRow = $("<tr>");
+							var cols = "";
+							cols += '<td><strong>' + promData[i].promotion_title + ':</strong><br/>' + promData[i].promotion_description + '</td>';
+							cols += '<td class="td-actions text-right"><div class="table-icons"><button type="button" rel="tooltip" title="" promotion-id="' + promData[i].id + '" service-duration="' + promData[i].service_duration + '" service-id="' + promData[i].service_id + '" days-duration="' + promData[i].days_duration + '" class="btn btn-info btn-simple btn-xs p-add" data-original-title="Add Promotion"><i class="ti-plus"></i></button></div></td>';
+
+							newRow.append(cols);
+							$("table.promotion-table").append(newRow);
+						};
+						$('[rel="tooltip"]').tooltip();
+
+
+					});
+					$("#promsername").text($this.find(':selected').text());
+				});
+
+				$('#fullCalModal').modal();
+
+			},
+			eventDrop: function (event, delta, revertFunc) {
+				var formData = {
+					'start': event.start.format(),
+					'end': event.end.format(),
+					'id': event.id,
+					'resource_id': parseInt(event.resourceId),
+				};
+
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/update-calendar-with-hairdresser-id',
+					data: JSON.stringify(formData),
+					contentType: 'application/json',
+					dataType: 'json',
+
+					success: function (events) {
+						$calendar.fullCalendar('renderEvent', events, true); // stick? = true
+						$calendar.fullCalendar('unselect');
+
+					},
+					error: function (err) {
+						console.log(err);
+					}
+				});
+
+
+			},
+			eventResize: function (event, delta, revertFunc) {
+
+				var formData = {
+					'start': event.start,
+					'end': event.end,
+					'id': event.id,
+				};
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/update-calendar',
+					data: JSON.stringify(formData),
+					contentType: 'application/json',
+					dataType: 'json',
+					success: function (events) {
+						$calendar.fullCalendar('renderEvent', events, true); // stick? = true
+						$calendar.fullCalendar('unselect');
+					},
+					error: function (err) {
+						console.log(err);
+					}
+				});
+
+
+
+			},
+			eventClick: function (event, jsEvent, view) {
+				$("#alert-warning").hide();
+				$("#alert-warning-cancel").hide();
+
+
+				$('.modalTitleEdit').html(event.title + '<small> </small>');
+				$("#startTime").html(moment(event.start).format('DD/MM/YYYY HH:mm'));
+				$("#endTime").html(moment(event.end).format('DD/MM/YYYY HH:mm'));
+				$("#eventComments").html(event.rantevou_comments);
+				$('#editfullCalModal').modal();
+				$("#eventresourceID").val(event.resourceId);
+				$("#eventID").val(event.id);
+				$("#canceleddAppointment").attr('data-event-id', event.id);
+				$("#serviceName").html(event.service_name);
+				$("#customerID").val(event.customer_id);
+				$("#eventDate").val(event.start.format());
+				$("#customerName").val(event.title);
+				$("#customerPhoneNumber").val(event.customer_mobile_number);
+				$("#customerEmail").val(event.customer_email);
+
+				$("#hairdreserName").val(event.hairdresser_name);
+				$("#storeID").val(event.store_id);
+				$("#serviceStatus").val(event.service_status);
+				if (event.service_status == "complete") {
+					$("#customer-finish").prop("disabled", true);
+					$("#change-appointmet").prop("disabled", true);
+					$("#canceleddAppointment").prop("disabled", true);
+					$("#alert-warning").show();
+
+				}
+
+				else if (event.service_status == "cancelled") {
+					$("#customer-finish").prop("disabled", true);
+					$("#change-appointmet").prop("disabled", true);
+					$("#canceleddAppointment").prop("disabled", true);
+					$("#alert-warning-cancel").show();
+
+				}
+
+
+				else {
+					$("#customer-finish").prop("disabled", false);
+					$("#change-appointmet").prop("disabled", false);
+					$("#canceleddAppointment").prop("disabled", false);
+					$("#alert-warning").hide();
+					$("#alert-warning-cancel").hide();
+
+
+				}
+				var customerID = event.customer_id;
+				customerID = parseInt(customerID);
+				var urlcustomer = '/admin/api/all-appointments-per-customer/' + customerID;
+				$("table.customer_comments tbody").empty();
+
+				$.getJSON(urlcustomer, function (customerData) {
+
+					for (let i = 0; i < customerData.length; i++) {
+
+						if (customerData[i].rantevou_comments !== '') {
+
+							var starttimerantevoustring = moment(customerData[i].created_at);
+							var momentStringStart = starttimerantevoustring.format("DD/MM/YYYY HH:mm");
+							var newRow = $("<tr>");
+							var cols = "";
+							cols += '<td><strong>' + customerData[i].service_name + ':</strong><br/>' + customerData[i].rantevou_comments + ' </td>';
+							cols += '<td class="td-actions text-right"><div class="table-icons">' + momentStringStart + '</div></td>';
+							newRow.append(cols);
+							$("table.customer_comments").append(newRow);
+						};
+
+					}
+					var tableRows = $("table.customer_comments tr");
+					var btnMore = $("#seeMoreRecords");
+					var btnLess = $("#seeLessRecords");
+
+					var tableRowsLength = tableRows.length;
+
+					var currentIndex = 6;
+					tableRows.hide();
+					tableRows.slice(0, 6).show();
+					checkButton();
+					btnMore.click(function (e) {
+						e.preventDefault();
+						$("table.customer_comments tr").slice(currentIndex, currentIndex + 6).show();
+						currentIndex += 6;
+						checkButton();
+					});
+
+					btnLess.click(function (e) {
+						e.preventDefault();
+						$("table.customer_comments tr").slice(currentIndex - 6, currentIndex).hide();
+						currentIndex -= 6;
+						checkButton();
+					});
+					function checkButton() {
+						var currentLength = $("table.customer_comments tr:visible").length;
+
+						if (currentLength >= tableRowsLength) {
+							btnMore.hide();
+						} else {
+							btnMore.show();
+						};
+
+						if (tableRowsLength > 6 && currentLength > 6) {
+							btnLess.show();
+						} else {
+							btnLess.hide();
+						}
+
+					};
+
+				});
+
+			},
+
+			dayClick: function (date, jsEvent, view, resource) {
+				// for (let i = 0; i < weeklyHours["data"].length; i++) {
+
+				// 	console.log(weeklyHours["data"][i]);
+				// }
+				console.log(
+					'dayClick',
+					date.format(),
+					resource ? resource.id : '(no resource)'
+				);
+			},
+
+		});
+		$("#select_customer").on('change', function () {
+			var $this = $(this);
+			var customer_ID = $this.val();
+			customer_ID = parseInt(customer_ID);
+			var urlcustomer = '/admin/api/all-appointments-per-customer/' + customer_ID;
+			$("table.customer_comments_new tbody").empty();
+
+
+			$.getJSON(urlcustomer, function (customerData) {
+
+				for (let i = 0; i < customerData.length; i++) {
+					if (customerData[i].rantevou_comments !== '') {
+
+						var starttimerantevoustring = moment(customerData[i].created_at);
+						var momentStringStart = starttimerantevoustring.format("DD/MM/YYYY HH:mm");
+						var newRow = $("<tr>");
+						var cols = "";
+						cols += '<td><strong>' + customerData[i].service_name + ':</strong><br/>' + customerData[i].rantevou_comments + ' </td>';
+						cols += '<td class="td-actions text-right"><div class="table-icons">' + momentStringStart + '</div></td>';
+
+						newRow.append(cols);
+						$("table.customer_comments_new").append(newRow);
+					};
+
+
+				}
+				var tableRows = $("table.customer_comments_new tr");
+				var btnMore = $("#seeMoreRecords_new");
+				var btnLess = $("#seeLessRecords_new");
+
+				var tableRowsLength = tableRows.length;
+
+				var currentIndex = 6;
+				tableRows.hide();
+				tableRows.slice(0, 6).show();
+				checkButton();
+				btnMore.click(function (e) {
+					e.preventDefault();
+					$("table.customer_comments_new tr").slice(currentIndex, currentIndex + 6).show();
+					currentIndex += 6;
+					checkButton();
+				});
+
+				btnLess.click(function (e) {
+					e.preventDefault();
+					$("table.customer_comments_new tr").slice(currentIndex - 6, currentIndex).hide();
+					currentIndex -= 6;
+					checkButton();
+				});
+				function checkButton() {
+					var currentLength = $("table.customer_comments_new tr:visible").length;
+
+					if (currentLength >= tableRowsLength) {
+						btnMore.hide();
+					} else {
+						btnMore.show();
+					};
+
+					if (tableRowsLength > 6 && currentLength > 6) {
+						btnLess.show();
+					} else {
+						btnLess.hide();
+					}
+
+				};
+			});
+
+
+
+		});
+
+
+
+	});
+	var room = 1;
+	function education_fields() {
+
+
+		room++;
+
+		var objTo = document.getElementById('education_fields')
+		var divtest = document.createElement("div");
+		divtest.setAttribute("class", "form-group removeclass" + room);
+		var rdiv = 'removeclass' + room;
+		divtest.innerHTML = `<div class="row loaders">
+						<hr>
+						<div class="col-md-2">
+							<select id="hairdresser_name` + room + `" name="hairdresser_name" class="hairdresser_name selectpicker" data-style="btn btn-info btn-block" title="{{gettext "Select Employee"}}" data-size="7" data-live-search="true">
+							</select>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<select id="service_name1` + room + `" name="service_name" class="select_service selectpicker" data-style="btn btn-info btn-block" title="{{gettext "Select Service"}}" data-size="7" data-live-search="true">
+								</select>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group"> 
+								<div class="input-group">
+									<span class="input-group-addon" id="basic-addon1">€</span>
+										<input type="text" class="form-control border-input rantevou_price" name="rantevou_price" id="rantevou_price` + room + `" placeholder="{{gettext "Price"}}" readonly>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<select id="rantevou_status` + room + `" name="rantevou_status" class="select_status selectpicker" data-style="btn dropdown-toggle bs-placeholder btn-info  btn-block" title="{{gettext "Select Status"}}" data-size="7">
+									<option value="pending" selected>Pending</option>
+									<option value="inprogress">In progress</option>
+									<option value="complete">Complete</option>
+									<option value="cancelled">Cancelled</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-froup">
+								<div class="input-group">
+									<span class="input-group-addon" id="basic-addon1"><i class="ti-timer"></i></span>
+										<input id="rantevou_duration` + room + `" type="text" name="rantevou_duration" class="form-control border-input rantevou_duration" placeholder="{{gettext "Duration"}}" readonly>
+											
+											<div class="input-group-btn">
+												<button class="btn btn-danger btn-fill" type="button"onclick="remove_education_fields(` + room + `);">
+													<span class="ti-minus" aria-hidden="true"></span>
+												</button>
+											</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">{{gettext "Observations"}}</label>
+									<textarea class="form-control rantevou_comments" id="rantevou_comments` + room + `" name="rantevou_comments" placeholder="{{gettext "Observations"}}" rows="3"></textarea>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>`;
+
+
+		objTo.appendChild(divtest);
+		var user_is = $('input[name=ServicesUserID]').val();
+		var usr_id = parseInt(user_is);
+		var store_id = $("#select_store").val();
+
+		store_id = parseInt(store_id);
+
+		var hairdresserID = $("#hairdresser_name").val();
+		hairdresserID = parseInt(hairdresserID);
+
+		for (let i = 0; i < allHairdressers.length; i++) {
+			if (allHairdressers[i].id == hairdresserID) {
+				$('#hairdresser_name' + room).append($('<option>').text(allHairdressers[i].title).attr('value', allHairdressers[i].id).attr("selected", "true"));
+
+			} else {
+				$('#hairdresser_name' + room).append($('<option>').text(allHairdressers[i].title).attr('value', allHairdressers[i].id));
+
+			}
+		};
+
+		for (let i = 0; i < allservicesperstore.length; i++) {
+			$('#service_name1' + room).append($('<option>').text(allservicesperstore[i].service_name).attr('value', allservicesperstore[i].id).attr('data-price', allservicesperstore[i].service_price).attr('data-duration', allservicesperstore[i].service_duration).attr('service-id', allservicesperstore[i].id));
+		}
+
+		$('#service_name1' + room).selectpicker('refresh');
+		$('#hairdresser_name' + room).selectpicker('refresh');
+		$('#rantevou_status' + room).selectpicker('refresh');
+
+		$('#service_name1' + room).on('change', function () {
+			$("#rantevou_price" + room).val();
+			$("#rantevou_duration" + room).val();
+			var $this = $(this);
+			var price = $this.find(':selected').attr('data-price');
+			var duration = $this.find(':selected').attr('data-duration');
+			$("#rantevou_price" + room).val(price);
+			$("#rantevou_duration" + room).val(duration + " minutes");
+			var endtimerantevou = $("#selectedtimeend").text();
+
+
+			var momentObj = moment(endtimerantevou, 'DD/MM/YYYY HH:mm');
+			var momentString = momentObj.add(duration, 'minutes').format('DD/MM/YYYY HH:mm');
+			$("#selectedtimeend").html(momentString);
+
+			var service_ID = $this.find(':selected').attr('service-id');
+			service_ID = parseInt(service_ID);
+			var prourl = '/admin/api/all-promotion-services-per-service-per-user-per-store/' + usr_id + "/" + store_id + "/" + service_ID;
+			$("table.promotion-table tbody").empty();
+
+
+			$.getJSON(prourl, function (promData) {
+				if (!promData) {
+					return false;
+				}
+
+				for (let i = 0; i < promData.length; i++) {
+
+					var starttimerantevoustring = moment(promData[i].created_at);
+					var momentStringStart = starttimerantevoustring.format("DD/MM/YYYY HH:mm");
+					var newRow = $("<tr>");
+					var cols = "";
+					cols += '<td><strong>' + promData[i].promotion_title + ':</strong><br/>' + promData[i].promotion_description + '</td>';
+					cols += '<td class="td-actions text-right"><div class="table-icons"><button type="button" rel="tooltip" title="" promotion-id="' + promData[i].id + '" service-duration="' + promData[i].service_duration + '" service-id="' + promData[i].service_id + '" days-duration="' + promData[i].days_duration + '" class="btn btn-info btn-simple btn-xs p-add" data-original-title="Add Promotion"><i class="ti-plus"></i></button></div></td>';
+
+					newRow.append(cols);
+					$("table.promotion-table").append(newRow);
+				};
+				$('[rel="tooltip"]').tooltip();
+
+
+			});
+			$("#promsername").text($this.find(':selected').text());
+
+		});
+
+	}
+	function remove_education_fields(rid) {
+		var minutes = $("#rantevou_duration" + rid).val();
+		var onlyminutes = minutes.split(" ");
+		onlyminutes = parseInt(onlyminutes);
+		var endtimerantevou = $("#selectedtimeend").text();
+		var momentObj = moment(endtimerantevou, 'DD/MM/YYYY HH:mm');
+		var startdate = new Date(momentObj);
+		var durationInMinutes = onlyminutes;
+		startdate.setMinutes(startdate.getMinutes() - durationInMinutes);
+		var momentString = moment(startdate).format('DD/MM/YYYY HH:mm');
+		$("#selectedtimeend").html(momentString);
+
+		$('.removeclass' + rid).remove();
+
+	}
+
+</script>
+<script>
+	$(document).ready(function () {
+		$("#walkinbutton").on('click', function () {
+			var optionvalue = $(this).attr('optioncustomerid');
+			optionvalue = parseInt(optionvalue);
+			$("#select_customer option[value=" + optionvalue + "]").show().attr("selected", "true");
+			$('#select_customer').selectpicker('refresh');
+		});
+
+		$("#canceleddAppointment").on('click', function (e) {
+			var $this = $(this);
+			var eventid = $this.attr('data-event-id');
+			eventid = parseInt(eventid);
+			var formData = {
+				'status': 'cancelled',
+				'id': eventid,
+
+			}
+			swal({
+				title: '{{gettext "Are you sure?"}}',
+				text: '{{gettext "You want to cancel this appointment?"}}',
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonText: '{{gettext "Yes, cancel it!"}}',
+				cancelButtonText: '{{gettext "No, keep it"}}',
+				confirmButtonClass: "btn btn-success btn-fill",
+				cancelButtonClass: "btn btn-danger btn-fill",
+				buttonsStyling: false
+			}).then(function () {
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/cancelled-single-appointment',
+					data: JSON.stringify(formData),
+
+					success: function (data) {
+						// if (data.status == 501) {
+						// 	swal({
+						// 		title: "Aborted",
+						// 		text: "Cannot delete the supplier because is not emply. Check your products :)",
+						// 		type: 'warning',
+						// 		confirmButtonClass: "btn btn-info btn-fill",
+						// 		buttonsStyling: false
+						// 	})
+						// 	return;
+						// }
+
+						swal({
+							title: '{{gettext "Cancelled"}}',
+							text: '{{gettext "Your appointment has been cancelled"}}',
+							type: 'success',
+							confirmButtonClass: "btn btn-success btn-fill",
+							buttonsStyling: false
+						}).then(function () {
+							$('#editfullCalModal').modal('toggle');
+							window.location.reload();
+
+						});
+
+					},
+					contentType: 'application/json',
+					dataType: 'json'
+				});
+
+			}, function (dismiss) {
+				// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+				if (dismiss === 'cancel') {
+					swal({
+						title: '{{gettext "Cancelled"}}',
+						text: '{{gettext "Your appointment has not changed"}}',
+						type: 'error',
+						confirmButtonClass: "btn btn-info btn-fill",
+						buttonsStyling: false
+					})
+				}
+			})
+
+			e.preventDefault();
+		});
+
+		var tablepro = $('#promotion-table');
+		$.fn.modal.Constructor.prototype.enforceFocus = function () { };
+
+
+		tablepro.on('click', '.p-add', function (e) {
+
+			var $this = $(this);
+			var startapp = $("#selectedtimestart").text();
+			var dati = startapp.split(" ");
+			var ststring = dati[1] + " " + dati[2];
+
+			var serid = $this.attr("service-id");
+			serid = parseInt(serid);
+
+			var pid = $this.attr("promotion-id");
+			pid = parseInt(pid);
+
+			var customer = $("#select_customer option:selected").val();
+			customer = parseInt(customer);
+
+			var days_duration = $this.attr("days-duration");
+			days_duration = parseInt(days_duration);
+
+			var startrrantevou = moment(ststring, 'DD/MM/YYYY HH:mm');
+
+			var startfeaturerantevou = startrrantevou.add(days_duration, 'days');
+			var startfeaturerantevouString = startfeaturerantevou.format("LLLL")
+			var startfran = startfeaturerantevou.format("DD/MM/YYYY HH:mm")
+			var checkdate = startfeaturerantevou.format("YYYY-MM-DD");
+			var serviceminutesduration = $this.attr("service-duration");
+			serviceminutesduration = parseInt(serviceminutesduration);
+			var endfeaturerantevou = startfeaturerantevou.add(serviceminutesduration, 'minutes');
+
+			var endfeaturerantevouString = endfeaturerantevou.format("LLLL");
+
+			var bankholidaymessage = "";
+			for (let i = 0; i < allBankHolidays.length; i++) {
+				var hol = allBankHolidays[i].start;
+				var momentObj1 = moment(hol);
+
+
+				if (checkdate == momentObj1.format('YYYY-MM-DD')) {
+
+					console.log(checkdate, momentObj1.format('YYYY-MM-DD'), "equal");
+					// bankholidaymessage = "The " + startfeaturerantevouString + " is bank holiday.<br/> Please select new date from the date time picker"
+					bankholidaymessage = `<div class="alert alert-warning">
+	                    <button type="button" aria-hidden="true" class="close">×</button>
+	                    <span><b> Warning - </b> The`  + startfeaturerantevouString + `is bank holiday.<br/> Please select new date from the date time picker</span>
+				     </div>`
+				};
+			};
+
+			swal({
+				title: 'Your next appointment Details:',
+				html: ` 
+						<p class="text-left">
+							<strong>Your next appointment is at:</strong>  `+ startfeaturerantevouString + `<strong>
+							</br> And finish at:</strong>` + endfeaturerantevouString + `
+						</p>
+						<p id="warningbakhoidyamessage">`+ bankholidaymessage + `</p>
+						
+						<div id="changeapp" class="form-group">
+							<input id="appointmentchangedate" type="text" class="form-control" placeholder=" Select date and time" >
+						</div>
+						<div class="form-group margin-botton-20">
+							<label class="control-label">Select New Employee</label>
+                            <select id="kommotes" name="product_name" class="form-control kommotes">
+                                <option value>{{gettext "Please Select"}}</option>    
+                            </select>
+						</div>
+						<div class="form-group">
+						 <textarea class="form-control service_comments_pro" id="service_comments_pro" name="service_comments_pro" placeholder="Promotion comments for the service" rows="3"></textarea>
+						</div>`,
+				showCancelButton: true,
+				confirmButtonText: 'Create!',
+				cancelButtonText: 'Cancel',
+				confirmButtonClass: "btn btn-success btn-fill",
+				cancelButtonClass: "btn btn-danger btn-fill",
+				buttonsStyling: false,
+				allowOutsideClick: false,
+				preConfirm: () => {
+					return new Promise((resolve) => {
+						if ($("#select_customer").val() === "") {
+							swal.showValidationError(
+								'Please select customer'
+							)
+							return false;
+						};
+						var featurerantevoustartString = $("#appointmentchangedate").val();
+						var featurerantevoustartmomentjs = moment(featurerantevoustartString, "DD/MM/YYYY HH:mm");
+						var dow = featurerantevoustartmomentjs.day();
+
+						var endfeaturerantevouStringonlytime = featurerantevoustartmomentjs.format("HH:mm");
+						for (let i = 0; i < weeklyHoursArray.length; i++) {
+
+							if (dow == weeklyHoursArray[i].day_of_the_week) {
+								var stime = weeklyHoursArray[i].start;
+								var stimetime = moment(stime, "HH:mm");
+
+								var etime = weeklyHoursArray[i].end;
+								var etimetime = moment(etime, "HH:mm");
+								if (endfeaturerantevouStringonlytime <= stimetime.format("HH:mm") || endfeaturerantevouStringonlytime >= etimetime.format("HH:mm")) {
+
+									swal.showValidationError(
+										'The feature appointment is out of weekly hours. Please change the appointment to weekly hours'
+									)
+									return false;
+
+								};
+							};
+
+
+						};
+
+						resolve()
+
+					})
+				},
+
+			}).then((result) => {
+
+				var user_is = $('input[name=ServicesUserID]').val();
+				var usr_id = parseInt(user_is);
+
+				var store_id = $("#select_store").val();
+				store_id = parseInt(store_id);
+
+				var hairid = $("#kommotes option:selected").val();
+				hairid = parseInt(hairid);
+				var feature_comments = $("#service_comments_pro").val();
+
+				var feature_rantevou_startString = $("#appointmentchangedate").val();
+				var formData = {
+					"user_id": usr_id,
+					"rantevou_start": feature_rantevou_startString,
+					"rantevou_end": endfeaturerantevou.format('DD/MM/YYYY HH:mm'),
+					"rantevou_store_id": store_id,
+					"rantevou_hairdresser_id": hairid,
+					"select_customer_id": customer,
+					"service_id": serid,
+					"status": "pending",
+					"rantevou_comments": feature_comments,
+					"is_all_day": false,
+					"promotion_id": pid
+				};
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/create-feature-rantevou',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						if (status == 500) {
+							console.log(data.description);
+							return;
+						} else {
+
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: data.description,
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							});
+						}
+					}
+				});
+
+			}, function (dismiss) {
+				// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+				if (dismiss === 'cancel') {
+					swal({
+						title: 'Cancelled',
+						text: 'Nothing Changed',
+						type: 'info',
+						confirmButtonClass: "btn btn-info btn-fill",
+						buttonsStyling: false
+					})
+				}
+			});
+
+
+			$('.close').click(function () {
+				$('.alert').hide();
+			});
+			$('#appointmentchangedate').datetimepicker({
+				format: 'DD/MM/YYYY HH:mm',
+				icons: {
+					time: "fa fa-clock-o",
+					date: "fa fa-calendar",
+					up: "fa fa-chevron-up",
+					down: "fa fa-chevron-down",
+					previous: 'fa fa-chevron-left',
+					next: 'fa fa-chevron-right',
+					today: 'fa fa-screenshot',
+					clear: 'fa fa-trash',
+					close: 'fa fa-remove'
+				}
+			});
+			$('#appointmentchangedate').val(startfran);
+
+
+
+			for (let i = 0; i < allHairdressers.length; i++) {
+				$('.kommotes').append($('<option>').text(allHairdressers[i].title).attr('value', allHairdressers[i].id));
+			};
+			var hairdresserID = $("#hairdresser_name").val();
+			hairdresserID = parseInt(hairdresserID);
+			$(".kommotes").val(hairdresserID);
+
+			$(".kommotes").select2({
+				theme: 'bootstrap'
+			});
+			e.preventDefault();
+		});
+
+
+	})
+</script>
+<script>
+	$(document).ready(function () {
+
+		$("#createrantevou").validate({
+
+			rules: {
+				select_customer: 'required',
+				service_name: 'required',
+				rantevou_status: 'required',
+			},
+			messages: {
+				select_customer: '{{gettext "Please select customer"}}',
+				service_name: '{{gettext "Please select service"}}',
+				rantevou_status: '{{gettext "Please select service status"}}',
+			}
+		});
+	})
+</script>
+<script>
+	$(document).ready(function () {
+
+		$('#createrantevou').on('submit', function (event) {
+			event.preventDefault();
+			if ($.trim($("#select_customer").val()) === "" || $.trim($("#service_name1").val()) === "" || $.trim($("#rantevou_price").val()) === "" || $.trim($("#rantevou_status").val()) === "" || $.trim($("#rantevou_duration").val()) === "" || $.trim($("#hairdresser_name").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+				$('#rantevousubmit').addClass('loaderform');
+				var user_is = $('input[name=ServicesUserID]').val();
+				var usr_id = parseInt(user_is);
+				var rantevou_start = $("input[name=rantevou_start]").val();
+				var rantevou_end = $("input[name=rantevou_end]").val();
+				var rantevou_store_id = $("#rantevou_store_id").val();
+				var rantevou_hairdresser_id = $("#rantevou_hairdresser").val();
+				var select_customer_id = $("#select_customer").val();
+				var hairdressers = [];
+				var hairdresser;
+				$(".hairdresser_name").each(function () {
+					hairdresser = $(this).val();
+					hairdressers.push(hairdresser);
+				});
+				hairdressers = hairdressers.filter(Boolean);
+				var allHairdresser = hairdressers.join(":");
+				var services = [];
+				var service;
+				$(".select_service").each(function () {
+					service = $(this).val();
+					services.push(service);
+				});
+				services = services.filter(Boolean);
+				var allServices = services.join(":");
+
+				var rantevou_prices = [];
+				var rantevou_price;
+				$(".rantevou_price").each(function () {
+					rantevou_price = $(this).val();
+					rantevou_price = parseFloat(rantevou_price);
+					rantevou_prices.push(rantevou_price);
+				});
+				rantevou_prices = rantevou_prices.filter(Boolean);
+				var allrantevou_prices = rantevou_prices.join(":");
+
+				var statuses = [];
+				var status;
+				$(".select_status").each(function () {
+					status = $(this).val();
+					statuses.push(status);
+				});
+				statuses = statuses.filter(Boolean);
+				var allStatuses = statuses.join(":");
+				var rantevou_duration_spit;
+				var rantevou_duration_int;
+				var rantevou_durations = [];
+				var rantevou_duration;
+				$(".rantevou_duration").each(function () {
+					rantevou_duration = $(this).val();
+					rantevou_duration_spit = rantevou_duration.split(" ");
+					rantevou_duration_int = rantevou_duration_spit[0];
+					rantevou_durations.push(rantevou_duration_int);
+				});
+				rantevou_durations = rantevou_durations.filter(Boolean);
+				var allrantevou_durations = rantevou_durations.join(":");
+
+
+
+
+				var comments = [];
+				var comment;
+				$(".rantevou_comments").each(function () {
+					comment = $(this).val();
+					comments.push(comment);
+				});
+				// comments = comments.filter(Boolean);
+				var rantevou_comments = comments.join("::");
+
+
+				var allday = $("input[name=allDay]").val();
+				var all;
+				if (allday == "true") {
+					all = true
+				} else {
+					all = false;
+				}
+
+				var formData = {
+					"user_id": usr_id,
+					"rantevou_start": rantevou_start,
+					"rantevou_end": rantevou_end,
+					"rantevou_store_id": parseInt(rantevou_store_id),
+					"rantevou_hairdresser_id": parseInt(rantevou_hairdresser_id),
+					"select_customer_id": parseInt(select_customer_id),
+					"all_services": allServices,
+					"rantevou_price": allrantevou_prices,
+					"all_statuses": allStatuses,
+					"rantevou_duration": allrantevou_durations,
+					"rantevou_comments": rantevou_comments,
+					"hairdresser_name": allHairdresser,
+					"is_all_day": all,
+				};
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/create-rantevou',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						if (status == 501) {
+							$('#rantevousubmit').removeClass('loaderform');
+							return;
+						} else {
+							$('#fullCalModal').modal('toggle');
+							$('#rantevousubmit').removeClass('loaderform');
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: data.description,
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+						}
+					}
+				});
+			}
+		});
+
+	});
+</script>
+<script>
+	$(document).ready(function () {
+
+		$('#createNewCustomerFormForCalendar').validate({
+			rules: {
+				customer_name: "required",
+				customer_surname: "required",
+				gender_of_customer: "required",
+				customer_email: {
+					required: true,
+					email: true,
+				},
+				mobile_phone: {
+					required: true,
+					number: true,
+				},
+
+				search_address: "required",
+				street_number: {
+					required: true,
+					number: true,
+				},
+				route: "required",
+				locality: "required",
+				postal_code: "required",
+				country: "required",
+				date_of_birth: "required",
+
+			},
+			messages: {
+				customer_name: '{{gettext "Please enter customer name"}}',
+				customer_surname: '{{gettext "Please enter surname name"}}',
+				gender_of_customer: '{{gettext "Please select gender"}}',
+				mobile_phone: {
+					required: '{{gettext "Please enter your phone number"}}',
+					number: '{{gettext "The phone number is not a number"}}',
+				},
+				search_address: '{{gettext "Please enter your address"}}',
+				street_number: {
+					required: '{{gettext "Please enter your address number"}}',
+					number: '{{gettext "The address number is not a number"}}',
+				},
+				route: '{{gettext "Please enter your route"}}',
+				locality: '{{gettext "Please enter your city"}}',
+				postal_code: '{{gettext "Please enter your postal code"}}',
+				country: '{{gettext "Please enter your country"}}',
+				customer_email: {
+					required: '{{gettext "Please enter a valid email address"}}',
+					email: '{{gettext "The value is not a email address"}}'
+				},
+
+				date_of_birth: '{{gettext "Please select your date of birth"}}',
+			}
+		});
+
+
+	})
+</script>
+<script>
+	$(document).ready(function () {
+
+		$("#btn1calendar").click(function () {
+			$('#createNewCustomerFormForCalendar').on('submit', function (event) {
+				event.preventDefault();
+				if ($.trim($("#customer_name").val()) === "" || $.trim($("#customer_surname").val()) === "" || $.trim($("#mobile_phone").val()) === "" || $.trim($("#customer_email").val()) === "" || $.trim($("#autocomplete").val()) === "" || $.trim($("#postal_code").val()) === "" || $.trim($("#gender_of_customer").val()) === "") {
+					alert('{{gettext "you did not fill out one of the fields"}}');
+					return false;
+				} else {
+
+					var user_is = $('input[name= UserID]').val();
+					var usr_id = parseInt(user_is);
+					var street_number = $("input[name=street_number]").val();
+					street_number = parseInt(street_number);
+
+					var from = $("#date_of_birth").val().split("/");
+					var f = new Date(from[2], from[1] - 1, from[0]);
+
+					var formData = {
+						'user_id': usr_id,
+						'customer_name': $("input[name=customer_name]").val(),
+						'customer_surname': $("input[name=customer_surname]").val(),
+						'gender_of_customer': $("#gender_of_customer").val(),
+						'mobile_phone_number': $("input[name=mobile_phone]").val(),
+						'home_phone_number': $("input[name=home_number]").val(),
+						'customer_email': $("input[name=customer_email]").val(),
+						'date_of_birth': f,
+						'customer_street_number': street_number,
+						'customer_address': $("input[name=route]").val(),
+						'customer_city': $("input[name=locality]").val(),
+						'customer_state': $("input[name=administrative_area_level_1]").val(),
+						'customer_zip_code': $("input[name=postal_code]").val(),
+						'customer_country': $("input[name=country]").val(),
+					};
+
+					var shopJSON = JSON.stringify(formData);
+
+					var fd = new FormData();
+					fd.append('supplierJSON', shopJSON);
+					// if (shopLogoImageFile.length && shopLogoImageFile[0].files.length) {
+					//   fd.append('shopLogoImageFile', shopLogoImageFile[0].files[0]);
+					// }
+					$.ajax({
+						type: 'post',
+						url: '/admin/api/create-customer',
+						data: JSON.stringify(formData),
+						dataType: 'json',
+						contentType: "application/json",
+						success: function (data) {
+							var status = data.status;
+							if (status == 500) {
+								return;
+							} else {
+
+								swal({
+									title: '{{gettext "Good job!"}}',
+									text: '{{gettext "Successfully insert customer to the database"}}',
+									buttonsStyling: false,
+									confirmButtonClass: "btn btn-success btn-fill",
+									type: "success"
+								}).then(function () {
+									$('#select_customer').find('option').remove().end();
+
+									$.getJSON('/admin/api/all-customers-per-user/' + usr_id, function (data) {
+										for (let i = 0; i < data["data"].length; i++) {
+											$('#select_customer').append($('<option>').text(data["data"][i].customer_name + " " + data["data"][i].customer_surname + " " + data["data"][i].mobile_phone_number).attr('value', data["data"][i].id));
+
+										};
+										$('#select_customer').selectpicker('refresh');
+										$('#customerCollapse').collapse('hide');
+									});
+
+								});
+							}
+						}
+					});
+				}
+			});
+		});
+
+	})
+</script> {{end}}

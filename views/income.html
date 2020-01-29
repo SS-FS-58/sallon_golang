@@ -1,0 +1,826 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+	<li>
+		<a href="/admin/income?lang=gr">
+			<img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin/income?lang=en">
+			<img src="/static/images/flags/GB.png"> {{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}} {{define "content"}}
+<div class="content">
+	<input type="hidden" id="UserID" name="UserID" value="{{.UserID}}">
+	<div class="container-fluid">
+		<div class="row ">
+			<div class="col-md-4">
+				<div class="card">
+					<div class="ncust-header">
+						<i class="ti-home icon-danger"></i> {{gettext "Stores"}}
+					</div>
+					<div class="card-content text-right">
+						<div id="ServiceTime">
+							<div class="form-group">
+								<label for="selectstore" class="control-label">{{gettext "Select Store"}}</label>
+								<select id="selectstore" name="selectserice" class="select_drop selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select Store"}}'
+								 data-size="7" data-live-search="true">
+
+
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						<hr>
+						<div class="footer-title"></div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="ncust-header">
+						<i class="ti-user icon-danger"></i> {{gettext "Customers"}}
+					</div>
+					<div class="card-content text-right">
+						<div id="SubCategoryName">
+							<div class="form-group">
+								<label for="selectcustomer" class="control-label">{{gettext "Select Customer"}}</label>
+								<select id="selectcustomer" name="selectcustomer" class="select_drop selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select Customer"}}'
+								 data-size="7" data-live-search="true">
+
+
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						<hr>
+
+						<div class="stats">
+							<i class="ti-user"></i> {{gettext "Customers"}}</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="ncust-header">
+						<i class="ti-receipt icon-danger"></i> {{gettext "Products"}}
+					</div>
+					<div class="card-content text-right">
+						<div id="GenderOfCustomer">
+							<div class="form-group">
+								<label for="selectproduct" class="control-label">{{gettext "Select product"}}</label>
+								<select id="selectproduct" name="selectproduct" class="select_drop selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select product"}}'
+								 data-size="7" data-live-search="true">
+
+
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						<hr>
+						<div class="footer-title">{{gettext "Add Product"}}</div>
+						<div class="pull-right">
+							<button id="btnaddproduct" class="btn btn-info btn-fill btn-icon btn-sm">
+								<i class="ti-plus"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+
+			<div class="col-lg-12 col-md-12">
+				<div class="card">
+					<div class="table-responsive">
+						<table class="table table-shopping" id="printTable">
+							<thead>
+								<tr>
+
+									<th>{{gettext "Services"}}</th>
+									<th class="">{{gettext "Remove"}}</th>
+									<th class="text-right">{{gettext "Price"}}</th>
+									<th class="text-right">{{gettext "Quantity"}}</th>
+									<th class="text-left">{{gettext "Discount"}}</th>
+									<th class="text-right">{{gettext "Total"}}</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+
+						<div class="col-md-12 ">
+							<div class="col-md-6"></div>
+							<div class="col-md-5 text-right customertotal">
+								{{gettext "Subtotal"}}
+							</div>
+							<div class="col-md-1 text-right customertotal">
+								<small>€</small>
+								<span id="grandsubtotal"></span>
+							</div>
+						</div>
+						<div class="col-md-12">
+
+							<div class="col-md-6"></div>
+							<div class="col-md-5 text-right customertotal">
+								{{gettext "Discount"}}
+							</div>
+							<div class="col-md-1 text-right customertotal">
+								<small>€</small>
+								<span id="grandtotaldiscount"></span>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-6"></div>
+
+
+							<div class="col-md-5 text-right customertotal">
+								{{gettext "Total"}}
+							</div>
+							<div class="col-md-1 text-right customertotal">
+								<small>€</small>
+								<span id="grandtotal"></span>
+							</div>
+						</div>
+					</div>
+					<div class="card-content text-right">
+						<div class="col-md-4 form-inline text-right">
+							<div class="radio">
+								<input type="radio" name="radio1" id="radio1" value="cash" checked="">
+								<label for="radio1">
+									{{gettext "Cash"}}
+								</label>
+							</div>
+							<div class="radio">
+								<input type="radio" name="radio1" id="radio2" value="credit_card">
+								<label for="radio2">
+									{{gettext "Credit Card"}}
+								</label>
+							</div>
+						</div>
+						<div class="col-md-2 ">
+							<button id="payment_button" type="button" class="btn btn-wd btn-success">
+								<span class="btn-label">
+									<i class="fa fa-check"></i>
+								</span>
+								{{gettext "Payment"}}
+							</button>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<br/>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+<div class="portfolio-modal modal fade" id="invoiceModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="close-modal" data-dismiss="modal" onclick="window.location = '/admin/income';">
+				<div class="lr">
+					<div class="rl"></div>
+				</div>
+			</div>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title">{{gettext "Checkout"}}</h4>
+							</div>
+							<div id="invoicebox" class="card-content">
+								<div class="invoice-box">
+									<table id="invoicetable" cellpadding="0" cellspacing="0">
+										<tr class="top">
+											<td colspan="2">
+												<table>
+													<tr>
+														<td class="title">
+															<img src="/static/images/stor_admin_{{.ImageName}}.jpg" style="width:100%; max-width:300px;">
+														</td>
+
+														<td>
+															{{gettext "Invoice #:"}}
+															<span id="invoicenumber"></span>
+															<br> {{gettext "Created:"}}
+															<span id="datetimeinvoice"></span>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+
+										<tr class="information">
+											<td colspan="2">
+												<table>
+													<tr>
+														<td>
+															<span id="companyname"></span>
+															<br>
+															<span id="companyaddess"></span>
+															<br>
+															<span id="companyaddess1"></span>
+															<br>
+															<span id="companyaddess2"></span>
+														</td>
+
+														<td>
+															<span id="invoicecustomername"></span>
+															<br>
+															<span id="invoicecustomerphone"></span>
+															<br>
+															<span id="invoicecustomeremail"></span>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+
+										<tr class="heading">
+											<td>
+												{{gettext "Payment Method"}}
+											</td>
+
+											<td>
+												#
+											</td>
+										</tr>
+
+										<tr class="details">
+											<td id="incoicepaymentmehtod">
+
+											</td>
+
+											<td>
+
+											</td>
+										</tr>
+
+										<tr class="heading">
+											<td>
+												{{gettext "Item"}}
+											</td>
+
+											<td>
+												{{gettext "Price"}}
+											</td>
+										</tr>
+										<tr class="total">
+											<td></td>
+
+											<td>
+												{{gettext "Subtotal"}}:
+												<span id="subtotalinvoice"></span>
+											</td>
+										</tr>
+										<tr class="total">
+											<td></td>
+
+											<td>
+												{{gettext "Discount"}}:
+												<span id="discountinvoice"></span>
+											</td>
+										</tr>
+
+										<tr class="total">
+											<td></td>
+
+											<td>
+												{{gettext "Total"}}:
+												<span id="invocietotal"></span>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+							<div class="card-footer">
+								<hr>
+
+								<div class="col-md-6 text-right">
+
+
+									<button id="printbutton" type="button" class="btn btn-wd btn-warning  btn-magnify" onclick="window.location = '/admin/income';">
+										<span class="btn-label">
+											<i class="ti-printer"></i>
+										</span>
+										{{gettext "Print"}}
+									</button>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{end}}{{define "scripts"}}
+
+<script type="text/javascript">
+	var store_id;
+
+	$('.selectpicker').selectpicker('refresh');
+	var user_id = $('input[name=UserID]').val();
+	user_id = parseInt(user_id);
+	var url = '/admin/api/all-stores-per-user/' + user_id;
+	$.getJSON(url, function (data) {
+
+		for (let i = 0; i < data["data"].length; i++) {
+			$('#selectstore').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id));
+		};
+
+		$('#selectstore').val(data["data"][0].id);
+		$('.selectpicker').selectpicker('refresh');
+
+		store_id = data["data"][0].id;
+		$.getJSON('/admin/api/all-customers-per-user/' + user_id, function (data) {
+			for (let i = 0; i < data["data"].length; i++) {
+				$('#selectcustomer').append($('<option>').text(data["data"][i].customer_name + " " + data["data"][i].customer_surname + " " + data["data"][i].mobile_phone_number).attr('value', data["data"][i].id).attr("email", data["data"][i].customer_email));
+				if (data["data"][i].pelatis_lianikis == true) {
+
+					$("#selectcustomer").val(data["data"][i].id);
+
+				};
+
+			};
+			$('#selectcustomer').selectpicker('refresh');
+		});
+
+		var customerURL = '/admin/api/all-products-per-user-per-store/' + store_id + "/" + user_id;
+		$.getJSON(customerURL, function (productdata) {
+			for (let i = 0; i < productdata.length; i++) {
+				$('#selectproduct').append($('<option>').text(productdata[i].product_name).attr('value', productdata[i].id).attr('product_price', productdata[i].product_price).attr('product_stock', productdata[i].product_stock));
+			};
+			$('#selectproduct').selectpicker('refresh');
+
+		});
+
+	});
+
+</script>
+<script>
+	$(document).ready(function () {
+		$('#selectproduct').on('change', function () {
+			var productid = parseInt(this.value);
+			var $this = $(this);
+			
+			var value = parseInt($("#selectproduct option:selected").attr("product_stock"));
+			console.log(value);
+			$.getJSON('/admin/api/product-qty/' + productid, function (productqtydata) {
+				var stock = productqtydata.product_stock;
+				stock = parseInt(stock);
+				console.log(stock);
+				var remain = stock - value;
+				remain = parseInt(remain);
+				console.log(remain);
+				if (stock <= 3 && stock >= 1) {
+					$.notify({
+						icon: 'ti-info',
+						message: '{{gettext "Warning: you have only"}}' + " " + stock + " " + '{{gettext "in the store"}}',
+
+					}, {
+							placement: {
+								from: "top",
+								align: "right"
+							},
+							type: 'warning',
+							allow_dismiss: true,
+						});
+				} else if (stock <= 0) {
+					$.notify({
+						icon: 'ti-alert',
+						message: '{{gettext "Danger: you have only"}}' + " " + stock + " " + '{{gettext "in the store"}}',
+
+					}, {
+							placement: {
+								from: "top",
+								align: "right"
+							},
+							type: 'danger',
+							allow_dismiss: true,
+						});
+				}
+			});
+		});
+
+
+		var userid = $('input[name=UserID]').val();
+		userid = parseInt(userid);
+		var storeid;
+		$("#selectstore").on('change', function () {
+			storeid = parseInt(this.value);
+			$('#selectcustomer').find('option').remove().end();
+			$('#selectproduct').find('option').remove().end();
+
+			$.getJSON('/admin/api/all-customers-per-user/' + userid, function (data) {
+				for (let i = 0; i < data["data"].length; i++) {
+					$('#selectcustomer').append($('<option>').text(data["data"][i].customer_name + " " + data["data"][i].customer_surname + " " + data["data"][i].mobile_phone_number).attr('value', data["data"][i].id));
+					if (data["data"][i].pelatis_lianikis == true) {
+
+						$("#selectcustomer").val(data["data"][i].id);
+
+					};
+				};
+				$('#selectcustomer').selectpicker('refresh');
+			});
+
+			var customer_URL = '/admin/api/all-products-per-user-per-store/' + storeid + "/" + userid;
+			$.getJSON(customer_URL, function (product_data) {
+				for (let i = 0; i < product_data.length; i++) {
+					$('#selectproduct').append($('<option>').text(product_data[i].product_name).attr('value', product_data[i].id).attr('product_price', product_data[i].product_price));
+				};
+				$('#selectproduct').selectpicker('refresh');
+
+			});
+		});
+
+
+
+		$("#btnaddproduct").on('click', function (e) {
+			e.preventDefault();
+			var shopid = $('#selectstore option:selected').val();
+			shopid = parseInt(shopid);
+			var pos = "pos_" + userid + "_" + shopid;
+			var product_id = $('#selectproduct option:selected').val();
+			product_id = parseInt(product_id);
+			var product_name = $('#selectproduct option:selected').text();
+			var product_price = $("#selectproduct option:selected").attr("product_price");
+			product_price = parseFloat(product_price).toFixed(2);
+
+			var newRow = $("<tr>");
+			var cols = "";
+			cols += '<td class="td-product form-inline">' + product_name + '<input type="hidden" id="serviceName" name="serviceName" value="' + product_name + '"><input type="hidden" id="serviceID" name="serviceID" value="' + product_id + '"><input type="hidden" id="isService" name="isService" value="true"><input type="hidden" name="hairdresserID" id="hairdresserID" value="' + pos + '"></td>';
+			cols += '<td><p class="button-remove-service"><a rel="tooltip" title="" class="btn btn-simple btn-danger btn-icon table-action remove" data-original-title={{gettext "Remove"}}><i class="ti-close"></i></a></p></td>'
+			cols += '<td class="td-price"><small>€</small>' + product_price + '<input type="hidden" name="price" value="' + product_price + '"/></td>';
+			cols += ' <td class="td-number td-quantity"><input type="text" size="1" class="form-control" name="qty" value="1"/></td>';
+			cols += '<td class="td-number discount"><input type="text" name="discount" class="form-control service_discount"  rel="txttooltip" data-original-title={{gettext "Discount amount is NOT percentage and this must be less than the total price"}}></td>';
+			cols += '<td class="td-number"><small>€</small><span class="servisesubtotal">' + product_price + '</span><input type="hidden" name="linetotal" readonly="readonly" value="' + product_price + '"/></td>';
+
+			newRow.append(cols);
+
+			$("table.table-shopping").append(newRow);
+			// setTimeout(function () {  }, 50);
+			calculateGrandTotal(); calculateGrandDiscount(); calculateGrandSubTotal();
+			$('[rel="tooltip"]').tooltip();
+		});
+
+		$("table.table-shopping").on("input", 'input[name="price"], input[name="qty"]', function (event) {
+			calculateRow($(this).closest("tr"));
+			calculateRowAfterDiscount($(this).closest("tr"));
+
+			calculateGrandTotal();
+			calculateGrandDiscount();
+			calculateGrandSubTotal();
+		});
+
+
+
+		$("table.table-shopping").on("input", 'input[name="discount"]', function (event) {
+			calculateRowAfterDiscount($(this).closest("tr"));
+			calculateGrandTotal();
+			calculateGrandDiscount();
+			calculateGrandSubTotal();
+		});
+
+		$("table.table-shopping").on("click", "a.remove", function (event) {
+			$(this).closest("tr").remove();
+			calculateGrandTotal();
+			calculateGrandDiscount();
+			calculateGrandSubTotal();
+		});
+
+		$("#payment_button").on('click', function (e) {
+
+			e.preventDefault();
+			$('#payment_button').prop('disabled', true);
+
+			$('#payment_button').addClass('loaderform');
+
+			// var hairdresserID = $("#hairdresserID").val();
+			var storeID = $('#selectstore option:selected').val();
+			var userID = userid;
+			var customerID = $("#selectcustomer option:selected").val();
+
+			var shopid = $('#selectstore option:selected').val();
+			shopid = parseInt(shopid);
+
+			var grandSubTotal = $("#grandsubtotal").text();
+			grandSubTotal = parseFloat(grandSubTotal);
+
+			var discount = $("#grandtotaldiscount").text();
+			discount = parseFloat(discount);
+
+			var total = $("#grandtotal").text();
+			total = parseFloat(total);
+
+
+			var obj;
+			var tbl = [];
+
+
+			var all_invoices_per_customer;
+			var statusID;
+
+
+
+			$.getJSON('/admin/api/all-invoices-per-store/' + parseInt(storeID), function (allInvoicesPerCustomer) {
+				var customerID = $("#selectcustomer option:selected").val()
+
+				if (!allInvoicesPerCustomer) {
+					statusID = 1;
+				} else {
+					statusID = allInvoicesPerCustomer.length + 1;
+				}
+
+				$("table.table-shopping").find('input[name="serviceName"]').each(function () {
+					var eventID = +$(this).closest('tr').find('input[name="eventID"]').val();
+
+					var service_name = $(this).val();
+					var service_id = +$(this).closest('tr').find('input[name="serviceID"]').val();
+					var service_price = +$(this).closest('tr').find('input[name="price"]').val();
+					var service_qty = +$(this).closest('tr').find('input[name="qty"]').val();
+					var service_discount = +$(this).closest('tr').find('input[name="discount"]').val();
+					var service_line_total = +$(this).closest('tr').find('input[name="linetotal"]').val();
+					var paymentType = $('input[name=radio1]:checked').val();
+
+					obj = {
+						"store_id": shopid,
+						"service_name": service_name,
+						"is_service": false,
+						"customer_id": parseInt(customerID),
+						"user_id": userID,
+						"service_id": parseInt(service_id),
+						"service_price": parseFloat(service_price),
+						"service_qty": parseFloat(service_qty),
+						"service_discount": parseFloat(service_discount),
+						"payment_type": paymentType,
+						"service_line_total": parseFloat(service_line_total),
+						"invoice_number": parseInt(statusID)
+
+
+					};
+					tbl.push(obj);
+				});
+				console.log(tbl);
+				if (tbl.length === 0) {
+					$.notify({
+						icon: 'ti-info',
+						message: '{{gettext "Info: you do not have services for this client"}}',
+
+					}, {
+							placement: {
+								from: "top",
+								align: "right"
+							},
+							type: 'info',
+							allow_dismiss: true,
+						});
+					$('#payment_button').prop('disabled', false);
+
+					$('#payment_button').removeClass('loaderform');
+				}
+
+				else {
+
+					var customerProductsJSON = JSON.stringify(tbl);
+
+					var fd = new FormData();
+					fd.append('customerProductsJSON', customerProductsJSON);
+
+
+
+					// fd.append('lenderLogoImage', lenderLogoImageFile[0].files[0]);
+					$.ajax({
+						url: '/admin/api/insert-income-checkout-data',
+						data: fd,
+						type: 'POST',
+						contentType: false,
+						processData: false,
+						dataType: 'json',
+						success: function (data) {
+							if (data.status == 500) {
+								$.notify({
+									icon: 'ti-user',
+									message: data.description,
+
+								}, {
+										placement: {
+											from: "top",
+											align: "center"
+										},
+										type: 'danger',
+										timer: 2000
+									});
+
+							} else if (data.status == 200) {
+								swal({
+									title: '{{gettext "Good job!"}}',
+									text: '{{gettext "Would you like to print your invoice?"}}',
+									type: "info",
+									showCancelButton: true,
+									confirmButtonClass: "btn-success",
+									confirmButtonText: '{{gettext "No, Finish"}}',
+									cancelButtonText: '{{gettext "Yes, Invoice"}}',
+									allowOutsideClick: false,
+
+
+								}).then(function () {
+
+									swal({
+										title: "Thanks!",
+										text: "Close.",
+										buttonsStyling: false,
+										confirmButtonClass: "btn btn-success btn-fill",
+										type: "success",
+										allowOutsideClick: false,
+
+									}).then(function () {
+
+										location.href = "/admin/income";
+
+
+									});
+
+								}, function (dismiss) {
+
+									if (dismiss === 'cancel') {
+										var groupLength = tbl.length;
+										var row = 6;
+										for (let i = 0; i < groupLength; i++) {
+											if ((i + 1) == (groupLength)) {
+												$('#invoicetable tr').eq(row).after('<tr class="item last"><td>' + tbl[i].service_name + '</td><td>€' + tbl[i].service_price.toFixed(2) + '</td></tr>>');
+
+											} else {
+												$('#invoicetable tr').eq(row).after('<tr class="item"><td>' + tbl[i].service_name + '</td><td>€' + tbl[i].service_price.toFixed(2) + '</td></tr>>');
+
+												row++;
+											}
+
+										}
+
+										var invoitetota = $("#grandtotal").text();
+										var grandsubtotal = $("#grandsubtotal").text();
+										var grandtotaldiscount = $("#grandtotaldiscount").text();
+										$("#invocietotal").text("€" + invoitetota);
+										$("#discountinvoice").text("€" + grandtotaldiscount);
+										$("#subtotalinvoice").text("€" + grandsubtotal);
+										var paymentTypeforinvoice = $('input[name=radio1]:checked').val();
+										$("#incoicepaymentmehtod").text(paymentTypeforinvoice.toUpperCase());
+										var customerName = $("#selectcustomer option:selected").text();
+										var customerEmail = $("#selectcustomer option:selected").attr("email");
+										var customerMobileNumber = $("#selectcustomer option:selected").text();
+										$("#invoicecustomername").text(customerName);
+										$("#invoicecustomeremail").text(customerEmail);
+										$("#invoicecustomerphone").text(customerMobileNumber);
+										const now = new Date();
+										var userLang = navigator.language || navigator.userLanguage;
+										console.log(userLang);
+
+										var momentString = moment(now).format('llll');
+										$("#datetimeinvoice").text(momentString);
+										$("#invoicenumber").text(statusID);
+
+
+										var urlstores = '/admin/api/all-shops-per-user/' + userid;
+
+										$.getJSON(urlstores, function (storesdata) {
+
+											for (let i = 0; i < storesdata["data"].length; i++) {
+												if (storesdata["data"][i].id == shopid) {
+
+													$("#companyname").text(storesdata["data"][i].company_name);
+													$("#companyaddess").text(storesdata["data"][i].company_street_number + " " + storesdata["data"][i].company_address)
+													$("#companyaddess1").text(storesdata["data"][i].company_city + ", " + storesdata["data"][i].company_state + " " + storesdata["data"][i].company_zip_code);
+													$("#companyaddess2").text(storesdata["data"][i].vat_number + ", " + storesdata["data"][i].tax_office);
+
+												}
+											}
+
+										});
+
+										$('#invoiceModal').modal();
+									}
+								})
+							}
+						},
+						error: function (err) {
+							$('#payment_button').prop('disabled', false);
+
+							$('#payment_button').removeClass('loaderform');
+						}
+					});
+				}
+
+				var formData = {
+					"user_id": parseInt(userID),
+					"store_id": parseInt(storeID),
+					"customer_id": parseInt(customerID),
+					"sub_total_cost": grandSubTotal,
+					"discount": discount,
+					"total": total,
+					"status_id": parseInt(statusID)
+
+				};
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/insert-invoice-data',
+					data: JSON.stringify(formData),
+					contentType: 'application/json',
+					dataType: 'json',
+					success: function (status) {
+						console.log(status.invoice_number);
+					},
+					error: function (err) {
+						console.log(err);
+					}
+				});
+
+			});
+
+		});
+
+	});
+	function calculateRow(row) {
+		var price = +row.find('input[name="price"]').val();
+		var qty = +row.find('input[name="qty"]').val();
+		row.find('input[name="linetotal"]').val((price * qty).toFixed(2));
+		row.find('.servisesubtotal').html((price * qty).toFixed(2));
+	}
+
+	function calculateRowAfterDiscount(row) {
+		var price = +row.find('input[name="price"]').val();
+		var qty = +row.find('input[name="qty"]').val();
+		var discount = +row.find('input[name="discount"]').val();
+		row.find('input[name="linetotal"]').val(((price * qty) - discount).toFixed(2));
+		row.find('.servisesubtotal').html(((price * qty) - discount).toFixed(2));
+	}
+	function calculateGrandDiscount() {
+		var discount = 0;
+		$("table.table-shopping").find('input[name="discount"]').each(function () {
+			discount += +$(this).val();
+		});
+		$("#grandtotaldiscount").text(discount.toFixed(2));
+	}
+
+	function calculateGrandTotal() {
+		var grandTotal = 0;
+		$("table.table-shopping").find('input[name="linetotal"]').each(function () {
+			grandTotal += +$(this).val();
+		});
+		$("#grandtotal").text(grandTotal.toFixed(2));
+	}
+	function calculateGrandSubTotal() {
+		var grandSubTotal = 0;
+		var total = $("#grandtotal").text();
+		var discount = $("#grandtotaldiscount").text();
+		discount = parseFloat(discount);
+		total = parseFloat(total);
+		grandSubTotal = total + discount
+		$("#grandsubtotal").text(grandSubTotal.toFixed(2));
+	}
+</script>
+<script type="text/javascript">
+
+	$("#printbutton").on('click', function () {
+		var contents = $("#invoicebox").html();
+		var frame1 = $('<iframe />');
+		frame1[0].name = "frame1";
+		frame1.css({ "position": "absolute", "top": "-1000000px" });
+		$("body").append(frame1);
+		var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
+		frameDoc.document.open();
+		//Create a new HTML document.
+		frameDoc.document.write('<html><head><title></title>');
+		frameDoc.document.write('</head><body>');
+		//Append the external CSS file.
+		frameDoc.document.write('<link href="/static/css/paper-dashboard.css"  rel="stylesheet" type="text/css" />');
+		frameDoc.document.write('<link href="/static/css/demo.css"  rel="stylesheet" type="text/css" />');
+
+		//Append the DIV contents.
+		frameDoc.document.write(contents);
+		frameDoc.document.write('</body></html>');
+		frameDoc.document.close();
+		setTimeout(function () {
+			window.frames["frame1"].focus();
+			window.frames["frame1"].print();
+			frame1.remove();
+		}, 500);
+	});
+
+</script> {{end}}

@@ -1,0 +1,1024 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+	<li>
+		<a href="/admin/suppliers?lang=gr">
+			<img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin/suppliers?lang=en">
+			<img src="/static/images/flags/GB.png"> {{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}} {{define "content"}}
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="col-lg-12 col-md-12">
+			<div class="card">
+				
+					<button id="toggle" class="btn btn-sm btn-primary">?</button>
+					<aside id="aside" class="aside">
+						<h2>{{gettext "Information"}}</h2>
+	
+						<p>{{gettext "Here you can find all your suppliers settings You can add new suppliers edit details you will need at least one supplier if you want to add products"}}</p>
+						
+					</aside>
+
+				<div class="card-content">
+					<div id="my-tab-content" class="tab-content">
+						<div class="tab-pane active" id="Suppliers">
+							<div class="col-md-12 text-left margin-bottom-20">
+
+							 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalHorizontal">
+									<span class="btn-label">
+											<i class="ti-plus"></i>
+										</span>{{gettext "Add new supplier"}}</button>
+									
+							</div>
+
+
+							<div class="fresh-datatables">
+								<table id="supplierdatatables" class="table  table-striped table-bordered  table-hover supplierdatatables" cellspacing="0"
+								 width="100%" style="width:100%">
+									<thead>
+										<tr>
+
+											<th>{{gettext "Supplier Name"}}</th>
+											<th>{{gettext "Vat Number"}}</th>
+											<th>{{gettext "Address"}}</th>
+											<th>{{gettext "Field of Business"}}</th>
+											<th>{{gettext "Phone"}}</th>
+											<th>{{gettext "Email"}}</th>
+											<th>{{gettext "Website"}}</th>
+											<th>{{gettext "Creation Date"}}</th>
+											<th>{{gettext "Active"}}</th>
+											<th class="disabled-sorting">{{gettext "Actions"}}</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>{{gettext "Supplier Name"}}</th>
+											<th>{{gettext "Vat Number"}}</th>
+											<th>{{gettext "Address"}}</th>
+											<th>{{gettext "Field of Business"}}</th>
+											<th>{{gettext "Phone"}}</th>
+											<th>{{gettext "Email"}}</th>
+											<th>{{gettext "Website"}}</th>
+											<th>{{gettext "Creation Date"}}</th>
+											<th>{{gettext "Active"}}</th>
+											<th>{{gettext "Actions"}}</th>
+										</tr>
+									</tfoot>
+
+								</table>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" onclick="window.location = '/admin/suppliers';">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">{{gettext "Close"}}</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						{{gettext "New Supplier"}}
+					</h4>
+				</div>
+
+				<!-- Modal Body -->
+				<form id="createNewSupplierForm">
+					<input type="hidden" id="UserId" name="UserId" value="{{.UserID}}">
+					<div class="modal-body">
+						<div class="card card-plain">
+							<div class="content">
+								<div class="row">
+									<div class="col-md-12">
+										<div id="vat-exists" class='alert alert-danger' role='alert'>
+											<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+												<span aria-hidden='true'>&times;</span>
+											</button>
+											<strong>{{gettext "The VAT number already exist."}}</strong>
+
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" id="vat_number" name="vat_number" placeholder='{{gettext "Your VAT Number"}}' class="form-control">
+											<label id="report" class="error report">{{gettext "*VAT number exists"}}</label>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" id="supplier_name" name="supplier_name" placeholder='{{gettext "Supplier Name"}}' class="form-control">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" id="field_of_business" name="field_of_business" placeholder='{{gettext "Field of Business"}}' class="form-control">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" id="work_telephone" name="work_telephone" placeholder='{{gettext "Work Telephone"}}' class="form-control">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" id="website" name="website" placeholder='{{gettext "Website"}}' class="form-control">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input id="email" name="email" class="form-control" placeholder='{{gettext "Enter the email"}}' type="text">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+
+									<div class="col-md-12">
+										<div id="locationField" class="form-group">
+											<input id="autocomplete" name="search_address" class="form-control" placeholder='{{gettext "Enter the address"}}' onFocus="geolocate()"
+											 type="text"></input>
+										</div>
+									</div>
+								</div>
+
+
+
+								<div id="address" class="hidden">
+									<label class="control-label">{{gettext "Street address"}}</label>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<input class="form-control" id="street_number" name="street_number" placeholder='{{gettext "Street address"}}' disabled="true"></input>
+											</div>
+										</div>
+										<div class="col-md-8">
+											<div class="form-group">
+												<input class="form-control" id="route" name="route" disabled="true"></input>
+											</div>
+										</div>
+									</div>
+
+									<label class="control-label">{{gettext "Street City"}}</label>
+									<div class="form-group">
+										<input class="form-control" id="locality" name="locality" placeholder='{{gettext "Street City"}}' disabled="true"></input>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label class="control-label">{{gettext "State"}}</label>
+											<div class="form-group">
+												<input class="form-control" id="administrative_area_level_1" name="administrative_area_level_1" placeholder='{{gettext "State"}}'
+												 disabled="true"></input>
+											</div>
+										</div>
+										<div class="col-md-1"></div>
+										<div class="col-md-5">
+											<label class="control-label">{{gettext "Zip Code"}}</label>
+											<div class="form-group">
+												<input class="form-control" id="postal_code" name="postal_code" placeholder='{{gettext "Zip Code"}}' disabled="true"></input>
+											</div>
+										</div>
+									</div>
+									<div class="form-group" colspan="3">
+										<input class="form-control" id="country" name="country" placeholder='{{gettext "Country"}}' disabled="true"></input>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- Modal Footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.location = '/admin/suppliers';">
+							{{gettext "Close"}}
+						</button>
+						<button type="submit" class="btn btn-primary">
+							{{gettext "Save changes"}}
+						</button>
+					</div>
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+	<div class="modal fade editModalHorizontal" id="editModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	 aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" onclick="window.location = '/admin/suppliers';">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">{{gettext "Close"}}</span>
+					</button>
+					<h4 class="modal-title" id="editModalLabel">
+					</h4>
+				</div>
+
+				<!-- Modal Body -->
+				<form id="editSupplierForm">
+					<input type="hidden" id="Id" name="Id">
+					<input type="hidden" id="UserID" name="UserID">
+					<div class="modal-body">
+						<div class="card card-plain">
+							<div class="content">
+								<div class="row">
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="vat_number" class="control-label">{{gettext "Your VAT Number"}}</label>
+											<input type="text" id="evat_number" name="evat_number" placeholder='{{gettext "Your VAT Number"}}' disabled class="form-control">
+
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="esupplier_name" class="control-label">{{gettext "Supplier Name"}}</label>
+											<input type="text" id="esupplier_name" name="esupplier_name" placeholder='{{gettext "Supplier Name"}}' class="form-control">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="ework_telephone">{{gettext "Work Telephone"}}</label>
+											<input type="text" id="ework_telephone" name="ework_telephone" placeholder='{{gettext "Work Telephone"}}' class="form-control">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="efield_of_business" class="control-label">{{gettext "Field Of Business"}}</label>
+											<input type="text" id="efield_of_business" name="efield_of_business" placeholder='{{gettext "Field Of Business"}}' class="form-control">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="ewebsite" class="control-label">{{gettext "Website"}}</label>
+											<input type="text" id="ewebsite" name="ewebsite" placeholder='{{gettext "Website"}}' class="form-control">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="elocality" class="control-label">{{gettext "City"}}</label>
+											<input class="form-control" id="elocality" name="elocality" placeholder='{{gettext "City"}}'></input>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="eemail" class="control-label">{{gettext "Email"}}</label>
+											<input class="form-control" id="eemail" name="eemail" placeholder='{{gettext "Email"}}'></input>
+										</div>
+									</div>
+								</div>
+
+								<label class="control-label">{{gettext "Street address"}}</label>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<input class="form-control" id="estreet_number" name="estreet_number" placeholder='{{gettext "Street address"}}'></input>
+										</div>
+									</div>
+									<div class="col-md-8">
+										<div class="form-group">
+
+											<input class="form-control" id="eroute" name="eroute"></input>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<label class="control-label">{{gettext "State"}}</label>
+										<div class="form-group">
+											<input class="form-control" id="eadministrative_area_level_1" name="eadministrative_area_level_1" placeholder='{{gettext "State"}}'></input>
+										</div>
+									</div>
+									<div class="col-md-1"></div>
+									<div class="col-md-5">
+										<label class="control-label">{{gettext "Zip Code"}}</label>
+										<div class="form-group">
+											<input class="form-control" id="epostal_code" name="epostal_code" placeholder='{{gettext "Zip Code"}}'></input>
+										</div>
+									</div>
+								</div>
+								<div class="form-group" colspan="3">
+									<input class="form-control" id="ecountry" name="ecountry" placeholder='{{gettext "Country"}}'></input>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+					<!-- Modal Footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.location = '/admin/suppliers';">
+							{{gettext "Close"}}
+						</button>
+						<button type="submit" class="btn btn-primary">
+							{{gettext "Save changes"}}
+						</button>
+					</div>
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+{{end}} {{define "googlemaps"}}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCJQmyil5FKCMy9c29Jz4RswT5glVOdQ&libraries=places&callback=initAutocomplete&&language=el"></script> {{end}} {{define "scripts"}}
+
+<script>
+
+	var placeSearch, autocomplete;
+	var componentForm = {
+		street_number: 'short_name',
+		route: 'long_name',
+		locality: 'long_name',
+		administrative_area_level_1: 'short_name',
+		country: 'long_name',
+		postal_code: 'short_name'
+	};
+
+	function initAutocomplete() {
+		// Create the autocomplete object, restricting the search to geographical
+		// location types.
+		autocomplete = new google.maps.places.Autocomplete(
+                  /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+			{ types: ['geocode'] });
+
+		// When the user selects an address from the dropdown, populate the address
+		// fields in the form.
+		autocomplete.addListener('place_changed', fillInAddress);
+
+	}
+
+	function fillInAddress() {
+		// Get the place details from the autocomplete object.
+		var place = autocomplete.getPlace();
+
+		for (var component in componentForm) {
+			document.getElementById(component).value = '';
+			document.getElementById(component).disabled = false;
+		}
+
+		// Get each component of the address from the place details
+		// and fill the corresponding field on the form.
+		for (var i = 0; i < place.address_components.length; i++) {
+			var addressType = place.address_components[i].types[0];
+			if (componentForm[addressType]) {
+				var val = place.address_components[i][componentForm[addressType]];
+				document.getElementById(addressType).value = val;
+				$("#address").removeClass("hidden");
+			}
+		}
+	}
+
+	// Bias the autocomplete object to the user's geographical location,
+	// as supplied by the browser's 'navigator.geolocation' object.
+	function geolocate() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+				var geolocation = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+				var circle = new google.maps.Circle({
+					center: geolocation,
+					radius: position.coords.accuracy
+				});
+				autocomplete.setBounds(circle.getBounds());
+
+			});
+		}
+	}
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('#toggle').click(function (e) {
+			$('.aside').stop(true).slideToggle();
+		});
+		$(document).click(function (e) {
+			if (!$(e.target).closest('#toggle, .aside').length) {
+				$('.aside').stop(true).slideUp();
+			}
+		});
+		$(".report").hide();
+		$("#vat_number").bind("keyup change", function () {
+
+			var vat_number = $(this).val();
+
+			var formData = {
+				'vat_number': vat_number,
+
+			};
+			$.ajax({
+				type: 'post',
+				url: '/admin/api/check-vat-exists-for-supplier',
+				data: JSON.stringify(formData),
+				dataType: 'json',
+				contentType: "application/json",
+
+				success: function (data) {
+
+					if (data.status == 200) {
+						$(".report").show();
+					};
+
+				},
+				error: function (request, status, error) {
+					$(".report").hide();
+				}
+			});
+
+
+
+		});
+
+
+	});
+
+</script>
+<script>
+
+	var user_is = $('input[name= UserId]').val();
+	var usr_id = parseInt(user_is);
+	var url = '/admin/api/all-suppliers-per-user/' + usr_id;
+	console.log(url);
+	$('.supplierdatatables').DataTable({
+		"processing": true,
+		"ajax": {
+			"url": url,
+			"dataSrc": function (data) {
+				console.log(data);
+				if (data["data"] == null) {
+					return [];
+				}
+				else {
+					return data.data;
+				}
+			}
+		},
+		"oLanguage": {
+			"sEmptyTable": '{{gettext "You do not have any data"}}',
+			"sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+		},
+		"columns": [
+			{
+				"data": "supplier_name",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "vat_number",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": null,
+				"render": function (data, type, row) {
+
+
+					return data.supplier_address + " " + data.supplier_street_number + ", " + data.supplier_city + ", " + data.supplier_zip_code + ", " + data.supplier_country;
+				}
+			},
+			{
+				"data": "field_of_business",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+
+			{
+				"data": "work_telephone",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "email",
+				"render": function (data) {
+
+
+					return '<a href="mailto:' + data + '" target="_top">' + data + '</a>';
+				}
+			},
+			{
+				"data": "website",
+				"render": function (data) {
+
+
+					return '<a href="http://' + data + '" target="_blank">' + data + '</a>';
+				}
+			},
+			{
+				"data": "created_at",
+				"render": function (data) {
+					var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+					return dateoflastReview.format("DD/MM/YYYY")
+				}
+
+			},
+
+			{
+				"data": "null",
+				"render": function (data, type, row) {
+					if (row.is_active == true) {
+
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" type="checkbox" name="my-checkbox" class="switch-plain enableDisableBestBuyLender" checked></td>'
+					} else {
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" type="checkbox" name="my-checkbox" class="switch-plain enableDisableBestBuyLender"></td>'
+					}
+				}
+
+			},
+			{
+				"data": "supplier_country",
+				"render": function (data) {
+					return '<td><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target=".editModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+
+				}
+			},
+
+		],
+		"pagingType": "full_numbers",
+		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+		responsive: true,
+		language: {
+			search: "_INPUT_",
+			searchPlaceholder: '{{gettext "Search records"}}',
+		},
+		"initComplete": function (settings, json) {
+			$('[rel="tooltip"]').tooltip();
+
+			enable_disable_supplier();
+
+		},
+		drawCallback: function () {
+			$('[rel="tooltip"]').tooltip();
+
+
+		}
+
+	});
+
+
+	var table = $('.supplierdatatables').DataTable();
+	table.on('responsive-display', function (e, datatable, row, showHide, update) {
+		// console.log('Details for row ' + row.index() + ' ' + (showHide ? 'shown' : 'hidden'));
+		$('[rel="tooltip"]').tooltip();
+		enable_disable_supplier();
+	});
+	// Edit record
+	table.on('click', '.edit', function () {
+		// $tr = $(this).closest('tr');
+		// var data = table.row($tr).data();
+		var cell = table.cell(this.parentNode);
+		var data = table.row(cell.index().row).data();
+
+
+		console.log(data);
+		$("#editModalLabel").text("Edit " + data.supplier_name);
+		$("#Id").val(data.id);
+		$("#UserID").val(data.user_id);
+		$("input[name=esupplier_name]").val(data.supplier_name);
+		$("input[name=evat_number]").val(data.vat_number);
+		$("input[name=efield_of_business]").val(data.field_of_business);
+		$("input[name=ework_telephone]").val(data.work_telephone);
+		$("input[name=ewebsite]").val(data.website);
+		$("input[name=eemail]").val(data.email);
+
+		$("input[name=estreet_number]").val(data.supplier_street_number);
+		$("input[name=eroute]").val(data.supplier_address);
+		$("input[name=elocality]").val(data.supplier_city);
+		$("input[name=eadministrative_area_level_1]").val(data.supplier_state);
+		$("input[name=epostal_code]").val(data.supplier_zip_code);
+		$("input[name=ecountry]").val(data.supplier_country);
+
+		console.log(data);
+
+
+	});
+
+
+	table.on('click', '.remove', function (e) {
+		var cell = table.cell(this.parentNode);
+		var data = table.row(cell.index().row).data();
+		var shopId = parseInt(data.id);
+		var formData = {
+			'is_active': data.is_active,
+			'user_id': usr_id,
+
+		}
+		swal({
+			title: '{{gettext "Are you sure?"}}',
+			text: '{{gettext "You will not be able to recover this supplier!"}}',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: '{{gettext "Yes, delete it!"}}',
+			cancelButtonText: '{{gettext "No, keep it"}}',
+			confirmButtonClass: "btn btn-success btn-fill",
+			cancelButtonClass: "btn btn-danger btn-fill",
+			buttonsStyling: false
+		}).then(function () {
+			$.ajax({
+				type: 'post',
+				url: '/admin/api/delete-single-supplier/' + shopId,
+				data: JSON.stringify(formData),
+
+				success: function (data) {
+					if (data.status == 501) {
+						swal({
+							title: '{{gettext "Aborted"}}',
+							text: '{{gettext "Cannot delete the supplier because is not emply. Check your products :)"}}',
+							type: 'warning',
+							confirmButtonClass: "btn btn-info btn-fill",
+							buttonsStyling: false
+						})
+						return;
+					}
+					table.row(cell.index().row).remove().draw();
+					swal({
+						title: '{{gettext "Deleted!"}}',
+						text: '{{gettext "Your supplier has been deleted."}}',
+						type: 'success',
+						confirmButtonClass: "btn btn-success btn-fill",
+						buttonsStyling: false
+					})
+
+				},
+				contentType: 'application/json',
+				dataType: 'json'
+			});
+
+		}, function (dismiss) {
+			// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+			if (dismiss === 'cancel') {
+				swal({
+					title: '{{gettext "Cancelled"}}',
+					text: '{{gettext "Your supplier is safe :)"}}',
+					type: 'error',
+					confirmButtonClass: "btn btn-info btn-fill",
+					buttonsStyling: false
+				})
+			}
+		})
+
+		e.preventDefault();
+	});
+
+	//Like record
+	table.on('click', '.like', function () {
+		alert('You clicked on Like button');
+	});
+
+</script>
+<script>
+	function enable_disable_supplier() {
+		$('.switch-plain.enableDisableBestBuyLender').bootstrapSwitch({
+			onColor: 'primary',
+			onSwitchChange: function (event, state) {
+				console.log(this); // DOM element
+				console.log(event); // jQuery event
+				console.log(state); // true | false
+				var id = parseInt($(this).attr('data-id'));
+
+				var formData = {
+					'is_active': state,
+				}
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/enable-disable-supplier/' + id,
+					data: JSON.stringify(formData),
+
+					success: function (data) {
+						demo.showSwal('update-message');
+
+					},
+
+
+					contentType: 'application/json',
+					dataType: 'json'
+				});
+
+			}
+		});
+
+	}
+</script>
+<script>
+	$().ready(function () {
+		$('#createNewSupplierForm').on('submit', function (event) {
+			event.preventDefault();
+			if ($.trim($("#vat_number").val()) === "" || $.trim($("#supplier_name").val()) === "" || $.trim($("#field_of_business").val()) === "" || $.trim($("#work_telephone").val()) === "" || $.trim($("#website").val()) === "" || $.trim($("#email").val()) === "" || $.trim($("#autocomplete").val()) === "" || $.trim($("#postal_code").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+
+				var user_is = $('input[name= UserId]').val();
+				var usr_id = parseInt(user_is);
+				var shopLogoImageFile = $('input[name=shopLogoImageFile]');
+				var street_number = $("input[name=street_number]").val();
+				street_number = parseInt(street_number);
+				var formData = {
+					'user_id': usr_id,
+					'supplier_name': $("input[name=supplier_name]").val(),
+					'vat_number': $("input[name=vat_number]").val(),
+					'field_of_business': $("input[name=field_of_business]").val(),
+					'work_telephone': $("input[name=work_telephone]").val(),
+					'website': $("input[name=website]").val(),
+					'email': $("input[name=email]").val(),
+
+					'supplier_street_number': street_number,
+					'supplier_address': $("input[name=route]").val(),
+					'supplier_city': $("input[name=locality]").val(),
+					'supplier_state': $("input[name=administrative_area_level_1]").val(),
+					'supplier_zip_code': $("input[name=postal_code]").val(),
+					'supplier_country': $("input[name=country]").val(),
+				};
+
+				var shopJSON = JSON.stringify(formData);
+
+				var fd = new FormData();
+				fd.append('supplierJSON', shopJSON);
+				// if (shopLogoImageFile.length && shopLogoImageFile[0].files.length) {
+				//   fd.append('shopLogoImageFile', shopLogoImageFile[0].files[0]);
+				// }
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/create-supplier',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 500) {
+							$("#vat-exists").addClass("show");
+							return;
+						} else {
+							$("#vat-exists").removeClass("show");
+							$('#myModalHorizontal').modal('toggle');
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: '{{gettext "Successfully insert supplier to the database"}}',
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+			}
+		});
+	});
+</script>
+<script>
+	$().ready(function () {
+		$("#vat-exists").hide();
+		$('#createNewSupplierForm').validate({
+			rules: {
+				vat_number: "required",
+				supplier_name: "required",
+
+				field_of_business: "required",
+				work_telephone: {
+					required: true,
+					number: true,
+				},
+				search_address: "required",
+				street_number: {
+					required: true,
+					number: true,
+				},
+				route: "required",
+				locality: "required",
+				postal_code: "required",
+				country: "required",
+				website: "required",
+				email: {
+					required: true,
+					email: true,
+				},
+
+			},
+			messages: {
+				vat_number: '{{gettext "Please enter supplier VAT number"}}',
+				supplier_name: '{{gettext "Please enter supplier name"}}',
+				field_of_business: '{{gettext "Please enter the business field"}}',
+				work_telephone: {
+					required: '{{gettext "Please enter supplier phone number"}}',
+					number: '{{gettext "The phone number is not a number"}}',
+				},
+				search_address: '{{gettext "Please enter supplier address"}}',
+				street_number: {
+					required: '{{gettext "Please enter supplier address number"}}',
+					number: '{{gettext "The address number is not a number"}}',
+				},
+				route: '{{gettext "Please enter supplier route"}}',
+				locality: '{{gettext "Please enter supplier city"}}',
+				postal_code: '{{gettext "Please enter supplier postal code"}}',
+				country: '{{gettext "Please enter supplier country"}}',
+				website: '{{gettext "Please enter supplier website"}}',
+				email: '{{gettext "Please enter a valid email address"}}',
+
+
+			}
+		});
+	});
+</script>
+<script>
+	$().ready(function () {
+		$("#vat-exists").hide();
+		$('#editSupplierForm').validate({
+			rules: {
+				evat_number: "required",
+				esupplier_name: "required",
+
+				efield_of_business: "required",
+				ework_telephone: {
+					required: true,
+					number: true,
+				},
+				esearch_address: "required",
+				estreet_number: {
+					required: true,
+					number: true,
+				},
+				eroute: "required",
+				elocality: "required",
+				epostal_code: "required",
+				ecountry: "required",
+				ewebsite: "required",
+				eemail: {
+					required: true,
+					email: true,
+				},
+
+			},
+			messages: {
+				evat_number: '{{gettext "Please enter supplier VAT number"}}',
+				esupplier_name: '{{gettext "Please enter supplier name"}}',
+				efield_of_business: '{{gettext "Please enter the business field"}}',
+				ework_telephone: {
+					required: '{{gettext "Please enter supplier phone number"}}',
+					number: '{{gettext "The phone number is not a number"}}',
+				},
+				esearch_address: '{{gettext "Please enter supplier address"}}',
+				estreet_number: {
+					required: '{{gettext "Please enter supplier address number"}}',
+					number: '{{gettext "The address number is not a number"}}',
+				},
+				eroute: '{{gettext "Please enter supplier route"}}',
+				elocality: '{{gettext "Please enter supplier city"}}',
+				epostal_code: '{{gettext "Please enter supplier postal code"}}',
+				ecountry: '{{gettext "Please enter supplier country"}}',
+				ewebsite: '{{gettext "Please enter supplier website"}}',
+				eemail: '{{gettext "Please enter a valid email address"}}',
+
+
+			}
+		});
+	});
+</script>
+<script>
+	$().ready(function () {
+		$('#editSupplierForm').on('submit', function (event) {
+			event.preventDefault();
+			if ($.trim($("#evat_number").val()) === "" || $.trim($("#esupplier_name").val()) === "" || $.trim($("#efield_of_business").val()) === "" || $.trim($("#ework_telephone").val()) === "" || $.trim($("#ewebsite").val()) === "" || $.trim($("#eemail").val()) === "" || $.trim($("#estreet_number").val()) === "" || $.trim($("#eroute").val()) === "" || $.trim($("#eadministrative_area_level_1").val()) === "" || $.trim($("#epostal_code").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+				var id = $('input[name=Id]').val();
+				var id = parseInt(id);
+				var user_is = $('input[name= UserID]').val();
+				var usr_id = parseInt(user_is);
+				var shopLogoImageFile = $('input[name=shopLogoImageFile]');
+				var street_number = $("input[name=estreet_number]").val();
+				street_number = parseInt(street_number);
+				var formData = {
+					'id': id,
+					'user_id': usr_id,
+					'supplier_name': $("input[name=esupplier_name]").val(),
+					'vat_number': $("input[name=evat_number]").val(),
+					'field_of_business': $("input[name=efield_of_business]").val(),
+					'work_telephone': $("input[name=ework_telephone]").val(),
+					'website': $("input[name=ewebsite]").val(),
+					'email': $("input[name=eemail]").val(),
+
+					'supplier_street_number': street_number,
+					'supplier_address': $("input[name=eroute]").val(),
+					'supplier_city': $("input[name=elocality]").val(),
+					'supplier_state': $("input[name=eadministrative_area_level_1]").val(),
+					'supplier_zip_code': $("input[name=epostal_code]").val(),
+					'supplier_country': $("input[name=ecountry]").val(),
+				};
+
+				//var shopJSON = JSON.stringify(formData);
+
+				var fd = new FormData();
+				//fd.append('supplierJSON', shopJSON);
+				// if (shopLogoImageFile.length && shopLogoImageFile[0].files.length) {
+				//   fd.append('shopLogoImageFile', shopLogoImageFile[0].files[0]);
+				// }
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/update-supplier/' + id,
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						$('#editModalHorizontal').modal('toggle');
+						swal({
+							title: '{{gettext "Good job!"}}',
+							text: '{{gettext "Successfully update supplier to the database"}}',
+							buttonsStyling: false,
+							confirmButtonClass: "btn btn-success btn-fill",
+							type: "success"
+						}).then(function () {
+							window.location.reload();
+						});
+
+					}
+				});
+			}
+		});
+	});
+</script>
+<!-- <script type="text/javascript">
+    $.notify({
+        allow_dismiss: true,
+        
+        icon: '/static/images/Succstepsfavicon.png',
+        title: 'Succsteps',
+        message: '{{gettext "Here you can find all your suppliers settings You can add new suppliers edit details you will need at least one supplier if you want to add products"}}'
+    },{
+        type: 'pastel-warning',
+         delay: 500000,
+        icon_type: 'image',
+        placement: {from: 'top',align: 'center'
+	},
+    offset: {
+		y: 8
+	},
+        template: '<div data-notify="container" class="col-xs-11 col-sm-5 alert alert-{0}" role="alert">' +
+                '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">X</button>'+
+            '<img data-notify="icon" class="img-circle pull-left">' +
+            '<span data-notify="title">{1}</span>' +
+            '<span data-notify="message">{2}</span>' +
+        '</div>'
+    });
+ </script> -->
+ {{end}}

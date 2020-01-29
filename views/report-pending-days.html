@@ -1,0 +1,462 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+	<li>
+		<a href="/admin/reportcustomerswithbalance?lang=gr">
+			<img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin/reportcustomerswithbalance?lang=en">
+			<img src="/static/images/flags/GB.png"> {{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}} {{define "content"}}
+<div class="content">
+	<input type="hidden" id="UserID" name="UserID" value="{{.UserID}}">
+	<input type="hidden" name="UserEmail" id="UserEmail" value="{{.UserEmail}}">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="card">
+					<div class="card-header text-center">
+						<h4 class="card-title">Pending &amp; incomplete appointments</h4>
+						<p class="category">Appointments that have not been kept or cancelled.</p>
+					</div>
+					<div class="card-content">
+
+						<div class="fresh-datatables">
+							<table id="pendingservicestable" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+								<thead>
+									<tr>
+										<th>{{gettext "Store"}}</th>
+										<th>{{gettext "Name"}}</th>
+										<th>{{gettext "Mobile Phone "}}</th>
+										<th>{{gettext "Phone "}}</th>
+										<th>{{gettext "Service"}}</th>
+										<th>{{gettext "Price"}}</th>
+										<th>Creation Date</th>
+										<th class="disabled-sorting">{{gettext "Actions"}}</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>{{gettext "Store"}}</th>
+										<th>{{gettext "Name"}}</th>
+										<th>{{gettext "Mobile Phone "}}</th>
+										<th>{{gettext "Phone "}}</th>
+										<th>{{gettext "Service"}}</th>
+										<th>{{gettext "Price"}}</th>
+										<th>Creation Date</th>
+										<th class="disabled-sorting">{{gettext "Actions"}}</th>
+									</tr>
+								</tfoot>
+								<tbody>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{end}}{{define "scripts"}}
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+
+
+		var user_id = $('input[name=UserID]').val();
+		var user_id = parseInt(user_id);
+		var url = '/admin/api/all-pending-services-per-user/' + user_id;
+		$("#pendingservicestable").DataTable({
+
+			"processing": true,
+
+			"ajax": {
+				"url": url,
+				"dataSrc": function (data) {
+					if (data["data"] == null) {
+						return [];
+					}
+					else {
+						return data.data;
+					}
+
+				}
+			},
+			"oLanguage": {
+				"sEmptyTable": 'No Data... Please refresh the page',
+				"sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+			},
+
+			"columns": [
+				{
+					"data": "store_name",
+					"render": function (data) {
+
+
+						return data;
+					}
+				},
+				{
+					"data": null,
+					"render": function (data, type, row) {
+						var name = data.customer_name + " " + data.customer_surname;
+
+						return name;
+					}
+				},
+
+				{
+					"data": "customer_mobile_number",
+					"render": function (data) {
+
+
+						return data;
+					}
+				},
+				{
+					"data": "home_phone_number",
+					"render": function (data) {
+
+
+						return data;
+					}
+				},
+
+
+
+				{
+					"data": null,
+					"render": function (data, type, row) {
+						var servicename = row.service_name + "(" + row.hairdresser_name + ")"
+
+
+						return servicename;
+					}
+				},
+
+				{
+					"data": "service_price",
+					"render": function (data) {
+						var price = parseFloat(data).toFixed(2);
+
+						return "€" + price;
+					}
+				},
+
+				{
+					"data": "updated_at",
+					"render": function (data) {
+						var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+						return dateoflastReview.format("DD/MM/YYYY")
+					}
+
+				},
+				{
+					"data": "null",
+					"render": function (data, type, row) {
+
+						return `<td class="text-right">
+
+						<a rel="tooltip" title="" class="btn btn-simple btn-warning btn-icon table-action sendsms" data-original-title='Send SMS'>
+							<i class="ti-mobile"></i>
+						</a>
+						<a rel="tooltip" title="" class="btn btn-simple btn-warning btn-icon table-action sendEmail" data-original-title='Send e-mail'>
+							<i class="ti-email"></i>
+						</a>
+																
+					</td>`
+						//return '<td><a rel="tooltip" title="View" class="btn btn-simple btn-info btn-icon table-action view"> <i class="ti-image"></i></a><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target=".editModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+
+					}
+				},
+
+
+
+
+			],
+			"pagingType": "full_numbers",
+			"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+			responsive: true,
+			language: {
+				search: "_INPUT_",
+				searchPlaceholder: '{{gettext "Search records"}}',
+			},
+			"initComplete": function (settings, json) {
+				$('[rel="tooltip"]').tooltip();
+				this.api().columns().every(function () {
+					var column = this;
+					var select = $('<select id="student-selected" class="form-control border-input"><option value=""></option></select>')
+						.appendTo($(column.footer()).empty())
+						.on('change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+							);
+
+							column
+								.search(val ? '^' + val + '$' : '', true, false)
+								.draw();
+						});
+
+
+					column.data().unique().sort().each(function (d, j) {
+						select.append('<option value="' + d + '">' + d + '</option>')
+
+
+					});
+
+
+
+				});
+
+			}
+		});
+
+
+		$('table').on('responsive-display', function (e, datatable, row, showHide, update) {
+
+			$('[rel="tooltip"]').tooltip();
+
+		});
+		var table = $("#pendingservicestable").DataTable();
+		// Edit record
+		$('table#pendingservicestable').on('click', '.sendsms', function () {
+			var cell = table.cell(this.parentNode);
+			var data = table.row(cell.index().row).data();
+
+			swal({
+				title: 'Send sms',
+				html: ` 
+				<p><strong>`+ data.customer_name + " " + data.customer_surname +`</strong> has a pending appointment on <strong>`+moment(data.updated_at).format("DD/MM/YYYY") + `</strong> at <strong>`+moment(data.updated_at).format("HH:mm")+`</strong>. Please send an sms message using the text box below.</p>
+				<p>Please check the telephone number: <strong>`+ data.customer_mobile_number + `</strong> then type your message in the box below and press ok.</p>
+				<div class="form-group">
+				<input type="text" id="gold_customer_mobile_number" name="gold_customer_mobile_number" class="form-control" placeholder="Customer mobile phone number">
+				</div>
+				<div class="form-group">
+				<textarea class="form-control sms_gold_customer_comments" id="sms_gold_customer_comments" name="sms_gold_customer_comments" placeholder=Message rows="3"></textarea>
+				</div>`,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-success btn-fill',
+				cancelButtonClass: 'btn btn-danger btn-fill',
+				buttonsStyling: false,
+				preConfirm: () => {
+					return new Promise((resolve) => {
+
+						if ($("#sms_gold_customer_comments").val() === '') {
+							swal.showValidationError(
+								'Please write a message'
+							)
+							return false;
+						};
+						if ($("#gold_customer_mobile_number").val() === '') {
+							swal.showValidationError(
+								'Please insert a mobile phone number'
+
+							)
+							return false;
+						}
+
+						resolve()
+
+					})
+				},
+
+			}).then((result) => {
+				var sender = "SuccSteps";
+				var customermobilenumber = $("#gold_customer_mobile_number").val();
+				var customersmsmessage = $("#sms_gold_customer_comments").val();
+
+				var formData = {
+					"sender": sender,
+					"mobile_phone_number": customermobilenumber,
+					"message": customersmsmessage
+				};
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/send-sms-from-gold-customers',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 500) {
+
+							return;
+						} else {
+
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: 'Successfully send sms to client: ' + " " + data.customer_name,
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+
+
+			});
+			$("#gold_customer_mobile_number").val(data.customer_mobile_number);
+		});
+		$('table#pendingservicestable').on('click', '.sendEmail', function () {
+			var user_id = $('input[name=UserID]').val();
+			user_id = parseInt(user_id);
+			var url = '/admin/api/all-stores-per-user/' + user_id;
+
+
+			var cell = table.cell(this.parentNode);
+			var data = table.row(cell.index().row).data();
+			var storeid = parseInt(data.store_id);
+
+			swal({
+				title: 'Send E-mail',
+				html: ` 
+			<p><strong>`+ data.customer_name + " " + data.customer_surname + `</strong> has a pending appointment on <strong> `+moment(data.updated_at).format("DD/MM/YYYY") + `</strong> at <strong>`+moment(data.updated_at).format("HH:mm")+`</strong>. Please send an email using the text box below and then press ok.</p>
+			<p>Please check the email address is correct:</p> <p> <strong>`+ data.customer_email + `</strong></p>
+			<div class="form-group margin-botton-20">
+			 <label class="control-label">Select Store</label>
+			  <select id="stores" name="stores" class="form-control stores">
+				<option value>{{gettext "Please Select"}}</option>    
+			   </select>
+			</div>
+			<div class="form-group">
+			<input type="text" id="gold_customer_email" name="gold_customer_email" class="form-control" placeholder="Customer email address">
+			</div>
+			<div class="form-group">
+			<input type="text" id="gold_customer_subject" name="gold_customer_subject" class="form-control" placeholder="Customer subject">
+			</div>
+			<div class="form-group">
+			<textarea class="form-control gold_customer_email_message" id="gold_customer_email_message" name="gold_customer_email_message" placeholder=Message rows="3"></textarea>
+			</div>`,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-success btn-fill',
+				cancelButtonClass: 'btn btn-danger btn-fill',
+				buttonsStyling: false,
+				preConfirm: () => {
+					return new Promise((resolve) => {
+
+						if ($("#gold_customer_email").val() === '') {
+							swal.showValidationError(
+								'Please write the email'
+							)
+							return false;
+						};
+						if ($("#gold_customer_subject").val() === '') {
+							swal.showValidationError(
+								'Please write a subject'
+							)
+							return false;
+						};
+						if ($("#gold_customer_email_message").val() === '') {
+							swal.showValidationError(
+								'Please write a message'
+							)
+							return false;
+						};
+						if ($("#stores").select2().find(":selected").val() === '') {
+							swal.showValidationError(
+								'Please select store'
+							)
+							return false;
+						}
+
+						resolve()
+
+					})
+				},
+
+			}).then((result) => {
+
+
+				var companyAdress = $(".stores").select2().find(":selected").attr("companyAdress");
+				var worktel = $(".stores").select2().find(":selected").attr("work-telephone");
+				var store_name = $(".stores").select2().find(":selected").text();
+				// var service_id = $(".service_name").select2().find(":selected").val();
+				var formData = {
+					"customer_name": data.customer_name,
+					"email": $("#gold_customer_email").val(),
+					"subject": $("#gold_customer_subject").val(),
+					"customer_message": $("#gold_customer_email_message").val(),
+					"company_address": companyAdress,
+					"contact_details": worktel,
+					"company_nick_name": store_name,
+					"user_email": $("#UserEmail").val(),
+				};
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/send-email-from-gold-customers',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 500) {
+							swal({
+								title: 'Error',
+								text: data.description,
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "error"
+							}).then(function () {
+								window.location.reload();
+							});
+
+							return;
+						} else {
+
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: 'Successfully send email to client' + " " + $("#gold_customer_email").val(),
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+
+
+			});
+
+			$.getJSON(url, function (data) {
+				
+				for (let i = 0; i < data["data"].length; i++) {
+					var companyAdress = data["data"][i].company_address + " " + data["data"][i].company_street_number + ", " + data["data"][i].company_city + ", " + data["data"][i].company_zip_code + ", " + data["data"][i].company_country
+					$('#stores').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id).attr('companyAdress', companyAdress).attr('work-telephone', data["data"][i].work_telephone));
+
+				};
+				console.log(storeid);
+				$('#stores').val(storeid);
+
+				$("#stores").select2({
+					theme: 'bootstrap'
+				});
+
+			});
+			$("#gold_customer_email").val(data.customer_email);
+		});
+	});
+</script> {{end}}

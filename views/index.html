@@ -1,0 +1,923 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+
+	<li>
+		<a href="/admin?lang=gr">
+			<img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin?lang=en">
+			<img src="/static/images/flags/GB.png"> {{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}} {{define "content"}}
+
+<div class="content">
+	<input type="hidden" id="UserID" name="UserID" value="{{.UserID}}">
+	<input type="hidden" name="UserEmail" id="UserEmail" value="{{.UserEmail}}">
+	<div class="container-fluid">
+		<div class="row">
+
+			<div class="col-lg-3 col-sm-6">
+				<div class="card">
+					<div class="card-content">
+						<div class="row">
+							<div class="col-xs-5">
+								<div class="icon-big icon-warning text-center">
+									<i class="ti-location-pin"></i>
+								</div>
+							</div>
+							<div class="col-xs-7">
+								<div class="numbers">
+
+									<div class="form-group">
+										<select id="stores" name="stores" class="form-control stores">
+											<option value>{{gettext "Please Select"}}</option>
+										</select>
+										<span id='spanmessagestore' class="hidden">Please select store!</span>
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="card-footer">
+						<hr />
+						<div class="footer-title">
+							<div class="stats">
+								<i class="ti-reload"></i>
+								<a href="/admin/stores">{{gettext "View Stores"}}</a>
+							</div>
+						</div>
+
+						<div class="pull-right">
+							<p>{{gettext "Total Stores"}}: {{.TotalStore}}</p>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="card">
+					<div class="card-content">
+						<div class="row">
+							<div class="col-xs-5">
+								<div class="icon-big icon-success text-center">
+									<i class="ti-agenda"></i>
+								</div>
+							</div>
+							<div class="col-xs-7">
+								<div class="numbers">
+									<p>{{gettext "Bookings Today"}}</p>
+									<span id="totalpafter"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						<hr />
+						<div class="footer-title">
+							<div class="stats">
+								<i class="ti-calendar"></i>
+								<a href="/admin/calendar">{{gettext "View Bookings"}}</a>
+							</div>
+						</div>
+
+						<div class="pull-right">
+							<button id="btnsearchpendings" class="btn btn-info btn-icon btn-xs btnsearchpendings">
+
+								<i class="ti-reload"></i>
+
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="card">
+					<div class="card-content">
+						<div class="row">
+							<div class="col-xs-5">
+								<div class="icon-big icon-danger text-center">
+									<i class="ti-agenda"></i>
+								</div>
+							</div>
+							<div class="col-xs-7">
+								<div class="numbers">
+									<p>{{gettext "Cancellations Today"}}</p>
+									<span id="totalcancelled-today"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						<hr />
+						<div class="footer-title">
+							<div class="stats">
+								<i class="ti-reload"></i>
+								<a href="/admin/unfinishedcanceled">{{gettext "View Cancellations"}}</a>
+							</div>
+						</div>
+
+						<div class="pull-right">
+							<button id="btnsearchcancelled" class="btn btn-info btn-icon btn-xs">
+
+								<i class="ti-reload"></i>
+
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="card">
+					<div class="card-content">
+						<div class="row">
+							<div class="col-xs-5">
+								<div class="icon-big icon-info text-center">
+									<i class="ti-credit-card"></i>
+								</div>
+							</div>
+							<div class="col-xs-7">
+								<div class="numbers">
+									<p>{{gettext "Credits"}}</p>
+									45
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						<hr />
+						<div class="stats">
+							<i class="ti-reload"></i>
+							<a href="/admin/subscription"> {{gettext "Buy Credits Now"}}</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card ">
+					<div class="card-header text-center">
+						<h4 class="card-title">€
+							<span id="totalforyear"></span>
+						</h4>
+						<p class="category">{{gettext "total earnings"}} {{gettext "This Year"}}</p>
+					</div>
+					<div class="card-content">
+
+
+						<div id="chartActivity" class="ct-chart"></div>
+					</div>
+					<div class="card-footer">
+						<hr>
+						<div class="footer-title">
+							<a href="/admin/reportrevenueexpenses#revenues"> {{gettext "Financial Statistics"}}</a>
+						</div>
+						<div class="pull-right">
+							<button id="reloadtotalincomecharch" class="btn btn-info btn-icon btn-sm">
+
+								<i class="ti-reload"></i>
+
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-6 col-sm-6">
+				<div class="card">
+					<div class="card-header text-center">
+						<h4 class="card-title">€
+							<span id="totalforyearexp"></span>
+						</h4>
+						<p class="category">{{gettext "Total expenses this year"}}</p>
+					</div>
+					<div class="card-content">
+						<div class="row">
+							<div class="col-xs-7">
+								<div class="numbers pull-left">
+
+								</div>
+							</div>
+						</div>
+
+						<div id="chartTotalDownloads"></div>
+					</div>
+					<div class="card-footer">
+						<hr>
+						<div class="footer-title">
+							<a href="/admin/reportrevenueexpenses#expenses"> {{gettext "View more details"}}</a>
+						</div>
+						<div class="pull-right">
+							<button id="reloadtotalexpensesincomecharch" class="btn btn-success btn-icon btn-sm">
+
+								<i class="ti-reload"></i>
+
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12 col-sm-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="col-xs-7">
+
+							<h4 class="card-title">
+								<strong>{{gettext "Nameday - Birthday"}}:</strong>
+								<span>{{.TimeNow.Format "02-01-2006"}}</span>
+							</h4>
+							{{if .NameDays.StatusMessage}}
+							<p class="category">
+								<input type="text" value="{{.NameDays.StatusMessage}}" class="tagsinput" data-role="tagsinput" data-color="success" />
+							</p>
+							{{else}}
+							<p class="category">
+								<span>There aren't any names days celebrated today</span>
+							</p>
+							{{end}}
+
+						</div>
+						<div class="col-xs-5">
+							<div class="pull-right">
+								{{if .BrthdayCustomers}}
+								<span class="label label-success">
+									{{gettext "You have"}} {{.LentTotal}} {{gettext "Customers"}}
+									<br> {{.LenNameDaysCustomers}} {{gettext "with Nameday"}}
+									<br> {{.LenBrthdayCustomers}} {{gettext "with Birthday"}}
+								</span>
+								{{end}}
+							</div>
+						</div>
+						{{if not .BrthdayCustomers}}
+						<div class="clearfix"></div>
+						{{end}}
+					</div>
+					<div class="card-content">
+						{{if .BrthdayCustomers}}
+
+						<div class="card-content table-responsive table-full-width">
+							<table id="birthday_and_nameday_table" class="table">
+								<thead>
+									<tr>
+										<th class="text-center">#</th>
+										<th>{{gettext "Name"}}</th>
+										<th>{{gettext "Reason"}}</th>
+										<th class="text-right">{{gettext "Actions"}}</th>
+									</tr>
+								</thead>
+								<tbody>
+									{{range $index , $result := .BrthdayCustomers}}
+
+									<tr>
+										<input type="hidden" class="customer_phone_number" value="{{.MobileTelephone}}">
+										<input type="hidden" class="customer_details" value="{{.CustomerName}} {{.CustomerSurname}}">
+										<input type="hidden" class="customer_email" value="{{.CustomerEmail}}">
+										<input type="hidden" class="celebration_type" value="{{.CelebreationType}}">
+										<td class="text-center">{{add $index 1}}</td>
+										<td>{{.CustomerName}} {{.CustomerSurname}}</td>
+										<td>{{.TitleCelebration}}</td>
+										<td class="td-actions text-right">
+											<a href="/admin/view-customer/{{.ID}}/{{.CustomerSurname}}" rel="tooltip" title="View Profile" class="btn btn-info btn-simple btn-xs">
+												<i class="ti-user"></i>
+											</a>
+											<a rel="tooltip" title="Sent E-mail" class="btn btn-success btn-simple btn-xs birthday_email" >
+												<i class="ti-email"></i>
+											</a>
+											<a  rel="tooltip" title="Sent SMS" class="btn btn-success btn-simple btn-xs birthday_sms">
+												<i class="ti-mobile"></i>
+											</a>
+										</td>
+									</tr>
+									{{end}}
+								</tbody>
+							</table>
+						</div>
+						{{end}}
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+		<div class="row">
+			<div class="col-lg-4 col-sm-6">
+				<div class="card card-circle-chart" data-background-color="green">
+					<div class="card-header text-center">
+						<h5 class="card-title">{{gettext "Appointments"}}</h5>
+						<p class="description">{{gettext "Completed."}}</p>
+					</div>
+					<div id="chartOrders-content" class="card-content">
+
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6">
+				<div class="card card-circle-chart" data-background-color="orange">
+					<div class="card-header text-center">
+						<h5 class="card-title">{{gettext "Appointments"}}</h5>
+						<p class="description">{{gettext "Cancelled."}}</p>
+					</div>
+					<div id="chartNewVisitors-content" class="card-content">
+
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6">
+				<div class="card card-circle-chart" data-background-color="brown">
+					<div class="card-header text-center">
+						<h5 class="card-title">{{gettext "Appointments"}}</h5>
+						<p class="description">{{gettext "Pending."}}</p>
+					</div>
+					<div id="chartSubscriptions-content" class="card-content">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+{{end}}{{define "scripts"}}
+
+<script type="text/javascript">
+
+	var user_id = $('input[name=UserID]').val();
+	user_id = parseInt(user_id);
+
+
+	var momentObjTo = moment().format();
+	var timeStampNow = (moment(momentObjTo).unix());
+
+	var url = '/admin/api/all-stores-per-user/' + user_id;
+	$.getJSON(url, function (data) {
+
+		for (let i = 0; i < data["data"].length; i++) {
+			var companyAdress = data["data"][i].company_address + " " + data["data"][i].company_street_number + ", " + data["data"][i].company_city + ", " + data["data"][i].company_zip_code + ", " + data["data"][i].company_country
+			$('#stores').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id).attr('companyAdress', companyAdress).attr('work-telephone', data["data"][i].work_telephone));
+
+		};
+
+		$('#stores').val(data["data"][0].id);
+
+		$("#stores").select2({
+			theme: 'bootstrap'
+		});
+
+		var store_id = $("#stores option:selected").val();
+		store_id = parseInt(store_id);
+		var counturl1 = '/admin/api/count-pending-appointment/' + user_id + "/" + store_id + "/" + timeStampNow;
+		totalPEndingsToday(counturl1);
+
+		var cancelledurl = '/admin/api/count-cancelled-appointment/' + user_id + "/" + store_id + "/" + timeStampNow;
+		totalCancelledToday(cancelledurl);
+		var urlstatus = '/admin/api/total-appointments-per-status/' + user_id + "/" + store_id + "/" + timeStampNow + "/" + timeStampNow;
+		totalperstatus(urlstatus);
+
+		var urlmonths = '/admin/api/total-sales-per-month/' + user_id + "/" + store_id;
+		totalPerMonth(urlmonths);
+		var urlmonths2 = '/admin/api/total-expenses-per-month/' + user_id + "/" + store_id;
+		totalExpensesPerMonth(urlmonths2);
+
+	});
+
+	$(document).ready(function () {
+
+
+		$('table#birthday_and_nameday_table').on('click', '.birthday_sms', function () {
+			
+			var $this = $(this);
+
+			var phoneNumber = $this.closest("tr").find(".customer_phone_number").val();
+			var customerDetails =$this.closest("tr").find(".customer_details").val();
+			var celebreation_type = $this.closest("tr").find(".celebration_type").val();
+			var celMessage;
+			if (celebreation_type == "b") {
+				celMessage = "is celebrating their birthday";
+			};
+			if (celebreation_type == "n") {
+				celMessage = "has their name day";
+			};
+			swal({
+				title: 'Send sms',
+				html: ` 
+				<p>The customer `+customerDetails + " " + celMessage+`.</p>
+				<p>Please check the number: <strong>`+ phoneNumber + `</strong>,  then type your message in the text box below and press ok</p>
+				<div class="form-group">
+				<input type="text" id="gold_customer_mobile_number" name="gold_customer_mobile_number" class="form-control" placeholder="Customer mobile phone number">
+				</div>
+				<div class="form-group">
+				<textarea class="form-control sms_gold_customer_comments" id="sms_gold_customer_comments" name="sms_gold_customer_comments" placeholder=Message rows="3"></textarea>
+				</div>`,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-success btn-fill',
+				cancelButtonClass: 'btn btn-danger btn-fill',
+				buttonsStyling: false,
+				preConfirm: () => {
+					return new Promise((resolve) => {
+
+						if ($("#sms_gold_customer_comments").val() === '') {
+							swal.showValidationError(
+								'Please write a message'
+							)
+							return false;
+						};
+						if ($("#gold_customer_mobile_number").val() === '') {
+							swal.showValidationError(
+								'Please insert a mobile phone number'
+
+							)
+							return false;
+						}
+
+						resolve()
+
+					})
+				},
+
+			}).then((result) => {
+				var sender = "SuccSteps";
+				var customermobilenumber = $("#gold_customer_mobile_number").val();
+				var customersmsmessage = $("#sms_gold_customer_comments").val();
+
+				var formData = {
+					"sender": sender,
+					"mobile_phone_number": customermobilenumber,
+					"message": customersmsmessage
+				};
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/send-sms-from-gold-customers',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 500) {
+
+							return;
+						} else {
+
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: 'Successfully send sms to client: ' + " " + customerDetails,
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+
+
+			});
+			$("#gold_customer_mobile_number").val(phoneNumber);
+		});
+		$('table#birthday_and_nameday_table').on('click', '.birthday_email', function () {
+			var user_id = $('input[name=UserID]').val();
+			user_id = parseInt(user_id);
+			var urllll = '/admin/api/all-stores-per-user/' + user_id;
+			var $this = $(this);
+
+			var phoneNumber = $this.closest("tr").find(".customer_phone_number").val();
+			var customerDetails =$this.closest("tr").find(".customer_details").val();
+			var customerEmail =$this.closest("tr").find(".customer_email").val();
+			var celebreation_type = $this.closest("tr").find(".celebration_type").val();
+			var celMessage;
+			if (celebreation_type == "b") {
+				celMessage = "is celebrating their birthday";
+			};
+			if (celebreation_type == "n") {
+				celMessage = "has their name day";
+			};
+			
+
+
+			swal({
+				title: 'Send E-mail',
+				html: ` 
+						<p>The customer <strong> `+customerDetails + `</strong> ` +celMessage+`. Please send an email using the text box below and then press ok.</p>
+						<p>Please check the email address is correct: <strong>`+ customerEmail + `</strong></p>
+						<div class="form-group margin-botton-20">
+						<label class="control-label">Select Store</label>
+						<select id="storesss" name="stores" class="form-control stores">
+							<option value>{{gettext "Please Select"}}</option>    
+						</select>
+						</div>
+						<div class="form-group">
+						<input type="text" id="gold_customer_email" name="gold_customer_email" class="form-control" placeholder="Customer email address">
+						</div>
+						<div class="form-group">
+						<input type="text" id="gold_customer_subject" name="gold_customer_subject" class="form-control" placeholder="subject" value="">
+						</div>
+						<div class="form-group">
+						<textarea class="form-control gold_customer_email_message" id="gold_customer_email_message" name="gold_customer_email_message" placeholder=Message rows="3"></textarea>
+						</div>
+						`,
+				showCancelButton: true,
+				confirmButtonClass: 'btn btn-success btn-fill',
+				cancelButtonClass: 'btn btn-danger btn-fill',
+				buttonsStyling: false,
+				preConfirm: () => {
+					return new Promise((resolve) => {
+
+						if ($("#gold_customer_email").val() === '') {
+							swal.showValidationError(
+								'Please write the email'
+							)
+							return false;
+						};
+						if ($("#gold_customer_subject").val() === '') {
+							swal.showValidationError(
+								'Please write a subject'
+							)
+							return false;
+						};
+						if ($("#gold_customer_email_message").val() === '') {
+							swal.showValidationError(
+								'Please write a message'
+							)
+							return false;
+						};
+						if ($("#stores").select2().find(":selected").val() === '') {
+							swal.showValidationError(
+								'Please select store'
+							)
+							return false;
+						}
+
+						resolve()
+
+					})
+				},
+
+			}).then((result) => {
+				var myTextareaVal = $("#gold_customer_email_message").val();
+				var myLineBreak = myTextareaVal.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '<br />');
+				var companyAdress = $("#storesss").select2().find(":selected").attr("companyAdress");
+				var worktel = $("#storesss").select2().find(":selected").attr("work-telephone");
+				var store_name = $("#storesss").select2().find(":selected").text();
+				// var service_id = $(".service_name").select2().find(":selected").val();
+				var formData = {
+					"customer_name": customerDetails,
+					"email": $("#gold_customer_email").val(),
+					"subject": $("#gold_customer_subject").val(),
+					"customer_message": myLineBreak,
+					"company_address": companyAdress,
+					"contact_details": worktel,
+					"company_nick_name": store_name,
+					"user_email": $("#UserEmail").val(),
+				};
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/send-email-from-gold-customers',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 500) {
+							swal({
+								title: 'Error',
+								text: data.description,
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "error"
+							}).then(function () {
+								window.location.reload();
+							});
+
+							return;
+						} else {
+
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: 'Successfully send email to client' + " " + $("#gold_customer_email").val(),
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+
+
+			});
+
+			$.getJSON(urllll, function (data) {
+				console.log(data);
+				for (let i = 0; i < data["data"].length; i++) {
+					var companyAdress = data["data"][i].company_address + " " + data["data"][i].company_street_number + ", " + data["data"][i].company_city + ", " + data["data"][i].company_zip_code + ", " + data["data"][i].company_country
+					$('#storesss').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id).attr('companyAdress', companyAdress).attr('work-telephone', data["data"][i].work_telephone));
+
+				};
+
+				$('#storesss').val(data["data"][0].id);
+
+				$("#storesss").select2({
+					theme: 'bootstrap'
+				});
+
+			});
+			$("#gold_customer_email").val(customerEmail);
+		});
+
+
+
+
+
+		
+		$("#stores").on('change', function () {
+			if ($("#stores").val() === '') {
+				$("#spanmessagestore").removeClass("hidden");
+				return false;
+			} else {
+				$("#spanmessagestore").addClass("hidden");
+
+			};
+			var store_id = $("#stores option:selected").val();
+			store_id = parseInt(store_id);
+			var counturl = '/admin/api/count-pending-appointment/' + user_id + "/" + store_id + "/" + timeStampNow;
+			totalPEndingsToday(counturl);
+			var cancelledurl = '/admin/api/count-cancelled-appointment/' + user_id + "/" + store_id + "/" + timeStampNow;
+			totalCancelledToday(cancelledurl);
+			var urlstatus = '/admin/api/total-appointments-per-status/' + user_id + "/" + store_id + "/" + timeStampNow + "/" + timeStampNow
+			totalperstatus(urlstatus);
+
+			var urlmonths = '/admin/api/total-sales-per-month/' + user_id + "/" + store_id;
+			totalPerMonth(urlmonths);
+
+			var urlmonths2 = '/admin/api/total-expenses-per-month/' + user_id + "/" + store_id;
+			totalExpensesPerMonth(urlmonths2);
+		})
+		$("#btnsearchpendings").on('click', function (e) {
+			e.preventDefault();
+			if ($("#stores").val() === '') {
+				$("#spanmessagestore").removeClass("hidden");
+				return false;
+			} else {
+				$("#spanmessagestore").addClass("hidden");
+
+			};
+			var store_id = $("#stores option:selected").val();
+			store_id = parseInt(store_id);
+			var counturl = '/admin/api/count-pending-appointment/' + user_id + "/" + store_id + "/" + timeStampNow;
+			totalPEndingsToday(counturl);
+		});
+
+		$("#btnsearchcancelled").on('click', function (e) {
+			e.preventDefault();
+			if ($("#stores").val() === '') {
+				$("#spanmessagestore").removeClass("hidden");
+				return false;
+			} else {
+				$("#spanmessagestore").addClass("hidden");
+
+			};
+			var store_id = $("#stores option:selected").val();
+			store_id = parseInt(store_id);
+			var cancelledurl = '/admin/api/count-cancelled-appointment/' + user_id + "/" + store_id + "/" + timeStampNow;
+			totalCancelledToday(cancelledurl);
+		});
+
+		$("#reloadtotalincomecharch").on('click', function (e) {
+			e.preventDefault();
+			if ($("#stores").val() === '') {
+				$("#spanmessagestore").removeClass("hidden");
+				return false;
+			} else {
+				$("#spanmessagestore").addClass("hidden");
+
+			};
+			var store_id = $("#stores option:selected").val();
+			store_id = parseInt(store_id);
+			var urlmonthss = '/admin/api/total-sales-per-month/' + user_id + "/" + store_id;
+			totalPerMonth(urlmonthss);
+		});
+
+		$("#reloadtotalexpensesincomecharch").on('click', function (e) {
+			e.preventDefault();
+			if ($("#stores").val() === '') {
+				$("#spanmessagestore").removeClass("hidden");
+				return false;
+			} else {
+				$("#spanmessagestore").addClass("hidden");
+
+			};
+			var store_id = $("#stores option:selected").val();
+			store_id = parseInt(store_id);
+			var urlmonths2s = '/admin/api/total-expenses-per-month/' + user_id + "/" + store_id;
+			totalExpensesPerMonth(urlmonths2s);
+		});
+
+
+	});
+	function totalPEndingsToday(url1) {
+		$.getJSON(url1, function (totalpendings) {
+			$("#totalpafter").text(totalpendings);
+
+		});
+	};
+
+	function totalCancelledToday(url2) {
+		$.getJSON(url2, function (totalpendings) {
+			$("#totalcancelled-today").text(totalpendings);
+
+		});
+	};
+
+	function totalPerMonth(url3) {
+		$.getJSON(url3, function (totalpermonth) {
+			var totaallyear = 0;
+			var dataa = new Array();
+			for (let i = 0; i < totalpermonth.length; i++) {
+
+				dataa.push(totalpermonth[i].total);
+			};
+			var total = 0;
+			for (var i = 0; i < dataa.length; i++) {
+				total += dataa[i] << 0;
+			}
+			$("#totalforyear").text(parseFloat(total).toFixed(2));
+			var data = {
+				labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+				series: [
+					dataa
+				]
+			};
+
+			var options = {
+				seriesBarDistance: 10,
+				axisX: {
+					showGrid: false
+				},
+				axisY: {
+					offset: 40,
+					labelInterpolationFnc: function (value) {
+						return '€' + value;
+					}
+
+				},
+				height: "245px",
+				low: 0,
+				classNames: {
+					point: 'ct-point ct-green',
+					line: 'ct-line ct-green'
+				}
+			};
+
+			var responsiveOptions = [
+				['screen and (max-width: 640px)', {
+					seriesBarDistance: 5,
+					axisX: {
+						labelInterpolationFnc: function (value) {
+							return value[0];
+						}
+					}
+				}]
+			];
+
+			Chartist.Line('#chartActivity', data, options, responsiveOptions);
+		});
+	};
+
+	function totalExpensesPerMonth(url4) {
+		$.getJSON(url4, function (totalpermonth) {
+			var totaallyear = 0;
+			var dataa = new Array();
+			for (let i = 0; i < totalpermonth.length; i++) {
+
+				dataa.push(totalpermonth[i].total);
+			};
+			var total = 0;
+			for (var i = 0; i < dataa.length; i++) {
+				total += dataa[i] << 0;
+			}
+			$("#totalforyearexp").text(parseFloat(total).toFixed(2));
+			var data = {
+				labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+				series: [
+					dataa
+				]
+			};
+
+			var options = {
+				seriesBarDistance: 10,
+				axisX: {
+					showGrid: false
+				},
+				axisY: {
+					offset: 40,
+					labelInterpolationFnc: function (value) {
+						return '€' + value;
+					}
+
+				},
+				height: "245px",
+				low: 0,
+				classNames: {
+					point: 'ct-point ct-orange',
+					line: 'ct-line ct-orange'
+				}
+			};
+
+			var responsiveOptions = [
+				['screen and (max-width: 640px)', {
+					seriesBarDistance: 5,
+					axisX: {
+						labelInterpolationFnc: function (value) {
+							return value[0];
+						}
+					}
+				}]
+			];
+
+			Chartist.Line('#chartTotalDownloads', data, options, responsiveOptions);
+		});
+	};
+
+	function totalperstatus(urlstatus) {
+
+		$.getJSON(urlstatus, function (json) {
+			console.log(json);
+			var totalapp = 0;
+			var totalappcompleted = 0;
+			var totalapppending = 0;
+			var totalappCancelled = 0;
+			var percentagecompleted = 0;
+			var percentagepending = 0;
+			var percentagecancelled = 0;
+			for (let i = 0; i < json.length; i++) {
+				totalapp = totalapp + parseInt(json[i].total_completed);
+
+
+			};
+
+			for (let i = 0; i < json.length; i++) {
+
+				if (json[i].service_status == "complete") {
+					percentagecompleted = (parseInt(json[i].total_completed) / totalapp) * 100;
+					totalappcompleted = parseInt(json[i].total_completed);
+				};
+				if (json[i].service_status == "cancelled") {
+					percentagecancelled = (parseInt(json[i].total_completed) / totalapp) * 100;
+					totalappCancelled = parseInt(json[i].total_completed);
+				};
+				if (json[i].service_status == "pending") {
+					percentagepending = (parseInt(json[i].total_completed) / totalapp) * 100;
+					totalapppending = parseInt(json[i].total_completed);
+				};
+
+			};
+			$("#chartOrders-content").html('<div id="chartOrders" class="chart-circle" data-percent="' + percentagecompleted + '">' + totalappcompleted + '</div>');
+			$("#chartNewVisitors-content").html('<div id="chartNewVisitors" class="chart-circle" data-percent="' + percentagecancelled + '">' + totalappCancelled + '</div>');
+			$("#chartSubscriptions-content").html('<div id="chartSubscriptions" class="chart-circle" data-percent="' + percentagepending + '">' + totalapppending + '</div>');
+			$('#chartDashboard, #chartOrders, #chartNewVisitors, #chartSubscriptions, #chartDashboardDoc, #chartOrdersDoc').easyPieChart({
+				lineWidth: 6,
+				size: 160,
+				scaleColor: false,
+				trackColor: 'rgba(255,255,255,.25)',
+				barColor: '#FFFFFF',
+				animate: ({ duration: 5000, enabled: true })
+
+			});
+		});
+	}
+</script>
+<script> // Javascript to enable link to tab
+	var url = document.location.toString();
+	if (url.match('#')) {
+		$('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+	}
+
+	// Change hash for page-reload
+	$('.nav-tabs a').on('shown.bs.tab', function (e) {
+		window.location.hash = e.target.hash;
+	})
+</script> {{end}}

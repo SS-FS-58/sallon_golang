@@ -1,0 +1,950 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+    <li>
+        <a href="/admin/hairdressers?lang=gr">
+            <img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+        </a>
+
+    </li>
+    <li>
+
+        <a href="/admin/hairdressers?lang=en">
+            <img src="/static/images/flags/GB.png"> {{gettext "English"}}
+        </a>
+    </li>
+</ul>
+{{end}} {{define "content"}}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                        
+
+                        <button id="toggle" class="btn btn-sm btn-primary">?</button>
+                        <aside id="aside" class="aside">
+                            <h2>{{gettext "Information"}}</h2>
+        
+                            <p>{{gettext "Here you can find all your employees settings You can add new employees edit details change working stores or change display order on calendar"}}</p>
+                            
+                        </aside>
+
+                    <div class="card-content">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="active">
+                                        <a href="#Hairdressers" data-toggle="tab">{{gettext "Employees"}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="#services" data-toggle="tab">{{gettext "Services"}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="#workinghours" data-toggle="tab">{{gettext "Working hours"}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="#dayoff" data-toggle="tab">{{gettext "Day off"}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="my-tab-content" class="tab-content text-center">
+                            <div class="tab-pane active" id="Hairdressers">
+                                <div class="col-md-12 text-left margin-bottom-20">
+
+                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#hairdresserModalHorizontal">
+                                        <span class="btn-label">
+                                            <i class="ti-plus"></i>
+                                        </span>{{gettext "Add Employee"}}
+                                    </button>
+                                </div>
+
+                                <div class="fresh-datatables">
+                                    <table id="hairdresserdatatables" class="table  table-striped table-bordered  table-hover hairdresserdatatables" cellspacing="0"
+                                        width="100%" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{{gettext "Name"}}</th>
+                                                <th>{{gettext "Store"}}</th>
+                                                <th>{{gettext "Mobile Phone"}}</th>
+                                                <th>{{gettext "Home Phone"}}</th>
+                                                <th>{{gettext "Display Order"}}</th>
+                                                <th>{{gettext "Color"}}</th>
+                                                <th>{{gettext "Creation Date"}}</th>
+                                                <th>{{gettext "Active"}}</th>
+                                                <th class="disabled-sorting">{{gettext "Actions"}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>{{gettext "Name"}}</th>
+                                                <th>{{gettext "Store"}}</th>
+                                                <th>{{gettext "Mobile Phone"}}</th>
+                                                <th>{{gettext "Home Phone"}}</th>
+                                                <th>{{gettext "Display Order"}}</th>
+                                                <th>{{gettext "Color"}}</th>
+                                                <th>{{gettext "Creation Date"}}</th>
+                                                <th>{{gettext "Active"}}</th>
+                                                <th>{{gettext "Actions"}}</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="services">
+                                <div>
+                                    <p>Sorry for the inconvenience but we&rsquo;re performing some maintenance at the moment.
+                                        If you need to you can always
+                                        <a href="mailto:info@succsteps.com">contact us</a>, otherwise we&rsquo;ll be back online shortly!</p>
+                                    <p>&mdash; The Team</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="workinghours">
+                                <div>
+                                    <p>Sorry for the inconvenience but we&rsquo;re performing some maintenance at the moment.
+                                        If you need to you can always
+                                        <a href="mailto:info@succsteps.com">contact us</a>, otherwise we&rsquo;ll be back online shortly!</p>
+                                    <p>&mdash; The Team</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="dayoff">
+                                <div>
+                                    <p>Sorry for the inconvenience but we&rsquo;re performing some maintenance at the moment.
+                                        If you need to you can always
+                                        <a href="mailto:info@succsteps.com">contact us</a>, otherwise we&rsquo;ll be back online shortly!</p>
+                                    <p>&mdash; The Team</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<div class="modal fade " id="hairdresserModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="window.location = '/admin/hairdressers';">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">{{gettext "Close"}}</span>
+                </button>
+                <h4 class="modal-title" id="editModalLabel">{{gettext "Add Employee"}}</h4>
+            </div>
+
+            <!-- Modal Body -->
+            <form id="addHairdresser">
+                <input type="hidden" id="Id" name="Id">
+                <input type="hidden" id="UserID" name="UserID" value="{{.UserID}}">
+                <div class="modal-body">
+                    <div class="card card-plain">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="hairdresser_name" class="control-label">{{gettext "Employee Name"}}</label>
+                                        <input type="text" id="hairdresser_name" name="hairdresser_name" placeholder='{{gettext "Employee Name"}}' class="form-control">
+                                        <label id="hairdresser_name_exists"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="display_order" class="control-label">{{gettext "Display Order"}}</label>
+                                        <input type="text" id="display_order" name="display_order" placeholder='{{gettext "Display Order"}}' class="form-control">
+
+                                    </div>
+                                </div>
+                                <div id="SubCategoryName" class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="selectstore" class="control-label">{{gettext "Select Store"}}</label>
+                                        <select multiple id="selectstore" name="selectstore" class="select_drop selectpicker" data-style="btn btn-info btn-block"
+                                            title='{{gettext "Select Store"}}' data-size="7" data-live-search="true">
+
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="hairdresser_mobile_phone" class="control-label">{{gettext "Employee Mobile Phone"}}</label>
+                                        <input type="text" id="hairdresser_mobile_phone" name="hairdresser_mobile_phone" placeholder='{{gettext "Employee Mobile Phone"}}'
+                                            class="form-control">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="hairdresser_phone" class="control-label">{{gettext "Home Phone"}}</label>
+                                        <input type="text" id="hairdresser_phone" name="hairdresser_phone" placeholder='{{gettext "Home Phone"}}' class="form-control">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.location = '/admin/hairdressers';">
+                        {{gettext "Close"}}
+                    </button>
+                    <button id="addhairdressersubmit" type="submit" class="btn btn-primary">
+                        {{gettext "Save changes"}}
+                    </button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade editModalHorizontal" id="productsEditModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="window.location = '/admin/hairdressers';">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">{{gettext "Close"}}</span>
+                </button>
+                <h4 class="modal-title" id="editShopModalLabel">
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <form id="editHairdresser">
+                <input type="hidden" id="ID" name="ID">
+                <input type="hidden" id="EditUserID" name="EditUserID" value="{{.UserID}}">
+                <div class="modal-body">
+                    <div class="card card-plain">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ehairdresser_name" class="control-label">{{gettext "Employee Name"}}</label>
+                                        <input type="text" id="ehairdresser_name" name="ehairdresser_name" placeholder='{{gettext "Hairdresser Name"}}' class="form-control">
+                                        <label id="edithairdresser_name_exists"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="edisplay_order" class="control-label">{{gettext "Display Order"}}</label>
+                                        <input type="text" id="edisplay_order" name="edisplay_order" placeholder='{{gettext "Display Order"}}' class="form-control">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ehairdresser_mobile_phone" class="control-label">{{gettext "Employee Mobile Phone"}}</label>
+                                        <input type="text" id="ehairdresser_mobile_phone" name="ehairdresser_mobile_phone" placeholder='{{gettext "Employee Mobile Phone"}}'
+                                            class="form-control">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ehairdresser_phone" class="control-label">{{gettext "Home Phone"}}</label>
+                                        <input type="text" id="ehairdresser_phone" name="ehairdresser_phone" placeholder='{{gettext "Home Phone"}}' class="form-control">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.location = '/admin/hairdressers';">
+                        {{gettext "Close"}}
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        {{gettext "Update changes"}}
+                    </button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+{{end}} {{define "scripts"}}
+<script>
+    $(document).ready(function () {
+        // demo.addHairdresserValidation();
+        //demo.createNewHairdresserFormSubmit();
+        // demo.editHairdresserValidation();
+        //demo.updateHairdresserFormSubmit();
+        // $(".dropdown-toggle").on('click', function () {
+        var user_is = $('input[name=EditUserID]').val();
+        var usr_id = parseInt(user_is);
+
+        var url = '/admin/api/all-stores-per-user/' + usr_id;
+        $.getJSON(url, function (data) {
+            for (let i = 0; i < data["data"].length; i++) {
+                $('#selectstore').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id));
+
+                console.log(data["data"][i].company_name);
+            };
+            $('.selectpicker').selectpicker('refresh');
+
+        });
+
+        // $('#selectstore').find('option').remove().end();
+        // });
+
+
+    });
+</script>
+
+<script>
+    var user_is = $('input[name=UserID]').val();
+    var usr_id = parseInt(user_is);
+    var url = '/admin/api/all-hairdressers-per-user/' + usr_id;
+    $('#hairdresserdatatables').DataTable({
+        "processing": true,
+        "ajax": {
+            "url": url,
+            "dataSrc": function (data) {
+                console.log(data);
+                if (data["data"] == null) {
+                    return [];
+                }
+                else {
+                    return data.data;
+                }
+            }
+        },
+        "oLanguage": {
+            "sEmptyTable": '{{gettext "You do not have any data"}}',
+            "sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+        },
+        "columns": [
+            {
+                "data": "hairdresser_name",
+                "render": function (data) {
+
+
+                    return data;
+                }
+            },
+            {
+                "data": "store_name",
+                "render": function (data) {
+
+
+                    return data;
+                }
+            },
+            {
+                "data": "hairdresser_mobile_phone",
+                "render": function (data) {
+
+
+                    return data;
+                }
+            },
+            {
+                "data": "hairdresser_phone",
+                "render": function (data) {
+
+
+                    return data;
+                }
+            },
+            {
+                "data": "display_order",
+                "render": function (data) {
+
+
+                    return data;
+                }
+            },
+            {
+                "data": "color",
+                "render": function (data, type, row) {
+
+
+
+                    return '<div class="input-group"><input type="text" data-id="' + row.hairdresser_id + '" store-id="' + row.store_id + '" class="form-control changecolor"  value="' + row.color + '"><span class="input-group-btn"><button class="btn btn-default btnchangecolor" type="button">Go!</button></span></div>'
+                }
+            },
+            {
+                "data": "updated_at",
+                "render": function (data) {
+                    var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+                    return dateoflastReview.format("DD/MM/YYYY")
+                }
+
+            },
+
+            {
+                "data": "null",
+                "render": function (data, type, row) {
+                    if (row.is_active == true) {
+
+
+
+                        return '<td class="td-actions text-center"><input data-id="' + row.hairdresser_id + '" store-id="' + row.store_id + '" class="tgl tgl-skewed hairdressercheckbox" id="my-hairdressercheckbox' + row.id + row.store_name + '" type="checkbox" checked /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-hairdressercheckbox' + row.id + row.store_name + '"></label></td>'
+                    } else {
+                        return '<td class="td-actions text-center"><input data-id="' + row.hairdresser_id + '" store-id="' + row.store_id + '" class="tgl tgl-skewed hairdressercheckbox" id="my-hairdressercheckbox' + row.id + row.store_name + '" type="checkbox" /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-hairdressercheckbox' + row.id + row.store_name + '"></label></td>'
+                    }
+
+
+                }
+
+            },
+
+            {
+                "data": "null",
+                "render": function (data) {
+                    return '<td><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target=".editModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+
+                }
+            },
+
+        ],
+        "pagingType": "full_numbers",
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        responsive: true,
+        language: {
+            search: "_INPUT_",
+            searchPlaceholder: '{{gettext "Search records"}}',
+        },
+        "initComplete": function (settings, json) {
+            $('[rel="tooltip"]').tooltip();
+
+            this.api().columns().every(function () {
+                var column = this;
+                var select = $('<select id="student-selected" class="form-control border-input"><option value=""></option></select>')
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    });
+
+
+                column.data().unique().sort().each(function (d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+
+
+                });
+
+
+
+            });
+            var target = document.querySelectorAll('input.changecolor');
+
+            // set hooks for each target element
+            for (var i = 0, len = target.length; i < len; ++i) {
+                (new CP(target[i])).on("change", function (color) {
+                    this.target.value = '#' + color;
+                    this.target.style.backgroundColor = '#' + color;
+                });
+
+            }
+
+
+        },
+        drawCallback: function () {
+            $('[rel="tooltip"]').tooltip();
+
+            var target = document.querySelectorAll('input.changecolor');
+
+            // set hooks for each target element
+            for (var i = 0, len = target.length; i < len; ++i) {
+                (new CP(target[i])).on("change", function (color) {
+                    this.target.value = '#' + color;
+                    this.target.style.backgroundColor = '#' + color;
+
+                });
+
+            }
+        }
+
+
+    });
+
+
+    var table = $('#hairdresserdatatables').DataTable();
+    // $('input[type=search]').on('input', function () {
+    //     enable_disable_hairdresser();
+
+    // });
+    table.on('responsive-display', function (e, datatable, row, showHide, update) {
+        // console.log('Details for row ' + row.index() + ' ' + (showHide ? 'shown' : 'hidden'));
+        $('[rel="tooltip"]').tooltip();
+
+        var target = document.querySelectorAll('input.changecolor');
+
+        // set hooks for each target element
+        for (var i = 0, len = target.length; i < len; ++i) {
+            (new CP(target[i])).on("change", function (color) {
+                this.target.value = '#' + color;
+                this.target.style.backgroundColor = '#' + color;
+
+            });
+
+        }
+    });
+
+    table.on('click', '.hairdressercheckbox', function () {
+        var $this = $(this);
+        demo.enable_disable_hairdresser($this.prop('checked') == true, $this.attr('data-id'), $this.attr('store-id'));
+    });
+    // // Edit record
+    table.on('click', '.edit', function () {
+        // $tr = $(this).closest('tr');
+        // var data = table.row($tr).data();
+        var cell = table.cell(this.parentNode);
+        var data = table.row(cell.index().row).data();
+        $("#editShopModalLabel").text("Edit " + data.hairdresser_name);
+        $("#ID").val(data.hairdresser_id);
+        $("#EditUserID").val(data.user_id);
+        $("input[name=ehairdresser_name]").val(data.hairdresser_name);
+        $("input[name=ehairdresser_mobile_phone]").val(data.hairdresser_mobile_phone);
+        $("input[name=ehairdresser_phone]").val(data.hairdresser_phone);
+        $("input[name=edisplay_order]").val(data.display_order);
+
+    });
+
+    // Delete a record
+    // table.on('click', '.remove', function (e) {
+    // 	$tr = $(this).closest('tr');
+    // 	var data = table.row($tr).data();
+    // 	// table.row($tr).remove().draw();
+    // 	var serviceId = parseInt(data.id);
+    // 	var formData = {
+    // 		'id': parseInt(data.id),
+    // 	}
+    // 	swal({
+    // 		title: 'Are you sure?',
+    // 		text: 'You will not be able to recover this service!',
+    // 		type: 'warning',
+    // 		showCancelButton: true,
+    // 		confirmButtonText: 'Yes, delete it!',
+    // 		cancelButtonText: 'No, keep it',
+    // 		confirmButtonClass: "btn btn-success btn-fill",
+    // 		cancelButtonClass: "btn btn-danger btn-fill",
+    // 		buttonsStyling: false
+    // 	}).then(function () {
+    // 		$.ajax({
+    // 			type: 'delete',
+    // 			url: '/admin/api/delete-single-service/' + serviceId,
+    // 			data: JSON.stringify(formData),
+
+    // 			success: function (data) {
+    // 				table.row($tr).remove().draw();
+    // 				swal({
+    // 					title: 'Deleted!',
+    // 					text: 'Your service has been deleted.',
+    // 					type: 'success',
+    // 					confirmButtonClass: "btn btn-success btn-fill",
+    // 					buttonsStyling: false
+    // 				})
+
+    // 			},
+    // 			contentType: 'application/json',
+    // 			dataType: 'json'
+    // 		});
+
+    // 	}, function (dismiss) {
+    // 		// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+    // 		if (dismiss === 'cancel') {
+    // 			swal({
+    // 				title: 'Cancelled',
+    // 				text: 'Your service is safe :)',
+    // 				type: 'error',
+    // 				confirmButtonClass: "btn btn-info btn-fill",
+    // 				buttonsStyling: false
+    // 			})
+    // 		}
+    // 	})
+
+    // 	e.preventDefault();
+    // });
+
+
+
+    table.on('click', '.btnchangecolor', function () {
+        var $this = $(this);
+        var id = $this.closest('.input-group').find('input').attr('data-id');
+        id = parseInt(id);
+        var store_id = $this.closest('.input-group').find('input').attr('store-id');
+        store_id = parseInt(store_id);
+
+        var value = $this.closest('.input-group').find('input').val();
+        console.log(id, store_id, value);
+
+        var formData = {
+            'color': value,
+        }
+        console.log(formData);
+        $.ajax({
+            type: 'post',
+            url: '/admin/api/change-hairdresser-color/' + store_id + "/" + id,
+            data: JSON.stringify(formData),
+
+            success: function (data) {
+
+                swal({
+
+                    title: '{{gettext "Good job!"}}',
+                    text: '{{gettext "Successfully updated Employee to the database"}}',
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-success btn-fill",
+                    type: "success"
+                }).then(function () {
+                    window.location.reload();
+                });
+
+            },
+
+
+            contentType: 'application/json',
+            dataType: 'json'
+        });
+    });
+
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('#addHairdresser').validate({
+            rules: {
+                hairdresser_name: "required",
+                hairdresser_mobile_phone: "required",
+                selectstore: "required",
+                hairdresser_phone: "required",
+                display_order: {
+                    required: true,
+                    number: true,
+                },
+
+
+            },
+            messages: {
+                hairdresser_name: '{{gettext "Please enter employee name"}}',
+                hairdresser_mobile_phone: '{{gettext "Please enter employee mobile phone number"}}',
+                selectstore: '{{gettext "Please select store"}}',
+                eselectstore: '{{gettext "Please select store"}}',
+                hairdresser_phone: '{{gettext "Please enter employee home phone number"}}',
+                display_order: {
+                    required: '{{gettext "Please enter display order"}}',
+                    number: '{{gettext "The display order is not a number"}}',
+                },
+
+
+            }
+        });
+
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#editHairdresser').validate({
+            rules: {
+                ehairdresser_name: "required",
+                ehairdresser_mobile_phone: "required",
+                eselectstore: "required",
+                ehairdresser_phone: "required",
+                edisplay_order: {
+                    required: true,
+                    number: true,
+                },
+
+
+            },
+            messages: {
+                ehairdresser_name: '{{gettext "Please enter employee name"}}',
+                ehairdresser_mobile_phone: '{{gettext "Please enter employee mobile phone number"}}',
+                eselectstore: '{{gettext "Please select store"}}',
+                ehairdresser_phone: '{{gettext "Please enter employee home phone number"}}',
+                edisplay_order: {
+                    required: '{{gettext "Please enter display order"}}',
+                    number: '{{gettext "The display order is not a number"}}',
+                },
+
+
+            }
+        });
+
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#edithairdresser_name_exists").hide();
+        $('#editHairdresser').on('submit', function (event) {
+            event.preventDefault();
+            if ($.trim($("#ehairdresser_name").val()) === "" || $.trim($("#ehairdresser_mobile_phone").val()) === "" || $.trim($("#ehairdresser_phone").val()) === "" || $.trim($("#ehairdresser_mobile_phone").val()) === "") {
+                alert('{{gettext "you did not fill out one of the fields"}}');
+                return false;
+            } else {
+                var id = $('input[name=ID]').val();
+                var id = parseInt(id);
+                var user_is = $('input[name= UserID]').val();
+                var usr_id = parseInt(user_is);
+
+                var hairdresser_name = $('input[name=ehairdresser_name]').val();
+                var hairdresser_mobile_phone = $('input[name=ehairdresser_mobile_phone]').val();
+                var hairdresser_phone = $('input[name=ehairdresser_phone]').val();
+
+                var display_order = $('input[name=edisplay_order]').val();
+                display_order = parseFloat(display_order);
+
+
+                var formData = {
+                    "id": id,
+                    "user_id": usr_id,
+                    "hairdresser_name": hairdresser_name,
+                    "hairdresser_mobile_phone": hairdresser_mobile_phone,
+                    "hairdresser_phone": hairdresser_phone,
+                    "display_order": display_order,
+                };
+
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/api/update-hairdresser/' + id,
+                    data: JSON.stringify(formData),
+                    dataType: 'json',
+                    contentType: "application/json",
+
+                    success: function (data) {
+                        var status = data.status;
+                        console.log(status);
+                        if (status == 501) {
+                            $("#edithairdresser_name_exists").show();
+                            $("#edithairdresser_name_exists").text(data.description);
+                            $('#addhairdressersubmit').removeClass('loaderform');
+                            return;
+                        } else {
+                            $('#productsEditModalHorizontal').modal('toggle');
+                            swal({
+                                title: '{{gettext "Good job!"}}',
+                                text: '{{gettext "Successfully updated employee to the database"}}',
+                                buttonsStyling: false,
+                                confirmButtonClass: "btn btn-success btn-fill",
+                                type: "success"
+                            }).then(function () {
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+            }
+        });
+
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+
+        $("#hairdresser_name_exists").hide();
+        $('#addHairdresser').on('submit', function (event) {
+            event.preventDefault();
+            if ($.trim($("#hairdresser_name").val()) === "" || $.trim($("#hairdresser_mobile_phone").val()) === "" || $.trim($("#selectstore").val()) === "" || $.trim($("#hairdresser_mobile_phone").val()) === "" || $.trim($("#hairdresser_phone").val()) === "") {
+                alert('{{gettext "you did not fill out one of the fields"}}');
+                return false;
+            } else {
+                $('#addhairdressersubmit').addClass('loaderform');
+                var user_is = $('input[name= UserID]').val();
+                var usr_id = parseInt(user_is);
+
+
+
+                var stores = $('#selectstore').val();
+
+
+
+                var hairdresser_name = $('input[name=hairdresser_name]').val();
+                var hairdresser_mobile_phone = $('input[name=hairdresser_mobile_phone]').val();
+                var hairdresser_phone = $('input[name=hairdresser_phone]').val();
+
+                var display_order = $('input[name=display_order]').val();
+                display_order = parseFloat(display_order);
+
+
+                var formData = {
+                    "user_id": usr_id,
+                    "stores": stores,
+                    "hairdresser_name": hairdresser_name,
+                    "hairdresser_mobile_phone": hairdresser_mobile_phone,
+                    "hairdresser_phone": hairdresser_phone,
+                    "display_order": display_order,
+                };
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/api/create-hairdresser',
+                    data: JSON.stringify(formData),
+                    dataType: 'json',
+                    contentType: "application/json",
+
+                    success: function (data) {
+                        var status = data.status;
+                        console.log(status);
+                        if (status == 501) {
+                            $("#hairdresser_name_exists").show();
+                            $("#hairdresser_name_exists").text(data.description);
+                            $('#addhairdressersubmit').removeClass('loaderform');
+                            return;
+                        } else {
+                            $('#productsModalHorizontal').modal('toggle');
+                            $('#addhairdressersubmit').removeClass('loaderform');
+                            swal({
+                                title: '{{gettext "Good job!"}}',
+                                text: data.description,
+                                buttonsStyling: false,
+                                confirmButtonClass: "btn btn-success btn-fill",
+                                type: "success"
+                            }).then(function () {
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+            }
+        });
+
+    });
+
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('#toggle').click(function (e) {
+			$('.aside').stop(true).slideToggle();
+		});
+		$(document).click(function (e) {
+			if (!$(e.target).closest('#toggle, .aside').length) {
+				$('.aside').stop(true).slideUp();
+			}
+		});
+        $("#hairdresser_name_exists").hide();
+        $('#addHairdresser').on('submit', function (event) {
+            event.preventDefault();
+            if ($.trim($("#hairdresser_name").val()) === "" || $.trim($("#hairdresser_mobile_phone").val()) === "" || $.trim($("#selectstore").val()) === "" || $.trim($("#hairdresser_mobile_phone").val()) === "" || $.trim($("#hairdresser_phone").val()) === "") {
+                alert('{{gettext "you did not fill out one of the fields"}}');
+                return false;
+            } else {
+                $('#addhairdressersubmit').addClass('loaderform');
+                var user_is = $('input[name= UserID]').val();
+                var usr_id = parseInt(user_is);
+
+
+
+                var stores = $('#selectstore').val();
+
+
+
+                var hairdresser_name = $('input[name=hairdresser_name]').val();
+                var hairdresser_mobile_phone = $('input[name=hairdresser_mobile_phone]').val();
+                var hairdresser_phone = $('input[name=hairdresser_phone]').val();
+
+                var display_order = $('input[name=display_order]').val();
+                display_order = parseFloat(display_order);
+
+
+                var formData = {
+                    "user_id": usr_id,
+                    "stores": stores,
+                    "hairdresser_name": hairdresser_name,
+                    "hairdresser_mobile_phone": hairdresser_mobile_phone,
+                    "hairdresser_phone": hairdresser_phone,
+                    "display_order": display_order,
+                };
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/api/create-hairdresser',
+                    data: JSON.stringify(formData),
+                    dataType: 'json',
+                    contentType: "application/json",
+
+                    success: function (data) {
+                        var status = data.status;
+                        console.log(status);
+                        if (status == 501) {
+                            $("#hairdresser_name_exists").show();
+                            $("#hairdresser_name_exists").text(data.description);
+                            $('#addhairdressersubmit').removeClass('loaderform');
+                            return;
+                        } else {
+                            $('#productsModalHorizontal').modal('toggle');
+                            $('#addhairdressersubmit').removeClass('loaderform');
+                            swal({
+                                title: '{{gettext "Good job!"}}',
+                                text: data.description,
+                                buttonsStyling: false,
+                                confirmButtonClass: "btn btn-success btn-fill",
+                                type: "success"
+                            }).then(function () {
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+            }
+        });
+
+
+
+    });
+
+
+</script>
+<!-- <script type="text/javascript">
+    $.notify({
+        allow_dismiss: true,
+        
+        icon: '/static/images/Succstepsfavicon.png',
+        title: 'Succsteps',
+        message: '{{gettext "Here you can find all your employees settings You can add new employees edit details change working stores or change display order on calendar"}}'
+    },{
+        type: 'pastel-warning',
+         delay: 500000,
+        icon_type: 'image',
+        placement: {from: 'top',align: 'center'
+	},
+    offset: {
+		y: 8
+	},
+        template: '<div data-notify="container" class="col-xs-11 col-sm-5 alert alert-{0}" role="alert">' +
+                '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">X</button>'+
+            '<img data-notify="icon" class="img-circle pull-left">' +
+            '<span data-notify="title">{1}</span>' +
+            '<span data-notify="message">{2}</span>' +
+        '</div>'
+    });
+    </script> -->
+    {{end}}

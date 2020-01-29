@@ -1,0 +1,686 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+	<li>
+		<a href="/admin/reportrevenueexpenses?lang=gr">
+			<img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin/reportrevenueexpenses?lang=en">
+			<img src="/static/images/flags/GB.png"> {{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}} {{define "content"}}
+<div class="content">
+	<input type="hidden" id="UserID" name="UserID" value="{{.UserID}}">
+	<div class="container-fluid">
+		<div class="row ">
+			<div class="card">
+				<div class="card-content">
+					<div class="nav-tabs-navigation">
+						<div class="nav-tabs-wrapper">
+							<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+								<li class="active">
+									<a href="#revenues" data-toggle="tab">{{gettext "Revenue"}}</a>
+								</li>
+
+								<li>
+									<a href="#expenses" data-toggle="tab">{{gettext "Expenses"}}</a>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+					<div id="my-tab-content" class="tab-content ">
+						<div class="tab-pane active" id="revenues">
+							<div class="row">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+									<div class="col-md-4  col-sm-4 col-xs-4 text-left margin-bottom-20">
+										<div class="btn-group">
+											<button type="button" id="thisweekservices" class="btn btn-default">{{gettext "This Week"}}</button>
+											<button id="thismonthservices" type="button" class="btn btn-default">{{gettext "This Month"}}</button>
+											<button type="button" id="thisyearservices" class="btn btn-default">{{gettext "This Year"}}</button>
+										</div>
+									</div>
+
+									<div class="col-md-8">
+										<form id="formsalesperpartnet">
+											<div class="col-md-3">
+												<div id="ServiceTime" class="form-group">
+
+													<select id="select_store" name="select_store" class="select_store selectpicker" data-style="btn dropdown-toggle bs-placeholder btn-info  btn-block"
+													 title='{{gettext "Select Store"}}' data-size="7" data-live-search="true">
+														{{range $index , $result := .Stores}}
+
+														<option value="{{$result.ID}}">{{$result.CompanyName}}</option>
+														{{end}}
+													</select>
+
+												</div>
+
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<input type="text" id="service_date_from" name="service_date_from" class="form-control datepicker" placeholder='{{gettext "Select From Date"}}'>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<input type="text" id="service_date_to" name="service_date_to" class="form-control datepicker" placeholder='{{gettext "Select To Date"}}'>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<button id="salessearchbutton" type="button" class="btn btn-wd btn-warning btn-fill btn-magnify">
+														<span class="btn-label">
+															<i class="ti-search"></i>
+														</span>
+														{{gettext "Search"}}
+													</button>
+												</div>
+											</div>
+
+										</form>
+									</div>
+
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<h3 class="text-left">{{gettext "Revenue"}}
+								<span id="fromsalestitle"></span> -
+								<span id="tosalestitle"></span>
+							</h3>
+
+							<div class="fresh-datatables">
+								<table id="bootstrap-table" class="table  table-striped table-bordered  table-hover" cellspacing="0" width="100%" style="width:100%">
+									<thead>
+										<tr>
+											<th>{{gettext "Category"}}</th>
+											<th>{{gettext "Total"}}</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>{{gettext "Total"}}</th>
+											<th id="total_revenue"></th>
+										</tr>
+									</tfoot>
+									<tbody>
+										<tr>
+											<td>{{gettext "Product Revenue"}}</td>
+											<td id="product_revenue"></td>
+										</tr>
+										<tr>
+											<td>{{gettext "Services Revenue"}}</td>
+											<td id="services_revenue"></td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+							<div class="card card-plain ">								
+								<div class="card-content">
+									<canvas id="mybarChart"></canvas>
+									<!-- <div id="chartActivity" class="ct-chart"></div> -->
+								</div>
+
+							</div>
+						</div>
+
+						<div class="tab-pane" id="expenses">
+							<div class="row">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+									<div class="col-md-4  col-sm-4 col-xs-4 text-left margin-bottom-20">
+										<div class="btn-group">
+											<button type="button" id="sthisweekservices" class="btn btn-default">{{gettext "This Week"}}</button>
+											<button id="sthismonthservices" type="button" class="btn btn-default">{{gettext "This Month"}}</button>
+											<button type="button" id="sthisyearservices" class="btn btn-default">{{gettext "This Year"}}</button>
+										</div>
+									</div>
+
+									<div class="col-md-8">
+										<form id="formsalesperpartnet">
+											<div class="col-md-3">
+												<div id="ServiceTime" class="form-group">
+
+													<select id="sselect_store" name="sselect_store" class="sselect_store selectpicker" data-style="btn dropdown-toggle bs-placeholder btn-info  btn-block"
+													 title='{{gettext "Select Store"}}' data-size="7" data-live-search="true">
+														{{range $index , $result := .Stores}}
+
+														<option value="{{$result.ID}}">{{$result.CompanyName}}</option>
+														{{end}}
+													</select>
+
+												</div>
+
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<input type="text" id="sservice_date_from" name="service_date_from" class="form-control datepicker" placeholder='{{gettext "Select From Date"}}'>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<input type="text" id="sservice_date_to" name="service_date_to" class="form-control datepicker" placeholder='{{gettext "Select To Date"}}'>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<button id="ssalessearchbutton" type="button" class="btn btn-wd btn-warning btn-fill btn-magnify">
+														<span class="btn-label">
+															<i class="ti-search"></i>
+														</span>
+														{{gettext "Search"}}
+													</button>
+												</div>
+											</div>
+
+										</form>
+									</div>
+
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<h3 class="text-left">{{gettext "Expenses"}}
+								<span id="sfromsalestitle"></span> -
+								<span id="stosalestitle"></span>
+							</h3>
+							<div class="col-md-6">
+
+
+								<div class="fresh-datatables">
+									<table id="expenseslisttable" class="table  table-striped table-bordered  table-hover" cellspacing="0" width="100%" style="width:100%">
+
+										<thead>
+											<tr>
+												<th>{{gettext "Category"}}</th>
+												<th>{{gettext "Total"}}</th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th colspan="1" style="text-align:right">{{gettext "Total"}}</th>
+												<th></th>
+											</tr>
+										</tfoot>
+										<tbody>
+
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="card card-plain">
+									<div class="card-body">
+										<canvas id="canvasDoughnut"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+{{end}}{{define "scripts"}}
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#salessearchbutton").click(function (event) {
+
+			event.preventDefault();
+			if ($("#service_date_from").val() === '') {
+				$("<span id='spanmessagefrom'>Please select date from!</span>").insertAfter("#service_date_from");
+				return false;
+			} else {
+				$("#spanmessagefrom").hide();
+
+			};
+			if ($("#select_store").val() === '') {
+				$("<span id='spanmessagestore'>Please select store!</span>").insertAfter("#select_store");
+				return false;
+			} else {
+				$("#spanmessagestore").hide();
+
+			};
+			if ($("#service_date_to").val() === '') {
+				$("<span id='spanmessageto'>Please select date to!</span>").insertAfter("#service_date_to");
+				return false;
+			} else {
+				$("#spanmessageto").hide();
+				var from = $("#service_date_from").val();
+				$("#fromsalestitle").text(from);
+				var momentObjFfrom = moment(from, 'DD/MM/YYYY');
+				var timeStampFrom = (moment(momentObjFfrom).unix());
+				var to = $("#service_date_to").val();
+				$("#tosalestitle").text(to);
+				var momentObjTo = moment(to, 'DD/MM/YYYY');
+
+				var timeStampTo = (moment(momentObjTo).unix());
+
+				var user_id = $('input[name=UserID]').val();
+				var user_id = parseInt(user_id);
+
+				var store_id = $("#select_store option:selected").val();
+				store_id = parseInt(store_id);
+				var servicesalesurl = '/admin/api/total-revenue-sales-and-services/' + user_id + "/" + store_id + "/" + timeStampFrom + "/" + timeStampTo;
+				$.getJSON(servicesalesurl, function (data) {
+					var sum_product_services_revenue = 0;
+					for (let i = 0; i < data.length; i++) {
+						sum_product_services_revenue += parseFloat(data[i].total_revenue);
+						if (data[i].is_service == false) {
+							$("#product_revenue").text("€" + parseFloat(data[i].total_revenue).toFixed(2));
+						};
+						if (data[i].is_service == true) {
+							$("#services_revenue").text("€" + parseFloat(data[i].total_revenue).toFixed(2));
+						};
+					};
+					$("#total_revenue").text("€" + parseFloat(sum_product_services_revenue).toFixed(2));
+
+				});
+
+				if ($('#mybarChart').length) {
+
+					$.ajax({
+						type: 'GET',
+						url: '/admin/api/total-revenue-sales-and-services-graph/' + user_id + "/" + store_id + "/" + timeStampFrom + "/" + timeStampTo,
+						dataType: 'json',
+
+						success: function (json) {
+
+							var labelss = new Array();
+
+							var labels = new Array();;
+							var datasets = new Array();
+							$.each(json, function (i, data) {
+
+
+								labels = data.labels
+
+								datasets = data.datasets;
+								// console.log(data.labels);
+
+
+
+								// list.push(data);
+
+							});
+							console.log(datasets);
+							for (let i = 0; i < datasets.length; i++) {
+								if (datasets[i].label == true) {
+									datasets[i].label = '{{gettext "Services"}}';
+								};
+								if (datasets[i].label == false) {
+									datasets[i].label = '{{gettext "Products"}}';
+								}
+							};
+
+							for (i = 0; i < labels.length; ++i) {
+								var momentDate = moment(labels[i]);
+								labelss.push(momentDate.format('DD-MM-YYYY'));
+
+							}
+
+
+							divs = jQuery.unique(labelss);
+
+							// sortLabels = divs.sort();
+							var data = {
+								labels: labelss,
+								datasets: datasets,
+							};
+
+							var ctx = document.getElementById("mybarChart");
+							var mybarChart = new Chart(ctx, {
+								type: 'bar',
+
+								data,
+								options: {
+									tooltips: {
+										callbacks: {
+											label: function (tooltipItems, data) {
+												return '€' + tooltipItems.yLabel.toString();
+											}
+										},
+									},
+									scales: {
+										yAxes: [{
+
+											ticks: {
+												beginAtZero: true,
+												callback: function (value, index, values) {
+													return '€' + value.toFixed(2);
+												}
+											}
+										}]
+									}
+								}
+							});
+
+
+
+						},
+						error: function (Result) {
+
+							console.log("error");
+
+						}
+
+					});
+
+
+
+				}
+
+
+			};
+
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		var data_table;
+		var dashboard_table_id = "#expenseslisttable";
+		function destroy_existing_data_table() {
+
+			var existing_table = $(dashboard_table_id).dataTable();
+			if (existing_table != undefined) {
+				existing_table.fnClearTable();
+				existing_table.fnDestroy();
+			};
+		};
+
+		function create_dashboard_table() {
+			var from = $("#sservice_date_from").val();
+			$("#sfromsalestitle").text(from);
+			var momentObjFfrom = moment(from, 'DD/MM/YYYY');
+			var timeStampFrom = (moment(momentObjFfrom).unix());
+			var to = $("#sservice_date_to").val();
+			$("#stosalestitle").text(to);
+			var momentObjTo = moment(to, 'DD/MM/YYYY');
+
+			var timeStampTo = (moment(momentObjTo).unix());
+
+			var user_id = $('input[name=UserID]').val();
+			var user_id = parseInt(user_id);
+
+			var store_id = $("#sselect_store option:selected").val();
+			store_id = parseInt(store_id);
+
+
+
+
+			var expensesurl = '/admin/api/total-expenses-sales/' + user_id + "/" + store_id + "/" + timeStampFrom + "/" + timeStampTo;
+
+			data_table = $(dashboard_table_id).DataTable({
+				"processing": true,
+
+
+				"ajax": {
+					"url": expensesurl,
+					"dataSrc": function (data) {
+						if (data["data"] == null) {
+							return [];
+						}
+						else {
+							return data.data;
+						}
+
+					}
+				},
+				"oLanguage": {
+					"sEmptyTable": '{{gettext "You do not have any data"}}' + from + " to: " + to,
+					"sProcessing": '{{gettext "Loading. Please wait..."}}'
+				},
+
+
+				"columns": [
+					{
+						"data": "name",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": "total",
+						"render": function (data) {
+							var totaldicount = parseFloat(data).toFixed(2);
+
+							return "€" + totaldicount;
+						}
+					},
+
+				],
+				"pagingType": "full_numbers",
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+				responsive: true,
+				language: {
+					search: "_INPUT_",
+					searchPlaceholder: '{{gettext "Search records"}}',
+				},
+				"footerCallback": function (row, data, start, end, display) {
+					var api = this.api(), data;
+
+					// Remove the formatting to get integer data for summation
+					var intVal = function (i) {
+						return typeof i === 'string' ?
+							i.replace(/[\$,]/g, '') * 1 :
+							typeof i === 'number' ?
+								i : 0;
+					};
+
+					// Total over all pages
+					total = api
+						.column(1)
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+
+					// Total over this page
+					pageTotal = api
+						.column(1, { page: 'current' })
+						.data()
+						.reduce(function (a, b) {
+							return intVal(a) + intVal(b);
+						}, 0);
+
+					// Update footer
+					$(api.column(1).footer()).html(
+						'€' + parseFloat(pageTotal).toFixed(2)
+					);
+				},
+				"initComplete": function (settings, json) {
+					var total = new Array();
+					var labels = new Array();
+					var coloR = [];
+					var coloRback = [];
+					var dynamicColors = function () {
+						var r = Math.floor(Math.random() * 255);
+						var g = Math.floor(Math.random() * 255);
+						var b = Math.floor(Math.random() * 255);
+						return "rgb(" + r + "," + g + "," + b + ")";
+					};
+					var dynamicColorsback = function () {
+						var r = Math.floor(Math.random() * 254);
+						var g = Math.floor(Math.random() * 254);
+						var b = Math.floor(Math.random() * 254);
+						return "rgb(" + r + "," + g + "," + b + ")";
+					};
+					for (let i = 0; i < json["data"].length; i++) {
+						total.push(json["data"][i].total);
+						labels.push(json["data"][i].name);
+						coloR.push(dynamicColors());
+						coloRback.push(dynamicColorsback());
+					};
+
+					$('[rel="tooltip"]').tooltip();
+					if ($('#canvasDoughnut').length) {
+
+						var ctx = document.getElementById("canvasDoughnut");
+						var data = {
+							labels: labels,
+							datasets: [{
+								data: total,
+								backgroundColor: coloR,
+								hoverBackgroundColor: coloRback
+
+							}]
+						};
+
+						var canvasDoughnut = new Chart(ctx, {
+							type: 'doughnut',
+							tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+							data: data,
+							options: {
+								
+								tooltips: {
+									callbacks: {
+										label: function (tooltipItem, data) {
+											var allData = data.datasets[tooltipItem.datasetIndex].data;
+											var tooltipLabel = data.labels[tooltipItem.index];
+											var tooltipData = allData[tooltipItem.index];
+											var total = 0;
+											for (var i in allData) {
+												total += allData[i];
+											}
+											var tooltipPercentage = Math.round((tooltipData / total) * 100);
+											return tooltipLabel + ': ' + '€' + tooltipData + ' (' + tooltipPercentage + '%)';
+										}
+									}
+								}
+							}
+						});
+
+					}
+
+				}
+
+			});
+		};
+		$("#ssalessearchbutton").click(function (event) {
+
+			event.preventDefault();
+			if ($("#sservice_date_from").val() === '') {
+				$("<span id='sspanmessagefrom'>Please select date from!</span>").insertAfter("#sservice_date_from");
+				return false;
+			} else {
+				$("#sspanmessagefrom").hide();
+
+			};
+			if ($("#sselect_store").val() === '') {
+				$("<span id='sspanmessagestore'>Please select store!</span>").insertAfter("#sselect_store");
+				return false;
+			} else {
+				$("#sspanmessagestore").hide();
+
+			};
+			if ($("#sservice_date_to").val() === '') {
+				$("<span id='sspanmessageto'>Please select date to!</span>").insertAfter("#sservice_date_to");
+				return false;
+			} else {
+				$("#sspanmessageto").hide();
+				// $("#inactive_customers_row").removeClass("hidden").addClass("fade-it");
+				event.preventDefault();
+				destroy_existing_data_table();
+				create_dashboard_table();
+			};
+
+		});
+
+	});
+
+
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+
+
+		demo.initFormExtendedDatetimepickers();
+		$("#thisweekservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfweek = moment().startOf('week').format("DD/MM/YYYY");
+			const endOfweek = moment().endOf('week').format("DD/MM/YYYY");
+			$("#service_date_from").val(startOfweek);
+			$("#service_date_to").val(endOfweek);
+		});
+
+		$("#thismonthservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfmonth = moment().startOf('month').format("DD/MM/YYYY");
+			const endOfmonth = moment().endOf('month').format("DD/MM/YYYY");
+			$("#service_date_from").val(startOfmonth);
+			$("#service_date_to").val(endOfmonth);
+		});
+
+		$("#thisyearservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfyear = moment().startOf('year').format("DD/MM/YYYY");
+			const endOfyear = moment().endOf('year').format("DD/MM/YYYY");
+			$("#service_date_from").val(startOfyear);
+			$("#service_date_to").val(endOfyear);
+		});
+
+
+		$("#sthisweekservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfweek = moment().startOf('week').format("DD/MM/YYYY");
+			const endOfweek = moment().endOf('week').format("DD/MM/YYYY");
+			$("#sservice_date_from").val(startOfweek);
+			$("#sservice_date_to").val(endOfweek);
+		});
+
+		$("#sthismonthservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfmonth = moment().startOf('month').format("DD/MM/YYYY");
+			const endOfmonth = moment().endOf('month').format("DD/MM/YYYY");
+			$("#sservice_date_from").val(startOfmonth);
+			$("#sservice_date_to").val(endOfmonth);
+		});
+
+		$("#sthisyearservices").on('click', function (e) {
+			e.preventDefault();
+			const startOfyear = moment().startOf('year').format("DD/MM/YYYY");
+			const endOfyear = moment().endOf('year').format("DD/MM/YYYY");
+			$("#sservice_date_from").val(startOfyear);
+			$("#sservice_date_to").val(endOfyear);
+		});
+
+
+
+
+
+
+
+	});
+</script> 
+<script> // Javascript to enable link to tab
+	var url = document.location.toString();
+	if (url.match('#')) {
+		$('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+	} 
+	
+	// Change hash for page-reload
+	$('.nav-tabs a').on('shown.bs.tab', function (e) {
+		window.location.hash = e.target.hash;
+	})
+	</script>{{end}}

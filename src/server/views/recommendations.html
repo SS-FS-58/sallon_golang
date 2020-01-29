@@ -1,0 +1,135 @@
+{{define "content"}}
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+
+				<center>
+					<h5>Why not let your friends know how AWESOME Succsteps is</h5>
+				</center>
+				<center>
+					<h5>Remember: If your friend has already interviewed, applied and enrolled, you will not be able
+						to recommend them</h5>
+				</center>
+				<center>
+					<h5>Fill the form bellow and get 10% discount when your friend get an active subscription</h5>
+				</center>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2">
+							<div class="card card-wizard" id="wizardCard">
+								<form id="wizardForm" method="" action="">
+									<div class="card-header text-center">
+									</div>
+									<div class="card-content">
+										<ul class="nav">
+											<li>
+												<a href="#tab1" data-toggle="tab">Your Information</a>
+											</li>
+											<li>
+												<a href="#tab2" data-toggle="tab">Your Friend Information</a>
+											</li>
+											<li>
+												<a href="#tab3" data-toggle="tab">Finish</a>
+											</li>
+										</ul>
+										<div class="tab-content">
+											<div class="tab-pane" id="tab1">
+												<div class="row">
+													<div class="col-md-5 col-md-offset-1">
+														<div class="form-group">
+															<label class="control-label">
+																Your First Name
+															</label>
+															<input class="form-control" type="text" name="first_name" placeholder="ex: Mike" />
+														</div>
+													</div>
+													<div class="col-md-5">
+														<div class="form-group">
+															<label class="control-label">
+																Your Last Name
+															</label>
+															<input class="form-control" type="text" name="last_name" required="true" placeholder="ex: Andrew" />
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-10 col-md-offset-1">
+														<div class="form-group">
+															<label class="control-label">
+																Your Email
+																<star>*</star>
+															</label>
+															<input class="form-control" type="text" name="email" email="true" placeholder="ex: hello@succsteps.com" />
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="tab-pane" id="tab2">
+												<div class="row">
+													<div class="col-md-5 col-md-offset-1">
+														<div class="form-group">
+															<label class="control-label">
+																Your Friend First Name
+															</label>
+															<input class="form-control" type="text" name="first_name" placeholder="ex: Mike" />
+														</div>
+													</div>
+													<div class="col-md-5">
+														<div class="form-group">
+															<label class="control-label">
+																Your Friend Last Name
+															</label>
+															<input class="form-control" type="text" name="last_name" required="true" placeholder="ex: Andrew" />
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-10 col-md-offset-1">
+														<div class="form-group">
+															<label class="control-label">
+																Your Friend Email
+																<star>*</star>
+															</label>
+															<input class="form-control" type="text" name="email" email="true" placeholder="ex: hello@succsteps.com" />
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="tab-pane" id="tab3">
+												<h2 class="text-center text-space">Thank you!
+													<br>
+													<small> Click on "
+														<b>Finish</b>" Your Friend must click on the Recommend a
+														Friend button within the email and activate the subscription
+														to get your discount</small>
+												</h2>
+											</div>
+										</div>
+									</div>
+									<div class="card-footer">
+										<button type="button" class="btn btn-default btn-fill btn-wd btn-back pull-left">Back</button>
+										<button type="button" class="btn btn-info btn-fill btn-wd btn-next pull-right">Next</button>
+										<button type="button" class="btn btn-info btn-fill btn-wd btn-finish pull-right" onclick="onFinishWizard()">Finish</button>
+										<div class="clearfix"></div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>			
+
+		</div>
+	</div>
+</div>
+{{end}} {{define "scripts"}}
+<script>
+    $().ready(function () {
+
+        demo.initWizard();
+    });
+
+   
+
+</script>
+{{end}}

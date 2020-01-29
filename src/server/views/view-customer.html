@@ -1,0 +1,742 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+	<li>
+		<a href="/admin/view-customer?lang=gr">
+			<img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin/view-customer?lang=en">
+			<img src="/static/images/flags/GB.png"> {{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}} {{define "content"}}
+
+<div class="content">
+	<input type="hidden" name="customerID" id="customerID" value="{{.SingleCustomer.ID}}">
+	<div class="container-fluid">
+		<div class="col-md-3 col-sm-6">
+
+			<div class="card">
+				<!-- <div class="card-header">
+						{{.SingleCustomer.CustomerName}} {{.SingleCustomer.CustomerSurname}} Bonus Points
+				</div> -->
+				<div class="card-content text-right">
+
+					<div id="bonus-points-div" class="form-group">
+						<label for="bonus-points" class="control-label"> {{gettext "Extra Bonus Points"}}</label>
+						<input type="text" id="bonus-points" name="bonus-points" class="form-control" placeholder='{{gettext "Extra Bonus Points"}}'>
+					</div>
+
+				</div>
+				<div class="card-footer">
+					<hr>
+					<div class="footer-title">
+						<div class="stats">
+							<i class="ti-user"></i> {{gettext "Insert bonus points"}}
+						</div>
+					</div>
+					<div class="pull-right">
+						<button id="bonus-points-button" class="btn btn-success btn-fill btn-icon btn-sm bonus-points-button">
+							<i class="ti-plus"></i>
+						</button>
+
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+		<div class="col-md-3 col-sm-6">
+			<div class="card">
+				<div class="card-content">
+					<div class="row">
+						<div class="col-xs-3">
+							<div class="icon-big icon-warning text-center">
+								<i class="ti-user"></i>
+							</div>
+						</div>
+						<div class="col-xs-9">
+							<div class="numbers">
+								<p>{{gettext "Mobile Phone:"}} {{.SingleCustomer.MobileTelephone}}</p>
+								<p>{{gettext "Home Phone"}}: {{.SingleCustomer.HomeTelephone}}</p>
+								<p>{{gettext "Birthday"}}: {{.SingleCustomer.DateOfBirth.Format "02/01/2006"}}</p>
+								<p> </p>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+
+					</div>
+				</div>
+				<div class="card-footer">
+					<hr>
+					<div class="stats">
+							<i class="ti-timer"></i> {{.SingleCustomer.CustomerName}} {{.SingleCustomer.CustomerSurname}} Info 
+						</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-md-3 col-sm-6">
+			<div class="card">
+				<div class="card-content">
+					<div class="row">
+						<div class="col-xs-3">
+							<div class="icon-big icon-success text-center">
+								<i class="ti-calendar"></i>
+							</div>
+						</div>
+						<div class="col-xs-9">
+							<div class="numbers">
+								<p>{{gettext "Complete Services:"}} {{.LenCompletedServices}}</p>
+								<p>{{gettext "Pending Services:"}} {{.LenPending}}</p>
+								<p>{{gettext "Canceled Services:"}} {{.LenCancelled}}</p>
+								<p> </p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					<hr>
+					<div class="stats">
+						<i class="ti-timer"></i> {{gettext "Customer from"}} {{.SingleCustomer.CreatedAt.Format "02/01/2006"}}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-3 col-sm-6">
+			<div class="card">
+				<div class="card-content">
+					<div class="row">
+						<div class="col-xs-3">
+							<div class="icon-big icon-info text-center">
+								<i class="ti-bag"></i>
+							</div>
+						</div>
+						<div class="col-xs-9">
+							<div class="numbers">
+								<p>{{gettext "Sales of Services:"}} {{printf "%.2f" .TotalServices }} €</p>
+								<p>{{gettext "Product sales:"}} {{printf "%.2f" .TotalProducts}} €</p>
+								<p>{{gettext "Discounts:"}} {{printf "%.2f" .TotalDiscount}} €</p>
+							
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					<hr>
+					<div class="stats">
+						<i class="ti-shopping-cart"></i> {{.SingleCustomer.CustomerName}} {{.SingleCustomer.CustomerSurname}} {{gettext "Points:"}} {{.SingleCustomer.CustomerPoints}}
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-content">
+							<div class="nav-tabs-navigation">
+								<div class="nav-tabs-wrapper">
+									<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+
+
+										<li class="active">
+											<a class="tab-title" href="#Completed" data-toggle="tab">{{gettext "Completed appointments"}}</a>
+										</li>
+
+										<li>
+											<a id="subcat" class="tab-title" href="#Pending_Cancelled" data-toggle="tab">{{gettext "Pending-Cancelled appointments"}}</a>
+										</li>
+
+
+									</ul>
+								</div>
+							</div>
+							<div id="my-tab-content" class="tab-content">
+
+								<div class="tab-pane active" id="Completed">
+
+									<div class="card-content table-responsive table-full-width">
+										<table id="salestranstbale" class="table  table-striped table-bordered  table-hover salestranstbale" cellspacing="0" width="100%"
+										 style="width:100%">
+											<thead>
+												<tr>
+													<th class="text-left">#</th>
+													<th>{{gettext "Date"}}</th>
+													<th>{{gettext "Service - Item"}}</th>
+													<th class="text-left">{{gettext "Income"}}</th>
+													<th class="text-left">{{gettext "Actions"}}</th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<th class="text-left">#</th>
+													<th>{{gettext "Date"}}</th>
+													<th>{{gettext "Service - Item"}}</th>
+													<th class="text-left">{{gettext "Income"}}</th>
+													<th class="text-left">{{gettext "Actions"}}</th>
+												</tr>
+											</tfoot>
+
+										</table>
+									</div>
+								</div>
+								<div class="tab-pane" id="Pending_Cancelled">
+									<div class="card-content table-responsive table-full-width">
+										<table id="pendingCancelled" class="table  table-striped table-bordered  table-hover pendingCancelled" cellspacing="0" width="100%"
+										 style="width:100%">
+											<thead>
+												<tr>
+													<th class="text-left">#</th>
+													<th>{{gettext "Date"}}</th>
+													<th>{{gettext "Status"}}</th>
+													<th>{{gettext "Service"}}</th>
+													<th class="text-left">{{gettext "Actions"}}</th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<th class="text-left">#</th>
+													<th>{{gettext "Date"}}</th>
+													<th>{{gettext "Status"}}</th>
+													<th>{{gettext "Service"}}</th>
+													<th class="text-left">{{gettext "Actions"}}</th>
+												</tr>
+											</tfoot>
+
+										</table>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+
+
+
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="modal fade editModalHorizontal" id="editModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	 aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">{{gettext "Close"}}</span>
+					</button>
+					<h4 class="modal-title" id="editCustomerCommentsModalLabel">
+					</h4>
+				</div>
+
+				<!-- Modal Body -->
+				<form id="editComment">
+					<input type="hidden" id="ID" name="ID">
+					<div class="modal-body">
+						<div class="card card-plain">
+							<div class="content">
+								<div class="form-group">
+									<textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+					<!-- Modal Footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							{{gettext "Close"}}
+						</button>
+						<button type="submit" class="btn btn-primary">
+							{{gettext "Update changes"}}
+						</button>
+					</div>
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+
+	{{end}} {{define "scripts"}}
+
+	<script>
+		var customerID = $('input[name=customerID]').val();
+		var customerID = parseInt(customerID);
+		var url = '/admin/api/all-sales-per-customer/' + customerID;
+		var count = 0;
+		var count1 = 0;
+
+		$('table.salestranstbale').DataTable({
+			"processing": true,
+			"ajax": {
+				"url": url,
+				"dataSrc": function (data) {
+					console.log(data);
+					if (data["data"] == null) {
+						return [];
+					}
+					else {
+						return data.data;
+					}
+				}
+			},
+			"oLanguage": {
+				"sEmptyTable": '{{gettext "You do not have any data"}}',
+				"sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+			},
+			"columnDefs": [
+				{ "className": "text-left", "targets": "_all" }
+			],
+
+
+			"columns": [
+
+				{
+					"data": "id",
+					"render": function (data) {
+
+						count += 1;
+						return count;
+					}
+				},
+				{
+					"data": "created_at",
+					"render": function (data) {
+						var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+						return dateoflastReview.format("DD/MM/YYYY")
+					}
+
+				},
+				{
+					"data": "null",
+					"render": function (data, type, row) {
+						var service = row.service_name + " (" + row.hairdresser_name + ")";
+
+						return service;
+					}
+				},
+				{
+					"data": "service_line_total",
+					"render": function (data) {
+						var money = data;
+						money = parseFloat(money).toFixed(2)
+
+
+						return '<td class="text-right">&euro; ' + money + '</td>';
+					}
+				},
+
+				{
+					"data": "null",
+					"render": function (data, type, row) {
+						return '<td><a rel="tooltip" title="{{gettext "Edit"}}" class="btn btn-wd btn-success note_buton" data-toggle="modal" data-target=".editModalHorizontal"><span class="btn-label"><i class="ti-plus"></i></span>{{gettext "Observations"}}</a></td>';
+
+
+					}
+				},
+
+			],
+			"pagingType": "full_numbers",
+			"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+			responsive: true,
+			language: {
+				search: "_INPUT_",
+				searchPlaceholder: '{{gettext "Search records"}}',
+			},
+			"initComplete": function (settings, json) {
+				$('[rel="tooltip"]').tooltip();
+			},
+
+			dom: 'Bfrtip',
+			buttons: [
+				{
+					extend: 'pageLength'
+				},
+				'colvis',
+				{
+					extend: 'collection',
+					text: 'Export',
+					buttons: [
+
+						{
+							extend: 'copyHtml5',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+						{
+							extend: 'print',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+
+
+						{
+							extend: 'excelHtml5',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+						{
+							extend: 'pdfHtml5',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+
+					]
+				},
+
+
+			]
+
+
+
+		});
+		var table1 = $('table.salestranstbale').DataTable();
+		table1.on('responsive-display', function (e, datatable, row, showHide, update) {
+			// console.log('Details for row ' + row.index() + ' ' + (showHide ? 'shown' : 'hidden'));
+			$('[rel="tooltip"]').tooltip();
+		});
+		// Edit record
+		table1.on('click', '.note_buton', function () {
+			var cell1 = table1.cell(this.parentNode);
+			var data1 = table1.row(cell1.index().row).data();
+			$("#comment").val(data1.service_comments);
+			$("#editCustomerCommentsModalLabel").text('{{gettext "Edit"}}' + " " + data1.service_name + " " + "(" + data1.hairdresser_name + ")");
+			$("#ID").val(data1.service_id);
+
+
+		});
+		// table1.on('order.dt search.dt', function () {
+		// 	table1.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+		// 		cell.innerHTML = i + 1;
+		// 	});
+		// }).draw();
+
+
+
+	</script>
+	<script>
+		var customerID1 = $('input[name=customerID]').val();
+		var customerID1 = parseInt(customerID1);
+		var url1 = '/admin/api/all-events-per-customer/' + customerID1;
+		$('table.pendingCancelled').DataTable({
+			"processing": true,
+			"ajax": {
+				"url": url1,
+				"dataSrc": function (data) {
+
+					if (data["data"] == null) {
+						return [];
+					}
+					else {
+						return data.data;
+					}
+				}
+			},
+			"oLanguage": {
+				"sEmptyTable": '{{gettext "You do not have any data"}}',
+				"sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+			},
+			"columnDefs": [
+				{ "className": "text-left", "targets": "_all" }
+			],
+
+
+			"columns": [
+				{
+					"data": "id",
+					"render": function (data) {
+
+						count1 += 1;
+						return count1;
+					}
+				},
+
+				{
+					"data": "updated_at",
+					"render": function (data) {
+						var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+						return dateoflastReview.format("DD/MM/YYYY")
+					}
+
+				},
+				{
+					"data": "service_status",
+					"render": function (data) {
+
+
+
+						return data;
+					}
+				},
+				{
+					"data": "null",
+					"render": function (data, type, row) {
+						var service = row.service_name + " (" + row.hairdresser_name + ")";
+
+						return service;
+					}
+				},
+
+
+				{
+					"data": "null",
+					"render": function (data, type, row) {
+
+						return '<td><a rel="tooltip" title="{{gettext "Edit"}}" class="btn btn-wd btn-success note_buton" data-toggle="modal" data-target=".editModalHorizontal"><span class="btn-label"><i class="ti-plus"></i></span>{{gettext "Observations"}}</a></td>';
+
+
+					}
+				},
+
+			],
+			"pagingType": "full_numbers",
+			"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+			responsive: true,
+			language: {
+				search: "_INPUT_",
+				searchPlaceholder: '{{gettext "Search records"}}',
+			},
+			"initComplete": function (settings, json) {
+				$('[rel="tooltip"]').tooltip();
+			},
+
+			dom: 'Bfrtip',
+			buttons: [
+				{
+					extend: 'pageLength'
+				},
+				'colvis',
+				{
+					extend: 'collection',
+					text: 'Export',
+					buttons: [
+
+						{
+							extend: 'copyHtml5',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+						{
+							extend: 'print',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+
+
+						{
+							extend: 'excelHtml5',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+						{
+							extend: 'pdfHtml5',
+							exportOptions: {
+								columns: ':visible'
+							}
+						},
+
+					]
+				},
+			]
+
+		});
+		var table = $('table.pendingCancelled').DataTable();
+		table.on('responsive-display', function (e, datatable, row, showHide, update) {
+			// console.log('Details for row ' + row.index() + ' ' + (showHide ? 'shown' : 'hidden'));
+			$('[rel="tooltip"]').tooltip();
+		});
+		// Edit record
+		table.on('click', '.note_buton', function () {
+			var cell = table.cell(this.parentNode);
+			var data = table.row(cell.index().row).data();
+			$("#comment").val(data.rantevou_comments);
+			$("#editCustomerCommentsModalLabel").text('{{gettext "Edit"}}' + " " + data.service_name + " " + "(" + data.hairdresser_name + ")");
+			$("#ID").val(data.id);
+
+
+		});
+		// table.on('order.dt search.dt', function () {
+		// 	table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+		// 		cell.innerHTML = i + 1;
+		// 	});
+		// }).draw();
+
+
+
+	</script>
+	<script>
+		$(document).ready(function () {
+			$('#editComment').on('submit', function (event) {
+				event.preventDefault();
+				if ($.trim($("#comment").val()) === "") {
+					alert('{{gettext "you did not fill out one of the fields"}}');
+					return false;
+				} else {
+					var id = $('input[name=ID]').val();
+					var id = parseInt(id);
+
+					var formData = {
+						'id': id,
+
+						'rantevou_comments': $("#comment").val(),
+					};
+					$.ajax({
+						type: 'post',
+						url: '/admin/api/update-comment/' + id,
+						data: JSON.stringify(formData),
+						dataType: 'json',
+						contentType: "application/json",
+
+						success: function (data) {
+							var status = data.status;
+							console.log(status);
+							if (status == 500) {
+								$.notify({
+									icon: 'ti-user',
+									message: data.description,
+
+
+
+								}, {
+										placement: {
+											from: "top",
+											align: "center"
+										},
+										type: 'danger',
+										timer: 2000,
+									});
+								setTimeout(function () {
+									window.location.reload();
+								}, 2000);
+								return;
+							} else {
+
+								$('#editModalHorizontal').modal('toggle');
+								$.notify({
+									icon: 'ti-user',
+									message: data.description,
+
+
+
+								}, {
+										placement: {
+											from: "top",
+											align: "center"
+										},
+										type: 'success',
+										timer: 2000,
+									});
+								setTimeout(function () {
+									window.location.reload();
+								}, 2000);
+
+							}
+
+
+
+						}
+					});
+				}
+			});
+
+			$("#bonus-points-button").click(function (event) {
+
+				event.preventDefault();
+				if ($("#bonus-points").val() === '') {
+					$("<span id='spanmessagebonus'>Please insert bonus points</span>").insertAfter("#bonus-points");
+					return false;
+				} else {
+					$("#spanmessagebonus").hide();
+					var id = $('input[name=customerID]').val();
+					var id = parseInt(id);
+					var points = $("#bonus-points").val();
+					points =parseInt(points);
+					var formData = {
+						'id': id,
+
+						'customer_points':points,
+					};
+					$.ajax({
+						type: 'post',
+						url: '/admin/api/insert-bonus-points/' + id,
+						data: JSON.stringify(formData),
+						dataType: 'json',
+						contentType: "application/json",
+
+						success: function (data) {
+							var status = data.status;
+							console.log(status);
+							if (status == 500) {
+								$.notify({
+									icon: 'ti-user',
+									message: data.description,
+
+
+
+								}, {
+										placement: {
+											from: "top",
+											align: "center"
+										},
+										type: 'danger',
+										timer: 2000,
+									});
+								setTimeout(function () {
+									window.location.reload();
+								}, 2000);
+								return;
+							} else {
+
+								$.notify({
+									icon: 'ti-user',
+									message: data.description,
+
+								}, {
+										placement: {
+											from: "top",
+											align: "center"
+										},
+										type: 'success',
+										timer: 2000,
+									});
+								setTimeout(function () {
+									window.location.reload();
+								}, 2000);
+
+							}
+
+
+
+						}
+					});
+
+				};
+
+
+
+			});
+		})
+	</script> {{end}}

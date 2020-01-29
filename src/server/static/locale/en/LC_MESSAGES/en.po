@@ -1,0 +1,652 @@
+# Chinese translations for PACKAGE package.
+# Copyright (C) 2013 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-06-04 10:20+0800\n"
+"PO-Revision-Date: 2017-11-20 15:17+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+# ##################### Register Form #########################
+msgid "Register"
+msgstr "Register"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Login"
+msgstr "Login"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Forgot your password?"
+msgstr "Forgot your password?"
+
+msgid "Let's go"
+msgstr "Let's go"
+
+# ##################### Login Form #########################
+msgid "Looking to login?"
+msgstr "Looking to login?"
+
+msgid "Your username"
+msgstr "Your username"
+
+msgid "Enter email"
+msgstr "Enter email"
+
+msgid "Password Confirmation"
+msgstr "Password Confirmation"
+
+msgid "Your Forename"
+msgstr "Your Forename"
+
+msgid "Your Surname"
+msgstr "Your Surname"
+
+msgid "Work Telephone"
+msgstr "Work Telephone"
+
+msgid "Mobile Telephone"
+msgstr "Mobile Telephone"
+
+msgid "Upload Logo"
+msgstr "Upload Logo"
+
+msgid "Browse…"
+msgstr "Browse…"
+
+msgid "Create Account"
+msgstr "Create Account"
+
+# ##################### Left menu #########################
+msgid "My Profile"
+msgstr "My Profile"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Logout"
+msgstr "Logout"
+
+msgid "Overview"
+msgstr "Overview"
+
+msgid "Stats"
+msgstr "Stats"
+
+msgid "Bookings"
+msgstr "Bookings"
+
+msgid "Calendar"
+msgstr "Calendar"
+
+msgid "Booking List"
+msgstr "Booking List"
+
+msgid "Customers"
+msgstr "Customers"
+
+msgid "View customers"
+msgstr "View customers"
+
+msgid "Cashier"
+msgstr "Cashier"
+
+msgid "Campaigns"
+msgstr "Campaigns"
+
+msgid "Facebook Campaigns"
+msgstr "Facebook Campaigns"
+
+msgid "Google Campaigns"
+msgstr "Google Campaigns"
+
+msgid "Sms Campaigns"
+msgstr "Sms Campaigns"
+
+msgid "Email Campaigns"
+msgstr "Email Campaigns"
+
+msgid "Reports"
+msgstr "Reports"
+
+msgid "Sales Report"
+msgstr "Sales Report"
+
+msgid "Revenue - Expenses"
+msgstr "Revenue - Expenses"
+
+msgid "Customers with Balance"
+msgstr "Customers with Balance"
+
+msgid "Pending Days"
+msgstr "Pending Days"
+
+msgid "Stores"
+msgstr "Stores"
+
+msgid "Hairdressers"
+msgstr "Hairdressers"
+
+msgid "Suppliers"
+msgstr "Suppliers"
+
+msgid "Products"
+msgstr "Products"
+
+msgid "Services"
+msgstr "Services"
+
+msgid "Rewards"
+msgstr "Rewards"
+
+msgid "Promotions"
+msgstr "Promotions"
+
+msgid "Recommendations"
+msgstr "Recommendations"
+
+msgid "Store settings"
+msgstr "Store settings"
+
+msgid "Search..."
+msgstr "Search..."
+
+msgid "View your store"
+msgstr "View your store"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Terms and Conditions"
+msgstr "Terms and Conditions"
+
+msgid "Support"
+msgstr "Support"
+
+msgid "Contact us"
+msgstr "Contact us"
+
+msgid "Income"
+msgstr "Income"
+
+msgid "Expenses"
+msgstr "Expenses"
+
+# ##################### Shops page #########################
+msgid "Here you can find all your store settings"
+msgstr "Here you can find all your store settings"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Brand Name"
+msgstr "Brand Name"
+
+msgid "Vat Number"
+msgstr "Vat Number"
+
+msgid "Address"
+msgstr "Address"
+
+msgid "Tax Office"
+msgstr "Tax Office"
+
+msgid "Creation Date"
+msgstr "Creation Date"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "New Shop"
+msgstr "New Shop"
+
+msgid "The VAT number already exist."
+msgstr "The VAT number already exist."
+
+msgid "*VAT number exists"
+msgstr "*VAT number exists"
+
+msgid "Your VAT Number"
+msgstr "Your VAT Number"
+
+msgid "Company Name"
+msgstr "Company Name"
+
+msgid "Enter your address"
+msgstr "Enter your address"
+
+msgid "Street address"
+msgstr "Street address"
+
+msgid "City"
+msgstr "City"
+
+msgid "State"
+msgstr "State"
+
+msgid "Zip Code"
+msgstr "Zip Code"
+
+msgid "Country"
+msgstr "Country"
+
+msgid "Save changes"
+msgstr "Save changes"
+
+msgid "Search records"
+msgstr "Search records"
+
+msgid "All"
+msgstr "All"
+
+msgid "Are you sure?"
+msgstr "Are you sure?"
+
+msgid "You will not be able to recover this store!"
+msgstr "You will not be able to recover this store!"
+
+msgid "Yes, delete it!"
+msgstr "Yes, delete it!"
+
+msgid "No, keep it"
+msgstr "No, keep it"
+
+msgid "Deleted!"
+msgstr "Deleted!"
+
+msgid "Your store has been deleted."
+msgstr "Your store has been deleted."
+
+msgid "Cancelled"
+msgstr "Cancelled"
+
+msgid "Your store is safe :)"
+msgstr "Your store is safe :)"
+
+# ##################### Suppliers page #########################
+msgid "Here you can find all your suppliers settings"
+msgstr "Here you can find all your suppliers settings"
+
+msgid "Supplier Name"
+msgstr "Supplier Name"
+
+msgid "Field of Business"
+msgstr "Field of Business"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Website"
+msgstr "Website"
+
+msgid "Active"
+msgstr "Active"
+
+msgid "New Supplier"
+msgstr "New Supplier"
+
+msgid "Enter your email"
+msgstr "Enter your email"
+
+msgid "You will not be able to recover this supplier!"
+msgstr "You will not be able to recover this supplier!"
+
+msgid "Your supplier has been deleted."
+msgstr "Your supplier has been deleted."
+
+msgid "Your supplier is safe :)"
+msgstr "Your supplier is safe :)"
+
+# ##################### Services page #########################
+msgid "Here you can find all your store services"
+msgstr "Here you can find all your store services"
+
+msgid "Service Code"
+msgstr "Service Code"
+
+msgid "Service Name"
+msgstr "Service Name"
+
+msgid "Price"
+msgstr "Price"
+
+msgid "Discount"
+msgstr "Discount"
+
+msgid "Time"
+msgstr "Time"
+
+msgid "Add Service"
+msgstr "Add Service"
+
+msgid "Your service name"
+msgstr "Your service name"
+
+msgid "Service Time"
+msgstr "Service Time"
+
+msgid "Select duration"
+msgstr "Select duration"
+
+msgid "15 minutes"
+msgstr "15 minutes"
+
+msgid "30 minutes"
+msgstr "30 minutes"
+
+msgid "45 minutes"
+msgstr "45 minutes"
+
+msgid "60 minutes"
+msgstr "60 minutes"
+
+msgid "1 hour 15 minutes"
+msgstr "1 hour 15 minutes"
+
+msgid "1 hour 30 minutes"
+msgstr "1 hour 30 minutes"
+
+msgid "1 hour 45 minutes"
+msgstr "1 hour 45 minutes"
+
+msgid "2 hours"
+msgstr "2 hours"
+
+msgid "2 hours 30 minutes"
+msgstr "2 hours 30 minutes"
+
+msgid "3 hours"
+msgstr "3 hours"
+
+msgid "3 hours 30 minutes"
+msgstr "3 hours 30 minutes"
+
+msgid "4 hours"
+msgstr "4 hours"
+
+msgid "Discount Price"
+msgstr "Discount Price"
+
+msgid "You will not be able to recover this service!"
+msgstr "You will not be able to recover this service!"
+
+msgid "Your service has been deleted."
+msgstr "Your service has been deleted."
+
+msgid "Your service is safe :)"
+msgstr "Your service is safe :)"
+
+msgid "Categories"
+msgstr "Categories"
+
+msgid "Category Name"
+msgstr "Category Name"
+
+# ##################### Products page #########################
+msgid "Here you can find all your products"
+msgstr "Here you can find all your products"
+
+msgid "Product Code"
+msgstr "Product Code"
+
+msgid "Supplier"
+msgstr "Supplier"
+
+msgid "Product"
+msgstr "Product"
+
+msgid "Ml"
+msgstr "Ml"
+
+msgid "Stock"
+msgstr "Stock"
+
+msgid "Can split"
+msgstr "Can split"
+
+msgid "Add Product"
+msgstr "Add Product"
+
+msgid "Select supplier"
+msgstr "Select supplier"
+
+msgid "Product Name"
+msgstr "Product Name"
+
+msgid "Product ml"
+msgstr "Product ml"
+
+msgid "Product Price"
+msgstr "Product Price"
+
+msgid "Product Stock"
+msgstr "Product Stock"
+
+msgid "Good job!"
+msgstr "Good job!"
+
+msgid "Successfully updated product to the database"
+msgstr "Successfully updated product to the database"
+
+# ##################### Index page #########################
+msgid "Total Stores"
+msgstr "Total Stores"
+
+msgid "Updated now"
+msgstr "Updated now"
+
+msgid "Revenue"
+msgstr "Revenue"
+
+msgid "Last day"
+msgstr "Last day"
+
+msgid "Bookings Today"
+msgstr "Bookings Today"
+
+msgid "View Bookings"
+msgstr "View Bookings"
+
+msgid "Credits"
+msgstr "Credits"
+
+msgid "Buy Credits Now"
+msgstr "Buy Credits Now"
+
+msgid "total earnings"
+msgstr "total earnings"
+
+msgid "Financial Statistics"
+msgstr "Financial Statistics"
+
+msgid "Nameday - Birthday"
+msgstr "Nameday - Birthday"
+
+msgid "You have"
+msgstr "You have"
+
+msgid "with Nameday"
+msgstr "with Nameday"
+
+msgid "with Birthday"
+msgstr "with Birthday"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Reason"
+msgstr "Reason"
+
+# ##################### Customers page #########################
+msgid "Here you can find all your customers"
+msgstr "Here you can find all your customers"
+
+msgid "Add customer"
+msgstr "Add customer"
+
+msgid "Gold customers"
+msgstr "Gold customers"
+
+msgid "Inactice customers"
+msgstr "Inactice customers"
+
+msgid "Customers with birthdays"
+msgstr "Customers with birthdays"
+
+msgid "Phone"
+msgstr "Phone"
+
+msgid "Points"
+msgstr "Points"
+
+msgid "Birthday"
+msgstr "Birthday"
+
+msgid "Customer Name"
+msgstr "Customer Name"
+
+msgid "Customer Surname"
+msgstr "Customer Surname"
+
+msgid "Customer Email"
+msgstr "Customer Email"
+
+msgid "Select gender"
+msgstr "Select gender"
+
+msgid "Male"
+msgstr "Male"
+
+msgid "Female"
+msgstr "Female"
+
+msgid "Enter your mobile number"
+msgstr "Enter your mobile number"
+
+msgid "Enter your home phone number"
+msgstr "Enter your home phone number"
+
+msgid "Date Of Birth"
+msgstr "Date Of Birth"
+
+# ##################### Profile page #########################
+msgid "Work Phone:"
+msgstr "Work Phone:"
+
+msgid "Mobile Phone:"
+msgstr "Mobile Phone:"
+
+msgid "Company:"
+msgstr "Company:"
+
+msgid "Add Stores"
+msgstr "Add Stores"
+
+msgid "Edit Profile"
+msgstr "Edit Profile"
+
+msgid "Company"
+msgstr "Company"
+
+msgid "Email address"
+msgstr "Email address"
+
+msgid "First Name"
+msgstr "First Name"
+
+msgid "Last Name"
+msgstr "Last Name"
+
+msgid "Image Logo"
+msgstr "Image Logo"
+
+msgid "Clear"
+msgstr "Clear"
+
+msgid "Update Profile"
+msgstr "Update Profile"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Subscription"
+msgstr "Subscription"
+
+msgid "Update your Subscription"
+msgstr "Update your Subscription"
+
+msgid "Edit your profile"
+msgstr "Edit your profile"
+
+# ##################### Profile page #########################
+msgid "Page Not Found"
+msgstr "Page Not Found"
+
+msgid "Error 404"
+msgstr "Error 404"
+
+msgid "The page you requested could not be found, either contact your webmaster or try again. Use your browsers Back button to navigate to the page you have previously come from."
+msgstr "The page you requested could not be found, either contact your webmaster or try again. Use your browsers Back button to navigate to the page you have previously come from."
+
+msgid "Or you could just press this neat little button:"
+msgstr "Or you could just press this neat little button:"
+
+msgid "Take Me Home"
+msgstr "Take Me Home"
+
+# ##################### Helpers translations #########################
+msgid "Home"
+msgstr "Home"
+
+# ##################### Shop settings page #########################
+msgid "Automatic SMS and EMAIL"
+msgstr "Automatic SMS and EMAIL"
+
+msgid "Send SMS notification on new customer bookings"
+msgstr "Send SMS notification on new customer bookings"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "booking reminder for [TIME] on [DATE] on [SALON NAME]"
+msgstr "booking reminder for [TIME] on [DATE] on [SALON NAME]"
+
+msgid "Remind the appointment to the client with an SMS"
+msgstr "Remind the appointment to the client with an SMS"
+
+msgid "Send Email notification on new customer bookings"
+msgstr "Send Email notification on new customer bookings"
+
+msgid "Email Subject"
+msgstr "Email Subject"
+
+msgid "Reservation reminder for [TIME] on [DATE] on [SALON NAME]"
+msgstr "Reservation reminder for [TIME] on [DATE] on [SALON NAME]"
+
+msgid "Submit"
+msgstr "Submit"
+
+msgid "Remind the appointment to the client with an Email"
+msgstr "Remind the appointment to the client with an Email"

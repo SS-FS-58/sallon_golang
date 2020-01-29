@@ -1,0 +1,966 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+	<li>
+		<a href="/admin/products?lang=gr">
+			<img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin/products?lang=en">
+			<img src="/static/images/flags/GB.png"> {{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}} {{define "content"}}
+
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="col-lg-12 col-md-12">
+			<div class="card">	
+				
+					<button id="toggle" class="btn btn-sm btn-primary">?</button>
+					<aside id="aside" class="aside">
+						<h2>{{gettext "Information"}}</h2>
+	
+						<p>{{gettext "Here you can find all your products You can add new products edit details and change product status also you can add or remove stock"}}</p>
+						
+					</aside>
+				
+				<div class="card-content">
+					
+					<div id="my-tab-content" class="tab-content">
+
+						<div class="tab-pane active" id="Products">
+							<div class="col-md-12 text-left margin-bottom-20">
+
+								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#productsModalHorizontal">
+									<span class="btn-label">
+										<i class="ti-plus"></i>
+									</span> {{gettext "Add new product"}}
+								</button>
+							</div>
+							<div class="fresh-datatables ">
+								<table id="productsdatatables" class="table  table-striped table-bordered  table-hover productdatatables" cellspacing="0"
+								 width="100%" style="width:100%">
+									<thead>
+										<tr>
+											<th>{{gettext "Code"}}</th>
+											<th>{{gettext "Store Name"}}</th>
+											<th>{{gettext "Supplier"}}</th>
+											<th>{{gettext "Product"}}</th>
+											<th>{{gettext "Ml"}}</th>
+											<th>{{gettext "Price"}}</th>
+											<th>{{gettext "Stock"}}</th>
+											<th>{{gettext "Creation Date"}}</th>
+											<th>{{gettext "Active"}}</th>
+											<th>{{gettext "Can split"}}</th>
+											<th class="disabled-sorting">{{gettext "Actions"}}</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>{{gettext "Code"}}</th>
+											<th>{{gettext "Store Name"}}</th>
+											<th>{{gettext "Supplier"}}</th>
+											<th>{{gettext "Product"}}</th>
+											<th>{{gettext "Ml"}}</th>
+											<th>{{gettext "Price"}}</th>
+											<th>{{gettext "Stock"}}</th>
+											<th>{{gettext "Creation Date"}}</th>
+											<th>{{gettext "Active"}}</th>
+											<th>{{gettext "Can split"}}</th>
+											<th>{{gettext "Actions"}}</th>
+										</tr>
+									</tfoot>
+									<tbody>
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="modal fade " id="productsModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" onclick="window.location = '/admin/products';">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">{{gettext "Close"}}</span>
+				</button>
+				<h4 class="modal-title" id="editModalLabel">{{gettext "Add Product"}}</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<form id="createProduct">
+				<input type="hidden" id="Id" name="Id">
+				<input type="hidden" id="UserID" name="UserID" value="{{.UserID}}">
+				<div class="modal-body">
+					<div class="card card-plain">
+						<div class="content">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="product_code" class="control-label">{{gettext "Product Code"}}</label>
+										<input type="text" id="product_code" name="product_code" placeholder='{{gettext "Product Code"}}' class="form-control">
+										<label id="product_name_exists"></label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div id="SupplierName" class="col-md-6">
+									<div class="form-group">
+										<label for="supplier_name">{{gettext "Supplier"}}</label>
+										<select id="supplier_name" name="supplier_name" class="selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select supplier"}}'
+										 data-size="7" data-live-search="true">
+											{{range .Suppliers}}
+											<option value="{{.SupplierName}},{{.ID}}">{{.SupplierName}}</option>
+											{{end}}
+
+										</select>
+									</div>
+								</div>
+								<div id="SubCategoryName" class="col-md-6">
+									<div class="form-group">
+										<label for="selectstore" class="control-label">{{gettext "Select Store"}}</label>
+										<select multiple id="selectstore" name="selectstore" class="select_drop selectpicker" data-style="btn btn-info btn-block"
+										 title='{{gettext "Select Store"}}' data-size="7" data-live-search="true">
+
+
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="product_name" class="control-label">{{gettext "Product Name"}}</label>
+										<input type="text" id="product_name" name="product_name" placeholder='{{gettext "Product Name"}}' class="form-control">
+
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="product_stock" class="control-label">{{gettext "Product Stock"}}</label>
+										<input type="text" id="product_stock" name="product_stock" placeholder='{{gettext "Product Stock"}}' class="form-control">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="product_price" class="control-label">{{gettext "Product Price"}} (EURO)</label>
+										<input type="text" id="product_price" name="product_price" placeholder='{{gettext "Product Price"}}  (EURO)' class="form-control">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="product_ml" class="control-label">{{gettext "Product ml"}}</label>
+										<input type="text" id="product_ml" name="product_ml" placeholder='{{gettext "Product ml"}}' class="form-control">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="product_ml_per_price" class="control-label">Price / ml</label>
+										<input type="text" id="product_ml_per_price" name="product_ml_per_price" placeholder='Price / ml' class="form-control">
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.location = '/admin/products';">
+						{{gettext "Close"}}
+					</button>
+					<button id="addproductsubmit" type="submit" class="btn btn-primary">
+						{{gettext "Save changes"}}
+					</button>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+</div>
+
+<div class="modal fade editModalHorizontal" id="productsEditModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" onclick="window.location = '/admin/products';">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">{{gettext "Close"}}</span>
+				</button>
+				<h4 class="modal-title" id="editShopModalLabel">
+				</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<form id="editProduct">
+				<input type="hidden" id="ID" name="ID">
+				<input type="hidden" id="EditUserID" name="EditUserID" value="{{.UserID}}">
+				<div class="modal-body">
+					<div class="card card-plain">
+						<div class="content">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="eproduct_code" class="control-label">{{gettext "Product Code"}}</label>
+										<input type="text" id="eproduct_code" name="eproduct_code" placeholder='{{gettext "Product Code"}}' class="form-control">
+
+									</div>
+								</div>
+								<div id="SupplierName" class="col-md-6">
+									<div class="form-group">
+										<label for="esupplier_name">{{gettext "Supplier"}}</label>
+										<select id="esupplier_name" name="esupplier_name" class="selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select supplier"}}'
+										 data-size="7" data-live-search="true">
+											{{range .Suppliers}}
+											<option value="{{.SupplierName}},{{.ID}}">{{.SupplierName}}</option>
+											{{end}}
+
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="eproduct_name" class="control-label">{{gettext "Product Name"}}</label>
+										<input type="text" id="eproduct_name" name="eproduct_name" placeholder='{{gettext "Product Name"}}' class="form-control">
+
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="eproduct_ml" class="control-label">{{gettext "Product ml"}}</label>
+										<input type="text" id="eproduct_ml" name="eproduct_ml" placeholder='{{gettext "Product ml"}}' class="form-control">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="eproduct_price" class="control-label">{{gettext "Product Price"}}</label>
+										<input type="text" id="eproduct_price" name="eproduct_price" placeholder='{{gettext "Product Price"}}' class="form-control">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="eproduct_ml_per_price" class="control-label">ML per Price</label>
+										<input type="text" id="eproduct_ml_per_price" name="eproduct_ml_per_price" placeholder='ML per Price' class="form-control">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="eproduct_stock" class="control-label">{{gettext "Product Stock"}}
+											<span class="productstock"></span>
+										</label>
+										<input type="text" id="eproduct_stock" name="eproduct_stock" placeholder='{{gettext "Product Stock"}}' class="form-control"
+										 value="0">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.location = '/admin/products';">
+						{{gettext "Close"}}
+					</button>
+					<button type="submit" class="btn btn-primary">
+						{{gettext "Update changes"}}
+					</button>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+</div>
+
+{{end}} {{define "googlemaps"}}
+
+<script>
+	$(document).ready(function () {
+
+		producthelpers.addProductsValidation();
+
+	});
+</script>
+
+<script>
+	var user_is = $('input[name=UserID]').val();
+	var usr_id = parseInt(user_is);
+	console.log(usr_id);
+	var url = '/admin/api/all-products-per-user/' + usr_id;
+	$('#productsdatatables').DataTable({
+		"processing": true,
+		"ajax": {
+			"url": url,
+			"dataSrc": function (data) {
+				console.log(data);
+				if (data["data"] == null) {
+					return [];
+				}
+				else {
+					return data.data;
+				}
+			}
+		},
+		"oLanguage": {
+			"sEmptyTable": '{{gettext "You do not have any data"}}',
+			"sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+		},
+		"columns": [
+			{
+				"data": "product_code",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "store_name",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "supplier_name",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "product_name",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "product_ml",
+				"render": function (data) {
+
+
+					return data + " ml";
+				}
+			},
+			{
+				"data": "product_price",
+				"render": function (data) {
+
+
+					return data + " €";
+				}
+			},
+			{
+				"data": "product_stock",
+				"render": function (data) {
+
+
+					return data + " items";
+				}
+			},
+
+
+			{
+				"data": "updated_at",
+				"render": function (data) {
+					var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+					return dateoflastReview.format("DD/MM/YYYY")
+				}
+
+			},
+			{
+				"data": "null",
+				"render": function (data, type, row) {
+					if (row.is_active == true) {
+
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" store-id="' + row.store_id + '" type="checkbox" name="my-checkbox" class="switch-plain enableDisableProduct" checked></td>'
+					} else {
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" store-id="' + row.store_id + '" type="checkbox" name="my-checkbox" class="switch-plain enableDisableProduct"></td>'
+					}
+				}
+
+			},
+			{
+				"data": "null",
+				"render": function (data, type, row) {
+					if (row.can_split == true) {
+
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" store-id="' + row.store_id + '"  type="checkbox" name="my-checkbox-can-split" class="switch-plain enableDisablCanSplitProduct" checked></td>'
+					} else {
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" store-id="' + row.store_id + '" type="checkbox" name="my-checkbox-can-split" class="switch-plain enableDisablCanSplitProduct"></td>'
+					}
+				}
+
+			},
+			{
+				"data": "null",
+				"render": function (data) {
+					return '<td><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target=".editModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+
+				}
+			},
+
+
+
+
+		],
+		"pagingType": "full_numbers",
+		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+		responsive: true,
+		language: {
+			search: "_INPUT_",
+			searchPlaceholder: '{{gettext "Search records"}}',
+		},
+		"initComplete": function (settings, json) {
+			enable_disable_product();
+			can_split_product();
+			$('[rel="tooltip"]').tooltip();
+			this.api().columns().every(function () {
+				var column = this;
+				var select = $('<select id="student-selected" class="form-control border-input"><option value=""></option></select>')
+					.appendTo($(column.footer()).empty())
+					.on('change', function () {
+						var val = $.fn.dataTable.util.escapeRegex(
+							$(this).val()
+						);
+
+						column
+							.search(val ? '^' + val + '$' : '', true, false)
+							.draw();
+					});
+
+
+				column.data().unique().sort().each(function (d, j) {
+					select.append('<option value="' + d + '">' + d + '</option>')
+
+
+				});
+
+
+			});
+		}
+
+	});
+
+
+	var table = $('#productsdatatables').DataTable();
+	table.on('responsive-display', function (e, datatable, row, showHide, update) {
+		// console.log('Details for row ' + row.index() + ' ' + (showHide ? 'shown' : 'hidden'));
+		enable_disable_product();
+		can_split_product();
+	});
+	// Edit record
+	table.on('click', '.edit', function () {
+		// $tr = $(this).closest('tr');
+		// var data = table.row($tr).data();
+		var cell = table.cell(this.parentNode);
+		var data = table.row(cell.index().row).data();
+		$("#editShopModalLabel").text("Edit " + data.product_name);
+		$("#ID").val(data.id);
+		$("#EditUserID").val(data.user_id);
+		$("input[name=eproduct_code]").val(data.product_code);
+		$("input[name=eproduct_name]").val(data.product_name);
+		$("input[name=eproduct_ml]").val(data.product_ml);
+		$("input[name=eproduct_price]").val(data.product_price);
+		$(".productstock").text(" (" + data.product_stock + ")");
+		$("input[name=eproduct_ml_per_price]").val(data.product_ml_per_price);
+
+		var selected = data.supplier_name + "," + data.supplier_id;
+		$("#esupplier_name").val(selected);
+
+		$('.selectpicker').selectpicker('refresh');
+
+	});
+
+</script>
+<script>
+	function enable_disable_product() {
+		$('.switch-plain.enableDisableProduct').bootstrapSwitch({
+			onColor: 'primary',
+			onSwitchChange: function (event, state) {
+				console.log(this); // DOM element
+				console.log(event); // jQuery event
+				console.log(state); // true | false
+				var id = parseInt($(this).attr('data-id'));
+				var storeid = parseInt($(this).attr('store-id'));
+				var formData = {
+					'is_active': state,
+				}
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/enable-disable-product/' + storeid + "/" + id,
+					data: JSON.stringify(formData),
+
+					success: function (data) {
+						swal({
+							title: '{{gettext "Good job!"}}',
+							text: '{{gettext "Successfully updated product to the database"}}',
+							buttonsStyling: false,
+							confirmButtonClass: "btn btn-success btn-fill",
+							type: "success"
+						}).then(function () {
+							window.location.reload();
+						});
+
+					},
+
+
+					contentType: 'application/json',
+					dataType: 'json'
+				});
+
+			}
+		});
+	}
+
+	function can_split_product() {
+		$('.switch-plain.enableDisablCanSplitProduct').bootstrapSwitch({
+			onColor: 'primary',
+			onSwitchChange: function (event, state) {
+				console.log(this); // DOM element
+				console.log(event); // jQuery event
+				console.log(state); // true | false
+				var id = parseInt($(this).attr('data-id'));
+				var storeid = parseInt($(this).attr('store-id'));
+				var formData = {
+					'can_split': state,
+				}
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/enable-disable-can-split-product/' + storeid + "/" + id,
+					data: JSON.stringify(formData),
+
+					success: function (data) {
+						swal({
+							title: '{{gettext "Good job!"}}',
+							text: '{{gettext "Successfully updated product to the database"}}',
+							buttonsStyling: false,
+							confirmButtonClass: "btn btn-success btn-fill",
+							type: "success"
+						}).then(function () {
+							window.location.reload();
+						});
+
+					},
+
+
+					contentType: 'application/json',
+					dataType: 'json'
+				});
+
+			}
+		});
+	}
+</script>
+<script>
+
+	$('#createProduct').on('submit', function (event) {
+		event.preventDefault();
+		if ($.trim($("#product_code").val()) === "" || $.trim($("#supplier_name").val()) === "" || $.trim($("#product_ml_per_price").val()) === "" || $.trim($("#product_name").val()) === "" || $.trim($("#product_ml").val()) === "" || $.trim($("#product_stock").val()) === "") {
+			alert('you did not fill out one of the fields');
+			return false;
+		} else {
+			var user_is = $('input[name= UserID]').val();
+			var usr_id = parseInt(user_is);
+
+			var stores = $('#selectstore').val();
+
+
+			var supplier = $('#supplier_name').val();
+			var res = supplier.split(",");
+			var supplier_name = res[0];
+			var supplier_id = parseInt(res[1]);
+			var product_name = $('input[name=product_name]').val();
+			var product_code = $('input[name=product_code]').val();
+			var product_ml = $('input[name=product_ml]').val();
+			product_ml = parseInt(product_ml);
+
+			var product_price = $('input[name=product_price]').val();
+			product_price = parseFloat(product_price);
+
+			var product_ml_per_price = $('input[name=product_ml_per_price').val();
+			product_ml_per_price = parseFloat(product_ml_per_price);
+
+			var product_stock = $('input[name=product_stock]').val();
+			product_stock = parseFloat(product_stock);
+
+
+			var formData = {
+				"user_id": usr_id,
+				"stores": stores,
+				"product_code": product_code,
+				"supplier_name": supplier_name,
+				"supplier_id": supplier_id,
+				"product_name": product_name,
+				"product_ml": product_ml,
+				"product_price": product_price,
+				"product_ml_per_price": product_ml_per_price,
+				"product_stock": product_stock,
+			};
+			$('#addproductsubmit').addClass('loaderform');
+			$.ajax({
+				type: 'post',
+				url: '/admin/api/create-product',
+				data: JSON.stringify(formData),
+				dataType: 'json',
+				contentType: "application/json",
+
+				success: function (data) {
+					var status = data.status;
+					console.log(data);
+					if (status == 501) {
+						$("#product_name_exists").show();
+						$("#product_name_exists").text(data.description);
+						$('#addproductsubmit').removeClass('loaderform');
+						return;
+					} else {
+						$('#productsModalHorizontal').modal('toggle');
+						$('#addproductsubmit').removeClass('loaderform');
+						swal({
+							title: '{{gettext "Good job!"}}',
+							text: '{{gettext "Successfully insert product to the database"}}',
+							buttonsStyling: false,
+							confirmButtonClass: "btn btn-success btn-fill",
+							type: "success"
+						}).then(function () {
+							window.location.reload();
+						});
+					}
+				}
+			});
+		}
+	});
+
+	$('#editProduct').on('submit', function (event) {
+		event.preventDefault();
+		if ($.trim($("#eproduct_code").val()) === "" || $.trim($("#esupplier_name option:selected").text()) === "") {
+			alert('you did not fill out one of the fields');
+			return false;
+		} else {
+			var user_is = $('input[name=EditUserID]').val();
+			var usr_id = parseInt(user_is);
+
+			var id = $('input[name=ID]').val();
+			id = parseInt(id);
+
+
+			var supplier = $('#esupplier_name option:selected').val();
+			var res = supplier.split(",");
+			var supplier_name = res[0];
+			var supplier_id = parseInt(res[1]);
+			var product_name = $('input[name=eproduct_name]').val();
+			var product_code = $('input[name=eproduct_code]').val();
+			var product_ml = $('input[name=eproduct_ml]').val();
+			product_ml = parseInt(product_ml);
+
+			var product_price = $('input[name=eproduct_price]').val();
+			product_price = parseFloat(product_price);
+
+			var product_ml_per_price = $('input[name=eproduct_ml_per_price').val();
+			product_ml_per_price = parseFloat(product_ml_per_price);
+
+			var product_stock = $('input[name=eproduct_stock]').val();
+			product_stock = parseFloat(product_stock);
+
+
+			var formData = {
+				"id": id,
+				"user_id": usr_id,
+				"product_code": product_code,
+				"supplier_name": supplier_name,
+				"supplier_id": supplier_id,
+				"product_name": product_name,
+				"product_ml": product_ml,
+				"product_price": product_price,
+				"product_stock": product_stock,
+				"product_ml_per_price": product_ml_per_price,
+			};
+			$.ajax({
+				type: 'post',
+				url: '/admin/api/update-product/' + id,
+				data: JSON.stringify(formData),
+				dataType: 'json',
+				contentType: "application/json",
+
+				success: function (data) {
+					var status = data.status;
+					console.log(status);
+					$('#productsEditModalHorizontal').modal('toggle');
+					swal({
+						title: '{{gettext "Good job!"}}',
+						text: '{{gettext "Successfully updated product to the database"}}',
+						buttonsStyling: false,
+						confirmButtonClass: "btn btn-success btn-fill",
+						type: "success"
+					}).then(function () {
+						window.location.reload("#productsdatatables");
+					});
+				}
+			});
+		}
+	});
+
+</script>
+<script>
+	$(document).ready(function () {
+		$('#createProduct').validate({
+			rules: {
+				product_code: "required",
+				supplier_name: "required",
+				selectstore: "required",
+				product_name: "required",
+				product_ml: {
+					required: true,
+					number: true,
+				},
+
+				product_price: {
+					required: true,
+					number: true,
+				},
+				product_ml_per_price: {
+					required: true,
+					number: true,
+				},
+
+				product_stock: {
+					required: true,
+					number: true,
+				},
+
+			},
+			messages: {
+				product_code: '{{gettext "Please enter your product code"}}',
+				supplier_name: '{{gettext "Please select supplier name"}}',
+				selectstore: '{{gettext "Please select store"}}',
+				product_name: '{{gettext "Please enter the product name"}}',
+				product_ml: {
+					required: '{{gettext "Please enter product ML"}}',
+					number: '{{gettext "The product ML is not a number"}}',
+				},
+
+				product_price: {
+					required: '{{gettext "Please enter the product price"}}',
+					number: '{{gettext "The product price is not a number"}}',
+				},
+				product_ml_per_price: {
+					required: '{{gettext "Please enter the price per ml"}}',
+					number: '{{gettext "The product ml is not a number"}}',
+				},
+				product_stock: {
+					required: '{{gettext "Please enter the product stock"}}',
+					number: '{{gettext "The product stock is not a number"}}',
+				},
+
+			}
+		});
+
+	});
+</script>
+<script>
+	$(document).ready(function () {
+		$('#editProduct').validate({
+			rules: {
+				eproduct_code: "required",
+				esupplier_name: "required",
+				eselectstore: "required",
+				eproduct_name: "required",
+				eproduct_ml: {
+					required: true,
+					number: true,
+				},
+
+				eproduct_price: {
+					required: true,
+					number: true,
+				},
+				eproduct_ml_per_price: {
+					required: true,
+					number: true,
+				},
+				eproduct_stock: {
+					required: true,
+					number: true,
+				},
+
+			},
+			messages: {
+				eproduct_code: '{{gettext "Please enter your product code"}}',
+				esupplier_name: '{{gettext "Please select supplier name"}}',
+				eselectstore: '{{gettext "Please select store"}}',
+				eproduct_name: '{{gettext "Please enter the product name"}}',
+				eproduct_ml: {
+					required: '{{gettext "Please enter product ML"}}',
+					number: '{{gettext "The product ML is not a number"}}',
+				},
+
+				eproduct_price: {
+					required: '{{gettext "Please enter the product price"}}',
+					number: '{{gettext "The product price is not a number"}}',
+				},
+				eproduct_ml_per_price: {
+					required: '{{gettext "Please enter the product price"}}',
+					number: '{{gettext "The product price is not a number"}}',
+				},
+				eproduct_stock: {
+					required: '{{gettext "Please enter the product stock"}}',
+					number: '{{gettext "The product stock is not a number"}}',
+				},
+
+			}
+		});
+
+	});
+</script>
+<script>
+	$(document).ready(function () {
+		$('#toggle').click(function (e) {
+			$('.aside').stop(true).slideToggle();
+		});
+		$(document).click(function (e) {
+			if (!$(e.target).closest('#toggle, .aside').length) {
+				$('.aside').stop(true).slideUp();
+			}
+		});
+		$('#updateCustomerForm').on('submit', function (event) {
+			event.preventDefault();
+			if ($.trim($("#ecustomer_name").val()) === "" || $.trim($("#ecustomer_surname").val()) === "" || $.trim($("#emobile_phone").val()) === "" || $.trim($("#ecustomer_email").val()) === "" || $.trim($("#estreet_number").val()) === "" || $.trim($("#eroute").val()) === "" || $.trim($("#eadministrative_area_level_1").val()) === "" || $.trim($("#epostal_code").val()) === "" || $.trim($("#egender_of_customer").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+
+				var id = $('input[name=Id]').val();
+				var id = parseInt(id);
+				var user_is = $('input[name= UserID]').val();
+				var usr_id = parseInt(user_is);
+				var street_number = $("input[name=estreet_number]").val();
+				street_number = parseInt(street_number);
+
+
+				var from = $("#edate_of_birth").val().split("/");
+				var f = new Date(from[2], from[1] - 1, from[0]);
+
+				var formData = {
+					'id': id,
+					'user_id': usr_id,
+					'customer_name': $("input[name=ecustomer_name]").val(),
+					'customer_surname': $("input[name=ecustomer_surname]").val(),
+					'gender_of_customer': $("#egender_of_customer").val(),
+					'mobile_phone_number': $("input[name=emobile_phone]").val(),
+					'home_phone_number': $("input[name=ehome_number]").val(),
+					'customer_email': $("input[name=ecustomer_email]").val(),
+					'date_of_birth': f,
+
+					'customer_street_number': street_number,
+					'customer_address': $("input[name=eroute]").val(),
+					'customer_city': $("input[name=elocality]").val(),
+					'customer_state': $("input[name=eadministrative_area_level_1]").val(),
+					'customer_zip_code': $("input[name=epostal_code]").val(),
+					'customer_country': $("input[name=ecountry]").val(),
+				};
+
+				var shopJSON = JSON.stringify(formData);
+
+				var fd = new FormData();
+				fd.append('supplierJSON', shopJSON);
+				// if (shopLogoImageFile.length && shopLogoImageFile[0].files.length) {
+				//   fd.append('shopLogoImageFile', shopLogoImageFile[0].files[0]);
+				// }
+
+
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/update-customer/' + id,
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 500) {
+
+							return;
+						} else {
+
+							$('.editModalHorizontal').modal('toggle');
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: '{{gettext "Successfully update customer in to the database"}}',
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+			}
+		});
+
+	});
+</script>
+<!-- <script type="text/javascript">
+    $.notify({
+        allow_dismiss: true,
+        
+        icon: '/static/images/Succstepsfavicon.png',
+        title: 'Succsteps',
+        message: '{{gettext "Here you can find all your products You can add new products edit details and change product status also you can add or remove stock"}}'
+    },{
+        type: 'pastel-warning',
+         delay: 500000,
+        icon_type: 'image',
+        placement: {from: 'top',align: 'center'
+	},
+    offset: {
+		y: 8
+	},
+        template: '<div data-notify="container" class="col-xs-11 col-sm-5 alert alert-{0}" role="alert">' +
+                '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">X</button>'+
+            '<img data-notify="icon" class="img-circle pull-left">' +
+            '<span data-notify="title">{1}</span>' +
+            '<span data-notify="message">{2}</span>' +
+        '</div>'
+    });
+ </script> -->
+ {{end}}

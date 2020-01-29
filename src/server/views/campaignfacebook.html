@@ -1,0 +1,192 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+	<li>
+		<a href="/admin/campaignfacebook?lang=gr">
+			<img src="/static/images/flags/GR.png">
+			{{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin/campaignfacebook?lang=en">
+			<img src="/static/images/flags/GB.png">
+			{{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}}
+{{define "content"}}
+
+<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+					<div class="col-lg-3 col-sm-6">
+							<div class="card">
+								<div class="card-content">
+									<div class="row">
+										<div class="col-xs-5">
+											<div class="icon-big icon-warning text-center">
+												<i class="ti-facebook"></i>
+											</div>
+										</div>
+										<div class="col-xs-7">
+											<div class="numbers">
+												<p>{{gettext "To be approved"}}</p>
+												12
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card-footer">
+									<hr />
+									<div class="stats">
+										<i class="ti-reload"></i> {{gettext "View your Campaigns"}}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-sm-6">
+							<div class="card">
+								<div class="card-content">
+									<div class="row">
+										<div class="col-xs-5">
+											<div class="icon-big icon-success text-center">
+												<i class="ti-facebook"></i>
+											</div>
+										</div>
+										<div class="col-xs-7">
+											<div class="numbers">
+												<p>{{gettext "Active"}}</p>
+												11
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card-footer">
+									<hr />
+									<div class="stats">
+										<i class="ti-calendar"></i> {{gettext "View your Campaigns"}}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-sm-6">
+							<div class="card">
+								<div class="card-content">
+									<div class="row">
+										<div class="col-xs-5">
+											<div class="icon-big icon-danger text-center">
+												<i class="ti-facebook"></i>
+											</div>
+										</div>
+										<div class="col-xs-7">
+											<div class="numbers">
+												<p>{{gettext "Inactive"}}</p>
+												23
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card-footer">
+									<hr />
+									<div class="stats">
+										<i class="ti-reload"></i> {{gettext "View your Campaigns"}}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-sm-6">
+							<div class="card">
+								<div class="card-content">
+									<div class="row">
+										<div class="col-xs-5">
+											<div class="icon-big icon-info text-center">
+												<i class="ti-credit-card"></i>
+											</div>
+										</div>
+										<div class="col-xs-7">
+											<div class="numbers">
+												<p>{{gettext "Credits"}}</p>
+												45
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card-footer">
+									<hr />
+									<div class="stats">
+										<i class="ti-reload"></i> {{gettext "Buy Credits Now"}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>		
+
+					<div class="col-md-12">
+							<div class="card-header">                           
+							</div>
+							<div class="card-content">
+								<button class="btn btn-success btn-fill btn-wd">{{gettext "Active"}}</button>
+								<button class="btn btn-warning btn-fill btn-wd">{{gettext "To be approved"}}</button>
+								<button class="btn btn-danger btn-fill btn-wd">{{gettext "Inactive"}}</button>
+								<h3></h3>
+							</div>
+						</div>			
+	
+				<div class="fresh-datatables">
+									<table id="datatables" class="table  table-striped table-bordered  table-hover" cellspacing="0" width="100%" style="width:100%">
+										<thead>
+											<tr>
+												<th>{{gettext "Status"}}</th>
+												<th>{{gettext "Date"}}</th>
+												<th>{{gettext "Campaign name"}}</th>
+												<th>{{gettext "From"}}</th>
+												<th>{{gettext "To"}}</th>
+												<th>{{gettext "Budget / Day"}}</th>
+												<th>{{gettext "Total Budget"}}</th>                                            
+												<th class="disabled-sorting">{{gettext "Actions"}}</th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>{{gettext "Status"}}</th>
+												<th>{{gettext "Date"}}</th>
+												<th>{{gettext "Campaign name"}}</th>
+												<th>{{gettext "From"}}</th>
+												<th>{{gettext "To"}}</th>
+												<th>{{gettext "Budget / Day"}}</th>
+												<th>{{gettext "Total Budget"}}</th>  
+												<th>{{gettext "Actions"}}</th>
+											</tr>
+										</tfoot>
+										<tbody>
+											<tr>
+												<td><button class="btn btn-success btn-fill btn-wd">{{gettext "Active"}}</button></td>
+												<td>26-10-2017</td>
+												<td>Ονομα καμπανιας</td>
+												<td>29-10-2017</td>
+												<td>26-11-2017</td>
+												<td>10,00€</td>
+												<td>100,00€</td>                                            
+												<td>
+													<a rel="tooltip" title='{{gettext "View"}}' class="btn btn-simple btn-info btn-icon table-action view">
+														<i class="ti-image"></i>
+													</a>
+													<a rel="tooltip" title='{{gettext "Edit"}}' class="btn btn-simple btn-warning btn-icon table-action edit">
+														<i class="ti-pencil-alt"></i>
+													</a>
+													<a rel="tooltip" title='{{gettext "Remove"}}' class="btn btn-simple btn-danger btn-icon table-action remove">
+														<i class="ti-close"></i>
+													</a>
+												</td>
+											</tr>
+	
+										</tbody>
+									</table>
+								</div>
+	
+			</div>
+		</div>
+	</div>
+{{end}}

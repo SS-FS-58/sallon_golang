@@ -1,0 +1,1972 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+	<li>
+		<a href="/admin/services?lang=gr">
+			<img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+		</a>
+
+	</li>
+	<li>
+
+		<a href="/admin/services?lang=en">
+			<img src="/static/images/flags/GB.png"> {{gettext "English"}}
+		</a>
+	</li>
+</ul>
+{{end}} {{define "content"}}
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="col-lg-12 col-md-12">
+			<div class="card">
+
+
+
+
+				<!-- <input type="checkbox" id="toggle"> -->
+				<button id="toggle" class="btn btn-sm btn-primary">?</button>
+				<aside id="aside" class="aside">
+					<h2>{{gettext "Information"}}</h2>
+
+					<p>{{gettext "Some very important information about you"}}</p>
+					<li>{{gettext "Here you can find all your store services"}}</li>
+					<ol>
+						
+						<li>{{gettext "On this page you can add categories"}}</li>
+						<li>{{gettext "Sub-categories"}}</li>
+						<li>{{gettext "Services"}}</li>					
+						
+					</ol>
+					<li>{{gettext "On add service if you select Accept formula this service "}}</li>
+
+				</aside>
+
+
+
+
+				<div class="card-content">
+					<div class="nav-tabs-navigation">
+						<div class="nav-tabs-wrapper">
+							<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+
+
+								<li>
+									<a class="tab-title" href="#Categories" data-toggle="tab">{{gettext "Categories"}}</a>
+								</li>
+
+								<li>
+									<a id="subcat" class="tab-title" href="#SubCategories" data-toggle="tab">{{gettext "Sub-Categories"}}</a>
+								</li>
+								<li class="active">
+									<a class="tab-title" href="#Services" data-toggle="tab">{{gettext "Services"}}</a>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+					<div id="my-tab-content" class="tab-content">
+
+						<div class="tab-pane active" id="Services">
+							<div class="col-md-12 text-left margin-bottom-20">
+
+								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#servicesModalHorizontal">
+									<span class="btn-label">
+										<i class="ti-plus"></i>
+									</span> {{gettext "Add new service"}}
+								</button>
+							</div>
+							<div class="fresh-datatables">
+								<table id="servicesdatatables" class="table  table-striped table-bordered  table-hover" cellspacing="0" width="100%" style="width:100%">
+									<thead>
+										<tr>
+											<th>{{gettext "Service Code"}}</th>
+											<th>{{gettext "Store Name"}}</th>
+											<th>{{gettext "Service Name"}}</th>
+											<th>{{gettext "Price"}}</th>
+											<th>{{gettext "Discount"}}</th>
+											<th>{{gettext "Time"}}</th>
+											<th>{{gettext "Creation Date"}}</th>
+											<th>{{gettext "Active"}}</th>
+											<th>Has Formula</th>
+											<th class="disabled-sorting">{{gettext "Actions"}}</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>{{gettext "Service Code"}}</th>
+											<th>{{gettext "Store Name"}}</th>
+											<th>{{gettext "Service Name"}}</th>
+											<th>{{gettext "Price"}}</th>
+											<th>{{gettext "Discount"}}</th>
+											<th>{{gettext "Time"}}</th>
+											<th>{{gettext "Creation Date"}}</th>
+											<th>{{gettext "Active"}}</th>
+											<th>Has Formula</th>
+											<th>{{gettext "Actions"}}</th>
+										</tr>
+									</tfoot>
+									<tbody>
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="tab-pane" id="Categories">
+							<div class="col-md-12 text-left margin-bottom-20">
+
+								<a href="#addCategory" data-toggle="collapse" class="btn">
+									<span class="btn-label">
+										<i class="ti-plus"></i>
+									</span>{{gettext "Add Category"}}</a>
+								<div class=" collapse " id="addCategory">
+									<div class="header">
+										<h4 class="title">{{gettext "Add Category"}}</h4>
+									</div>
+									<div class="content">
+										<form id="add-category">
+											<div class="row">
+
+												<div class="col-md-6">
+													<div class="form-group">
+
+														<input id="category_name" type="text" name="category_name" class="form-control border-input" placeholder='{{gettext "Category Name"}}'>
+														<label id="category_name_exists" for="category_name"></label>
+													</div>
+												</div>
+
+
+												<div class="col-md-2">
+													<div class="form-group">
+														<div class="text-center">
+															<button type="submit" class="btn btn-info btn-fill btn-wd">{{gettext "Create"}}</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+
+
+									</div>
+								</div>
+							</div>
+							<div class="fresh-datatables">
+								<table id="categoriesdatatables" class="table  table-striped table-bordered  table-hover" cellspacing="0" width="100%" style="width:100%">
+									<thead>
+										<tr>
+											<th>{{gettext "Service Code"}}</th>
+											<th>{{gettext "Category Name"}}</th>
+											<th>{{gettext "Creation Date"}}</th>
+											<th>{{gettext "Active"}}</th>
+											<th class="disabled-sorting">{{gettext "Actions"}}</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>{{gettext "Service Code"}}</th>
+											<th>{{gettext "Category Name"}}</th>
+											<th>{{gettext "Creation Date"}}</th>
+											<th>{{gettext "Active"}}</th>
+											<th>{{gettext "Actions"}}</th>
+										</tr>
+									</tfoot>
+									<tbody>
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="tab-pane" id="SubCategories">
+							<div class="col-md-12 text-left margin-bottom-20">
+
+								<a id="btaddsub" href="#addsubCategory" data-toggle="collapse" class="btn">
+									<span class="btn-label">
+										<i class="ti-plus"></i>
+									</span> {{gettext "Add Sub Category"}}</a>
+								<div class=" collapse " id="addsubCategory">
+									<div class="header">
+										<h4 class="title">{{gettext "Add Sub Category"}}</h4>
+									</div>
+									<div class="content">
+										<form id="add-sub-category">
+
+											<div class="row">
+												<div id="SubCategoryName" class="col-md-4">
+													<div class="form-group">
+
+														<select id="category_name1" name="category_name[]" class="select_drop selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select category"}}'
+														 data-size="7" data-live-search="true">
+
+
+														</select>
+													</div>
+												</div>
+
+												<div class="col-md-4">
+													<div class="form-froup">
+														<div class="input-group">
+
+															<input id="sub_category_name" type="text" name="sub_category_name[]" class="form-control border-input" placeholder='{{gettext "Sub Category Name"}}'>
+
+															<div class="input-group-btn">
+																<button class="btn btn-success" type="button" onclick="education_fields();">
+																	<span class="ti-plus" aria-hidden="true"></span>
+																</button>
+															</div>
+
+														</div>
+														<label class="sub_category_name_exists" for="category_name"></label>
+													</div>
+
+												</div>
+											</div>
+											<div id="education_fields"> </div>
+											<div class="col-md-12 text-right">
+												<div class="form-group">
+													<div class="text-center">
+														<button type="submit" class="btn btn-info btn-fill btn-wd">{{gettext "Create"}}</button>
+													</div>
+												</div>
+											</div>
+
+										</form>
+
+									</div>
+								</div>
+							</div>
+
+							<div class="clearfix"></div>
+							<div class="card-header">
+								<h4 class="card-title">{{gettext "Categories"}}</h4>
+
+							</div>
+							<div id="acordeon">
+								<div class="panel-group" id="accordion">
+									{{range .SubCategories}}
+									<div class="panel panel-border panel-default">
+										<a data-toggle="collapse" href="#collapse{{.ID}}">
+											<div class="panel-heading">
+												<h4 class="panel-title" category-id="{{.CategoryID}}">
+													{{.CategoryName}}
+													<i class="ti-angle-down"></i>
+												</h4>
+											</div>
+										</a>
+										<div id="collapse{{.ID}}" class="panel-collapse collapse">
+											<div class="panel-body">
+												<div class="fresh-datatables">
+													<div class="col-md-12">
+														<table class="subcategoriestable table  table-striped table-bordered  table-hover " cellspacing="0" width="100%" style="width:100%">
+															<thead>
+																<tr>
+																	<th>{{gettext "Service Code"}}</th>
+																	<th>{{gettext "Category Name"}}</th>
+																	<th>{{gettext "Sub Category Name"}}</th>
+																	<th>{{gettext "Creation Date"}}</th>
+																	<th>{{gettext "Active"}}</th>
+																	<th class="disabled-sorting">{{gettext "Actions"}}</th>
+																</tr>
+															</thead>
+															<tfoot>
+																<tr>
+																	<th>{{gettext "Service Code"}}</th>
+																	<th>{{gettext "Category Name"}}</th>
+																	<th>{{gettext "Sub Category Name"}}</th>
+																	<th>{{gettext "Creation Date"}}</th>
+																	<th>{{gettext "Active"}}</th>
+																	<th>{{gettext "Actions"}}</th>
+																</tr>
+															</tfoot>
+															<tbody>
+
+
+															</tbody>
+														</table>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									{{end}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="modal fade " id="servicesModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" onclick="window.location = '/admin/services';">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">{{gettext "Close"}}</span>
+				</button>
+				<h4 class="modal-title" id="editModalLabel">{{gettext "Add Service"}}</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<form id="createServices">
+				<input type="hidden" id="Id" name="Id">
+				<input type="hidden" id="ServicesUserID" name="ServicesUserID" value="{{.UserID}}">
+				<div class="modal-body">
+					<div class="card card-plain">
+						<div class="content">
+							<div class="row">
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="service_name" class="control-label">{{gettext "Service Name"}}</label>
+										<input type="text" id="service_name" name="service_name" placeholder='{{gettext "Your service name"}}' class="form-control">
+										<label id="service_name_exists"></label>
+									</div>
+								</div>
+								<div class="col-md-6 subcategory">
+									<div class="form-group">
+										<label for="selectsubcategory">{{gettext "Select Sub Category"}}</label>
+										<select id="selectsubcategory" name="selectsubcategory" class=" selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select Sub Category"}}'
+										 data-size="7" data-live-search="true">
+
+
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 store2">
+									<div class="form-group">
+										<label for="selectstore2">{{gettext "Select Store"}}</label>
+										<select multiple id="selectstore2" name="selectstore" class=" selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select Store"}}'
+										 data-size="7" data-live-search="true">
+
+
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="company_name" class="control-label">{{gettext "Price"}}</label>
+										<input type="text" id="service_price" name="service_price" placeholder="Price" class="form-control">
+									</div>
+								</div>
+							</div>
+
+
+							<div class="row">
+								<div id="ServiceTime" class="col-md-6">
+									<div class="form-group">
+										<label for="service_time">{{gettext "Service Time"}}</label>
+										<select id="service_time" name="service_time" class="selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select duration"}}'
+										 data-size="7">
+											<option value="15">{{gettext "15 minutes"}}</option>
+											<option value="30">{{gettext "30 minutes"}}</option>
+											<option value="45">{{gettext "45 minutes"}}</option>
+											<option value="60">{{gettext "60 minutes"}}</option>
+											<option value="75">{{gettext "1 hour 15 minutes"}}</option>
+											<option value="90">{{gettext "1 hour 30 minutes"}}</option>
+											<option value="105">{{gettext "1 hour 45 minutes"}}</option>
+											<option value="120">{{gettext "2 hours"}}</option>
+											<option value="150">{{gettext "2 hours 30 minutes"}}</option>
+											<option value="180">{{gettext "3 hours"}}</option>
+											<option value="210">{{gettext "3 hours 30 minutes"}}</option>
+											<option value="270">{{gettext "4 hours"}}</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="company_name" class="control-label">{{gettext "Discount Price"}}</label>
+										<input type="text" id="service_discount" name="service_discount" placeholder='{{gettext "Discount"}}' class="form-control">
+										<label id="discount_error" class="error discount_error"></label>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="switchFormula">Accept formula</label>
+										<input class="tgl tgl-skewed" id="switchFormula" type="checkbox" />
+										<label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="switchFormula"></label>
+									</div>
+
+								</div>
+
+							</div>
+
+
+						</div>
+					</div>
+
+				</div>
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.location = '/admin/services';">
+						{{gettext "Close"}}
+					</button>
+					<button type="submit" class="btn btn-primary">
+						{{gettext "Save changes"}}
+					</button>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+</div>
+
+<div class="modal fade " id="servicesEditModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" onclick="window.location = '/admin/services';">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">{{gettext "Close"}}</span>
+				</button>
+				<h4 class="modal-title" id="editShopModalLabel">
+				</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<form id="editServices">
+				<input type="hidden" id="ServiceId" name="ServiceId">
+				<input type="hidden" id="ServicesEditUserID" name="ServicesEditUserID">
+				<div class="modal-body">
+					<div class="card card-plain">
+						<div class="content">
+							<div class="row">
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="vat_number" class="control-label">{{gettext "Service Name"}}</label>
+										<input type="text" id="edit_service_name" name="edit_service_name" placeholder='{{gettext "Your service name"}}' class="form-control">
+
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="company_name" class="control-label">{{gettext "Price"}}</label>
+										<input type="text" id="edit_service_price" name="edit_service_price" placeholder='{{gettext "Price"}}' class="form-control">
+									</div>
+								</div>
+							</div>
+
+
+							<div class="row">
+								<div id="ServiceTime" class="col-md-6">
+									<div class="form-group">
+										<label for="service_time">{{gettext "Service Time"}}</label>
+										<select id="edit_service_time" name="edit_service_time" class="selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select duration"}}'
+										 data-size="7">
+											<option value="15">{{gettext "15 minutes"}}</option>
+											<option value="30">{{gettext "30 minutes"}}</option>
+											<option value="45">{{gettext "45 minutes"}}</option>
+											<option value="60">{{gettext "60 minutes"}}</option>
+											<option value="75">{{gettext "1 hour 15 minutes"}}</option>
+											<option value="90">{{gettext "1 hour 30 minutes"}}</option>
+											<option value="105">{{gettext "1 hour 45 minutes"}}</option>
+											<option value="120">{{gettext "2 hours"}}</option>
+											<option value="150">{{gettext "2 hours 30 minutes"}}</option>
+											<option value="180">{{gettext "3 hours"}}</option>
+											<option value="210">{{gettext "3 hours 30 minutes"}}</option>
+											<option value="270">{{gettext "4 hours"}}</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="company_name" class="control-label">{{gettext "Discount Price"}}</label>
+										<input type="text" id="edit_service_discount" name="edit_service_discount" placeholder='{{gettext "Discount"}}' class="form-control">
+									</div>
+								</div>
+
+							</div>
+
+
+						</div>
+					</div>
+
+				</div>
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.location = '/admin/services';">
+						{{gettext "Close"}}
+					</button>
+					<button type="submit" class="btn btn-primary">
+						{{gettext "Save changes"}}
+					</button>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+</div>
+
+<div class="modal fade categoryEditModalHorizontal" id="categoryEditModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">{{gettext "Close"}}</span>
+				</button>
+				<h4 class="modal-title" id="editcatModalLabel">
+				</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<form id="edit-category">
+				<input type="hidden" id="CategoryID" name="CategoryID">
+				<input type="hidden" id="CategoryEditUserID" name="CategoryEditUserID">
+				<div class="modal-body">
+					<div class="card card-plain">
+						<div class="content">
+							<div class="row">
+
+								<div class="col-md-12">
+									<div class="form-group">
+
+										<input id="ecategory_name" type="text" name="ecategory_name" class="form-control border-input" placeholder='{{gettext "Category Name"}}'>
+										<label id="ecategory_name_exists" for="ecategory_name"></label>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						{{gettext "Close"}}
+					</button>
+					<button type="submit" class="btn btn-primary">
+						{{gettext "Save changes"}}
+					</button>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+</div>
+<div class="modal fade subcategoryEditModalHorizontal" id="subcategoryEditModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+ aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">{{gettext "Close"}}</span>
+				</button>
+				<h4 class="modal-title" id="editsubcatModalLabel">
+				</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<form id="edit-sub-category">
+				<input type="hidden" id="SubCategoryID" name="SubCategoryID">
+				<input type="hidden" id="SubCategoryEditUserID" name="SubCategoryEditUserID">
+				<input type="hidden" id="Category_ID" name="Category_ID">
+				<input type="hidden" id="Category_Name" name="Category_Name">
+				<div class="modal-body">
+					<div class="card card-plain">
+						<div class="content">
+							<div class="row">
+
+								<div class="col-md-12">
+									<div class="form-group">
+
+										<input id="esub_category_name" type="text" name="esub_category_name" class="form-control border-input" placeholder='{{gettext "Sub Category Name"}}'>
+										<label id="esub_category_name_exists" for="esub_category_name_exists"></label>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						{{gettext "Close"}}
+					</button>
+					<button type="submit" class="btn btn-primary">
+						{{gettext "Update changes"}}
+					</button>
+				</div>
+			</form>
+
+
+
+		</div>
+	</div>
+</div>
+
+
+
+{{end}} {{define "googlemaps"}}
+
+<script>
+	$(document).ready(function () {
+		//demo.createServicesFormValidation();
+		//demo.createNewServiceForm();
+		//demo.updateServicesFormSubmit();
+		//demo.createCategoryFormValidation();
+		//demo.editCategoryFormValidation();
+		//demo.createCategoryFormValidationSubmit();
+		//demo.updateCategoryFormValidationSubmit();
+
+		//demo.createSubCategoryFormValidation();
+		//demo.editSubCategoryFormValidation();
+		//demo.createSubCategoryFormValidationSubmit();
+		//demo.updateSubCategoryFormValidationSubmit();
+
+		// $('.input-sm').on('input', function () {
+
+		// });
+		//$("#servicesdatatables").on("click", "a", function () { alert("clicked") });
+
+
+		$(".store2 .dropdown-toggle").on('click', function () {
+			var user_is = $('input[name=ServicesUserID]').val();
+			var usr_id = parseInt(user_is);
+
+			var url = '/admin/api/all-stores-per-user/' + usr_id;
+			$.getJSON(url, function (data) {
+				for (let i = 0; i < data["data"].length; i++) {
+					$('#selectstore2').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id));
+
+					console.log(data["data"][i].company_name);
+				};
+				$('.selectpicker').selectpicker('refresh');
+
+			});
+
+			$('#selectstore2').find('option').remove().end();
+		});
+
+		$(".subcategory .dropdown-toggle").on('click', function () {
+			var user_is = $('input[name=ServicesUserID]').val();
+			var usr_id = parseInt(user_is);
+
+			var url = '/admin/api/all-sub-categories/' + usr_id;
+			$.getJSON(url, function (data) {
+				for (let i = 0; i < data["data"].length; i++) {
+					$('#selectsubcategory').append($('<option>').text(data["data"][i].sub_category_name).attr('value', data["data"][i].id));
+
+					console.log(data["data"][i].sub_category_name);
+				};
+				$('.selectpicker').selectpicker('refresh');
+
+			});
+
+			$('#selectsubcategory').find('option').remove().end();
+		});
+
+
+	});
+</script>
+<script>
+	var room = 1;
+	function education_fields() {
+
+		room++;
+		var objTo = document.getElementById('education_fields')
+		var divtest = document.createElement("div");
+		divtest.setAttribute("class", "form-group removeclass" + room);
+		var rdiv = 'removeclass' + room;
+		divtest.innerHTML = '<div class="row"><div id="SubCategoryName" class="col-md-4"><div class="form-group"><select id="category_name1' + room + '" name="category_name[]" class="select_drop selectpicker" data-style="btn btn-info btn-block" title="Select category" data-size="7"></select></div></div><div class="col-md-4"><div class="form-froup"><div class="input-group"><input id="sub_category_name" type="text" name="sub_category_name[]" class="form-control border-input" placeholder="Sub Category Name"><div class="input-group-btn"><button class="btn btn-danger" type="button"onclick="remove_education_fields(' + room + ');"><span class="ti-minus" aria-hidden="true"></span></button></div></div><label class="sub_category_name_exists" for="category_name"></label></div></div><div class="clear"></div></div>';
+
+		objTo.appendChild(divtest)
+		var user_is = $('input[name=ServicesUserID]').val();
+		var usr_id = parseInt(user_is);
+		var url = '/admin/api/all-categories-per-user/' + usr_id;
+		$.getJSON(url, function (data) {
+			for (let i = 0; i < data["data"].length; i++) {
+				$('#category_name1' + room + '').append($('<option>').text(data["data"][i].category_name).attr('value', data["data"][i].category_name + ":" + data["data"][i].id));
+
+				console.log(data["data"][i].category_name);
+			};
+			$('.selectpicker').selectpicker('refresh');
+
+		});
+
+		$('#category_name1' + room + '').find('option').remove().end();
+
+		var user_is = $('input[name=ServicesUserID]').val();
+		var usr_id = parseInt(user_is);
+
+
+
+	}
+	function remove_education_fields(rid) {
+		$('.removeclass' + rid).remove();
+	}
+
+
+</script>
+<script>
+
+	$(document).ready(function () {
+		$('a[data-toggle="tab"]').on('click', function (e) {
+			window.localStorage.setItem('activeTab', $(e.target).attr('href'));
+
+		});
+		var activeTab = window.localStorage.getItem('activeTab');
+		if (activeTab) {
+			$('#tabs a[href="' + activeTab + '"]').tab('show');
+			window.localStorage.removeItem("activeTab");
+
+		}
+
+		var seen = {};
+		$('#accordion h4').each(function () {
+			var txt = $(this).text();
+			if (seen[txt])
+				$(this).closest(".panel").remove();
+			else
+				seen[txt] = true;
+		});
+
+		$("#btaddsub").on('click', function () {
+			var user_is = $('input[name=ServicesUserID]').val();
+			var usr_id = parseInt(user_is);
+
+			var url = '/admin/api/all-categories-per-user/' + usr_id;
+			$.getJSON(url, function (data) {
+				for (let i = 0; i < data["data"].length; i++) {
+					$('#category_name1').append($('<option>').text(data["data"][i].category_name).attr('value', data["data"][i].category_name + ":" + data["data"][i].id));
+
+					console.log(data["data"][i].category_name);
+				};
+				$('.selectpicker').selectpicker('refresh');
+
+			});
+
+			$('#category_name1').find('option').remove().end();
+
+		});
+		$(".panel-title").on('click', function () {
+
+			var $this = $(this);
+			var cat_id = $this.attr("category-id");
+			var category = ($.trim($this.text()));
+			var user_is = $('input[name=ServicesUserID]').val();
+			var usr_id = parseInt(user_is);
+			var cat_id = parseInt(cat_id);
+
+			$this.closest('.panel').find('table.subcategoriestable').dataTable().fnDestroy();
+
+			var url = '/admin/api/all-sub-categories-per-user/' + usr_id + "/" + cat_id;
+			$this.closest('.panel').find('table.subcategoriestable').DataTable({
+
+				"processing": true,
+				"ajax": {
+					"url": url,
+					"dataSrc": function (data) {
+						console.log(data);
+						if (data["data"] == null) {
+							return [];
+						}
+						else {
+							return data.data;
+						}
+					}
+				},
+				"oLanguage": {
+					"sEmptyTable": '{{gettext "You do not have any data with : "}}' + category,
+					"sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+				},
+				"columns": [
+					{
+						"data": "id",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": "category_name",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+					{
+						"data": "sub_category_name",
+						"render": function (data) {
+
+
+							return data;
+						}
+					},
+
+					{
+						"data": "created_at",
+						"render": function (data) {
+							var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+							return dateoflastReview.format("DD/MM/YYYY")
+						}
+
+					},
+					{
+						"data": "null",
+						"render": function (data, type, row) {
+							if (row.is_active == true) {
+
+
+								return '<td class="td-actions text-center"><input data-id="' + row.id + '" class="tgl tgl-skewed" id="my-subcategorycheckbox' + row.id + '" type="checkbox" checked /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-subcategorycheckbox' + row.id + '"></label></td>'
+							} else {
+								return '<td class="td-actions text-center"><input data-id="' + row.id + '" class="tgl tgl-skewed" id="my-subcategorycheckbox' + row.id + '" type="checkbox" /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-subcategorycheckbox' + row.id + '"></label></td>'
+							}
+						}
+
+					},
+					{
+						"data": "null",
+						"render": function (data) {
+							return '<td><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target="#subcategoryEditModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+
+						}
+					},
+
+				],
+				"pagingType": "full_numbers",
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+				responsive: true,
+				language: {
+					search: "_INPUT_",
+					searchPlaceholder: '{{gettext "Search records"}}',
+				},
+				"initComplete": function (settings, json) {
+
+					$('[rel="tooltip"]').tooltip();
+				}
+
+			});
+
+			var table2 = $this.closest('.panel').find('table.subcategoriestable').DataTable();
+			// Edit record
+			table2.on('click', '.edit', function () {
+				// $tr = $(this).closest('tr');
+				// var data = table.row($tr).data();
+				var cell = table2.cell(this.parentNode);
+				var data = table2.row(cell.index().row).data();
+				$("#editsubcatModalLabel").text("Edit " + data.sub_category_name);
+				$("input[name=esub_category_name]").val(data.sub_category_name);
+				$("input[name=SubCategoryID]").val(data.id);
+				$("input[name=SubCategoryEditUserID]").val(data.user_id);
+				$("input[name=Category_ID]").val(data.category_id);
+				$("input[name=Category_Name]").val(data.category_name);
+
+			});
+			table2.on('click', '.tgl-skewed', function () {
+				var $this = $(this);
+				demo.enable_disable_subcategory($this.prop('checked') == true, $this.attr('data-id'));
+			});
+
+
+			// table2.on('responsive-display', function (e, datatable, row, showHide, update) {
+			// 	// console.log('Details for row ' + row.index() + ' ' + (showHide ? 'shown' : 'hidden'));
+			// 	enable_disable_sub_category();
+			// });
+
+			// Delete a record
+			table2.on('click', '.remove', function (e) {
+				var cell = table2.cell(this.parentNode);
+				var data = table2.row(cell.index().row).data();
+				//table.row($tr).remove().draw();
+				var sub_categoryId = parseInt(data.id);
+				var userid = parseInt(data.user_id);
+				var categoryname = data.category_name;
+				var formData = {
+					'id': parseInt(data.id),
+				}
+				swal({
+					title: '{{gettext "Are you sure?"}}',
+					text: '{{gettext "You will not be able to recover this category!"}}',
+					type: 'warning',
+					showCancelButton: true,
+					confirmButtonText: '{{gettext "Yes, delete it!"}}',
+					cancelButtonText: '{{gettext "No, keep it"}}',
+					confirmButtonClass: "btn btn-success btn-fill",
+					cancelButtonClass: "btn btn-danger btn-fill",
+					buttonsStyling: false
+				}).then(function () {
+					$.ajax({
+						type: 'delete',
+						url: '/admin/api/delete-single-sub-category/' + sub_categoryId,
+						data: JSON.stringify(formData),
+
+						success: function (data) {
+							if (data.status == 501) {
+								swal({
+									title: '{{gettext "Aborted"}}',
+									text: '{{gettext "Cannot delete the sub category because is not emply. Check your sub categories :)"}}',
+									type: 'warning',
+									confirmButtonClass: "btn btn-info btn-fill",
+									buttonsStyling: false
+								})
+								return;
+							}
+
+							table2.row($tr).remove().draw();
+							swal({
+								title: '{{gettext "Deleted!"}}',
+								text: '{{gettext "Your sub category has been deleted."}}',
+								type: 'success',
+								confirmButtonClass: "btn btn-success btn-fill",
+								buttonsStyling: false
+							})
+							if (table2.column(0).data().length > 0) {
+								table2.ajax.reload();
+							} else {
+								window.location.reload();
+							};
+
+
+
+						},
+						contentType: 'application/json',
+						dataType: 'json'
+					});
+
+				}, function (dismiss) {
+
+					if (dismiss === 'cancel') {
+						swal({
+							title: '{{gettext "Cancelled"}}',
+							text: '{{gettext "Your sub category is safe :)"}}',
+							type: 'error',
+							confirmButtonClass: "btn btn-info btn-fill",
+							buttonsStyling: false
+						})
+					}
+				})
+
+				e.preventDefault();
+			});
+
+		});
+
+	});
+
+</script>
+
+
+<script>
+
+	var user_is = $('input[name=ServicesUserID]').val();
+	var usr_id = parseInt(user_is);
+
+	var url = '/admin/api/all-categories-per-user/' + usr_id;
+	$('#categoriesdatatables').DataTable({
+		"processing": true,
+		"ajax": {
+			"url": url,
+			"dataSrc": function (data) {
+				console.log(data);
+				if (data["data"] == null) {
+					return [];
+				}
+				else {
+					return data.data;
+				}
+			}
+		},
+		"oLanguage": {
+			"sEmptyTable": '{{gettext "You do not have any data"}}',
+			"sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+		},
+		"columns": [
+			{
+				"data": "id",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "category_name",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+
+			{
+				"data": "created_at",
+				"render": function (data) {
+					var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+					return dateoflastReview.format("DD/MM/YYYY")
+				}
+
+			},
+			{
+				"data": "null",
+				"render": function (data, type, row) {
+					if (row.is_active == true) {
+
+
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" class="tgl tgl-skewed" id="my-categorycheckbox' + row.id + '" type="checkbox" checked /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-categorycheckbox' + row.id + '"></label></td>'
+					} else {
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" class="tgl tgl-skewed" id="my-categorycheckbox' + row.id + '" type="checkbox" /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-categorycheckbox' + row.id + '"></label></td>'
+					}
+				}
+
+			},
+			{
+				"data": "null",
+				"render": function (data) {
+					return '<td><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target="#categoryEditModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+				}
+			},
+
+		],
+		"pagingType": "full_numbers",
+		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+		responsive: true,
+		language: {
+			search: "_INPUT_",
+			searchPlaceholder: '{{gettext "Search records"}}',
+		},
+		"initComplete": function (settings, json) {
+
+
+		}
+
+	});
+
+
+	var table1 = $('#categoriesdatatables').DataTable();
+	// table1.on('responsive-display', function (e, datatable, row, showHide, update) {
+	// 	// console.log('Details for row ' + row.index() + ' ' + (showHide ? 'shown' : 'hidden'));
+	// enable_disable_category();
+	// });
+	// Edit record
+
+	table1.on('click', '.tgl-skewed', function () {
+		var $this = $(this);
+		demo.enable_disable_category($this.prop('checked') == true, $this.attr('data-id'));
+	});
+
+
+	table1.on('click', '.edit', function () {
+		// $tr = $(this).closest('tr');
+		// var data = table.row($tr).data();
+		var cell = table1.cell(this.parentNode);
+		var data = table1.row(cell.index().row).data();
+		$("#editcatModalLabel").text("Edit " + data.category_name);
+		$("input[name=ecategory_name]").val(data.category_name);
+		$("input[name=CategoryID]").val(data.id);
+		$("input[name=CategoryEditUserID]").val(data.user_id);
+
+	});
+
+	// Delete a record
+	table1.on('click', '.remove', function (e) {
+		var cell = table1.cell(this.parentNode);
+		var data = table1.row(cell.index().row).data();
+		var categoryId = parseInt(data.id);
+		var userid = parseInt(data.user_id);
+		var categoryname = data.category_name;
+		var formData = {
+			'id': parseInt(data.id),
+		}
+		swal({
+			title: '{{gettext "Are you sure?"}}',
+			text: '{{gettext "You will not be able to recover this category!"}}',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: '{{gettext "Yes, delete it!"}}',
+			cancelButtonText: '{{gettext "No, keep it"}}',
+			confirmButtonClass: "btn btn-success btn-fill",
+			cancelButtonClass: "btn btn-danger btn-fill",
+			buttonsStyling: false
+		}).then(function () {
+			$.ajax({
+				type: 'delete',
+				url: '/admin/api/delete-single-category/' + categoryId + "/" + categoryname + "/" + userid,
+				data: JSON.stringify(formData),
+
+				success: function (data) {
+					if (data.status == 501) {
+						swal({
+							title: '{{gettext "Aborted"}}',
+							text: '{{gettext "Cannot delete the category because is not emply. Check your sub categories :)"}}',
+							type: 'warning',
+							confirmButtonClass: "btn btn-info btn-fill",
+							buttonsStyling: false
+						})
+						return;
+					}
+
+					table1.row($tr).remove().draw();
+					swal({
+						title: '{{gettext "Deleted!"}}',
+						text: '{{gettext "Your category has been deleted."}}',
+						type: 'success',
+						confirmButtonClass: "btn btn-success btn-fill",
+						buttonsStyling: false
+					})
+					if (table1.column(0).data().length > 0) {
+						table1.ajax.reload();
+					} else {
+						window.location.reload();
+					};
+
+				},
+				contentType: 'application/json',
+				dataType: 'json'
+			});
+
+		}, function (dismiss) {
+			// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+			if (dismiss === 'cancel') {
+				swal({
+					title: '{{gettext "Cancelled"}}',
+					text: '{{gettext "Your category is safe :)"}}',
+					type: 'error',
+					confirmButtonClass: "btn btn-info btn-fill",
+					buttonsStyling: false
+				})
+			}
+		})
+
+		e.preventDefault();
+	});
+</script>
+
+<script>
+	var user_is = $('input[name=ServicesUserID]').val();
+	var usr_id = parseInt(user_is);
+	var url = '/admin/api/all-services-per-user/' + usr_id;
+	$('#servicesdatatables').DataTable({
+		"processing": true,
+		"ajax": {
+			"url": url,
+			"dataSrc": function (data) {
+				console.log(data);
+				if (data["data"] == null) {
+					return [];
+				}
+				else {
+					return data.data;
+				}
+			}
+		},
+		"oLanguage": {
+			"sEmptyTable": '{{gettext "You do not have any data"}}',
+			"sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+		},
+		"columns": [
+			{
+				"data": "id",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "store_name",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "service_name",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "service_price",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "service_discount",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+			{
+				"data": "service_duration",
+				"render": function (data) {
+
+
+					return data;
+				}
+			},
+
+
+			{
+				"data": "created_at",
+				"render": function (data) {
+					var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+					return dateoflastReview.format("DD/MM/YYYY")
+				}
+
+			},
+			{
+				"data": "null",
+				"render": function (data, type, row) {
+
+					if (row.is_active == true) {
+
+
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" store-id="' + row.store_id + '" class="tgl tgl-skewed has_service" id="my-servicecheckbox' + row.id + row.store_name + '" type="checkbox" checked /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-servicecheckbox' + row.id + row.store_name + '"></label></td>'
+					} else {
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" store-id="' + row.store_id + '" class="tgl tgl-skewed has_service" id="my-servicecheckbox' + row.id + row.store_name + '" type="checkbox" /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-servicecheckbox' + row.id + row.store_name + '"></label></td>'
+					}
+
+				}
+
+			},
+			{
+				"data": "null",
+				"render": function (data, type, row) {
+					if (row.switch_formula == true) {
+
+
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" store-id="' + row.store_id + '" class="tgl tgl-skewed hasformula" id="my-servicehasformulacheckbox' + row.id + row.store_name + '" type="checkbox" checked /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-servicehasformulacheckbox' + row.id + row.store_name + '"></label></td>'
+					} else {
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" store-id="' + row.store_id + '" class="tgl tgl-skewed hasformula" id="my-servicehasformulacheckbox' + row.id + row.store_name + '" type="checkbox" /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-servicehasformulacheckbox' + row.id + row.store_name + '"></label></td>'
+					}
+				}
+
+			},
+			{
+				"data": "company_country",
+				"render": function (data) {
+					return '<td><a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" data-toggle="modal" data-target="#servicesEditModalHorizontal"><i class="ti-pencil-alt"></i></a><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+
+				}
+			},
+
+		],
+		"pagingType": "full_numbers",
+		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+		responsive: true,
+		language: {
+			search: "_INPUT_",
+			searchPlaceholder: '{{gettext "Search records"}}',
+		},
+		"initComplete": function (settings, json) {
+			// enable_disable_service();
+			// has_formula_service();
+			$('[rel="tooltip"]').tooltip();
+		},
+		// "drawCallback": function (settings) {
+
+		// }
+
+
+	});
+
+
+	var table = $('#servicesdatatables').DataTable();
+
+
+	table.on('click', '.has_service', function () {
+		var $this = $(this);
+		demo.enable_disable_service($this.prop('checked') == true, $this.attr('data-id'), $this.attr('store-id'));
+	});
+
+	table.on('click', '.hasformula', function () {
+		var $this = $(this);
+		demo.has_formula($this.prop('checked') == true, $this.attr('data-id'), $this.attr('store-id'));
+	});
+
+	// Edit record
+	table.on('click', '.edit', function () {
+		// $tr = $(this).closest('tr');
+		// var data = table.row($tr).data();
+		var cell = table.cell(this.parentNode);
+		var data = table.row(cell.index().row).data();
+		$("#editShopModalLabel").text('{{gettext "Edit"}}' + data.service_name);
+		$("#ServiceId").val(data.id);
+		$("#ServicesEditUserID").val(data.user_id);
+		$("input[name=edit_service_name]").val(data.service_name);
+		$("input[name=edit_service_price]").val(data.service_price);
+		$("#edit_service_time").val(data.service_duration);
+		$("#edit_service_discount").val(data.service_discount);
+
+
+
+		$(".selectpicker").selectpicker("refresh");
+	});
+
+
+	// Delete a record
+	table.on('click', '.remove', function (e) {
+		var cell = table.cell(this.parentNode);
+		var data = table.row(cell.index().row).data();
+		var serviceId = parseInt(data.id);
+
+		var formData = {
+			'id': parseInt(data.id),
+		}
+		swal({
+			title: '{{gettext "Are you sure?"}}',
+			text: '{{gettext "You will not be able to recover this service!"}}',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: '{{gettext "Yes, delete it!"}}',
+			cancelButtonText: '{{gettext "No, keep it"}}',
+			confirmButtonClass: "btn btn-success btn-fill",
+			cancelButtonClass: "btn btn-danger btn-fill",
+			buttonsStyling: false
+		}).then(function () {
+			$.ajax({
+				type: 'delete',
+				url: '/admin/api/delete-single-service/' + serviceId,
+				data: JSON.stringify(formData),
+
+				success: function (data) {
+					table.row($tr).remove().draw();
+					swal({
+						title: '{{gettext "Deleted!"}}',
+						text: '{{gettext "Your service has been deleted."}}',
+						type: 'success',
+						confirmButtonClass: "btn btn-success btn-fill",
+						buttonsStyling: false
+					});
+
+				},
+				contentType: 'application/json',
+				dataType: 'json'
+			});
+			if (table.column(0).data().length > 0) {
+				table.ajax.reload();
+			} else {
+				window.location.reload();
+			};
+
+		}, function (dismiss) {
+			// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+			if (dismiss === 'cancel') {
+				swal({
+					title: '{{gettext "Cancelled"}}',
+					text: '{{gettext "Your service is safe :)"}}',
+					type: 'error',
+					confirmButtonClass: "btn btn-info btn-fill",
+					buttonsStyling: false
+				})
+			}
+		})
+
+		e.preventDefault();
+	});
+
+
+
+</script>
+<script>
+	$(document).ready(function () {
+		$("#vat-exists").hide();
+		$('#createServices').validate({
+			rules: {
+				service_name: "required",
+
+				service_price: {
+					required: true,
+					number: true,
+				},
+				selectstore: "required",
+				selectsubcategory: "required",
+				service_time: "required",
+
+			},
+			messages: {
+				service_name: '{{gettext "Please enter service name"}}',
+
+				service_price: {
+					required: '{{gettext "Please enter service price"}}',
+					number: '{{gettext "Your service price must be a number 2 or 2.x"}}'
+				},
+				selectstore: '{{gettext "Please select store"}}',
+				selectsubcategory: '{{gettext "Please select sub category"}}',
+				service_time: {
+					required: '{{gettext "Please select service time duration"}}',
+
+				},
+			}
+		});
+
+	});
+</script>
+
+<script>
+	$(document).ready(function () {
+		$("#service_name_exists").show();
+		$("#discount_error").hide();
+		$('#createServices').on('submit', function (event) {
+			event.preventDefault();
+			if ($.trim($("#service_name").val()) === "" || $.trim($("#service_price").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+				var user_is = $('input[name= ServicesUserID]').val();
+				var usr_id = parseInt(user_is);
+
+				var price = $("input[name=service_price]").val();
+				var priceFloat = parseFloat(price);
+
+				var discount = $("input[name=service_discount]").val();
+				var discountFloat = parseFloat(discount);
+				var duration = $("#service_time").val();
+				duration = parseInt(duration);
+				var stores = $('#selectstore2').val();
+
+
+				var subcat = $('#selectsubcategory').val();
+				subcat = parseInt(subcat);
+				var switchFormula = $("#switchFormula:checked").length > 0;
+				console.log(switchFormula);
+
+
+				if (discount > priceFloat) {
+					$("#discount_error").show();
+					var texterror = '{{gettext "The discount cannot exceed the value of the actual price"}}';
+					$("#discount_error").text(texterror);
+					return false;
+				} else {
+					$("#discount_error").hide();
+
+
+					var formData = {
+						'user_id': usr_id,
+						'stores': stores,
+						'service_name': $("input[name=service_name]").val(),
+						'service_price': priceFloat,
+						'service_duration': duration,
+						'service_discount': discountFloat,
+						'sub_category_id': subcat,
+						'switch_formula': switchFormula,
+					};
+
+
+					$.ajax({
+						type: 'post',
+						url: '/admin/api/create-service',
+						data: JSON.stringify(formData),
+						dataType: 'json',
+						contentType: "application/json",
+
+						success: function (data) {
+							var status = data.status;
+							console.log(status);
+							if (status == 501) {
+								$("#service_name_exists").show();
+								$("#service_name_exists").text(data.description);
+								return;
+							} else {
+
+								$('#servicesModalHorizontal').modal('toggle');
+								swal({
+									title: '{{gettext "Good job!"}}',
+									text: '{{gettext "Successfully insert service to the database"}}',
+									buttonsStyling: false,
+									confirmButtonClass: "btn btn-success btn-fill",
+									type: "success"
+								}).then(function () {
+									window.location.reload();
+								});
+							}
+
+
+						},
+						error: function (Result) {
+							console.log(Result);
+						}
+
+					});
+				}
+
+			}
+		});
+
+	});
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('#editServices').on('submit', function (event) {
+			event.preventDefault();
+			if ($.trim($("#edit_service_name").val()) === "" || $.trim($("#edit_service_price").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+
+
+				var service_id = $('input[name=ServiceId]').val();
+				service_id = parseInt(service_id)
+				var usr_id = parseInt(user_is);
+				var user_is = $('input[name=ServicesEditUserID]').val();
+				var usr_id = parseInt(user_is);
+
+				var price = $("input[name=edit_service_price]").val();
+				var priceFloat = parseFloat(price);
+
+				var discount = $("input[name=edit_service_discount]").val();
+				var discountFloat = parseFloat(discount);
+				var duration = $("#edit_service_time").val();
+				duration = parseInt(duration);
+				var formData = {
+					'id': service_id,
+					'user_id': usr_id,
+					'service_name': $("input[name=edit_service_name]").val(),
+					'service_price': priceFloat,
+					'service_duration': duration,
+					'service_discount': discountFloat,
+				};
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/update-service/' + service_id,
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+
+						$('#servicesEditModalHorizontal').modal('toggle');
+						swal({
+							title: '{{gettext "Good job!"}}',
+							text: '{{gettext "Successfully updated service to the database"}}',
+							buttonsStyling: false,
+							confirmButtonClass: "btn btn-success btn-fill",
+							type: "success"
+						}).then(function () {
+							window.location.reload();
+						});
+
+
+					},
+					error: function (Result) {
+						console.lod(Result);
+					}
+
+				});
+			}
+		});
+
+	});
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('#add-category').validate({
+			rules: {
+				category_name: "required",
+
+
+			},
+			messages: {
+				category_name: '{{gettext "Please enter category name"}}',
+
+			}
+		});
+
+	});
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('#edit-category').validate({
+			rules: {
+				ecategory_name: "required",
+				eselectstore: "required",
+
+			},
+			messages: {
+				ecategory_name: '{{gettext "Please enter category name"}}',
+				eselectstore: '{{gettext "Please select store"}}',
+			}
+		});
+
+	});
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('#add-category').on('submit', function (event) {
+			event.preventDefault();
+			if ($.trim($("#category_name").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+
+				var user_is = $('input[name=ServicesUserID]').val();
+				var usr_id = parseInt(user_is);
+
+
+
+
+				var formData = {
+					'user_id': usr_id,
+					'category_name': $("input[name=category_name]").val(),
+
+				};
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/create-category',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 501) {
+							$("#category_name_exists").text(data.description);
+							return;
+						} else {
+
+
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: '{{gettext "Successfully insert category to the database"}}',
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								var table = $('#categoriesdatatables').DataTable();
+								table.ajax.reload()
+								// $("#demos").load(location.href + " #demos");
+								// $('#demos').load(document.URL + ' #demos');
+
+
+							});
+
+						}
+
+					}
+				});
+			}
+		});
+
+	});
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('#edit-category').on('submit', function (event) {
+			event.preventDefault();
+			if ($.trim($("#ecategory_name").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+
+				var id = $('input[name=CategoryID]').val();
+				var id = parseInt(id);
+				var user_is = $('input[name=CategoryEditUserID]').val();
+				var usr_id = parseInt(user_is);
+
+
+				var formData = {
+					'id': id,
+					'user_id': usr_id,
+
+					'category_name': $("input[name=ecategory_name]").val(),
+				};
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/update-category/' + id,
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 501) {
+							$("#ecategory_name_exists").text(data.description);
+							return;
+						} else {
+
+							$('.categoryEditModalHorizontal').modal('toggle');
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: "Successfully update category in to the database",
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								var table = $('#categoriesdatatables').DataTable();
+								table.ajax.reload();
+							});
+
+						}
+
+					}
+				});
+			}
+		});
+
+	});
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('#add-sub-category').on('submit', function (event) {
+			event.preventDefault();
+			if ($.trim($("#sub_category_name").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+
+				var user_is = $('input[name=ServicesUserID]').val();
+				var usr_id = parseInt(user_is);
+
+				var sub_category_name = $('input[name="sub_category_name[]"]').map(function () {
+					return this.value;
+				}).get();
+				var subcategory_name = sub_category_name.join(":");
+
+				var v = [];
+				var ids = [];
+				var cats;
+				$(".select_drop").each(function () {
+					cats = $(this).val();
+					var arr = cats.split(':');
+					v.push(arr[0]);
+					ids.push(arr[1]);
+				});
+				v = v.filter(Boolean)
+				var catall = v.join(":");
+
+				ids = ids.filter(Boolean)
+
+				var allids = ids.join(":");
+
+
+
+				var formData = {
+					'user_id': usr_id,
+					'category_name': catall,
+					'sub_category_name': subcategory_name,
+					'category_id': allids,
+
+				};
+
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/create-sub-category',
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 501) {
+							$(".sub_category_name_exists").text(data.description);
+							return;
+						} else {
+
+
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: '{{gettext "Successfully insert sub category to the database"}}',
+								buttonsStyling: false,
+								confirmButtonClass: "sub_but btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+
+
+								// var h = $("#tabs li.active a").attr('href');
+								//     console.log( h);
+								//       localStorage.setItem('activeTab', h);
+
+								window.location.reload();
+
+							});
+
+						}
+
+					}
+				});
+			}
+		});
+
+	});
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('#edit-sub-category').validate({
+			rules: {
+				ecategory_name: "required",
+				esub_category_name: "required",
+				eselectstore: "required",
+
+			},
+			messages: {
+				ecategory_name: '{{gettext "Please enter sub category name"}}',
+				esub_category_name: '{{gettext "Please enter sub category name"}}',
+				eselectstore: '{{gettext "Please select store"}}',
+			}
+		});
+
+	});
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('#add-sub-category').validate({
+			rules: {
+				category_name: "required",
+				sub_category_name: "required",
+				selectstore: "required",
+
+			},
+			messages: {
+				category_name: '{{gettext "Please select category name"}}',
+				sub_category_name: '{{gettext "Please select category name"}}',
+				selectstore: '{{gettext "Please select store"}}',
+			}
+		});
+
+	});
+</script>
+
+<script>
+
+
+	$(document).ready(function () {
+
+
+
+		$('#toggle').click(function (e) {
+			$('.aside').stop(true).slideToggle();
+		});
+		$(document).click(function (e) {
+			if (!$(e.target).closest('#toggle, .aside').length) {
+				$('.aside').stop(true).slideUp();
+			}
+		});
+
+		$('#edit-sub-category').on('submit', function (event) {
+			event.preventDefault();
+			if ($.trim($("#esub_category_name").val()) === "") {
+				alert('{{gettext "you did not fill out one of the fields"}}');
+				return false;
+			} else {
+
+				var id = $('input[name=SubCategoryID]').val();
+				var id = parseInt(id);
+				var user_is = $('input[name=SubCategoryEditUserID]').val();
+				var usr_id = parseInt(user_is);
+				var catID = $('input[name=Category_ID]').val();
+
+
+				var formData = {
+					'id': id,
+					'user_id': usr_id,
+					'category_id': catID,
+					'category_name': $("input[name=Category_Name]").val(),
+					'sub_category_name': $("input[name=esub_category_name]").val(),
+				};
+
+				$.ajax({
+					type: 'post',
+					url: '/admin/api/update-sub-category/' + id,
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					contentType: "application/json",
+
+					success: function (data) {
+						var status = data.status;
+						console.log(status);
+						if (status == 501) {
+							$("#esub_category_name_exists").text(data.description);
+							return;
+						} else {
+
+							$('.subcategoryEditModalHorizontal').modal('toggle');
+							swal({
+								title: '{{gettext "Good job!"}}',
+								text: '{{gettext "Successfully update sub category in to the database"}}',
+								buttonsStyling: false,
+								confirmButtonClass: "btn btn-success btn-fill",
+								type: "success"
+							}).then(function () {
+								window.location.reload();
+							});
+
+						}
+
+					}
+				});
+			}
+		});
+
+	});
+</script>
+<!-- <script type="text/javascript">
+    $.notify({
+        allow_dismiss: true,
+        
+        icon: '/static/images/Succstepsfavicon.png',
+        title: 'Succsteps',
+        message: '{{gettext "Here you can find all your store services"}}'
+    },{
+        type: 'pastel-warning',
+         delay: 500000,
+        icon_type: 'image',
+        placement: {from: 'top',align: 'center'
+	},
+    offset: {
+		y: 8
+	},
+        template: '<div data-notify="container" class="col-xs-11 col-sm-5 alert alert-{0}" role="alert">' +
+                '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">X</button>'+
+            '<img data-notify="icon" class="img-circle pull-left">' +
+            '<span data-notify="title">{1}</span>' +
+            '<span data-notify="message">{2}</span>' +
+        '</div>'
+    });
+ </script> -->
+{{end}}

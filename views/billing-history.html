@@ -1,0 +1,236 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+    <li>
+        <a href="/admin/billing-history?lang=gr">
+            <img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+        </a>
+
+    </li>
+    <li>
+
+        <a href="/admin/billing-history?lang=en">
+            <img src="/static/images/flags/GB.png"> {{gettext "English"}}
+        </a>
+    </li>
+</ul>
+{{end}} {{define "content"}}
+
+<div class="content">
+    <input type="hidden" id="UseID" name="UserID" value="{{.UserID}}">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <form method="#" action="#" class="form-horizontal">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                {{gettext "Subscription contracts"}}
+                            </h4>
+                            <p class="category">{{gettext "Here is the list of your subscription contracts"}}</p>
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="toolbar">
+                                        <!--Here you can write extra buttons/actions for the toolbar-->
+                                    </div>
+                                    <div class="fresh-datatables">
+                                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>{{gettext "Start Date"}}</th>
+                                                    <th>{{gettext "Expiry Date"}}</th>
+                                                    <th>{{gettext "Amount of stores"}}</th>
+                                                    <th>{{gettext "Price"}}</th>
+                                                    <th>{{gettext "Paid Date"}}</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>{{gettext "Start Date"}}</th>
+                                                    <th>{{gettext "Expiry Date"}}</th>
+                                                    <th>{{gettext "Amount of stores"}}</th>
+                                                    <th>{{gettext "Price"}}</th>
+                                                    <th>{{gettext "Paid Date"}}</th>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>22/02/2016</td>
+                                                    <td>22/02/2017</td>
+                                                    <td>1</td>
+                                                    <td>159.00 €</td>
+                                                    <td>22/02/2016</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>22/02/2017</td>
+                                                    <td>22/02/2018</td>
+                                                    <td>1</td>
+                                                    <td>159.00 €</td>
+                                                    <td>22/02/2017</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!--  end card  -->
+
+
+
+                        </div>
+
+                    </form>
+                </div>
+                <!-- end card -->
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <form method="#" action="#" class="form-horizontal">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                {{gettext "Credits Purchases"}}
+                            </h4>
+                            <p class="category">{{gettext "Here is the list of your credits purchases"}}</p>
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="toolbar">
+                                        <!--Here you can write extra buttons/actions for the toolbar-->
+                                    </div>
+                                    <div class="fresh-datatables">
+                                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>{{gettext "Purchase Date"}}</th>
+                                                    <th>{{gettext "Amount of credits"}}</th>
+                                                    <th>{{gettext "Price"}}</th>
+                                                    <th>{{gettext "Paid Date"}}</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>{{gettext "Purchase Date"}}</th>
+                                                    <th>{{gettext "Amount of credits"}}</th>
+                                                    <th>{{gettext "Price"}}</th>
+                                                    <th>{{gettext "Paid Date"}}</th>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>22/02/2017</td>
+                                                    <td>100</td>
+                                                    <td>159.00 €</td>
+                                                    <td>22/02/2016</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>22/02/2018</td>
+                                                    <td>500</td>
+                                                    <td>359.00 €</td>
+                                                    <td>22/02/2017</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  end card  -->
+                        </div>
+                    </form>
+                </div>
+                <!-- end card -->
+            </div>
+        </div>
+
+        <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+    
+                        <form method="#" action="#" class="form-horizontal">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                    {{gettext "Credits Usage"}}
+                                </h4>
+                                <p class="category">{{gettext "Here is the list of your credits usage"}}</p>
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="toolbar">
+                                            <!--Here you can write extra buttons/actions for the toolbar-->
+                                        </div>
+                                        <div class="fresh-datatables">
+                                            <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>{{gettext "Usage Date"}}</th>
+                                                        <th>{{gettext "Usage Time"}}</th>
+                                                        <th>{{gettext "Amount of credits"}}</th>
+                                                        <th>{{gettext "Service"}}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>{{gettext "Usage Date"}}</th>
+                                                        <th>{{gettext "Usage Time"}}</th>
+                                                        <th>{{gettext "Amount of credits"}}</th>
+                                                        <th>{{gettext "Service"}}</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>22/02/2017</td>
+                                                        <td>22:50</td>
+                                                        <td>17</td>
+                                                        <td>Viber</td>
+                                                    </tr>
+    
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>24/02/2018</td>
+                                                        <td>11:00</td>
+                                                        <td>33</td>
+                                                        <td>Sms</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>25/02/2018</td>
+                                                        <td>14:00</td>
+                                                        <td>33</td>
+                                                        <td>Email</td>
+                                                        </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  end card  -->
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end card -->
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+{{end}} {{define "scripts"}} {{end}}

@@ -1,0 +1,498 @@
+{{define "manylangs"}}
+<ul class="dropdown-menu">
+    <li>
+        <a href="/admin/store-settings?lang=gr">
+            <img src="/static/images/flags/GR.png"> {{gettext "Greek"}}
+        </a>
+
+    </li>
+    <li>
+
+        <a href="/admin/store-settings?lang=en">
+            <img src="/static/images/flags/GB.png"> {{gettext "English"}}
+        </a>
+    </li>
+</ul>
+{{end}} {{define "content"}}
+
+<div class="content">
+    <input type="hidden" id="UseID" name="UserID" value="{{.UserID}}">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                        <button id="toggle" class="btn btn-sm btn-primary">?</button>
+                        <aside id="aside" class="aside">
+                            <h2>{{gettext "Information"}}</h2>
+        
+                            <p>{{gettext "This table represents your open days. Set carefully as it will affect your reservation system."}}</p>
+                            
+                        </aside>
+
+                    <div class="card-header">
+                        <h4 class="card-title">{{gettext "Booking on available days"}}</h4>
+                        <p class="category">{{gettext "Create one or more rules to limit reservations to specific days and time range."}}</p>
+                    </div>
+                    <div class="card-content">
+                        <form id="insert-weekly-hours">
+                            <div class="col-md-12">
+                                <div class="col-md-3">
+                                    <div id="ServiceTime">
+                                        <div class="form-group">
+                                            <select id="select_store" name="select_store" class="select_drop selectpicker" data-style="btn btn-info btn-block" title='{{gettext "Select Store"}}'
+                                                data-size="7" data-live-search="true">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <select id="day_of_the_week" name="day_of_the_week" class="day_of_the_week selectpicker" data-style="btn btn-info btn-block"
+                                        title='{{gettext "Select Day"}}' data-size="7">
+                                        <option value="1">{{gettext "Monday"}}</option>
+                                        <option value="2">{{gettext "Tuesday"}}</option>
+                                        <option value="3">{{gettext "Wednesday"}}</option>
+                                        <option value="4">{{gettext "Thursday"}}</option>
+                                        <option value="5">{{gettext "Friday"}}</option>
+                                        <option value="6">{{gettext "Saturday"}}</option>
+                                        <option value="0">{{gettext "Sunday"}}</option>
+
+                                    </select>
+                                </div>
+
+                                <div class="col-md-1 text-center from-to">
+                                    <p>{{gettext "From"}}</p>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <input id="from_time" type="text" name="from_time" class="form-control timepicker from_time" placeholder='{{gettext "From"}}'
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-1 text-center from-to">
+                                    <p>{{gettext "To"}}</p>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <input id="to_time" type="text" name="to_time" class="form-control timepicker to-time" placeholder='{{gettext "To"}}' />
+                                    </div>
+                                </div>
+                                <div class="col-md-1 text-center">
+                                    <div class="form-froup">
+                                        <button type="submit" class="btn btn-md btn-success btn-fill">
+                                            <span class="btn-label">
+                                                <i class="ti-save-alt"></i>
+                                            </span>
+
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="card-footer">
+                        <hr>                        
+                        <div class="col-md-12">
+                            <div class="fresh-datatables margin-top-20">
+                                <table id="weeklyhourstable" class="table table-striped table-bordered  table-hover weeklyhourstable" cellspacing="0" width="100%"
+                                    style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>{{gettext "Store"}}</th>
+                                            <th>{{gettext "Day"}}</th>
+                                            <th>{{gettext "Day Of The Week"}}</th>
+                                            <th>{{gettext "Time From"}}</th>
+                                            <th>{{gettext "Time To"}}</th>
+                                            <th>{{gettext "Date Of Creation"}}</th>
+                                            <th class="disabled-sorting">{{gettext "Actions"}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>{{gettext "Store"}}</th>
+                                            <th>{{gettext "Day"}}</th>
+                                            <th>{{gettext "Day Of The Week"}}</th>
+                                            <th>{{gettext "Time From"}}</th>
+                                            <th>{{gettext "Time To"}}</th>
+                                            <th>{{gettext "Date Of Creation"}}</th>
+
+                                            <th class="disabled-sorting">{{gettext "Actions"}}</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{{end}} {{define "scripts"}}
+
+<script type="text/javascript">
+    var user_id = $('input[name=UserID]').val();
+    user_id = parseInt(user_id);
+
+    var url = '/admin/api/all-stores-per-user/' + user_id;
+    $.getJSON(url, function (data) {
+        for (let i = 0; i < data["data"].length; i++) {
+            $('#select_store').append($('<option>').text(data["data"][i].company_name).attr('value', data["data"][i].id));
+        };
+        $('#select_store').val(data["data"][0].id);
+        $('.selectpicker').selectpicker('refresh');
+    });
+    $('#insert-weekly-hours').validate({
+        rules: {
+
+            day_of_the_week: "required",
+            select_store: "required",
+            from_time: "required",
+            to_time: "required",
+        },
+        messages: {
+
+            day_of_the_week: '{{gettext "Please select day of the week"}}',
+            select_store: '{{gettext "Please select store"}}',
+            from_time: '{{gettext "Please select from time"}}',
+            to_time: '{{gettext "Please select to time"}}',
+
+        }
+    });
+
+
+    $("#insert-weekly-hours").on('submit', function (e) {
+
+        e.preventDefault();
+
+        var user_id = $('input[name=UserID]').val();
+        user_id = parseInt(user_id);
+        if ($.trim($("#select_store").val()) === "" || $.trim($("#to_time").val()) === "" || $.trim($("#from_time").val()) === "" || $.trim($("#day_of_the_week").val()) === "") {
+            alert('{{gettext "you did not fill out one of the fields"}}');
+            return false;
+        } else {
+            var obj;
+
+            var day_of_the_week = $('#day_of_the_week').val();
+            day_of_the_week = parseInt(day_of_the_week);
+
+            var from_time = $("#from_time").val();
+            var single_store = $("#select_store option:selected").val();
+            single_store = parseInt(single_store);
+            var to_time = $("#to_time").val();
+
+            obj = {
+                'day_of_the_week': day_of_the_week,
+                'store_id': single_store,
+                'user_id': user_id,
+                'start': from_time,
+                'end': to_time
+            };
+            var weeklyHoursJSON = JSON.stringify(obj);
+
+
+            var fd = new FormData();
+            fd.append('weeklyHoursJSON', weeklyHoursJSON);
+
+
+            $.ajax({
+                url: '/admin/api/insert-wekkly-hours',
+                data: fd,
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status == 500) {
+                        $.notify({
+                            icon: 'ti-user',
+                            message: data.description,
+
+                        }, {
+                                placement: {
+                                    from: "top",
+                                    align: "center"
+                                },
+                                type: 'danger',
+                                timer: 2000,
+                                z_index: 2000,
+                            });
+
+                    } else if (data.status == 200) {
+                        $.notify({
+                            icon: 'ti-user',
+                            message: data.description,
+
+                        }, {
+                                placement: {
+                                    from: "top",
+                                    align: "center"
+                                },
+                                type: 'success',
+                                timer: 2000,
+                                z_index: 2000,
+                            });
+                        var table3 = $('#weeklyhourstable').DataTable();
+                        table3.ajax.reload();
+                        $("#insert-weekly-hours").trigger("reset");
+                        $('#insert-weekly-hours').find('input:text, input:password, textarea').val('');
+                        $('#day_of_the_week').selectpicker('refresh');
+                        $('#insert-weekly-hours').find('input:radio, input:checkbox').prop('checked', false);
+
+                    }
+                },
+                error: function (err) {
+
+                }
+            });
+
+        };
+
+    })
+
+
+    $(document).ready(function () {
+        $('#toggle').click(function (e) {
+			$('.aside').stop(true).slideToggle();
+		});
+		$(document).click(function (e) {
+			if (!$(e.target).closest('#toggle, .aside').length) {
+				$('.aside').stop(true).slideUp();
+			}
+		});
+
+        demo.initFormExtendedDatetimepickers();
+
+    });
+
+
+</script>
+<script>
+
+    var user = $('input[name=UserID]').val();
+    user = parseInt(user);
+
+    var url = '/admin/api/all-weekly-hours-per-user/' + user;
+    $('#weeklyhourstable').DataTable({
+        "processing": true,
+        "ajax": {
+            "url": url,
+            "dataSrc": function (data) {
+                console.log(data);
+                if (data["data"] == null) {
+                    return [];
+                }
+                else {
+                    return data.data;
+                }
+            }
+        },
+        "oLanguage": {
+            "sEmptyTable": '{{gettext "You do not have any data"}}',
+            "sProcessing": '{{gettext "Loading. Please wait..."}}'
+
+        },
+        "columns": [
+            {
+                "data": "store_name",
+                "render": function (data) {
+
+
+                    return data;
+                }
+            },
+            {
+                "data": "day_of_the_week",
+                "render": function (data) {
+
+
+                    return data;
+                }
+            },
+            {
+                "data": "name_week_day",
+                "render": function (data) {
+
+
+                    return data;
+                }
+            },
+            {
+                "data": "start",
+                "render": function (data) {
+
+
+                    return data;
+                }
+            },
+            {
+                "data": "end",
+                "render": function (data) {
+
+
+                    return data;
+                }
+            },
+
+            {
+                "data": "created_at",
+                "render": function (data) {
+                    var dateoflastReview = moment(data, "YYYY-MM-DD HH:mm");
+                    return dateoflastReview.format("DD/MM/YYYY")
+                }
+
+            },
+
+            {
+                "data": "id",
+                "render": function (data) {
+                    return '<td><a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a></td>'
+
+                }
+            },
+
+        ],
+        "pagingType": "full_numbers",
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, '{{gettext "All"}}']],
+        responsive: true,
+        language: {
+            search: "_INPUT_",
+            searchPlaceholder: '{{gettext "Search records"}}',
+        },
+        "initComplete": function (settings, json) {
+            $('[rel="tooltip"]').tooltip();
+            this.api().columns().every(function () {
+                var column = this;
+                var select = $('<select id="expense-selected" class="form-control border-input"><option value=""></option></select>')
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    });
+
+
+                column.data().unique().sort().each(function (d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+
+
+                });
+
+
+
+            });
+
+        },
+
+
+    });
+
+
+
+    var table = $('#weeklyhourstable').DataTable();
+
+
+
+
+    table.on('click', '.remove', function (e) {
+        var cell = table.cell(this.parentNode);
+        var data = table.row(cell.index().row).data();
+        var dayid = parseInt(data.id);
+        var formData = {
+            'id': parseInt(data.id),
+        }
+        swal({
+            title: '{{gettext "Are you sure"}}',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '{{gettext "Yes, delete it!"}}',
+            cancelButtonText: '{{gettext "No, keep it"}}',
+            confirmButtonClass: "btn btn-success btn-fill",
+            cancelButtonClass: "btn btn-danger btn-fill",
+            buttonsStyling: false
+        }).then(function () {
+            $.ajax({
+                type: 'post',
+                url: '/admin/api/delete-day-of-the-week/' + dayid,
+                data: JSON.stringify(formData),
+
+                success: function (data) {
+
+                    swal({
+                        title: '{{gettext "Deleted!"}}',
+                        text: '{{gettext "Your working time has been deleted."}}',
+                        type: 'success',
+                        confirmButtonClass: "btn btn-success btn-fill",
+                        buttonsStyling: false
+                    }).then(function () {
+                        var table2 = $('#weeklyhourstable').DataTable();
+                        table2.ajax.reload();
+
+
+                    });
+
+                },
+                contentType: 'application/json',
+                dataType: 'json'
+            });
+
+        }, function (dismiss) {
+            // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+            if (dismiss === 'cancel') {
+                swal({
+                    title: '{{gettext "Cancelled"}}',
+                    type: 'error',
+                    confirmButtonClass: "btn btn-info btn-fill",
+                    buttonsStyling: false
+                })
+            }
+        })
+
+        e.preventDefault();
+    });
+
+
+</script>
+<!-- <script type="text/javascript">
+    $.notify({
+        allow_dismiss: true,
+        
+        icon: '/static/images/Succstepsfavicon.png',
+        title: 'Succsteps',
+        message: '{{gettext "This table represents your open days. Set carefully as it will affect your reservation system."}}'
+    },{
+        type: 'pastel-warning',
+         delay: 500000,
+        icon_type: 'image',
+        placement: {from: 'top',align: 'center'
+	},
+    offset: {
+		y: 8
+	},
+        template: '<div data-notify="container" class="col-xs-11 col-sm-5 alert alert-{0}" role="alert">' +
+                '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">X</button>'+
+            '<img data-notify="icon" class="img-circle pull-left">' +
+            '<span data-notify="title">{1}</span>' +
+            '<span data-notify="message">{2}</span>' +
+        '</div>'
+    });
+ </script> -->
+ {{end}}

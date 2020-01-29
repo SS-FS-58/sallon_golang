@@ -1,0 +1,1949 @@
+# Chinese translations for PACKAGE package.
+# Copyright (C) 2013 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-06-04 10:20+0800\n"
+"PO-Revision-Date: 2018-03-04 02:01+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: el_GR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+
+# ##################### Register Form #########################
+msgid "Register"
+msgstr "Εγγραφή"
+
+msgid "Dashboard"
+msgstr "Πίνακας ελέγχου"
+
+msgid "Login"
+msgstr "Είσοδος"
+
+msgid "Username"
+msgstr "Όνομα χρήστη"
+
+msgid "Password"
+msgstr "Κωδικός"
+
+msgid "Forgot your password?"
+msgstr "Ξεχάσατε τον κωδικό σας;"
+
+msgid "Let's go"
+msgstr "Είσοδος"
+
+msgid "Discover all the features it has to offer"
+msgstr "Ανακαλύψτε όλα τα χαρακτηριστικά που έχει να προσφέρει"
+
+msgid "Customer Management"
+msgstr "Διαχείριση πελάτη"
+
+msgid "Your customers are rewarded as they buy and can redeem their reward when a limit is reached."
+msgstr "Οι πελάτες σας ανταμείβονται καθώς αγοράζουν και μπορούν να εξαργυρώσουν την ανταμοιβή τους όταν επιτευχθεί ένα όριο."
+
+msgid "Customer Calendar"
+msgstr "Εορτολόγιο πελατών"
+
+msgid "Detailed traffic and customer history"
+msgstr "Αναλυτική κίνηση και ιστορικό πελάτη"
+
+msgid "Notes and historical data per customer"
+msgstr "Σημειώσεις και ιστορικότητα ανα πελάτη"
+
+msgid "Get instant access"
+msgstr "Άμεση πρόσβαση"
+
+msgid "Get instant access from your laptop, PC, mobile or tablet"
+msgstr "Άμεση πρόσβαση από τον φορητό υπολογιστή, τον υπολογιστή, το κινητό ή το tablet σας"
+
+msgid "Cost management"
+msgstr "Διαχείριση εξόδων"
+
+msgid "Automatic reminders with sms and email"
+msgstr "Αυτόματες υπενθυμίσεις με sms και email"
+
+msgid "Automatic backup of data"
+msgstr "Αυτόματη δημιουργία αντιγράφων ασφαλείας"
+
+msgid "Warehouse Management"
+msgstr "Διαχείριση αποθήκης"
+
+msgid "Stock management"
+msgstr "Διαχείριση αποθέματος ειδών"
+
+msgid "Supplier Management"
+msgstr "Διαχειριση Προμηθευτων"
+
+# ##################### Login Form #########################
+msgid "Looking to login?"
+msgstr "Θέλετε να συνδεθείτε;"
+
+msgid "Your username"
+msgstr "Το όνομα χρήστη σας"
+
+msgid "Enter email"
+msgstr "Εισαγάγετε το email"
+
+msgid "Password Confirmation"
+msgstr "Επιβεβαίωση κωδικού πρόσβασης"
+
+msgid "Your Forename"
+msgstr "Το όνομα σας"
+
+msgid "Your Surname"
+msgstr "Το επώνυμό σας"
+
+msgid "Work Telephone"
+msgstr "Τηλέφωνο εργασίας"
+
+msgid "Mobile Telephone"
+msgstr "Κινητό τηλέφωνο"
+
+msgid "Upload Logo"
+msgstr "Ανεβάστε Logo"
+
+msgid "Browse…"
+msgstr "Αναζήτηση..."
+
+msgid "Create Account"
+msgstr "Δημιουργήστε λογαριασμό"
+
+msgid "Remember Me"
+msgstr "Να με θυμάσαι"
+
+msgid "or VAT Number"
+msgstr "ή το ΑΦΜ σας"
+
+msgid "Role"
+msgstr "Ρόλος"
+
+msgid "Administrator"
+msgstr "Διαχειριστής"
+
+msgid "Shop"
+msgstr "Κατάστημα"
+
+msgid "Toggle navigation"
+msgstr "Εναλλαγή πλοήγησης"
+
+# ##################### Left menu #########################
+msgid "My Profile"
+msgstr "Το προφίλ μου"
+
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+msgid "Logout"
+msgstr "Αποσυνδέση"
+
+msgid "Overview"
+msgstr "Επισκόπηση"
+
+msgid "Stats"
+msgstr "Στατιστικά"
+
+msgid "Bookings"
+msgstr "Κρατήσεις"
+
+msgid "Calendar"
+msgstr "Ημερολόγιο"
+
+msgid "Booking List"
+msgstr "Λίστα κρατήσεων"
+
+msgid "Customers"
+msgstr "Πελάτες"
+
+msgid "View customers"
+msgstr "Προβολή πελατών"
+
+msgid "Cashier"
+msgstr "Ταμείο"
+
+msgid "Campaigns"
+msgstr "Καμπάνιες"
+
+msgid "Facebook Campaigns"
+msgstr "Καμπάνιες Facebook"
+
+msgid "Google Campaigns"
+msgstr "Καμπάνιες Google"
+
+msgid "Sms Campaigns"
+msgstr "Καμπάνιες Sms"
+
+msgid "Email Campaigns"
+msgstr "Καμπάνιες Email"
+
+msgid "Reports"
+msgstr "Αναφορές"
+
+msgid "Sales Report"
+msgstr "Αναφορά πωλήσεων"
+
+msgid "Revenue - Expenses"
+msgstr "Έσοδα - Έξοδα"
+
+msgid "Customers with points"
+msgstr "Πελάτες με πόντους"
+
+msgid "Pending Days"
+msgstr "Ημέρες με εκκρεμοτητες"
+
+msgid "Stores"
+msgstr "Καταστήματα"
+
+msgid "Employees"
+msgstr "Εργαζόμενοι"
+
+msgid "Suppliers"
+msgstr "Προμηθευτές"
+
+msgid "Products"
+msgstr "Προϊόντα"
+
+msgid "Services"
+msgstr "Υπηρεσίες"
+
+msgid "Rewards"
+msgstr "Ανταμοιβές"
+
+msgid "Promotions"
+msgstr "Προσφορές"
+
+msgid "Recommendations"
+msgstr "Συστάσεις"
+
+msgid "Store settings"
+msgstr "Ρυθμίσεις Καταστήματος"
+
+msgid "Search..."
+msgstr "Αναζήτηση..."
+
+msgid "Search"
+msgstr "Αναζήτηση"
+
+msgid "View your store"
+msgstr "Δείτε το κατάστημά σας"
+
+msgid "Notifications"
+msgstr "Ειδοποιήσεις"
+
+msgid "Terms and Conditions"
+msgstr "Οροι και Προϋποθέσεις"
+
+msgid "Support"
+msgstr "Υποστήριξη"
+
+msgid "Contact us"
+msgstr "Επικοινωνήστε μαζί μας"
+
+msgid "Income"
+msgstr "Έσοδα"
+
+msgid "Expenses"
+msgstr "Έξοδα"
+
+msgid "Billing History"
+msgstr "Ιστορικό χρεώσεων"
+
+msgid "Cancelations Report"
+msgstr "Αναφορά ακυρώσεων"
+
+# ##################### Shops page #########################
+msgid "Here you can find all your store settings You can add new stores edit details or change passwords from your stores"
+msgstr "Εδώ μπορείτε να βρείτε όλες τις ρυθμίσεις του καταστήματός σας Μπορείτε να προσθέσετε νεα καταστήματα να επεξεργαστείτε λεπτομέρειες ή να αλλάξετε τους κωδικούς πρόσβασης από τα καταστήματά σας"
+
+msgid "Add new shop"
+msgstr "Προσθήκη νέου καταστήματος"
+
+msgid "Add"
+msgstr "Προσθήκη"
+
+msgid "Brand Name"
+msgstr "Όνομα καταστήματος"
+
+msgid "Vat Number"
+msgstr "Α.Φ.Μ"
+
+msgid "Address"
+msgstr "Διεύθυνση"
+
+msgid "Tax Office"
+msgstr "Δ.Ο.Υ"
+
+msgid "Creation Date"
+msgstr "Ημερομηνία δημιουργίας"
+
+msgid "Actions"
+msgstr "Ενέργειες"
+
+msgid "Close"
+msgstr "Κλείσιμο"
+
+msgid "New Shop"
+msgstr "Νέο κατάστημα"
+
+msgid "The VAT number already exist."
+msgstr "Ο αριθμός Α.Φ.Μ υπάρχει ήδη."
+
+msgid "*VAT number exists"
+msgstr "* Υπάρχει ο αριθμός Α.Φ.Μ"
+
+msgid "Your VAT Number"
+msgstr "Ο αριθμός Α.Φ.Μ σας"
+
+msgid "Company Name"
+msgstr "Όνομα Εταιρίας"
+
+msgid "Enter your address"
+msgstr "Εισάγετε τη διεύθυνσή σας"
+
+msgid "Street address"
+msgstr "διεύθυνση"
+
+msgid "City"
+msgstr "Πόλη"
+
+msgid "State"
+msgstr "Πολιτεία"
+
+msgid "Zip Code"
+msgstr "Ταχ. κώδικας"
+
+msgid "Country"
+msgstr "Χώρα"
+
+msgid "Save changes"
+msgstr "Αποθήκευση αλλαγών"
+
+msgid "Search records"
+msgstr "Αναζήτηση..."
+
+msgid "All"
+msgstr "Ολα"
+
+msgid "Are you sure?"
+msgstr "Είστε σίγουροι;"
+
+msgid "You will not be able to recover this store!"
+msgstr "Δεν θα είστε σε θέση να ανακτήσετε αυτό το κατάστημα!"
+
+msgid "Yes, delete it!"
+msgstr "Ναι, διαγράψτε το!"
+
+msgid "No, keep it"
+msgstr "Όχι, κρατήστε το"
+
+msgid "Deleted!"
+msgstr "Διαγράφηκε!"
+
+msgid "Your store has been deleted."
+msgstr "Το κατάστημά σας έχει διαγραφεί."
+
+msgid "Cancelled"
+msgstr "Ακυρώθηκε"
+
+msgid "Your store is safe :)"
+msgstr "Το κατάστημά σας είναι ασφαλές :)"
+
+msgid "Select country if you want to add bank holidays to the calendar"
+msgstr "Επιλέξτε χώρα, εάν θέλετε να προσθέσετε τις αργίες στο ημερολόγιο"
+
+msgid "Include Bank Holidays"
+msgstr "Συμπεριλάβετε αργίες"
+
+msgid "Exclude Bank Holidays"
+msgstr "Να μην συμπεριλάβετε αργίες"
+
+msgid "Select Coundry"
+msgstr "Επιλέξτε χώρα"
+
+msgid "Change country if you want to add bank holidays to the calendar"
+msgstr "Αλλάξτε τη χώρα εάν θέλετε να προσθέσετε τις αργίες στο ημερολόγιο"
+
+# ##################### Suppliers page #########################
+msgid "Here you can find all your suppliers settings You can add new suppliers edit details you will need at least one supplier if you want to add products"
+msgstr "Εδώ μπορείτε να βρείτε όλες τις ρυθμίσεις των προμηθευτών σας Μπορείτε να προσθέσετε νέο προμηθευτή να τον επεξεργαστείτε θα χρειαστείτε τουλάχιστον έναν προμηθευτή εάν θέλετε να προσθέσετε προϊόντα"
+
+msgid "Supplier Name"
+msgstr "Όνομα προμηθευτή"
+
+msgid "Field of Business"
+msgstr "Τομέας Επιχείρησης"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Website"
+msgstr "Σελίδα"
+
+msgid "Active"
+msgstr "Ενεργό"
+
+msgid "Add new supplier"
+msgstr "Προσθέστε νέο προμηθευτή"
+
+msgid "New Supplier"
+msgstr "Νέος προμηθευτής"
+
+msgid "Enter the address"
+msgstr "Εισαγάγετε τη διεύθυνση"
+
+msgid "Enter your email"
+msgstr "Συμπληρώστε το email σας"
+
+msgid "Enter the email"
+msgstr "Συμπληρώστε το email"
+
+msgid "You will not be able to recover this supplier!"
+msgstr "Δεν θα είστε σε θέση να ανακτήσετε αυτόν το προμηθευτή!"
+
+msgid "Your supplier has been deleted."
+msgstr "Ο προμηθευτής σας έχει διαγραφεί."
+
+msgid "Your supplier is safe :)"
+msgstr "Ο προμηθευτής σας είναι ασφαλής :)"
+
+# ##################### Services page #########################
+msgid "Here you can find all your store services"
+msgstr "Εδώ μπορείτε να βρείτε όλες τις υπηρεσίες του καταστήματός σας"
+
+msgid "Add new service"
+msgstr "Προσθήκη νέας υπηρεσίας"
+
+msgid "Service Code"
+msgstr "Κωδικός υπηρεσίας"
+
+msgid "Service Name"
+msgstr "Όνομα υπηρεσίας"
+
+msgid "Price"
+msgstr "Τιμή"
+
+msgid "Discount"
+msgstr "Εκπτωση"
+
+msgid "Time"
+msgstr "Xρόνος"
+
+msgid "Add Service"
+msgstr "Προσθήκη υπηρεσίας"
+
+msgid "Your service name"
+msgstr "Το όνομα της υπηρεσίας σας"
+
+msgid "Service Time"
+msgstr "Χρόνος υπηρεσίας"
+
+msgid "Select duration"
+msgstr "Επιλέξτε τη διάρκεια"
+
+msgid "15 minutes"
+msgstr "15 λεπτά"
+
+msgid "30 minutes"
+msgstr "30 λεπτά"
+
+msgid "45 minutes"
+msgstr "45 λεπτά"
+
+msgid "60 minutes"
+msgstr "60 λεπτά"
+
+msgid "1 hour 15 minutes"
+msgstr "1 ώρα και 15 λεπτά"
+
+msgid "1 hour 30 minutes"
+msgstr "1 ώρα και 30 λεπτά"
+
+msgid "1 hour 45 minutes"
+msgstr "1 ώρα και 45 λεπτά"
+
+msgid "2 hours"
+msgstr "2 ώρες"
+
+msgid "2 hours 30 minutes"
+msgstr "2 ώρες και 30 λεπτά"
+
+msgid "3 hours"
+msgstr "3 ώρες"
+
+msgid "3 hours 30 minutes"
+msgstr "3 ώρες και 30 λεπτά"
+
+msgid "4 hours"
+msgstr "4 ώρες"
+
+msgid "Discount Price"
+msgstr "Τιμή έκπτωσης"
+
+msgid "You will not be able to recover this service!"
+msgstr "Δεν θα μπορείτε να ανακτήσετε αυτήν την υπηρεσία!"
+
+msgid "Your service has been deleted."
+msgstr "Η υπηρεσία σας έχει διαγραφεί."
+
+msgid "Your service is safe :)"
+msgstr "Η υπηρεσία σας είναι ασφαλής :)"
+
+msgid "Categories"
+msgstr "Κατηγορίες"
+
+msgid "Category Name"
+msgstr "Oνομα κατηγορίας"
+
+msgid "Add Category"
+msgstr "Προσθήκη κατηγορίας"
+
+msgid "Create"
+msgstr "Δημιουργία"
+
+msgid "Add Sub Category"
+msgstr "Προσθήκη υπο-κατηγορίας"
+
+msgid "Sub Category Name"
+msgstr "Όνομα υπο-κατηγορίας"
+
+# ##################### Products page #########################
+msgid "Here you can find all your products You can add new products edit details and change product status also you can add or remove stock"
+msgstr "Εδώ μπορείτε να βρείτε όλα τα προϊόντα σας Μπορείτε να προσθέσετε νέα προϊόντα να τα επεξεργαστείτε και να αλλάξετε την κατάσταση του προϊόντος, μπορείτε επίσης να προσθέσετε ή να αφαιρέσετε απόθεμα"
+
+msgid "Add new product"
+msgstr "Προσθέστε νέο προϊόν"
+
+msgid "Code"
+msgstr "Κωδικός"
+
+msgid "Supplier"
+msgstr "Προμηθευτής"
+
+msgid "Store Name"
+msgstr "Όνομα καταστήματος"
+
+msgid "Product"
+msgstr "Προϊόν"
+
+msgid "Ml"
+msgstr "Ml"
+
+msgid "Stock"
+msgstr "Απόθεμα"
+
+msgid "Can split"
+msgstr "Μπορεί να χωρίσει"
+
+msgid "Add Product"
+msgstr "Προσθήκη προϊόντος"
+
+msgid "Select supplier"
+msgstr "Επιλέξτε προμηθευτή"
+
+msgid "Product Name"
+msgstr "όνομα προϊόντος"
+
+msgid "Product ml"
+msgstr "ml προϊόντος"
+
+msgid "Product Price"
+msgstr "Τιμή προϊόντος"
+
+msgid "Product Stock"
+msgstr "Απόθεμα προϊόντος"
+
+msgid "Good job!"
+msgstr "Επιτυχία!"
+
+msgid "Successfully updated product to the database"
+msgstr "Έχετε ενημερώσει με επιτυχία το προϊόν στη βάση δεδομένων"
+
+# ##################### Index page #########################
+msgid "Total Stores"
+msgstr "Kαταστήματα"
+
+msgid "View Stores"
+msgstr "Δείτε τα Καταστήματα"
+
+msgid "View your revenue"
+msgstr "Δείτε τα Εσοδα σας"
+
+msgid "Updated now"
+msgstr "Ενημέρωση τώρα"
+
+msgid "Revenue"
+msgstr "Εσοδα"
+
+msgid "Cancellations Today"
+msgstr "Ακυρώσεις σήμερα"
+
+msgid "View Cancellations"
+msgstr "Προβολή ακυρώσεων"
+
+msgid "Last day"
+msgstr "Χθές"
+
+msgid "Bookings Today"
+msgstr "Κρατήσεις σήμερα"
+
+msgid "View Bookings"
+msgstr "Προβολή κρατήσεων"
+
+msgid "Credits"
+msgstr "Credits"
+
+msgid "Buy Credits Now"
+msgstr "Αγορά Credits τώρα"
+
+msgid "total earnings"
+msgstr "συνολικά κέρδη"
+
+msgid "Financial Statistics"
+msgstr "Χρηματοοικονομικά στατιστικά"
+
+msgid "Nameday - Birthday"
+msgstr "Γιορτή - Γενέθλια"
+
+msgid "You have"
+msgstr "Έχετε"
+
+msgid "with Nameday"
+msgstr "με γιορτή"
+
+msgid "with Birthday"
+msgstr "με γενέθλια"
+
+msgid "Name"
+msgstr "Ονομα"
+
+msgid "Reason"
+msgstr "Αιτία"
+
+msgid "No notifications"
+msgstr "Δεν υπάρχουν ειδοποιήσεις"
+
+msgid "Mark all as read"
+msgstr "Σημείωση όλων ως αναγνωσμένα"
+
+msgid "Show all"
+msgstr "Εμφάνιση όλων"
+
+msgid "Total customers this year"
+msgstr "Σύνολο πελατών φέτος"
+
+msgid "View all customers"
+msgstr "Προβολή όλων των πελατών"
+
+msgid "Total expenses this year"
+msgstr "Συνολικά έξοδα φέτος"
+
+msgid "View more details"
+msgstr "Δείτε περισσότερες λεπτομέρειες"
+
+msgid "Completed."
+msgstr "που ολοκληρώθηκαν"
+
+msgid "Cancelled."
+msgstr "που ακυρώθηκαν"
+
+msgid "Pending."
+msgstr "με εκκρεμοτητες"
+
+# ##################### Customers page #########################
+msgid "Here you can find all your customers"
+msgstr "Εδώ μπορείτε να βρείτε όλους τους πελάτες σας"
+
+msgid "Add customer"
+msgstr "Προσθήκη Πελάτη"
+
+msgid "Gold customers"
+msgstr "Χρυσοί Πελάτες"
+
+msgid "Inactice customers"
+msgstr "Αδρανείς Πελάτες"
+
+msgid "Customers with birthdays"
+msgstr "Πελάτες με γενέθλια"
+
+msgid "Phone"
+msgstr "Τηλέφωνο"
+
+msgid "Points"
+msgstr "Πόντοι"
+
+msgid "Birthday"
+msgstr "Γενεθλια"
+
+msgid "Customer Name"
+msgstr "Όνομα πελάτη"
+
+msgid "Customer Surname"
+msgstr "Επώνυμο πελάτη"
+
+msgid "Customer Email"
+msgstr "Email πελάτη"
+
+msgid "Select gender"
+msgstr "Επιλέξτε φύλο"
+
+msgid "Male"
+msgstr "Άνδρας"
+
+msgid "Female"
+msgstr "Γυναίκα"
+
+msgid "Enter your mobile number"
+msgstr "Εισάγετε τον αριθμό του κινητού σας"
+
+msgid "Enter your home phone number"
+msgstr "Εισαγάγετε τον αριθμό τηλεφώνου"
+
+msgid "Date Of Birth"
+msgstr "Ημερομηνία γέννησης"
+
+msgid "Customer card"
+msgstr "Καρτελα πελατη"
+
+msgid "Insert Minimum Points"
+msgstr "Εισάγετε Ελάχιστους πόντους"
+
+msgid "Search for gold customers"
+msgstr "Αναζήτηση για χρυσούς πελάτες"
+
+msgid "Inactive customers"
+msgstr "Αδρανείς πελάτες"
+
+msgid "Select Date From"
+msgstr "Επιλέξτε Ημερομηνία από"
+
+msgid "Inactive From"
+msgstr "Αδρανείς από"
+
+msgid "Select Date To"
+msgstr "Επιλέξτε Ημερομηνία έως"
+
+msgid "Select Date"
+msgstr "Επιλέξτε Ημερομηνία"
+
+msgid "Inactive To"
+msgstr "Αδρανείς έως"
+
+msgid "Search for inactive customers"
+msgstr "Αναζήτηση ανενεργών πελατών"
+
+msgid "Search for customers with birthdays"
+msgstr "Αναζήτηση για πελάτες με γενέθλια"
+
+msgid "Add Walk-in Customer"
+msgstr "Προσθέστε Πελάτη λιανικής"
+
+msgid "Walk-in Customer"
+msgstr "Πελάτης λιανικής"
+
+msgid "Extra Bonus Points"
+msgstr "Επιπλέον μπόνους"
+
+msgid "Insert bonus points"
+msgstr "Εισάγετε bonus πόντους"
+
+# ##################### Profile page #########################
+msgid "Work Phone:"
+msgstr "Τηλέφωνο εργασίας:"
+
+msgid "Mobile Phone:"
+msgstr "Κινητό τηλέφωνο:"
+
+msgid "Company:"
+msgstr "Εταιρία:"
+
+msgid "Add Stores"
+msgstr "Προσθήκη καταστημάτων"
+
+msgid "Edit Profile"
+msgstr "Επεξεργασία προφίλ"
+
+msgid "Company"
+msgstr "Εταιρία"
+
+msgid "Buy subscription or credits"
+msgstr "Αγοράστε συνδρομή ή credits"
+
+msgid "Email address"
+msgstr "Διεύθυνση Email"
+
+msgid "First Name"
+msgstr "Ονομα"
+
+msgid "Last Name"
+msgstr "Επίθετο"
+
+msgid "Image Logo"
+msgstr "Λογότυπο"
+
+msgid "Clear"
+msgstr "Καθαρισμός"
+
+msgid "Update Profile"
+msgstr "Ανανέωση προφίλ"
+
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+msgid "Subscription"
+msgstr "Συνδρομή"
+
+msgid "Update your Subscription"
+msgstr "Ανανεώστε την συνδρομή σας"
+
+msgid "Edit your profile"
+msgstr "Επεξεργαστείτε το προφίλ σας"
+
+# ##################### Profile page #########################
+msgid "Page Not Found"
+msgstr "Η σελίδα δεν βρέθηκε"
+
+msgid "Error 404"
+msgstr "Σφάλμα 404"
+
+msgid "The page you requested could not be found, either contact your webmaster or try again. Use your browsers Back button to navigate to the page you have previously come from."
+msgstr "Η σελίδα που ζητήσατε δεν βρέθηκε, επικοινωνήστε με τον webmaster σας ή δοκιμάστε ξανά. Χρησιμοποιήστε το κουμπί Επιστροφή στο πρόγραμμα περιήγησης για να περιηγηθείτε στη σελίδα από την οποία προέρχονταν προηγουμένως."
+
+msgid "Or you could just press this neat little button:"
+msgstr "Εναλλακτικά, μπορείτε να πατήσετε ακριβώς αυτό το μικρό κουμπί:"
+
+msgid "Take Me Home"
+msgstr "Πήγαινε με στην Aρχική"
+
+# ##################### Helpers translations #########################
+msgid "Home"
+msgstr "Αρχική"
+
+# ##################### Store settings page #########################
+msgid "Automatic SMS and EMAIL"
+msgstr "Αυτόματα SMS και EMAIL"
+
+msgid "Send SMS notification on new customer bookings"
+msgstr "Αποστολή SMS ειδοποίησης σχετικά με νέες κρατήσεις πελατών"
+
+msgid "Message"
+msgstr "Μήνυμα"
+
+msgid "Text"
+msgstr "Κείμενο"
+
+msgid "booking reminder for [TIME] on [DATE] on [SALON NAME]"
+msgstr "υπενθύμιση κράτησης για [DATE] στις [TIME] στο [SALON NAME]"
+
+msgid "Remind the appointment to the client with an SMS"
+msgstr "Υπενθυμίστε το ραντεβού στον πελάτη με ένα SMS"
+
+msgid "Send Email notification on new customer bookings"
+msgstr "Αποστολή ειδοποίησης με email σχετικά με νέες κρατήσεις πελατών"
+
+msgid "Email Subject"
+msgstr "Το θέμα του email"
+
+msgid "Reservation reminder for [TIME] on [DATE] on [SALON NAME]"
+msgstr "Η υπενθύμιση κράτησης για [DATE] στις [TIME] στο [SALON NAME]"
+
+msgid "Submit"
+msgstr "Υποβολή"
+
+msgid "Remind the appointment to the client with an Email"
+msgstr "Υπενθυμίστε το ραντεβού στον πελάτη με ένα μήνυμα Email"
+
+msgid "Booking on available days"
+msgstr "Κράτηση στις διαθέσιμες ημέρες"
+
+msgid "Create one or more rules to limit reservations to specific days and time range."
+msgstr "Δημιουργήστε έναν ή περισσότερους κανόνες για τον περιορισμό των κρατήσεων σε συγκεκριμένες ημέρες και χρονικά διαστήματα."
+
+msgid "Monday"
+msgstr "Δευτέρα"
+
+msgid "Tuesday"
+msgstr "Τρίτη"
+
+msgid "Wednesday"
+msgstr "Τετάρτη"
+
+msgid "Thursday"
+msgstr "Πέμπτη"
+
+msgid "Friday"
+msgstr "Παρασκευή"
+
+msgid "Saturday"
+msgstr "Σάββατο"
+
+msgid "Sunday"
+msgstr "Κυριακή"
+
+msgid "This table represents your open days. Set carefully as it will affect your reservation system."
+msgstr "Αυτός ο πίνακας αντιπροσωπεύει τις ανοιχτές ημέρες σας. Ορίστε προσεκτικά, καθώς θα επηρεάσει το σύστημα κρατήσεων σας."
+
+msgid "Day"
+msgstr "Ημέρα"
+
+msgid "Day Of The Week"
+msgstr "Ημέρα της εβδομάδας"
+
+msgid "Time From"
+msgstr "Aπό Ώρα"
+
+msgid "Time To"
+msgstr "Έως Ωρα"
+
+msgid "Please select day of the week"
+msgstr "Παρακαλώ επιλέξτε ημέρα της εβδομάδος"
+
+msgid "Please select from time"
+msgstr "Παρακαλώ επιλέξτε από την ώρα"
+
+msgid "Please select to time"
+msgstr "Παρακαλώ εως την ώρα"
+
+msgid "Your working time has been deleted."
+msgstr "Ο χρόνος εργασίας σας έχει διαγραφεί."
+
+# ##################### Language #########################
+msgid "Greek"
+msgstr "Ελληνικά"
+
+msgid "English"
+msgstr "Αγγλικά"
+
+msgid "Language"
+msgstr "Γλώσσα"
+
+# ##################### Campaigns #########################
+msgid "Sent"
+msgstr "Απεσταλμένα"
+
+msgid "For approval"
+msgstr "Προς έγκριση"
+
+msgid "Inactive"
+msgstr "Ανενεργό"
+
+msgid "Status"
+msgstr "Κατάσταση"
+
+msgid "Date"
+msgstr "Ημερομηνία"
+
+msgid "Campaign name"
+msgstr "Ονομα Καμπάνιας"
+
+msgid "From"
+msgstr "Από"
+
+msgid "To"
+msgstr "Εώς"
+
+msgid "Budget / Day"
+msgstr "Προϋπολογισμός / Ημέρα"
+
+msgid "Total Budget"
+msgstr "Συνολικός προϋπολογισμός"
+
+msgid "View"
+msgstr "Εμφάνιση"
+
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+msgid "Remove"
+msgstr "Αφαίρεση"
+
+msgid "Opened"
+msgstr "Ανοιγμένα"
+
+msgid "Bounced"
+msgstr "Αναπήδησε"
+
+msgid "Junk"
+msgstr "Ανεπιθύμητα"
+
+msgid "Unsubscribed"
+msgstr "Διαγράφηκαν"
+
+# ##################### Expenses #########################
+msgid "Expenses List"
+msgstr "Λίστα εξόδων"
+
+msgid "Monthly Expenses target"
+msgstr "Στόχος μηνιαίων δαπανών"
+
+msgid "Weekly Expenses target"
+msgstr "Στόχος εβδομαδιαίων δαπανών"
+
+msgid "Total Expenses Today"
+msgstr "Συνολικά έξοδα σήμερα"
+
+msgid "Total Expenses target"
+msgstr "Συνολικός στόχος δαπανών"
+
+msgid "No"
+msgstr "Αριθμός"
+
+msgid "Service - Item"
+msgstr "Υπηρεσία - Είδος"
+
+msgid "Amount"
+msgstr "Ποσό"
+
+msgid "Add Row"
+msgstr "Προσθήκη γραμμής"
+
+msgid "Print"
+msgstr "Εκτύπωση"
+
+msgid "Save"
+msgstr "Αποθηκεύση"
+
+msgid "Expense Name"
+msgstr "Όνομα δαπάνης"
+
+msgid "Add Expense Price"
+msgstr "Προσθήκη Τιμή Δαπάνης"
+
+msgid "Select Cost Category"
+msgstr "Επιλέξτε κατηγορία Δαπάνης"
+
+msgid "Expense Price"
+msgstr "Ποσό Δαπάνης"
+
+msgid "Unpaid"
+msgstr "Απλήρωτο"
+
+msgid "Paid"
+msgstr "Πληρωμένο"
+
+msgid "Add Cost Category"
+msgstr "Προσθήκη κατηγορίας Δαπάνης"
+
+msgid "Cost Category Name"
+msgstr "Όνομα κατηγορίας Δαπάνης"
+
+msgid "Payment"
+msgstr "Πληρωμή"
+
+# ##################### Income #########################
+msgid "Income Name"
+msgstr "Όνομα εσόδου"
+
+msgid "Income List"
+msgstr "Λίστα εσόδου"
+
+msgid "Monthly Income target"
+msgstr "Στόχος μηνιαίων εσόδων"
+
+msgid "Weekly Income target"
+msgstr "Στόχος εβδομαδιαίων εσόδων"
+
+msgid "Total Income Today"
+msgstr "Συνολικά έσοδα σήμερα"
+
+msgid "Total Income target"
+msgstr "Συνολικός στόχος εσόδων"
+
+# ##################### Employee #########################
+msgid "Add Employee"
+msgstr "Προσθήκη Εργαζόμενου"
+
+msgid "Employee Name"
+msgstr "Ονομα Εργαζόμενου"
+
+msgid "Display Order"
+msgstr "Σειρά εμφάνισης"
+
+msgid "Color"
+msgstr "Χρώμα"
+
+msgid "Employee Mobile Phone"
+msgstr "Κινητό τηλέφωνο Εργαζόμενου"
+
+msgid "Mobile Phone"
+msgstr "Κινητό τηλέφωνο"
+
+msgid "Home Phone"
+msgstr "Τηλέφωνο Οικίας"
+
+msgid "Update changes"
+msgstr "Ενημέρωση αλλαγών"
+
+msgid "Change Password"
+msgstr "Αλλαγή Κωδικού"
+
+msgid "Working hours"
+msgstr "Ωρες εργασίας"
+
+msgid "Day off"
+msgstr "Ρεπό"
+
+msgid "Select Store"
+msgstr "Επιλογή καταστήματος"
+
+msgid "Here you can find all your employees settings You can add new employees edit details change working stores or change display order on calendar"
+msgstr "Εδώ μπορείτε να βρείτε όλες τις ρυθμίσεις του προσωπικού σας Μπορείτε να προσθέσετε νεόυς εργαζόμενους να τους επεξεργαστείτε να αλλάξετε το κατάστημα εργασίας ή να αλλάξετε την σειρά εμφάνισης στο ημερολόγιο"
+
+# ##################### Facebook Campaigns #########################
+msgid "To be approved"
+msgstr "Προς έγκριση"
+
+msgid "View your Campaigns"
+msgstr "Δείτε τις καμπάνιες σας"
+
+# ##################### booking List #########################
+msgid "Bookings This week"
+msgstr "Κρατήσεις Αυτή την εβδομάδα"
+
+msgid "Bookings This Month"
+msgstr "Κρατήσεις Αυτό το μήνα"
+
+msgid "Bookings Last Month"
+msgstr "Κρατήσεις τελευταίου μήνα"
+
+msgid "View your Bookings"
+msgstr "Δείτε τις Κρατήσεις σας"
+
+# ##################### Promotions #########################
+msgid "View your Promotions"
+msgstr "Δείτε τις προσφορές σας"
+
+msgid "Promotions This week"
+msgstr "Προσφορές αυτή την εβδομάδα"
+
+msgid "Promotions This Month"
+msgstr "Προσφορές αυτό τον Μήνα"
+
+msgid "Promotions Last Month"
+msgstr "Προσφορές τελευταίου μήνα"
+
+msgid "Time / Days"
+msgstr "Χρόνος / Ημέρες"
+
+msgid "Promotion Text"
+msgstr "Κείμενο Προσφοράς"
+
+msgid "Promotion Title"
+msgstr "Τίτλος Προσφοράς"
+
+msgid "Store"
+msgstr "Κατάστημα"
+
+msgid "Services Promotions"
+msgstr "Προσφορές υπηρεσιών"
+
+msgid "Products Promotions"
+msgstr "Προσφορές προϊόντων"
+
+msgid "Add Promotion"
+msgstr "Προσθέστε προσφορά"
+
+msgid "Select promotion type"
+msgstr "Επιλέξτε τύπο Προσφοράς"
+
+msgid "Service"
+msgstr "Υπηρεσία"
+
+msgid "Days Duration"
+msgstr "Διάρκεια ημερών"
+
+msgid "Price discount"
+msgstr "Έκπτωση τιμής"
+
+msgid "Promotion Sale per %  e.x. 10"
+msgstr "Έκπτωση Προσφοράς με % π.χ 10"
+
+msgid "Promotion Description"
+msgstr "Περιγραφή Προσφοράς"
+
+msgid "Edit Promotion"
+msgstr "Επεξεργασία προσφοράς"
+
+msgid "Please insert days duration"
+msgstr "Παρακαλώ εισάγετε τη διάρκεια των ημερών"
+
+msgid "Please insert promotion discount"
+msgstr "Παρακαλώ εισάγετε έκπτωση τις Προσφοράς"
+
+msgid "The promotion discount is not a number"
+msgstr "Η έκπτωση στην προσφορά δεν είναι ένας αριθμός"
+
+msgid "Please insert description"
+msgstr "Παρακαλώ εισάγετε περιγραφή"
+
+msgid "Please insert promotion title"
+msgstr "Παρακαλώ εισαγάγετε τον τίτλο προσφοράς"
+
+msgid "You will not be able to recover this promotion!"
+msgstr "Δεν θα μπορείτε να ανακτήσετε αυτήν την προσφορά!"
+
+msgid "Your promotion has been deleted."
+msgstr "Η προσφορά σας έχει διαγραφεί."
+
+msgid "Your promotion is safe :)"
+msgstr "Η προσφορά σας είναι ασφαλής :)"
+
+msgid "Here you can find all your store promotions you can promote service or product with discount value in time frame"
+msgstr "Εδώ μπορείτε να βρείτε όλες τις προωθητικές ενέργειες του καταστήματός σας και να προωθήσετε την υπηρεσία ή το προϊόν με εκπτωτική αξία στο χρονικό πλαίσιο"
+
+# ##################### js #########################
+msgid "Successfully updated service to the database"
+msgstr "Η υπηρεσία ενημερώθηκε με επιτυχία στη βάση δεδομένων"
+
+msgid "you did not fill out one of the fields"
+msgstr "δεν συμπληρώσατε ένα από τα πεδία"
+
+msgid "Successfully insert service to the database"
+msgstr "Η υπηρεσία καταχωρηθηκε με επιτυχία στη βάση δεδομένων"
+
+msgid "The discount cannot exceed the value of the actual price"
+msgstr "Η έκπτωση δεν μπορεί να υπερβαίνει την αξία της πραγματικής τιμής"
+
+msgid "Successfully update supplier to the database"
+msgstr "Επιτυχής ενημέρωση προμηθευτή στη βάση δεδομένων"
+
+msgid "Successfully insert supplier to the database"
+msgstr "Επιτυχής εισαγωγή προμηθευτή στη βάση δεδομένων"
+
+msgid "Failed to insert Employee into database"
+msgstr "Αποτυχία εισαγωγής Εργαζόμενου στη βάση δεδομένων"
+
+msgid "Failed to get last insert id"
+msgstr "Αποτυχία λήψης του τελευταίου αναγνωριστικού εισαγωγής"
+
+msgid "Successfully insert product to the database"
+msgstr "Επιτυχής εισαγωγή του προϊόντος στη βάση δεδομένων"
+
+msgid "Successfully insert Employee to the database"
+msgstr "Εισάγατε επιτυχώς τον Εργαζόμενο στη βάση δεδομένων"
+
+msgid "Successfully updated Employee to the database"
+msgstr "Έχετε ενημερώσει με επιτυχία τον Εργαζόμενο στη βάση δεδομένων"
+
+msgid "Successfully update customer in to the database"
+msgstr "Επιτυχής ενημέρωση του πελατη στην βάση δεδομένων"
+
+msgid "Failed to insert into database"
+msgstr "Αποτυχία εισαγωγής στη βάση δεδομένων"
+
+msgid "Employee exists"
+msgstr "Ο Εργαζόμενος υπάρχει ήδη"
+
+msgid "Failed to update Employees in the Database"
+msgstr "Αποτυχία εισαγωγής του Εργαζόμενου στη βάση δεδομένων"
+
+msgid "Successfully Update Employees in the Database"
+msgstr "Επιτυχής ενημέρωση του Εργαζόμενου στην βάση δεδομένων"
+
+msgid "Failed to update Employee in the database"
+msgstr "Αποτυχία ενημέρωσης του Εργαζόμενου στη βάση δεδομένων"
+
+msgid "Successfully Updated Employee in the Database"
+msgstr "Επιτυχής ενημέρωση του Εργαζόμενου στην βάση δεδομένων"
+
+msgid "Product exists"
+msgstr "Το προϊόν υπάρχει ήδη"
+
+msgid "Failed to insert product into database"
+msgstr "Δεν ήταν δυνατή η εισαγωγή προϊόντος στη βάση δεδομένων"
+
+msgid "Successfully Update product in the Database"
+msgstr "Επιτυχής ενημέρωση του προϊόντος στην βάση δεδομένων"
+
+msgid "Failed to update product in the Database"
+msgstr "Δεν ήταν δυνατή η ενημέρωση του προϊόντος στη βάση δεδομένων"
+
+msgid "Successfully Update propduct in the Database"
+msgstr "Επιτυχής ενημέρωση προϊόντος στη βάση δεδομένων"
+
+msgid "Successfully Updated product in the Database"
+msgstr "Επιτυχής ενημέρωση προϊόντος στη Βάση Δεδομένων"
+
+msgid "Please enter supplier VAT number"
+msgstr "Εισαγάγετε τον αριθμό ΑΦΜ του προμηθευτή"
+
+msgid "Please enter supplier name"
+msgstr "Παρακαλώ εισάγετε το όνομα προμηθευτή"
+
+msgid "Please enter the business field"
+msgstr "Εισαγάγετε το πεδίο επιχείρησης"
+
+msgid "Please enter supplier phone number"
+msgstr "Εισαγάγετε τον αριθμό τηλεφώνου προμηθευτή"
+
+msgid "Please enter supplier address"
+msgstr "Πληκτρολογήστε τη διεύθυνση προμηθευτή"
+
+msgid "Please enter supplier address number"
+msgstr "Πληκτρολογήστε τον αριθμό της διεύθυνσης προμηθευτή"
+
+msgid "The address number is not a number"
+msgstr "Ο αριθμός διεύθυνσης δεν είναι αριθμός"
+
+msgid "Please enter supplier route"
+msgstr "Εισαγάγετε τη διαδρομή προμηθευτή"
+
+msgid "Please enter supplier city"
+msgstr "Εισαγάγετε την πόλη προμηθευτή"
+
+msgid "Please enter supplier postal code"
+msgstr "Εισαγάγετε τον ταχυδρομικό κώδικα προμηθευτή"
+
+msgid "Please enter supplier country"
+msgstr "Παρακαλούμε εισάγετε χώρα προμηθευτή"
+
+msgid "Please enter supplier website"
+msgstr "Εισαγάγετε τον ιστότοπο του προμηθευτή"
+
+msgid "Please enter a valid email address"
+msgstr "Παρακαλώ εισάγετε μία έγκυρη διεύθυνση email"
+
+msgid "Please enter your username"
+msgstr "Εισαγάγετε το όνομα χρήστη σας"
+
+msgid "Please provide a password"
+msgstr "Καταχωρίστε έναν κωδικό πρόσβασης"
+
+msgid "Your password must be at least 5 characters long"
+msgstr "Ο κωδικός σας πρέπει να έχει μήκος τουλάχιστον 5 χαρακτήρων"
+
+msgid "Please enter the same password as above"
+msgstr "Πληκτρολογήστε τον ίδιο κωδικό πρόσβασης όπως παραπάνω"
+
+msgid "Please enter your forename"
+msgstr "Εισαγάγετε το όνομά σας"
+
+msgid "Please enter your surname"
+msgstr "Εισαγάγετε το επώνυμό σας"
+
+msgid "Please enter your company name"
+msgstr "Εισαγάγετε το όνομα της εταιρείας σας"
+
+msgid "Please enter your address"
+msgstr "Εισαγάγετε τη διεύθυνσή σας"
+
+msgid "Please enter your address number"
+msgstr "Πληκτρολογήστε τον αριθμό της διεύθυνσής σας"
+
+msgid "Please enter your route"
+msgstr "Εισαγάγετε τη διαδρομή σας"
+
+msgid "Please enter your city"
+msgstr "Παρακαλώ εισάγετε την πόλη σας"
+
+msgid "Please enter your postal code"
+msgstr "Εισαγάγετε τον ταχυδρομικό σας κωδικό"
+
+msgid "Please enter your country"
+msgstr "Πληκτρολογήστε τη χώρα σας"
+
+msgid "Please enter your phone number"
+msgstr "Εισαγάγετε τον αριθμό τηλεφώνου σας"
+
+msgid "The phone number is not a number"
+msgstr "Ο αριθμός τηλεφώνου δεν είναι αριθμός"
+
+msgid "Please enter your mobile number"
+msgstr "Εισαγάγετε τον αριθμό του κινητού σας"
+
+msgid "The mobile number is not a number"
+msgstr "Ο αριθμός κινητού δεν είναι ένας αριθμός"
+
+msgid "Please enter your VAT number"
+msgstr "Εισαγάγετε τον αριθμό ΑΦΜ σας"
+
+msgid "Please enter your tax office"
+msgstr "Παρακαλώ εισάγετε την εφορία σας"
+
+msgid "Please enter your product code"
+msgstr "Εισαγάγετε τον κωδικό προϊόντος σας"
+
+msgid "Please select supplier name"
+msgstr "Επιλέξτε όνομα προμηθευτή"
+
+msgid "Please select store"
+msgstr "Επιλέξτε κατάστημα"
+
+msgid "Please enter the product name"
+msgstr "Εισαγάγετε το όνομα του προϊόντος"
+
+msgid "Please enter product ML"
+msgstr "Εισαγάγετε τα ML του προϊόντος"
+
+msgid "The product ML is not a number"
+msgstr "Τα ML προϊόντος δεν είναι ένας αριθμός"
+
+msgid "Please enter the product price"
+msgstr "Εισαγάγετε την τιμή του προϊόντος"
+
+msgid "The product price is not a number"
+msgstr "Η τιμή του προϊόντος δεν είναι ένας αριθμός"
+
+msgid "Please enter the price per ml"
+msgstr "Εισαγάγετε την τιμή ανά ml"
+
+msgid "The product ml is not a number"
+msgstr "Τα ml του προϊόντος δεν είναι αριθμός"
+
+msgid "Please enter the product stock"
+msgstr "Εισαγάγετε το απόθεμα του προϊόντος"
+
+msgid "The product stock is not a number"
+msgstr "Το απόθεμα του προϊόντος δεν είναι αριθμός"
+
+msgid "Please enter employee name"
+msgstr "Παρακαλώ εισάγετε το όνομα υπαλλήλου"
+
+msgid "Please enter employee mobile phone number"
+msgstr "Εισαγάγετε αριθμό κινητού τηλεφώνου υπαλλήλου"
+
+msgid "Please enter employee home phone number"
+msgstr "Πληκτρολογήστε τον αριθμό τηλεφώνου του σπιτιού του εργαζομένου"
+
+msgid "Please enter display order"
+msgstr "Καταχωρίστε την σειρά εμφάνισης"
+
+msgid "The display order is not a number"
+msgstr "Η σειρά εμφάνισης δεν είναι αριθμός"
+
+msgid "Successfully insert walk-in customer to the database"
+msgstr "Εισαγάγετε με επιτυχία τον πελάτη λιανικής στη βάση δεδομένων"
+
+msgid "Please enter customer name"
+msgstr "Παρακαλώ εισάγετε το όνομα του πελάτη"
+
+msgid "Please enter surname name"
+msgstr "Εισαγάγετε το επώνυμο"
+
+msgid "Please select gender"
+msgstr "Παρακαλώ επιλέξτε το φύλο"
+
+msgid "The value is not a email address"
+msgstr "Η καταχώριση σας δεν είναι σε σωστή μορφή"
+
+msgid "Please select date of birth"
+msgstr "Επιλέξτε την ημερομηνία γέννησής"
+
+msgid "Successfully insert customer to the database"
+msgstr "Επιτυχής εισαγωγή του πελάτη στη βάση δεδομένων"
+
+msgid "Please enter phone number"
+msgstr "Εισαγάγετε τον αριθμό τηλεφώνου"
+
+msgid "Please enter the address"
+msgstr "Εισαγάγετε τη διεύθυνση"
+
+msgid "Please enter the address number"
+msgstr "Εισαγάγετε τον αριθμό διεύθυνσης"
+
+msgid "Please enter route"
+msgstr "Εισαγάγετε τη διαδρομή"
+
+msgid "Please enter the city"
+msgstr "Παρακαλώ εισάγετε την πόλη"
+
+msgid "Please enter the postal code"
+msgstr "Εισαγάγετε τον ταχυδρομικό κώδικα"
+
+msgid "Please enter the country"
+msgstr "Εισαγάγετε τη χώρα"
+
+msgid "Loading. Please wait..."
+msgstr "Φόρτωση. Παρακαλώ περιμένετε..."
+
+msgid "You do not have any data"
+msgstr "Δεν υπάρχουν δεδομένα"
+
+msgid "You do not have gold customers with:"
+msgstr "Δεν έχετε χρυσούς πελάτες με:"
+
+msgid " points or more."
+msgstr " πόντοι ή περισσότερα."
+
+msgid "You do not have inactive customers for :"
+msgstr "Δεν έχετε ανενεργούς πελάτες για:"
+
+msgid "to: "
+msgstr "έως: "
+
+msgid "You do not have any customers with birthdays for :"
+msgstr "Δεν έχετε πελάτες με γενέθλια για :"
+
+msgid "You do not have any data with : "
+msgstr "Δεν έχετε δεδομένα σχετικά με : "
+
+# ##################### js #########################
+msgid "Cash"
+msgstr "Μετρητά"
+
+msgid "Credit Card"
+msgstr "Πιστωτική"
+
+msgid "Discounts / Gifts"
+msgstr "Εκπτώσεις / Δώρα"
+
+msgid "This Month"
+msgstr "Αυτό το μήνα"
+
+msgid "This Year"
+msgstr "Αυτό το έτος"
+
+msgid "Select From Date"
+msgstr "Επιλέξτε Από ημερομηνία"
+
+msgid "Select To Date"
+msgstr "Επιλέξτε Εως Ημερομηνία"
+
+msgid "Sales Report:"
+msgstr "Αναφορά Πωλήσεων:"
+
+msgid "Total Discount"
+msgstr "Συνολική έκπτωση"
+
+msgid "Sales of Services per Partner"
+msgstr "Πωλήσεις Υπηρεσιών ανά Συνεργάτη"
+
+msgid "Partner"
+msgstr "Συνεργάτης"
+
+msgid "Total"
+msgstr "Σύνολο"
+
+msgid "No. Services"
+msgstr "Αρ. Υπηρεσιών"
+
+msgid "Hours"
+msgstr "Ώρες"
+
+msgid "Revenue / hour"
+msgstr "Έσοδα/ώρα"
+
+msgid "Pieces"
+msgstr "Τεμάχια"
+
+msgid "Items quantity"
+msgstr "Ποσότητα ειδών"
+
+msgid "Product Sales per Partner"
+msgstr "Πωλήσεις Προϊόντων ανά Συνεργάτη"
+
+msgid "Sales of Services per Service"
+msgstr "Πωλήσεις Υπηρεσιών ανά Υπηρεσία"
+
+msgid "Product Sales by Product"
+msgstr "Πωλήσεις Προϊόντων ανά Προϊόν"
+
+msgid "Unfinished Canceled"
+msgstr "Ημιτελής ακυρώθηκαν"
+
+msgid "This Week"
+msgstr "Αυτή την εβδομάδα"
+
+msgid "Pending"
+msgstr "Εκκρεμότητες"
+
+msgid "Customer"
+msgstr "Πελάτης"
+
+msgid "Notice E-mail"
+msgstr "Ειδοποίηση E-mail"
+
+msgid "Notice Sms"
+msgstr "Ειδοποίηση Sms"
+
+msgid "Cancel Appointment"
+msgstr "Ακύρωση ραντεβού"
+
+msgid "Cancellations"
+msgstr "Ακυρώσεις"
+
+# ##################### view customer #########################
+msgid "Sent sms"
+msgstr "Αποστολή sms"
+
+msgid "Sent e-mail"
+msgstr "Αποστολή e-mail"
+
+msgid "Complete Services:"
+msgstr "Ολοκλ. Υπηρεσίες:"
+
+msgid "Outstanding Services:"
+msgstr "Εκκρεμείς Υπηρεσίες:"
+
+msgid "Canceled Services:"
+msgstr "Ακυρωμένες Υπηρεσίες:"
+
+msgid "Customer from"
+msgstr "Πελάτης από"
+
+msgid "Sales of Services:"
+msgstr "Πωλήσεις Υπηρεσιών:"
+
+msgid "Product sales:"
+msgstr "Πωλήσεις Προϊόντων:"
+
+msgid "Discounts:"
+msgstr "Εκπτώσεις:"
+
+msgid "Points:"
+msgstr "Πόντοι:"
+
+msgid "Observation list"
+msgstr "Λίστα παρατηρήσεων"
+
+msgid "Print PDF"
+msgstr "Εκτύπωση PDF"
+
+msgid "Print Preview"
+msgstr "Προεπισκόπηση εκτύπωσης:"
+
+msgid "Observations"
+msgstr "Παρατηρήσεις"
+
+msgid "Completed appointments"
+msgstr "Ολοκληρωμενα ραντεβού"
+
+msgid "Pending-Cancelled appointments"
+msgstr "Σε αναμονή-Ακυρωμένα ραντεβού"
+
+msgid "Appointments"
+msgstr "Ραντεβού"
+
+# ##################### Calendar #########################
+msgid "More"
+msgstr "Περισσότερα"
+
+msgid "Less"
+msgstr "Λιγότερα"
+
+msgid "Add an appointment"
+msgstr "Προσθέστε ραντεβού"
+
+msgid "Create Customer"
+msgstr "Δημιουργία πελάτη"
+
+msgid "New Customer"
+msgstr "Νέος πελάτης"
+
+msgid "Walk-In"
+msgstr "Πελάτης λιανικής"
+
+msgid "In progress"
+msgstr "Σε εξέλιξη"
+
+msgid "Complete"
+msgstr "Ολοκληρώθηκε"
+
+msgid "Duration"
+msgstr "Διάρκεια"
+
+msgid "Transfer the appointment for"
+msgstr "Μεταφέρετε το ραντεβού για"
+
+msgid "to different date:"
+msgstr "σε διαφορετική ημερομηνία:"
+
+msgid "Change Appointment"
+msgstr "Αλλαγή ραντεβού"
+
+msgid "Services:"
+msgstr "Υπηρεσίες:"
+
+msgid "Start Date:"
+msgstr "Ημερομηνία έναρξης:"
+
+msgid "End Date:"
+msgstr "Ημερομηνία λήξης:"
+
+msgid "Finish"
+msgstr "Ολοκλήρωση"
+
+msgid "Select Employee"
+msgstr "Επιλέξτε Υπάλληλο"
+
+msgid "Select Service"
+msgstr "Επιλέξτε Υπηρεσία"
+
+msgid "Select Customer"
+msgstr "Επιλέξτε Πελάτη"
+
+msgid "Select Status"
+msgstr "Επιλέξτε Κατάσταση"
+
+msgid "Your appointment has not changed"
+msgstr "Το ραντεβού σας δεν έχει αλλάξει"
+
+msgid "Your appointment has been cancelled"
+msgstr "Το ραντεβού σας ακυρώθηκε"
+
+msgid "You want to cancel this appointment?"
+msgstr "Θέλετε να ακυρώσετε αυτό το ραντεβού;"
+
+msgid "Yes, cancel it!"
+msgstr "Ναι, ακυρώστε το!"
+
+msgid "today"
+msgstr "σήμερα"
+
+msgid "month"
+msgstr "μήνας"
+
+msgid "week"
+msgstr "εβδομάδα"
+
+msgid "day"
+msgstr "ημέρα"
+
+msgid "list"
+msgstr "λίστα"
+
+msgid "2 days"
+msgstr "2 ημέρες"
+
+msgid "Start:"
+msgstr "Εκκίνηση:"
+
+msgid "End:"
+msgstr "Λήξη:"
+
+# ##################### checkout page #########################
+msgid "Employee"
+msgstr "Εργαζόμενος"
+
+msgid "Checkout"
+msgstr "Ταμείο"
+
+msgid "Total Points"
+msgstr "Συνολικοί πόντοι"
+
+msgid "Until"
+msgstr "Μέχρι"
+
+msgid "Quantity"
+msgstr "Ποσότητα"
+
+msgid "Add Recipe"
+msgstr "Προσθέστε συνταγή"
+
+msgid "Subtotal"
+msgstr "Μερικό σύνολο"
+
+msgid "Invoice #:"
+msgstr "Τιμολόγιο #:"
+
+msgid "Created:"
+msgstr "Δημιουργήθηκε:"
+
+msgid "Payment Method"
+msgstr "Τρόπος πληρωμής"
+
+msgid "Item"
+msgstr "Είδος"
+
+msgid "Select start time"
+msgstr "Επιλέξτε ώρα έναρξης"
+
+msgid "Discount amount is NOT percentage and this must be less than the total price"
+msgstr "Το ποσό έκπτωσης ΔΕΝ είναι ποσοστό και αυτό πρέπει να είναι μικρότερο από τη συνολική τιμή"
+
+msgid "Select product"
+msgstr "Επιλέξτε προϊόν"
+
+msgid "Please Select"
+msgstr "Παρακαλώ επιλέξτε"
+
+msgid "Warning: you have only"
+msgstr "Προειδοποίηση: έχετε μόνο"
+
+msgid "in the store"
+msgstr "στο κατάστημα"
+
+msgid "Danger: you have only"
+msgstr "Προσοχή: έχετε μόνο"
+
+msgid "Enter used ml"
+msgstr "Πληκτρολογήστε τα χρησιμοποιημένα ml"
+
+msgid "Would you like to print your invoice?"
+msgstr "Θέλετε να εκτυπώσετε το τιμολόγιό σας;"
+
+msgid "No, Finish"
+msgstr "Όχι, Τέλος"
+
+msgid "Yes, Invoice"
+msgstr "Ναι, Τιμολόγιο"
+
+msgid "Warning -"
+msgstr "Προειδοποίηση -"
+
+msgid "You can not modify this appointment with completed status"
+msgstr "Δεν μπορείτε να τροποποιήσετε αυτό το ραντεβού με την κατάσταση ολοκληρώθηκε"
+
+msgid "You can not modify this appointment with cancelled status"
+msgstr "Δεν μπορείτε να τροποποιήσετε αυτό το ραντεβού με την κατάσταση ακυρώθηκε"
+
+# ##################### bank holydays #########################
+msgid "New Year's Day"
+msgstr "Πρωτοχρονιά"
+
+msgid "Epiphany"
+msgstr "θεοφάνεια"
+
+msgid "The Three Holy Hierarchs"
+msgstr "Οι Τρεις Ιεράρχες"
+
+msgid "Clean Monday"
+msgstr "Καθαρά Δευτέρα"
+
+msgid "25th of March (national holiday)"
+msgstr "25η Μαρτίου (εθνική εορτή)"
+
+msgid "Annunciation of the Lord"
+msgstr "Ευαγγελισμός της Θεοτόκου"
+
+msgid "Good Friday"
+msgstr "Μεγάλη Παρασκευή"
+
+msgid "Easter Sunday"
+msgstr "Κυριακή του Πάσχα"
+
+msgid "Easter Monday"
+msgstr "Δευτέρα του Πάσχα"
+
+msgid "Labor Day / May Day"
+msgstr "Εργατική Πρωτομαγιά / Πρωτομαγιά"
+
+msgid "Holy Spirit Monday"
+msgstr "Δευτέρα του Αγίου Πνεύματος"
+
+msgid "Dormition of the Holy Virgin"
+msgstr "Κοίμηση της Θεοτόκου"
+
+msgid "The Restoration of Democracy"
+msgstr "Η αποκατάσταση της δημοκρατίας"
+
+msgid "The Ochi day"
+msgstr "Ημέρα του OXI"
+
+msgid "Polytechneio"
+msgstr "Εορτασμός της επετείου του Πολυτεχνείου"
+
+msgid "Armed Forces Day"
+msgstr "Ημέρα των Ενόπλων Δυνάμεων"
+
+msgid "Christmas Day"
+msgstr "Χριστούγεννα"
+
+msgid "Synaxis of the Mother of God"
+msgstr "Σύναξη της Μητέρας του Θεού"
+
+# ##################### sms and Email settings #########################
+msgid "Save settings"
+msgstr "Αποθήκευση"
+
+msgid " If you select sms all your stores will use the sms Gateway for the notifications and campaigns"
+msgstr " Εάν επιλέξετε sms, όλα τα καταστήματά σας θα χρησιμοποιήσουν την πύλη sms για τις ειδοποιήσεις και τις καμπάνιες"
+
+msgid " If you select viber all your stores will use the viber Getaway for the notifications and campaigns"
+msgstr " Εάν επιλέξετε viber, όλα τα καταστήματά σας θα χρησιμοποιήσουν την πύλη viber για τις ειδοποιήσεις και τις καμπάνιες"
+
+msgid " If you select Viber first and then sms all your stores will use the Viber first and then sms for failed back Getaway for the notifications and campaigns"
+msgstr " Εάν επιλέξετε Viber πρώτα και στη συνέχεια sms όλα τα καταστήματά σας θα χρησιμοποιήσουν πρώτα το Viber και στη συνέχεια sms αν αποτυχει με την πρώτη επιλογή για τις ειδοποιήσεις και τις καμπάνιες"
+
+msgid " E.g If you customer could not be reach from viber service sms service will be selected"
+msgstr " Π.χ Εάν η υπηρεσία Viber δεν θα μπορέσει να βρεί τον πελάτη η υπηρεσία sms θα αναλάβει την Αποστολή"
+
+msgid "Sms and viber settings"
+msgstr "Ρυθμίσεις Sms και viber"
+
+msgid "Please choose one of the available option"
+msgstr "Επιλέξτε μία από τις διαθέσιμες επιλογές"
+
+msgid "SMS Only"
+msgstr "Μόνο SMS"
+
+msgid "Viber Only"
+msgstr "Μόνο Viber"
+
+msgid "Viber first and then sms"
+msgstr "Viber πρώτα και στη συνέχεια sms"
+
+msgid "Information"
+msgstr "Πληροφορίες"
+
+# ##################### billing page #########################
+msgid "Subscription contracts"
+msgstr "Συμβόλαια συνδρομής"
+
+msgid "Here is the list of your subscription contracts"
+msgstr "Αυτή είναι η λίστα των συμβάσεων συνδρομής σας"
+
+msgid "Start Date"
+msgstr "Ημερομηνία έναρξης"
+
+msgid "Expiry Date"
+msgstr "Ημερομηνία λήξης"
+
+msgid "Amount of stores"
+msgstr "Ποσότητα καταστημάτων"
+
+msgid "Paid Date"
+msgstr "Ημερομηνία πληρωμής"
+
+msgid "Credits Purchases"
+msgstr "Αγορές Credits"
+
+msgid "Here is the list of your credits purchases"
+msgstr "Αυτή είναι η λίστα με τις αγορές των πόντων σας"
+
+msgid "Purchase Date"
+msgstr "Ημερομηνία αγοράς"
+
+msgid "Amount of credits"
+msgstr "Σύνολο των Credits"
+
+msgid "Credits Usage"
+msgstr "Χρήση Credits"
+
+msgid "Here is the list of your credits usage"
+msgstr "Αυτή είναι η λίστα της χρήσης των Credits σας"
+
+msgid "Usage Date"
+msgstr "Ημερομηνία Χρήσης"
+
+msgid "Usage Time"
+msgstr "Ώρα Χρήσης"
+
+msgid "Here you can find all your cancelled appointments for all your stores"
+msgstr "Εδώ μπορείτε να βρείτε όλα τα ακυρωμένα ραντεβού σας για όλα τα καταστήματα σας"
+
+msgid "Cancellations Report:"
+msgstr "Αναφορά ακυρώσεων:"
+
+msgid "Cancellation Date"
+msgstr "Ημερομηνία Ακύρωσης"
+
+msgid "Product Revenue"
+msgstr "Έσοδα προϊόντος"
+
+msgid "Services Revenue"
+msgstr "Έσοδα υπηρεσιών"
+
+msgid "Category"
+msgstr "Κατηγορία"
+
+msgid "Please select date from!"
+msgstr "Παρακαλώ επιλέξτε ημερομηνία από!"
+
+msgid "Some very important information about you"
+msgstr "Μερικές πολύ σημαντικές πληροφορίες για εσάς"
