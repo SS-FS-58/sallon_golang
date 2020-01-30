@@ -1406,7 +1406,7 @@ demo = {
     $('#createNewShopFormValidation').on('submit', function (event) {
       event.preventDefault();
       if ($.trim($("#vat_number").val()) === "" || $.trim($("#company_name").val()) === "" || $.trim($("#work_telephone").val()) === "") {
-        alert('you did not fill out one of the fields');
+        alert('you did not fill out one of the fields In New Shop Form');
         return false;
       } else {
         var user_is = $('input[name= UserId]').val();

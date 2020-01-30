@@ -752,8 +752,8 @@
 	$().ready(function () {
 		$('#createNewSupplierForm').on('submit', function (event) {
 			event.preventDefault();
-			if ($.trim($("#vat_number").val()) === "" || $.trim($("#supplier_name").val()) === "" || $.trim($("#field_of_business").val()) === "" || $.trim($("#work_telephone").val()) === "" || $.trim($("#website").val()) === "" || $.trim($("#email").val()) === "" || $.trim($("#autocomplete").val()) === "" || $.trim($("#postal_code").val()) === "") {
-				alert('{{gettext "you did not fill out one of the fields"}}');
+			if ($.trim($("#vat_number").val()) === "" || $.trim($("#supplier_name").val()) === "" || $.trim($("#field_of_business").val()) === "" || $.trim($("#work_telephone").val()) === "" || $.trim($("#website").val()) === "" || $.trim($("#email").val()) === "" ) {
+				alert('{{gettext "you did not fill out one of the fields In New Supplier"}}');
 				return false;
 			} else {
 
