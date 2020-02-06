@@ -767,6 +767,7 @@
         "initComplete": function (settings, json) {
 
             $('[rel="tooltip"]').tooltip();
+
         }
 
     });
@@ -816,8 +817,8 @@
 
     // Delete a record
     table.on('click', '.remove', function (e) {
-        var cell = table2.cell(this.parentNode);
-        var data = table2.row(cell.index().row).data();
+        var cell = table.cell(this.parentNode);
+        var data = table.row(cell.index().row).data();
 
         var shopId = parseInt(data.id);
         var formData = {
@@ -840,14 +841,29 @@
                 data: JSON.stringify(formData),
 
                 success: function (data) {
-                    table.row($tr).remove().draw();
+					// if (data.status == 501) {
+					// 	swal({
+					// 		title: '{{gettext "Aborted"}}',
+					// 		text: '{{gettext "Cannot delete the Shop because is not emply. Check your products :)"}}',
+					// 		type: 'warning',
+					// 		confirmButtonClass: "btn btn-info btn-fill",
+					// 		buttonsStyling: false
+					// 	})
+					// 	return;
+					// }
+                    // table.row($tr).remove().draw();
                     swal({
                         title: '{{gettext "Deleted!"}}',
                         text: '{{gettext "Your store has been deleted."}}',
                         type: 'success',
                         confirmButtonClass: "btn btn-success btn-fill",
                         buttonsStyling: false
-                    })
+                    }).then(function () {
+                        var table2 = $('#shopdatatables').DataTable();
+                        table2.ajax.reload();
+
+
+                    });
 
                 },
                 contentType: 'application/json',

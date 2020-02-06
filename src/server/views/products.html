@@ -504,6 +504,67 @@
 		$('.selectpicker').selectpicker('refresh');
 
 	});
+	// Delete a record
+    table.on('click', '.remove', function (e) {
+        var cell = table.cell(this.parentNode);
+        var data = table.row(cell.index().row).data();
+
+		var shopId = parseInt(data.store_id);
+		var productId = parseInt(data.id);
+        var formData = {
+            'is_active': data.is_active,
+        }
+        swal({
+            title: '{{gettext "Are you sure?"}}',
+            text: '{{gettext "You will not be able to recover this product!"}}',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '{{gettext "Yes, delete it!"}}',
+            cancelButtonText: '{{gettext "No, keep it"}}',
+            confirmButtonClass: "btn btn-success btn-fill",
+            cancelButtonClass: "btn btn-danger btn-fill",
+            buttonsStyling: false
+        }).then(function () {
+            $.ajax({
+                type: 'post',
+                url: '/admin/api/enable-disable-product/' + shopId + '/' + productId,
+                data: JSON.stringify(formData),
+
+                success: function (data) {
+					
+                    swal({
+                        title: '{{gettext "Deleted!"}}',
+                        text: '{{gettext "Your product has been deleted."}}',
+                        type: 'success',
+                        confirmButtonClass: "btn btn-success btn-fill",
+                        buttonsStyling: false
+                    }).then(function () {
+                        var table2 = $('#productsdatatables').DataTable();
+                        table2.ajax.reload();
+
+
+                    });
+
+                },
+                contentType: 'application/json',
+                dataType: 'json'
+            });
+
+        }, function (dismiss) {
+            // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+            if (dismiss === 'cancel') {
+                swal({
+                    title: '{{gettext "Cancelled"}}',
+                    text: '{{gettext "Your store is safe :)"}}',
+                    type: 'error',
+                    confirmButtonClass: "btn btn-info btn-fill",
+                    buttonsStyling: false
+                })
+            }
+        })
+
+        e.preventDefault();
+    });
 
 </script>
 <script>
@@ -734,7 +795,7 @@
 			});
 		}
 	});
-
+	
 </script>
 <script>
 	$(document).ready(function () {

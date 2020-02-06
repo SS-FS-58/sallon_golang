@@ -685,7 +685,10 @@
 						type: 'success',
 						confirmButtonClass: "btn btn-success btn-fill",
 						buttonsStyling: false
-					})
+					}).then(function () {
+                        var table2 = $('#supplierdatatables').DataTable();
+                        table2.ajax.reload();
+                    });
 
 				},
 				contentType: 'application/json',

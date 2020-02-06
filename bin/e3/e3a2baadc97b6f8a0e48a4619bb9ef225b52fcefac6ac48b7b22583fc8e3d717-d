@@ -1,0 +1,7 @@
+./attendee.go
+./calendar.go
+./doc.go
+./event.go
+./geo.go
+./parse.go
+./utils.go

@@ -1382,15 +1382,31 @@ demo = {
             } else {
               $('#productsModalHorizontal').modal('toggle');
               $('#addhairdressersubmit').removeClass('loaderform');
-              swal({
-                title: "Good job!",
-                text: data.description,
-                buttonsStyling: false,
-                confirmButtonClass: "btn btn-success btn-fill",
-                type: "success"
-              }).then(function () {
+              // swal({
+              //   title: "Good job!",
+              //   text: data.description,
+              //   buttonsStyling: false,
+              //   confirmButtonClass: "btn btn-success btn-fill",
+              //   type: "success"
+              // }).then(function () {
+              //   window.location.reload();
+              // });
+
+              $.notify({
+                icon: 'ti-user',
+                message: data.description,
+              }, {
+                  placement: {
+                    from: "top",
+                    align: "center"
+                  },
+                  type: 'success',
+                  timer: 2000,
+                });
+              setTimeout(function () {
                 window.location.reload();
-              });
+              }, 2000);
+
             }
           }
         });
@@ -1463,9 +1479,6 @@ demo = {
               $.notify({
                 icon: 'ti-user',
                 message: data.description,
-
-
-
               }, {
                   placement: {
                     from: "top",

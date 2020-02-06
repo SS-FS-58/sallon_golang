@@ -913,9 +913,11 @@ func renderIncomePage(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+
 	http.Handle("/static/", CacheMiddleware(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))), 7*24*time.Hour))
 
 	router := mux.NewRouter()
+
 	router.HandleFunc("/", Index)
 	router.Handle("/admin", AdminCheck(http.HandlerFunc(Admin), true))
 	router.HandleFunc("/admin/login", login)
@@ -1120,7 +1122,7 @@ func main() {
 
 	// storesettings.BankHolidays()
 
-	http.ListenAndServe(":"+os.Getenv("HTTP_PLATFORM_PORT"), nil)
-	// http.ListenAndSerrve(":3001", nil)
+	//	http.ListenAndServe(":"+os.Getenv("HTTP_PLATFORM_PORT"), nil)
+	http.ListenAndServe(":8001", nil)
 
 }

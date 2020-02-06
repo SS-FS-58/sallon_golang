@@ -1433,6 +1433,8 @@ demo = {
           'include_bank_holidays': $('input[name="include_bank_holidays"]:checked').val(),
           'bank_holidays_country': $("#select_coundry option:selected").val()
         };
+
+        println(formData)
         //  debugger;
         //  return false;
         // var shopJSON = JSON.stringify(formData);

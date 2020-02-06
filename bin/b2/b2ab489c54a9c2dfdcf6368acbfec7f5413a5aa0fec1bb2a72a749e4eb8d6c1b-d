@@ -1,0 +1,8 @@
+./caller.go
+./doc.go
+./domain.go
+./domain_helper.go
+./fs.go
+./gettext.go
+./local.go
+./tr.go

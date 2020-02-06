@@ -5,17 +5,22 @@ import (
 	"fmt"
 	"log"
 	"os"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
+	
 )
 
 func Connect() *sql.DB {
 	connString := os.Getenv("MYSQL_USER") + ":" + os.Getenv("MYSQL_PASS") + "@(" + os.Getenv("MYSQL_HOST") + ")/" + os.Getenv("MYSQL_DB") + "?parseTime=true"
 
+	connString = "root:salon@(localhost:3306)/salon_new?parseTime=true"
+	println("DB start!!!" + connString)
+
 	db, err := sql.Open("mysql", connString)
 
 	if err != nil {
-		log.Fatal("Could not connect to database")
+		log.Fatal("Could not connect to database NOW")
 	}
 
 	err = db.Ping()
