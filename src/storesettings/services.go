@@ -211,8 +211,7 @@ func GetAllServicesPerUser(userID int) []ServiceView {
 		service_discount,
 		store_id,
 		company_name,
-		category_name,
-		sub_category_name,
+		
 		is_active,
 		switch_formula,
 		created_at,
@@ -225,7 +224,7 @@ func GetAllServicesPerUser(userID int) []ServiceView {
 	defer results.Close()
 	for results.Next() {
 		var service ServiceView
-		err = results.Scan(&service.ID, &service.UserID, &service.ServiceName, &service.ServiceDuration, &service.ServicePrice, &service.ServiceDiscount, &service.StoreID, &service.StoreName, &service.CategoryName, &service.SubCategoryName, &service.IsActive, &service.SwitchFormula, &service.CreatedAt, &service.UpdatedAt)
+		err = results.Scan(&service.ID, &service.UserID, &service.ServiceName, &service.ServiceDuration, &service.ServicePrice, &service.ServiceDiscount, &service.StoreID, &service.StoreName, &service.IsActive, &service.SwitchFormula, &service.CreatedAt, &service.UpdatedAt)
 		if err != nil {
 			println(err.Error())
 		}
@@ -402,6 +401,9 @@ func DisableService(w http.ResponseWriter, r *http.Request) {
 
 	stmt, _ := db.Prepare("UPDATE services_stores SET is_active = ? WHERE store_id = ? AND service_id = ?")
 	_, err = stmt.Exec(service.IsActive, StoreID, ID)
+
+	println("-----------------------active------------------" + strconv.FormatBool(service.IsActive))
+
 	if err != nil {
 		println(err.Error())
 		json.NewEncoder(w).Encode(HTTPResp{Status: 500, Description: "Failed to update service in the database"})

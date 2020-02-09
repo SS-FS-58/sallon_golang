@@ -216,6 +216,7 @@ CREATE TABLE `hairdresser_stores` (
   `id` int(11) NOT NULL,
   `hairdresser_id` int(11) DEFAULT NULL,
   `store_id` int(11) DEFAULT NULL,
+  `color` varchar(45) NOT NULL,
   `is_active_hairdresser` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
@@ -468,6 +469,8 @@ CREATE TABLE `services_stores` (
   `id` int(11) NOT NULL,
   `service_id` int(11) DEFAULT NULL,
   `store_id` int(11) DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT NULL,
+  `switch_formula` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -772,7 +775,7 @@ ALTER TABLE `hairdressers`
 -- Indexes for table `hairdresser_stores`
 --
 ALTER TABLE `hairdresser_stores`
-  ADD PRIMARY KEY (`d`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `hairdresser_id` (`hairdresser_id`),
   ADD KEY `store_id` (`store_id`);
 
@@ -966,7 +969,7 @@ ALTER TABLE `hairdressers`
 -- AUTO_INCREMENT for table `hairdresser_stores`
 --
 ALTER TABLE `hairdresser_stores`
-  MODIFY `d` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `invoices`
 --
@@ -1166,7 +1169,10 @@ ALTER TABLE `sales_products_with_promotions`
 -- Constraints for table `services`
 --
 ALTER TABLE `services`
-  ADD CONSTRAINT `services_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `services_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  -- ADD CONSTRAINT `services_ibfk_2` FOREIGN KEY (`is_active`) REFERENCES `services_stores` (`is_active`) ON DELETE CASCADE ON UPDATE CASCADE,
+  -- ADD CONSTRAINT `services_ibfk_3` FOREIGN KEY (`switch_formula`) REFERENCES `services_stores` (`switch_formula`) ON DELETE CASCADE ON UPDATE CASCADE;
+  
 
 --
 -- Constraints for table `services_stores`
@@ -1205,14 +1211,10 @@ ALTER TABLE `suppliers`
 
 
 
------------------VIEWS----------------------
+-- ---------------VIEWS----------------------
 
-------------------------------------------------------
-CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
-    SQL SECURITY DEFINER
-VIEW `hairdresser_view` AS
+-- ----------------------------------------------------
+CREATE VIEW `hairdresser_view` AS
     SELECT 
         `hairdressers`.`user_id` AS `user_id`,
         `hairdressers`.`id` AS `hairdresser_id`,
@@ -1223,28 +1225,23 @@ VIEW `hairdresser_view` AS
         `hairdresser_stores`.`is_active_hairdresser` AS `is_active_hairdresser`,
         `shops`.`company_name` AS `company_name`,
         `shops`.`id` AS `company_id`,
-        `weekly_hours`.`color` AS `color`,
+        `hairdresser_stores`.`color` AS `color`,
         `hairdressers`.`created_at` AS `created_at`,
         `hairdressers`.`updated_at` AS `updated_at`
     FROM
-        (((`hairdressers`
+        ((`hairdressers`
         JOIN `hairdresser_stores`)
         JOIN `shops`)
-        JOIN `weekly_hours`)
+        
     WHERE
         ((`hairdressers`.`id` = `hairdresser_stores`.`hairdresser_id`)
-            AND (`weekly_hours`.`user_id` = `hairdressers`.`user_id`)
             AND (`shops`.`id` = `hairdresser_stores`.`store_id`))
 
----------------------------------------------------------------------------------
+-- -------------------------------------------------------------------------------
 
 -- --------------------------------------------------------
 
-CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
-    SQL SECURITY DEFINER
-VIEW `products_view` AS
+CREATE VIEW `products_view` AS
     SELECT 
         `products`.`user_id` AS `user_id`,
         `products`.`id` AS `product_id`,
@@ -1270,12 +1267,8 @@ VIEW `products_view` AS
     WHERE
         (`products`.`store_id` = `shops`.`id`)
          
-------------------------------------------------------
-CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
-    SQL SECURITY DEFINER
-VIEW `services_view` AS
+-- ----------------------------------------------------
+CREATE VIEW `services_view` AS
     SELECT 
         `services`.`id` AS `service_id`,
         `services`.`user_id` AS `user_id`,
@@ -1287,8 +1280,8 @@ VIEW `services_view` AS
         `shops`.`company_name` AS `company_name`,
         `service_categories`.`category_name` AS `category_name`,
         `services`.`sub_category` AS `sub_category_name`,
-        `services`.`is_active` AS `is_active`,
-        `services`.`switch_formula` AS `switch_formula`,
+        `services_stores`.`is_active` AS `is_active`,
+        `services_stores`.`switch_formula` AS `switch_formula`,
         `services`.`created_at` AS `created_at`,
         `services`.`updated_at` AS `updated_at`
         
@@ -1303,13 +1296,9 @@ VIEW `services_view` AS
           AND (`services_stores`.`store_id` = `shops`.`id`)
           AND (`services`.`category_id` = `service_categories`.`id`))
 
--------------------------------------
+-- -----------------------------------
 
-CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
-    SQL SECURITY DEFINER
-VIEW `promotion_view` AS
+CREATE VIEW `promotion_view` AS
     SELECT 
         `promotions`.`id` AS `promotions_id`,
         `promotions`.`promotion_title` AS `promotion_title`,

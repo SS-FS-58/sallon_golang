@@ -719,7 +719,8 @@
 							confirmButtonClass: "btn btn-success btn-fill",
 							type: "success"
 						}).then(function () {
-							window.location.reload();
+							var table2 = $('#productsdatatables').DataTable();
+							table2.ajax.reload();
 						});
 					}
 				}
@@ -789,7 +790,8 @@
 						confirmButtonClass: "btn btn-success btn-fill",
 						type: "success"
 					}).then(function () {
-						window.location.reload("#productsdatatables");
+						var table2 = $('#productsdatatables').DataTable();
+						table2.ajax.reload();
 					});
 				}
 			});
@@ -988,7 +990,8 @@
 								confirmButtonClass: "btn btn-success btn-fill",
 								type: "success"
 							}).then(function () {
-								window.location.reload();
+								var table2 = $('#productsdatatables').DataTable();
+								table2.ajax.reload();
 							});
 
 						}

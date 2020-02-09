@@ -1028,9 +1028,13 @@
 			{
 				"data": "null",
 				"render": function (data, type, row) {
+					// if (row.is_active == true) {
+
+					// 	return '<td class="td-actions text-center"><input data-id="' + row.id + '" store-id="' + row.store_id + '" type="checkbox" name="my-checkbox" class="switch-plain enableDisableProduct" checked></td>'
+					// } else {
+					// 	return '<td class="td-actions text-center"><input data-id="' + row.id + '" store-id="' + row.store_id + '" type="checkbox" name="my-checkbox" class="switch-plain enableDisableProduct"></td>'
+					// }
 					if (row.is_active == true) {
-
-
 						return '<td class="td-actions text-center"><input data-id="' + row.id + '" class="tgl tgl-skewed" id="my-categorycheckbox' + row.id + '" type="checkbox" checked /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-categorycheckbox' + row.id + '"></label></td>'
 					} else {
 						return '<td class="td-actions text-center"><input data-id="' + row.id + '" class="tgl tgl-skewed" id="my-categorycheckbox' + row.id + '" type="checkbox" /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-categorycheckbox' + row.id + '"></label></td>'
@@ -1233,8 +1237,6 @@
 					return data;
 				}
 			},
-
-
 			{
 				"data": "created_at",
 				"render": function (data) {
@@ -1252,7 +1254,7 @@
 
 						return '<td class="td-actions text-center"><input data-id="' + row.id + '" store-id="' + row.store_id + '" class="tgl tgl-skewed has_service" id="my-servicecheckbox' + row.id + row.store_name + '" type="checkbox" checked /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-servicecheckbox' + row.id + row.store_name + '"></label></td>'
 					} else {
-						return '<td class="td-actions text-center"><input data-id="' + row.id + '" store-id="' + row.store_id + '" class="tgl tgl-skewed has_service" id="my-servicecheckbox' + row.id + row.store_name + '" type="checkbox" /><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-servicecheckbox' + row.id + row.store_name + '"></label></td>'
+						return '<td class="td-actions text-center"><input data-id="' + row.id + '" store-id="' + row.store_id + '" class="tgl tgl-skewed has_service" id="my-servicecheckbox' + row.id + row.store_name + '" type="checkbox"/><label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" for="my-servicecheckbox' + row.id + row.store_name + '"></label></td>'
 					}
 
 				}

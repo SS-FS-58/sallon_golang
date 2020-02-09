@@ -308,6 +308,8 @@
 
                 console.log(data["data"][i].company_name);
             };
+
+
             $('.selectpicker').selectpicker('refresh');
 
         });
@@ -538,60 +540,62 @@
     });
 
     // Delete a record
-    // table.on('click', '.remove', function (e) {
-    // 	$tr = $(this).closest('tr');
-    // 	var data = table.row($tr).data();
-    // 	// table.row($tr).remove().draw();
-    // 	var serviceId = parseInt(data.id);
-    // 	var formData = {
-    // 		'id': parseInt(data.id),
-    // 	}
-    // 	swal({
-    // 		title: 'Are you sure?',
-    // 		text: 'You will not be able to recover this service!',
-    // 		type: 'warning',
-    // 		showCancelButton: true,
-    // 		confirmButtonText: 'Yes, delete it!',
-    // 		cancelButtonText: 'No, keep it',
-    // 		confirmButtonClass: "btn btn-success btn-fill",
-    // 		cancelButtonClass: "btn btn-danger btn-fill",
-    // 		buttonsStyling: false
-    // 	}).then(function () {
-    // 		$.ajax({
-    // 			type: 'delete',
-    // 			url: '/admin/api/delete-single-service/' + serviceId,
-    // 			data: JSON.stringify(formData),
+    table.on('click', '.remove', function (e) {
+    	$tr = $(this).closest('tr');
+    	var data = table.row($tr).data();
+    	// table.row($tr).remove().draw();
+        var store_id_del = parseInt(data.store_id);
+        var hairdresser_id_del = parseInt(data.hairdresser_id);
+    	var formData = {
+            'storeid' : data.store_id,
+            'id': data.hairdresser_id
+        }
+    	swal({
+    		title: 'Are you sure?',
+    		text: 'You will not be able to recover this service!',
+    		type: 'warning',
+    		showCancelButton: true,
+    		confirmButtonText: 'Yes, delete it!',
+    		cancelButtonText: 'No, keep it',
+    		confirmButtonClass: "btn btn-success btn-fill",
+    		cancelButtonClass: "btn btn-danger btn-fill",
+    		buttonsStyling: false
+    	}).then(function () {
+    		$.ajax({
+    			type: 'post',
+    			url: '/admin/api/enable-disable-hairdresser/' + store_id_del + '/' + hairdresser_id_del,
+    			data: JSON.stringify(formData),
 
-    // 			success: function (data) {
-    // 				table.row($tr).remove().draw();
-    // 				swal({
-    // 					title: 'Deleted!',
-    // 					text: 'Your service has been deleted.',
-    // 					type: 'success',
-    // 					confirmButtonClass: "btn btn-success btn-fill",
-    // 					buttonsStyling: false
-    // 				})
+    			success: function (data) {
+    				table.row($tr).remove().draw();
+    				swal({
+    					title: 'Deleted!',
+    					text: 'Your service has been deleted.',
+    					type: 'success',
+    					confirmButtonClass: "btn btn-success btn-fill",
+    					buttonsStyling: false
+    				})
 
-    // 			},
-    // 			contentType: 'application/json',
-    // 			dataType: 'json'
-    // 		});
+    			},
+    			contentType: 'application/json',
+    			dataType: 'json'
+    		});
 
-    // 	}, function (dismiss) {
-    // 		// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
-    // 		if (dismiss === 'cancel') {
-    // 			swal({
-    // 				title: 'Cancelled',
-    // 				text: 'Your service is safe :)',
-    // 				type: 'error',
-    // 				confirmButtonClass: "btn btn-info btn-fill",
-    // 				buttonsStyling: false
-    // 			})
-    // 		}
-    // 	})
+    	}, function (dismiss) {
+    		// dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+    		if (dismiss === 'cancel') {
+    			swal({
+    				title: 'Cancelled',
+    				text: 'Your service is safe :)',
+    				type: 'error',
+    				confirmButtonClass: "btn btn-info btn-fill",
+    				buttonsStyling: false
+    			})
+    		}
+    	})
 
-    // 	e.preventDefault();
-    // });
+    	e.preventDefault();
+    });
 
 
 
@@ -768,7 +772,7 @@
 
     });
 </script>
-<script>
+<!-- <script>
     $(document).ready(function () {
 
         $("#hairdresser_name_exists").hide();
@@ -837,10 +841,11 @@
             }
         });
 
-    });
+    }); 
 
 
-</script>
+</script>-->
+
 <script>
     $(document).ready(function () {
         $('#toggle').click(function (e) {

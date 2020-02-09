@@ -303,8 +303,9 @@ func DeleteSupplier(w http.ResponseWriter, r *http.Request) {
 
 	ID, _ := strconv.Atoi(supplierID)
 
-	if rowExists("SELECT id FROM products WHERE supplier_id= ?  and user_id = ?", ID, supplier.UserID) {
-		json.NewEncoder(w).Encode(HTTPResp{Status: 501, Description: "Cannot delete the category because is not empty. Please check Sub Categories"})
+	
+	if !rowExists("SELECT * FROM suppliers WHERE id = ?", ID) {
+		json.NewEncoder(w).Encode(HTTPResp{Status: 501, Description: "Cannot delete the category because is not empty. Please check suppliers"})
 		return
 	}
 
@@ -317,6 +318,7 @@ func DeleteSupplier(w http.ResponseWriter, r *http.Request) {
 	_, err = stmt.Exec(ID)
 
 	if err != nil {
+		
 		json.NewEncoder(w).Encode(HTTPResp{Status: 500, Description: "Failed to delete supplier from database"})
 	}
 	json.NewEncoder(w).Encode(HTTPResp{Status: 200, Description: "Successfully deleted supplier from database "})

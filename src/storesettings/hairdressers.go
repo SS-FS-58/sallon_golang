@@ -82,13 +82,14 @@ func CreateHairdresser(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	decoder := json.NewDecoder(r.Body)
+
+
 	var hairdresser Hairdresser
 
 	err := decoder.Decode(&hairdresser)
 	if err != nil {
 		print(err.Error())
 	}
-
 	stores := hairdresser.Stores
 	var allHairdressers []string
 	var allStoreNames []string
@@ -109,6 +110,8 @@ func CreateHairdresser(w http.ResponseWriter, r *http.Request) {
 
 		if err != nil && err != sql.ErrNoRows {
 			log.Println(err.Error())
+			println("-------------------Error Hairdresser ok error no!-------------------------------" + err.Error())
+	
 
 		}
 		if err != sql.ErrNoRows {
@@ -135,24 +138,26 @@ func CreateHairdresser(w http.ResponseWriter, r *http.Request) {
 		updated_at) VALUES (?,?,?,?,?, NOW(), NOW())`)
 		if err != nil {
 			println(err.Error())
+			
 
 		}
 		res, err := stmt.Exec(hairdresser.UserID, hairdresser.HairdresserName, hairdresser.HairdressersMobilePhone, hairdresser.HairdressersPhone, hairdresser.DisplayOrder)
 
 		if err != nil {
 			println(err.Error())
+			
 			json.NewEncoder(w).Encode(HTTPResp{Status: 500, Description: tr.Translate("Failed to insert hairdresser into database")})
 		}
 		id, err := res.LastInsertId()
 		if err != nil {
 			println(err.Error())
+			
 			json.NewEncoder(w).Encode(HTTPResp{Status: 500, Description: tr.Translate("Failed to get last insert id")})
 		}
 
 		intID := strconv.Itoa(int(id))
 		color := "#66615B"
 		for _, store := range stores {
-
 			wstmt, err := db.Prepare("INSERT INTO hairdresser_stores (hairdresser_id, store_id,is_active_hairdresser,color,created_at, updated_at) VALUES (?,?,1,?,NOW(),NOW())")
 			if err != nil {
 				println(err.Error())
@@ -160,6 +165,7 @@ func CreateHairdresser(w http.ResponseWriter, r *http.Request) {
 			j, err := strconv.Atoi(store)
 			if err != nil {
 				println(err.Error())
+				
 			}
 			wres, err := wstmt.Exec(intID, j, color)
 			if err != nil {
@@ -170,6 +176,7 @@ func CreateHairdresser(w http.ResponseWriter, r *http.Request) {
 			wid, err := wres.LastInsertId()
 			if err != nil {
 				println(err.Error(), wid)
+				
 			}
 
 		}
@@ -222,7 +229,7 @@ func GetAllHairdressersPerUser(userID int) []HairdresserView {
 		created_at,
 		updated_at 
 		FROM hairdresser_view
-		WHERE user_id = ?`, userID)
+		WHERE user_id = ? AND is_active_hairdresser = ?`, userID, 1)
 	if err != nil {
 		println(err.Error())
 	}
@@ -295,6 +302,9 @@ func DisableHairdresser(w http.ResponseWriter, r *http.Request) {
 
 	decoder := json.NewDecoder(r.Body)
 
+
+
+
 	var hairdresser HairdresserView
 	err := decoder.Decode(&hairdresser)
 	if err != nil {
@@ -308,12 +318,15 @@ func DisableHairdresser(w http.ResponseWriter, r *http.Request) {
 	storeID := vars["storeid"]
 	StoreID, _ := strconv.Atoi(storeID)
 
+	
+	
+	
 	if err != nil {
 		println(err.Error())
 	}
-
+	// hairdresser.IsActive = tinyint(0)
 	stmt, _ := db.Prepare("UPDATE hairdresser_stores SET is_active_hairdresser = ? WHERE store_id = ? AND hairdresser_id = ?")
-	_, err = stmt.Exec(hairdresser.IsActive, StoreID, ID)
+	_, err = stmt.Exec(0, StoreID, ID)
 	if err != nil {
 		println(err.Error())
 		json.NewEncoder(w).Encode(HTTPResp{Status: 500, Description: tr.Translate("Failed to update hairdresser in the database")})
